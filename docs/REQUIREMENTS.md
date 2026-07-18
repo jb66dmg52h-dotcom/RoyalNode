@@ -10,7 +10,7 @@ RoyalNode Rev A is an engineering-validation platform for a rugged, solar-powere
 - Support the E22-900M33S SPI interface and external RF-control behavior.
 - Expose sufficient test points for bench validation of every critical power and radio signal.
 - Support firmware-controlled radio power, reset and receive/transmit control.
-- Provide battery, solar-input and radio-rail telemetry.
+- Expose only telemetry that can be reported through the MeshCore ecosystem.
 - Permit safe reduced-power operation when battery charge or temperature is outside preferred limits.
 
 ## 3. Power requirements
@@ -39,30 +39,65 @@ RoyalNode Rev A is an engineering-validation platform for a rugged, solar-powere
 - Panel-mounted XT60 connectors with short 16–18 AWG silicone-wire pigtails are acceptable.
 - Solar and battery connector positions must be mechanically keyed and clearly labeled to prevent cross-connection.
 
-### Low-current signal and accessory connectors
+### Low-current signal connectors
 
-- All JST-style connectors shall use the **JST-GH family, 1.25 mm pitch**.
+- All JST-style connectors shall use the JST-GH family, 1.25 mm pitch.
 - Do not mix JST-PH, JST-XH, JST-SH or JST-ZH families on the board.
-- Use genuine JST-GH-compatible locking housings and crimp contacts where practical.
-- Right-angle or vertical board headers may be used, but the mating family must remain JST-GH.
-- Standard JST-GH assignments:
-  - 2-pin: temperature sensor, fan or simple switched accessory.
-  - 3-pin: UART, analog sensor or one-wire sensor.
-  - 4-pin: I2C, UART with power, or expansion bus.
-  - 6-pin: debug/programming harness when Tag-Connect is not used.
-- Each connector must have pin 1 marked on silkscreen and polarity or signal labels printed beside the footprint.
-- External JST-GH connections must remain inside the weather-sealed enclosure unless a sealed bulkhead transition is used.
+- Use JST-GH only for MeshCore-supported environmental or location telemetry modules.
+- No fan, generic analog sensor, general-purpose UART, or six-pin debug/programming JST connector shall be fitted.
+- Programming shall use the XIAO USB-C connector.
+- Recovery/debug shall use a compact Tag-Connect or exposed SWD pad footprint.
+- Every JST-GH connector must have pin 1 and signal names marked on silkscreen.
+- JST-GH connections must remain inside the weather-sealed enclosure unless a sealed bulkhead transition is used.
 
-## 5. Environmental requirements
+## 5. MeshCore telemetry requirements
+
+Only the following telemetry categories are approved for Rev A:
+
+1. **Battery voltage**
+   - Required.
+   - Reported through MeshCore base telemetry.
+   - Measure the 2S pack with a protected resistor divider into an ADC input or another board-supported method.
+
+2. **MCU temperature**
+   - Required where supported by the XIAO nRF52840 board definition.
+   - Uses the MCU's internal temperature measurement.
+   - Treated as enclosure/electronics temperature, not precise outdoor ambient temperature.
+
+3. **Environmental telemetry**
+   - Optional.
+   - Temperature, humidity and pressure only.
+   - Preferred sensor: BME680 because current MeshCore firmware includes BME680 support.
+   - Connection: one 4-pin JST-GH I2C port with 3.3 V, GND, SDA and SCL.
+   - Gas-resistance or air-quality values are not required unless MeshCore explicitly exposes them.
+
+4. **GPS/location telemetry**
+   - Optional and not required for a fixed repeater.
+   - Omit GPS hardware by default.
+   - The fixed node position may be configured in firmware instead.
+
+The following shall not be included as deployed telemetry sensors unless future MeshCore support is confirmed:
+
+- solar current sensor
+- radio current sensor
+- battery current sensor
+- external PA temperature sensor
+- regulator temperature sensor
+- fan tachometer
+- generic analog sensors
+- arbitrary accessory sensors
+
+Electrical test points and temporary bench instrumentation may still be used during Rev A validation, but they are not permanent MeshCore telemetry features.
+
+## 6. Environmental requirements
 
 - Intended for outdoor use in Canada.
 - Electronics enclosure target: IP65 minimum, IP67 preferred.
 - Use a pressure-equalizing breathable vent to reduce condensation.
-- Battery temperature must be measured directly at the pack.
-- PCB temperature should be measured near the radio power amplifier and main regulator.
+- Battery charging temperature must still be monitored by the charger or battery pack for safety, even if that value is not exposed through MeshCore.
 - Materials, connectors and cabling must be suitable for UV exposure or protected inside the enclosure.
 
-## 6. Electrical protection
+## 7. Electrical protection
 
 - Reverse-polarity protection on solar and battery inputs.
 - Input fusing on solar and battery paths.
@@ -70,45 +105,48 @@ RoyalNode Rev A is an engineering-validation platform for a rugged, solar-powere
 - Hardware over-voltage protection on the 5 V radio rail.
 - Hardware or firmware transmit timeout.
 - Brownout supervision and watchdog recovery.
-- Current measurement on the radio rail and solar input.
+- Current-test shunt footprints or removable links may be included for bench validation without permanent telemetry ICs.
 
-## 7. Mechanical requirements
+## 8. Mechanical requirements
 
 - Socketed XIAO nRF52840 on Rev A.
 - Serviceable EBYTE radio module.
 - XT60 battery and solar connectors.
-- JST-GH 1.25 mm connectors for all low-current removable wiring.
+- No low-current connector except the optional 4-pin JST-GH environmental-sensor port.
 - Solar wiring sized for approximately 3.3 A continuous current with low voltage drop.
 - U.FL-to-bulkhead-SMA antenna connection for Rev A.
 - At least four mounting holes.
 - Board layout must separate switching power circuitry from the radio module and MCU antenna.
 
-## 8. PCB requirements
+## 9. PCB requirements
 
 - Four-layer PCB.
 - Continuous ground plane.
 - Two-ounce outer copper preferred.
 - ENIG finish preferred.
 - Wide copper pours for battery, solar-input and radio-current paths.
-- Extensive labeled test points.
+- Extensive labeled electrical test points.
 - Configuration jumpers for uncertain EBYTE control routing.
 - DRC and ERC must pass before fabrication release.
 
-## 9. Firmware requirements
+## 10. Firmware requirements
 
 - Safe startup sequencing for the radio supply.
 - EBYTE-specific TCXO and RF-switch configuration.
 - Low-battery power reduction and shutdown thresholds.
 - Charge-temperature lockout support.
+- MeshCore battery telemetry.
+- MeshCore MCU-temperature telemetry where supported.
+- Optional MeshCore environmental telemetry using the supported sensor interface.
 - Daily airtime and fault counters.
 - Recoverable watchdog behavior.
 - Bench-test firmware independent of MeshCore.
 
-## 10. Regulatory requirement
+## 11. Regulatory requirement
 
 Hardware capability does not imply legal operating permission. Deployed firmware settings, antenna gain, cable loss, bandwidth and duty cycle must be reviewed against current Canadian 902–928 MHz requirements before field operation.
 
-## 11. Rev A acceptance criteria
+## 12. Rev A acceptance criteria
 
 Rev A is successful when:
 
@@ -117,7 +155,8 @@ Rev A is successful when:
 3. The 5 V radio rail holds regulation during repeated full-power load steps.
 4. The XIAO remains stable during radio transmission.
 5. The radio initializes, receives and transmits through test firmware.
-6. Battery, solar and radio-current telemetry are reliable.
-7. Thermal measurements remain within component limits.
-8. XT60 and JST-GH connectors pass continuity, retention and polarity checks.
-9. The board survives multi-day outdoor pilot testing without unexplained resets.
+6. Battery voltage appears correctly through MeshCore telemetry.
+7. MCU temperature appears through MeshCore where supported.
+8. Optional BME680 temperature, humidity and pressure appear through MeshCore when fitted.
+9. XT60 and any fitted JST-GH connector pass continuity, retention and polarity checks.
+10. The board survives multi-day outdoor pilot testing without unexplained resets.
