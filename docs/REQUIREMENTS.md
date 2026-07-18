@@ -8,10 +8,10 @@ RoyalNode Rev A is an engineering-validation platform for a rugged, solar-powere
 
 - Operate as a continuously available LoRa repeater.
 - Support the E22-900M33S SPI interface and external RF-control behavior.
-- Expose sufficient test points for bench validation of every critical power and radio signal.
 - Support firmware-controlled radio power, reset and receive/transmit control.
 - Expose only telemetry that can be reported through the MeshCore ecosystem.
 - Permit safe reduced-power operation when battery charge or temperature is outside preferred limits.
+- Do not include dedicated electrical test points, current-shunt footprints, removable measurement links or bench-only instrumentation hardware.
 
 ## 3. Power requirements
 
@@ -43,7 +43,7 @@ RoyalNode Rev A is an engineering-validation platform for a rugged, solar-powere
 
 - All JST-style connectors shall use the JST-GH family, 1.25 mm pitch.
 - Do not mix JST-PH, JST-XH, JST-SH or JST-ZH families on the board.
-- Use JST-GH only for MeshCore-supported environmental or location telemetry modules.
+- Use JST-GH only for MeshCore-supported environmental telemetry modules.
 - No fan, generic analog sensor, general-purpose UART, or six-pin debug/programming JST connector shall be fitted.
 - Programming shall use the XIAO USB-C connector.
 - Recovery/debug shall use a compact Tag-Connect or exposed SWD pad footprint.
@@ -87,8 +87,6 @@ The following shall not be included as deployed telemetry sensors unless future 
 - generic analog sensors
 - arbitrary accessory sensors
 
-Electrical test points and temporary bench instrumentation may still be used during Rev A validation, but they are not permanent MeshCore telemetry features.
-
 ## 6. Environmental requirements
 
 - Intended for outdoor use in Canada.
@@ -105,7 +103,7 @@ Electrical test points and temporary bench instrumentation may still be used dur
 - Hardware over-voltage protection on the 5 V radio rail.
 - Hardware or firmware transmit timeout.
 - Brownout supervision and watchdog recovery.
-- Current-test shunt footprints or removable links may be included for bench validation without permanent telemetry ICs.
+- No current-shunt footprints, zero-ohm measurement links or dedicated probe pads shall be included.
 
 ## 8. Mechanical requirements
 
@@ -125,8 +123,8 @@ Electrical test points and temporary bench instrumentation may still be used dur
 - Two-ounce outer copper preferred.
 - ENIG finish preferred.
 - Wide copper pours for battery, solar-input and radio-current paths.
-- Extensive labeled electrical test points.
-- Configuration jumpers for uncertain EBYTE control routing.
+- No dedicated test points, measurement loops or shunt footprints.
+- Configuration jumpers are allowed only where electrically necessary for uncertain EBYTE control routing, not for current measurement.
 - DRC and ERC must pass before fabrication release.
 
 ## 10. Firmware requirements
