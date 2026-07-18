@@ -17,13 +17,15 @@ RoyalNode is a rugged, solar-powered 915 MHz LoRa repeater platform built around
 
 ## Current proposed power architecture
 
-- 18 V nominal, 30 W solar panel
-- True-MPPT multi-cell charger
+- 6 V nominal, 20 W monocrystalline solar panel
+- True-MPPT buck-boost multi-cell charger
 - 2S 15 Ah protected Li-ion battery
 - Dedicated regulated 5.0 V / 3 A radio rail
 - Separate low-noise XIAO rail
 - Battery, solar and radio-current telemetry
 - Low-temperature charge protection
+
+A 6 V / 20 W panel produces about 3.3 A at rated power. This matches the practical input-current ceiling of the current BQ25798 charger candidate. Panels above 20 W at 6 V require a different higher-current charger front end or multiple charger channels.
 
 ## Repository layout
 
@@ -43,7 +45,7 @@ RoyalNode/
 1. Confirming the exact E22-900M33S electrical interface and RF-control requirements.
 2. Implementing MeshCore support for the module's external PA, RF switching and TCXO behavior.
 3. Validating the high-current 5 V radio rail under repeated full-power transmission.
-4. Finalizing a charger architecture that safely supports 2S batteries, solar MPPT and cold-weather charging.
+4. Finalizing a charger architecture that safely supports a 6 V panel, 2S batteries, solar MPPT and cold-weather charging.
 5. Regulatory assessment for operation in Canada's 902–928 MHz band.
 
 ## Revision plan
