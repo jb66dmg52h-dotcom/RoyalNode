@@ -44,7 +44,7 @@ Battery voltage is the required deployed power telemetry value. Charger and batt
 
 The radio receives a dedicated 5.0 V rail sized for at least 3 A continuous operation with transient margin. The converter shall include a controlled enable input, soft start, local bulk capacitance and hardware over-voltage protection.
 
-Permanent radio-current and regulator-temperature telemetry ICs are omitted. Rev A may use removable shunts and test points for bench measurements.
+Permanent radio-current and regulator-temperature telemetry ICs are omitted. No current-shunt footprints, measurement links, dedicated test pads or probe loops are included.
 
 ### MCU subsystem
 
@@ -111,18 +111,17 @@ No other low-current detachable connectors are planned for Rev A.
 
 ## Design philosophy
 
-Rev A prioritizes testability without permanently loading the board with telemetry that MeshCore cannot display. Uncertain signal routes should use zero-ohm configuration resistors. Critical rails and controls require labeled test points. The EBYTE module and XIAO should remain replaceable during development.
+Rev A is deployment-focused and intentionally omits bench-only hardware. The board will not include dedicated test points, measurement loops, current-shunt footprints or removable links used only for probing. Necessary EBYTE configuration resistors may remain where required for signal-routing flexibility. The EBYTE module and XIAO remain replaceable during development.
 
 ## Current open decisions
 
 1. Final MPPT charger and support circuitry for 6 V boost operation.
 2. Final 5 V / 3 A synchronous buck regulator.
 3. Battery-pack NTC specification.
-4. Bench current-shunt values and test-point placement.
-5. Hardware radio-rail over-voltage shutdown method.
-6. Exact E22 footprint and pin mapping from the manufacturer drawing.
-7. MeshCore driver changes required for the external PA and RF switch.
-8. Confirming XIAO nRF52840 MCU-temperature telemetry support.
-9. Confirming the exact BME680 data path in the selected MeshCore repeater build.
-10. Enclosure size, vent and cable-gland selections.
-11. Final legal transmit-power configuration for Canadian deployment.
+4. Hardware radio-rail over-voltage shutdown method.
+5. Exact E22 footprint and pin mapping from the manufacturer drawing.
+6. MeshCore driver changes required for the external PA and RF switch.
+7. Confirming XIAO nRF52840 MCU-temperature telemetry support.
+8. Confirming the exact BME680 data path in the selected MeshCore repeater build.
+9. Enclosure size, vent and cable-gland selections.
+10. Final legal transmit-power configuration for Canadian deployment.
