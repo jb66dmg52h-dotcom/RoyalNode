@@ -5,123 +5,168 @@
 ```text
 6 V / 20 W solar panel
           |
-  fuse, reverse protection,
-  TVS and high-current filtering
+  XT60, fuse, reverse protection,
+  TVS and input filtering
           |
- true-MPPT buck-boost 2S charger
+  BQ24650 1S solar MPPT buck charger
           |
-  2S 15 Ah protected battery
+  1S 15 Ah protected Li-ion battery
           |
-      main fuse
+      XT60 + main fuse
           |
-          +-----------------------------+
-          |                             |
-  5.0 V / 3 A radio buck         low-noise MCU rail
-          |                             |
- EBYTE E22-900M33S              Seeed XIAO nRF52840
-          |                             |
-          +------ SPI and controls -----+
-                                        |
-                              optional 4-pin JST-GH
-                               BME680 environmental
+          +-------------------------------+
+          |                               |
+ TPS61088 5.0 V radio boost       low-noise MCU supply
+          |                               |
+ EBYTE E22-900M33S                Seeed XIAO nRF52840
+          |                               |
+ 50-ohm PCB trace to SMA          optional 4-pin JST-GH
+                                  BME680 environmental
 ```
 
 ## Major subsystems
 
 ### Solar and charger subsystem
 
-The charger must accept a 6 V nominal panel, perform true MPPT operation, boost as required to charge a 2S lithium-ion pack, support battery temperature sensing and provide programmable current limits. BQ25798 is the current candidate because it supports a 3.6–24 V input range, 1–4 cells and buck-boost solar charging.
+The previous BQ25798 buck-boost multi-cell charger is removed. RoyalNode now uses a one-cell charger architecture.
 
-The current BQ25798 candidate regulates input current up to approximately 3.3 A. Therefore, the practical panel target is 6 V / 20 W. A larger 6 V panel cannot be fully harvested through a single BQ25798 input and would require a higher-current charger or multiple power-conversion channels.
+The preferred charger is BQ24650 configured for one Li-ion cell. It is a standalone synchronous buck charger controller with programmable solar input-voltage regulation, supports one to six cells, accepts 5 V to 28 V input and can control charge currents well above RoyalNode's requirement.
+
+For a 6 V nominal panel, the final selected panel must maintain enough voltage above the battery and converter losses during charging. The MPPT input-voltage setpoint, charge-current resistor, external MOSFETs and inductor must be calculated from the actual panel maximum-power voltage rather than the printed nominal voltage alone.
+
+Initial charging target:
+
+- 1S Li-ion charge voltage: 4.20 V
+- maximum charge current: approximately 2.0–2.5 A
+- panel maximum-power current: approximately 3.3 A
+- battery NTC charge-temperature protection enabled
 
 ### Battery subsystem
 
-Target pack: protected 2S 15 Ah lithium-ion with balancing and a pack-mounted temperature sensor. The PCB shall not depend solely on the pack BMS; a serviceable main fuse is required near the pack connection.
+Target pack: protected 1S 15 Ah lithium-ion pack with a pack-mounted NTC.
 
-Battery voltage is the required deployed power telemetry value. Charger and battery temperature sensing remain mandatory for safe charging but do not need to be transmitted through MeshCore.
+The pack no longer needs cell balancing because all parallel cells operate as one series group. It still requires:
+
+- over-charge protection
+- over-discharge protection
+- over-current and short-circuit protection
+- at least 5 A continuous discharge capability
+- transient capability above 5 A
+- a main fuse near the XT60 connection
+
+At a 6 W radio load and approximately 85–90% boost efficiency, the battery may supply roughly 1.6 A at 4.2 V and approximately 2.2–2.6 A near the low end of the allowed battery range. Copper, fuse, protection FETs and wiring are sized with substantial margin.
 
 ### Radio power subsystem
 
-The radio receives a dedicated 5.0 V rail sized for at least 3 A continuous operation with transient margin. The converter shall include a controlled enable input, soft start, local bulk capacitance and hardware over-voltage protection.
+TPS61088 remains the preferred converter. It is suitable for single-cell lithium input and provides the switch-current capability required to create a stiff 5.0 V radio rail.
 
-Permanent radio-current and regulator-temperature telemetry ICs are omitted. No current-shunt footprints, measurement links, dedicated test pads or probe loops are included.
+Required design targets:
+
+- input range: approximately 3.0–4.2 V
+- output: 5.0 V
+- continuous output design target: 3 A
+- programmed soft start
+- controlled enable from the XIAO
+- low-ESR local bulk and ceramic capacitance at the EBYTE supply
+- hardware protection against abnormal output over-voltage
+
+No current-shunt footprints, dedicated test pads or measurement links are included.
 
 ### MCU subsystem
 
-The Seeed XIAO nRF52840 is socketed on Rev A. It handles the SPI radio interface, radio power sequencing, battery voltage telemetry, optional environmental telemetry, fault logging and the MeshCore hardware abstraction layer.
+The Seeed XIAO nRF52840 remains socketed on Rev A. It handles the SPI radio interface, boost enable and radio sequencing, battery telemetry, optional environmental telemetry, fault logging and the MeshCore hardware abstraction layer.
 
-Programming uses the XIAO USB-C port. Recovery uses a Tag-Connect or exposed SWD pads. No six-pin JST debug connector is fitted.
+The XIAO must not use its onboard battery charger. The custom BQ24650 charger is the only battery-charging path. Programming uses the XIAO USB-C port; recovery uses SWD pads or Tag-Connect.
 
-### Radio subsystem
+### Battery telemetry
+
+MAX17048 is the preferred single-cell fuel gauge because it is intended for one Li-ion cell and does not require a current-sense resistor. A protected ADC divider remains an alternate implementation if MeshCore integration is simpler.
+
+### Radio and RF subsystem
 
 The EBYTE E22-900M33S contains an SX1262-family transceiver and external high-power RF front end. Integration requires validated control of reset, BUSY, DIO1, RXEN, TXEN or DIO2 RF-switch control, and DIO3 TCXO behavior.
 
-## MeshCore telemetry architecture
+The board-mounted SMA is connected to EBYTE ANT pin 21 through a short 50-ohm controlled-impedance grounded coplanar waveguide. The module's alternate U.FL/I-PEX path must not be used simultaneously.
 
-RoyalNode only includes deployed telemetry that the MeshCore ecosystem can represent.
+## MeshCore telemetry architecture
 
 ### Required
 
-- Battery voltage
-- MCU internal temperature where supported by the XIAO nRF52840 board definition
+- battery voltage or state of charge
+- MCU internal temperature where supported
 
 ### Optional
 
-- BME680 environmental sensor over I2C
-- Reported values: temperature, humidity and pressure
-- Connector: one 4-pin JST-GH, 1.25 mm pitch
-- Pinout: 3.3 V, GND, SDA, SCL
+- BME680 temperature, humidity and pressure over one 4-pin JST-GH I2C connector
 
 ### Omitted
 
 - solar current telemetry
 - radio current telemetry
 - battery current telemetry
-- external PA temperature
-- regulator temperature
+- external PA or regulator temperature telemetry
 - fan sensing or control
-- generic analog sensor ports
-- general-purpose accessory connectors
+- generic accessory ports
 - GPS hardware for a fixed repeater
 
-Fixed node coordinates should be configured in firmware rather than adding GPS hardware.
+## Parts changed by the 2S-to-1S conversion
 
-## 6 V panel power estimate
+### Removed or replaced
 
-A 20 W panel at 6 V produces approximately 3.3 A at its maximum-power point. Using a conservative winter model of one equivalent full-sun hour and 55% net daily efficiency gives about 11 Wh per day of usable energy.
+- BQ25798 multi-cell buck-boost charger: removed
+- 2S 15 Ah battery pack: replaced by protected 1S 15 Ah pack
+- 2S BMS and balancing function: replaced by 1S protection circuit
+- any 2S voltage-divider values: recalculated for 1S
+- any 2S fuel-gauge choice: standardized on MAX17048
+- 2S low-voltage firmware thresholds: replaced by 1S thresholds
 
-Expected RoyalNode consumption is approximately:
+### Retained
 
-- light traffic: 6 Wh/day
-- moderate traffic: 7–8 Wh/day
-- heavy traffic: 13–15 Wh/day
+- TPS61088 radio boost converter
+- 5.0 V / 3 A radio-rail target
+- Seeed XIAO nRF52840
+- EBYTE E22-900M33S
+- XT60 battery and solar connectors
+- optional BME680 JST-GH connector
+- PCB-mounted edge-launch SMA
+- four-layer PCB and two-ounce outer copper preference
 
-Therefore, 20 W is appropriate for light-to-moderate traffic with battery reserve. Truly heavy sustained traffic in poor winter conditions would require either more panel voltage, a higher-current 6 V charger architecture, or additional panel/charger channels.
+### Recalculation required during schematic capture
+
+- BQ24650 MPPT divider
+- BQ24650 battery-voltage divider for 4.20 V
+- charge-current sense resistor
+- charger external MOSFET ratings and gate behavior
+- charger inductor current and saturation rating
+- TPS61088 inductor, current limit, compensation and thermal design
+- battery fuse rating
+- 1S protection MOSFET resistance and trip threshold
+- low-battery firmware thresholds
+- battery telemetry divider if MAX17048 is not used
 
 ## Connector architecture
 
 - Battery: XT60
 - Solar: XT60
 - Optional environmental sensor: 4-pin JST-GH
-- Antenna: U.FL to SMA bulkhead
+- Antenna: PCB-mounted edge-launch SMA
 - Programming: XIAO USB-C
 - Recovery/debug: Tag-Connect or SWD pads
 
-No other low-current detachable connectors are planned for Rev A.
-
 ## Design philosophy
 
-Rev A is deployment-focused and intentionally omits bench-only hardware. The board will not include dedicated test points, measurement loops, current-shunt footprints or removable links used only for probing. Necessary EBYTE configuration resistors may remain where required for signal-routing flexibility. The EBYTE module and XIAO remain replaceable during development.
+Rev A is deployment-focused. It omits bench-only test points and current shunts. Necessary EBYTE configuration resistors may remain where required for signal-routing flexibility. The XIAO and EBYTE modules remain serviceable.
 
 ## Current open decisions
 
-1. Final MPPT charger and support circuitry for 6 V boost operation.
-2. Final 5 V / 3 A synchronous buck regulator.
-3. Battery-pack NTC specification.
-4. Hardware radio-rail over-voltage shutdown method.
-5. Exact E22 footprint and pin mapping from the manufacturer drawing.
-6. MeshCore driver changes required for the external PA and RF switch.
-7. Confirming XIAO nRF52840 MCU-temperature telemetry support.
-8. Confirming the exact BME680 data path in the selected MeshCore repeater build.
-9. Enclosure size, vent and cable-gland selections.
-10. Final legal transmit-power configuration for Canadian deployment.
+1. Select exact 6 V / 20 W panel and confirm its Vmp and Voc.
+2. Complete BQ24650 charger calculations and component selection.
+3. Complete TPS61088 1S-to-5 V power-stage calculations.
+4. Select exact protected 1S 15 Ah battery pack and NTC specification.
+5. Select hardware radio-rail over-voltage protection.
+6. Verify exact E22 footprint, antenna-path selection and RF pin mapping.
+7. Implement MeshCore driver changes required for the external PA and RF switch.
+8. Confirm MAX17048 or ADC telemetry integration.
+9. Confirm BME680 support in the selected MeshCore repeater build.
+10. Finalize enclosure, vent and cable-gland selections.
+11. Finalize legal transmit-power configuration for Canadian deployment.
