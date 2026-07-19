@@ -12,21 +12,27 @@ RoyalNode is a rugged, solar-powered 915 MHz LoRa repeater platform built around
 - Solar charging with multi-day battery reserve
 - Dedicated, oversized radio power rail
 - Canadian climate considerations
-- Serviceable Rev A hardware without bench-only test points or shunts
+- Serviceable Rev A hardware
 - MeshCore board support, subject to firmware integration work
 
-## Current proposed power architecture
+## Current proposed architecture
 
-- 6 V nominal, 20 W monocrystalline solar panel
-- BQ24650 standalone solar MPPT buck charger configured for one Li-ion cell
-- 1S 15 Ah protected Li-ion battery pack
+- 6 V nominal solar input
+- Protected 1S flat LiPo battery pack
+- Board-mounted XT30 connector for solar input
+- Board-mounted XT30 connector for battery input
+- USB-C for firmware updates, external power and battery charging
+- BQ24650 standalone solar MPPT buck charger, pending panel-headroom validation
 - TPS61088 synchronous boost converter generating 5.0 V for the radio
 - Dedicated regulated 5.0 V / 3 A radio rail
 - Separate low-noise XIAO rail
-- MAX17048 single-cell fuel gauge or direct ADC battery telemetry
+- MAX17048 single-cell fuel gauge, with direct ADC voltage reading as a fallback
 - Low-temperature charge protection through battery NTC
+- Push-button power control
+- Charging and system-status LEDs
+- Direct 50-ohm PCB RF path from the E22 ANT pin to a board-edge SMA connector
 
-A 1S pack operates from approximately 3.0 V to 4.2 V. At full radio load, the 5 V boost stage may draw roughly 2.0–2.6 A from the battery, so the pack, XT60 connection, fuse, copper and protection circuit must be designed for at least 5 A continuous capability with additional transient margin.
+A 1S pack operates from approximately 3.0 V to 4.2 V. At full radio load, the 5 V boost stage may draw roughly 2.0–2.6 A from the battery, so the pack, XT30 connection, fuse, copper and protection circuit must be designed for at least 5 A continuous capability with additional transient margin.
 
 ## Repository layout
 
@@ -46,8 +52,10 @@ RoyalNode/
 1. Confirming the exact E22-900M33S electrical interface and RF-control requirements.
 2. Implementing MeshCore support for the module's external PA, RF switching and TCXO behavior.
 3. Validating the TPS61088 5 V rail under repeated full-power transmission from a nearly discharged 1S pack.
-4. Finalizing the BQ24650 charger, MPPT setting, MOSFETs, inductor and thermal design for a 6 V / 20 W panel.
-5. Regulatory assessment for operation in Canada's 902–928 MHz band.
+4. Confirming that the selected 6 V panel provides sufficient Vmp/Voc headroom for the BQ24650 under heat, cloud and wiring loss.
+5. Preventing the XIAO onboard 50/100 mA charger from conflicting with the main solar/USB charging system.
+6. Mechanically supporting the board-mounted XT30 and SMA connectors so insertion force is not carried only by solder joints.
+7. Regulatory assessment for operation in Canada's 902–928 MHz band.
 
 ## Revision plan
 
