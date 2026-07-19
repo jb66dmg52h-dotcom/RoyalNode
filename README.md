@@ -1,6 +1,6 @@
-# RoyalNode
+# 2Watt Project
 
-RoyalNode is a rugged, solar-powered 915 MHz LoRa repeater platform built around the Seeed XIAO nRF52840 and EBYTE E22-900M33S high-power radio module.
+The 2Watt Project is a rugged, solar-powered 915 MHz LoRa repeater platform built around the Seeed XIAO nRF52840 and EBYTE E22-900M33S high-power radio module.
 
 > **Status:** Rev A architecture and engineering validation
 
@@ -21,22 +21,24 @@ RoyalNode is a rugged, solar-powered 915 MHz LoRa repeater platform built around
 - Protected 1S flat LiPo battery pack
 - Board-mounted XT30 connector for solar input
 - Board-mounted XT30 connector for battery input
-- USB-C for firmware updates, external power and battery charging
-- BQ24650 standalone solar MPPT buck charger
+- XIAO USB-C for firmware updates, external power and battery charging
+- BQ25798 buck-boost charger with MPPT, power path and dual-source support
 - TPS61088 synchronous boost converter generating 5.0 V for the radio
 - Dedicated regulated 5.0 V / 3 A radio rail
-- Separate low-noise XIAO rail
-- MAX17048 single-cell fuel gauge, with direct ADC voltage reading as a fallback
+- Separate protected XIAO supply path
+- MAX17048 single-cell fuel gauge
+- XIAO onboard charger isolated by leaving BAT unconnected
 - Low-temperature charge protection through battery NTC
 - Push-button power control
 - Charging and system-status LEDs
 - Direct 50-ohm PCB RF path from the E22 ANT pin to a board-edge SMA connector
+- Surface-mount JST-PH 2.0 service connector for SWD programming
 
 A 1S pack operates from approximately 3.0 V to 4.2 V. At full radio load, the 5 V boost stage may draw roughly 2.0–2.6 A from the battery, so the pack, XT30 connection, fuse, copper and protection circuit must be designed for at least 5 A continuous capability with additional transient margin.
 
 ## Recommended deployment panel envelope
 
-RoyalNode should not require one specific panel SKU. Deployment documentation should recommend a compatible panel envelope, for example:
+The project should not require one specific panel SKU. Deployment documentation should recommend a compatible panel envelope, for example:
 
 - 12 V nominal monocrystalline panel
 - approximately 10–20 W depending on site and battery reserve goals
@@ -44,12 +46,12 @@ RoyalNode should not require one specific panel SKU. Deployment documentation sh
 - Voc comfortably below the charger input limit, including cold-weather rise
 - XT30 cable connection
 
-The final installer is responsible for checking the selected panel's Vmp, Voc, Imp and cold-weather Voc against the charger limits.
+The installer must check the selected panel's Vmp, Voc, Imp and cold-weather Voc against the charger limits.
 
 ## Repository layout
 
 ```text
-RoyalNode/
+2Watt-Project/
 ├── docs/              Engineering specifications and calculations
 ├── hardware/          KiCad project, symbols, footprints and fabrication files
 ├── firmware/          Board support and hardware test firmware
@@ -61,12 +63,12 @@ RoyalNode/
 
 ## Major project risks
 
-1. Confirming the exact E22-900M33S electrical interface and RF-control requirements.
-2. Implementing MeshCore support for the module's external PA, RF switching and TCXO behavior.
-3. Validating the TPS61088 5 V rail under repeated full-power transmission from a nearly discharged 1S pack.
-4. Defining a safe and useful 12 V nominal solar-panel compatibility envelope for deployment documentation.
-5. Preventing the XIAO onboard 50/100 mA charger from conflicting with the main solar/USB charging system.
-6. Mechanically supporting the board-mounted XT30 and SMA connectors so insertion force is not carried only by solder joints.
+1. Implementing MeshCore support for the module's external PA, RF switching and TCXO behavior.
+2. Validating the TPS61088 5 V rail under repeated full-power transmission from a nearly discharged 1S pack.
+3. Completing and validating the BQ25798 dual-input solar/USB reference design.
+4. Selecting a low-quiescent-current XIAO supply path that cannot backfeed USB.
+5. Mechanically supporting the board-mounted XT30 and SMA connectors so insertion force is not carried only by solder joints.
+6. Configuring the XIAO NFC pads as GPIO for extra control signals.
 7. Regulatory assessment for operation in Canada's 902–928 MHz band.
 
 ## Revision plan
