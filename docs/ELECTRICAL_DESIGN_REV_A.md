@@ -2,7 +2,7 @@
 
 ## Design status
 
-This document defines the proposed Rev A electrical architecture and candidate parts. It is suitable for beginning KiCad schematic capture. Battery-specific charge current, NTC values and several converter passives remain TBD until the exact battery is selected. This is not yet an order-ready or safety-certified schematic.
+This document defines the proposed Rev A electrical architecture and candidate parts. It is suitable for beginning KiCad schematic capture. Battery-specific charge current and several converter passives remain TBD until the exact battery is selected. Battery-temperature monitoring is intentionally omitted. This is not yet an order-ready or safety-certified schematic.
 
 ## System block diagram
 
@@ -82,8 +82,6 @@ Rev A default:
 - safe startup current limit: 500 mA
 - allow firmware to raise the limit only after BQ25798 source detection confirms a suitable USB source
 
-This prevents the board from assuming a high-current USB source before detection.
-
 ## 3. Main charger and power path
 
 ### IC
@@ -98,7 +96,7 @@ This prevents the board from assuming a high-current USB source before detection
 - NVDC power path
 - autonomous solar VOC-based MPPT
 - optional dual-input selector
-- integrated current sensing, BATFET, ADC and thermistor support
+- integrated current sensing, BATFET and ADC
 
 ### Proposed configuration
 
@@ -108,8 +106,8 @@ This prevents the board from assuming a high-current USB source before detection
 - minimum system voltage: approximately 3.5 V class, finalized from battery and XIAO behavior
 - solar MPPT: autonomous VOC scaling enabled
 - USB input current: 500 mA at startup, increased after source detection when allowed
-- TS pin: battery NTC network
-- INT pin: XIAO NFC2/P0.10
+- TS pin: configured using the datasheet-approved fixed bias method because no battery thermistor is fitted
+- INT pin: XIAO NFC2/P0.10 through the underside wire harness
 - SDA/SCL: XIAO D4/D5, 3.3 V pull-ups
 
 ### Required external power parts
@@ -117,15 +115,16 @@ This prevents the board from assuming a high-current USB source before detection
 - charger inductor sized from the TI design equations and final charge current
 - local input, system and battery capacitors following the latest TI EVM layout
 - optional dual-input blocking FETs controlled by the BQ25798 selector outputs
-- TS divider components matched to battery NTC
+- fixed TS-bias components chosen from the datasheet guidance for operation without an NTC
 - STAT/INT pull-ups and low-current LEDs
 
 ### Safety behavior
 
-- no charging when battery NTC reports too cold or too hot
+- no automatic battery-temperature lockout in Rev A
 - firmware logs and reports charger faults
 - hardware input OVP/OCP and thermal protections remain enabled
 - charging continues when the product load is switched off
+- deployment documentation must prohibit charging outside the battery manufacturer's allowed temperature range
 
 ## 4. Battery connection and telemetry
 
@@ -134,16 +133,8 @@ This prevents the board from assuming a high-current USB source before detection
 - J2: board-mounted XT30, different gender/orientation from solar.
 - Battery must be a protected 1S flat LiPo.
 - Pack must support at least 5 A continuous discharge.
-- Pack includes an NTC connection; because XT30 has only two contacts, NTC requires a separate small keyed connector or a 3/4-wire combined battery connector arrangement.
-
-### Important requirement correction
-
-A two-pin XT30 cannot carry battery positive, battery negative and NTC. Rev A therefore needs one of these:
-
-1. XT30 for power plus a separate 2-pin JST-PH for NTC, or
-2. a multi-pin battery connector instead of XT30.
-
-Preferred Rev A decision: retain XT30 for power and add a separate keyed 2-pin JST-PH NTC connector.
+- XT30 carries battery positive and negative only.
+- No NTC or temperature-sense connector is included.
 
 ### Fuel gauge
 
@@ -172,9 +163,7 @@ Preferred Rev A decision: retain XT30 for power and add a separate keyed 2-pin J
 - OFF: charger and fuel gauge remain alive; XIAO and radio are off unless USB is plugged in
 - ON: TPS61088 starts and powers the XIAO supply plus radio branch
 - USB inserted while OFF: XIAO can still boot through native USB for recovery/programming
-- long-press hard-off: requires an added hold-timer/clear circuit or a different dedicated long-press controller; MAX16054 alone provides toggle behavior, not a timed long-press
-
-Rev A schematic should include a hardware CLEAR path and a test point so shutdown can be forced during bring-up.
+- long-press hard-off requires an added hold-timer/clear circuit or a different dedicated long-press controller
 
 ## 6. 5 V boost rail
 
@@ -188,22 +177,22 @@ Rev A schematic should include a hardware CLEAR path and a test point so shutdow
 
 ### Output
 
-- 5.0 V nominal.
-- 2 A continuous design target.
-- 3 A transient class.
+- 5.0 V nominal
+- 2 A continuous design target
+- 3 A transient class
 
 ### Initial design direction
 
-- switching frequency target: approximately 1 MHz to balance magnetics size and efficiency
-- mode: PFM permitted for idle efficiency unless RF testing reveals interference; provide a MODE configuration option or resistor footprint
-- inductor: approximately 1 uH shielded, low DCR, saturation rating selected from worst-case low-battery peak current
+- switching frequency target: approximately 1 MHz
+- PFM permitted for idle efficiency unless RF testing reveals interference
+- approximately 1 uH shielded low-DCR inductor with saturation rating chosen from worst-case low-battery peak current
 - bulk input capacitance close to TPS61088
 - output ceramics and low-ESR bulk close to both converter and E22 branch
 - EN driven from the push-button latch
 
-Final values must be generated from the latest TPS61088 datasheet/WEBENCH and checked at 3.0, 3.2, 3.7 and 4.2 V input.
+Final values must be generated from the latest TPS61088 datasheet or WEBENCH and checked at 3.0, 3.2, 3.7 and 4.2 V input.
 
-## 7. XIAO power path
+## 7. XIAO power path and removable underside harness
 
 ### Battery-powered operation
 
@@ -220,16 +209,31 @@ Final values must be generated from the latest TPS61088 datasheet/WEBENCH and ch
 ### Socketing
 
 - XIAO is socketed on two edge-header rows.
-- Bottom SWD/NFC pads cannot be reached through ordinary edge headers.
-- If underside-pad access is required while socketed, use spring contacts/pogo pads on the carrier or short soldered wires/flex contacts.
+- Bottom pads are not contacted by pogo pins.
+- Short flexible wires are soldered directly to the required underside pads on the XIAO.
+- The wires terminate in one keyed 8-position JST-PH 2.0 plug.
+- The carrier PCB has the matching board-mounted JST-PH receptacle.
+- The XIAO and wire harness are removed together as one assembly.
 
-This is a mechanical/electrical correction: a socketed XIAO does not automatically connect its underside pads.
+### Harness pinout
 
-Preferred Rev A approach:
+1. SWDIO
+2. SWCLK
+3. 3V3 reference
+4. GND
+5. NFC1 / P0.09 / power-button sense
+6. NFC2 / P0.10 / charger interrupt
+7. RESET_N
+8. reserved spare
 
-- use edge pins for radio and I2C
-- use carrier pogo contacts for NFC1, NFC2, SWDIO, SWCLK and RESET
-- route SWDIO/SWCLK/3V3/GND to the 4-pin JST-PH service connector
+### Harness construction rules
+
+- use thin, flexible stranded wire
+- keep the harness short
+- route it away from the RF trace and switching nodes
+- add strain relief near the underside solder pads
+- do not use the 3V3 conductor to power the board
+- mark pin 1 clearly on both cable and PCB
 
 ## 8. Radio load switch and supply filtering
 
@@ -250,13 +254,11 @@ At the E22 VCC pins:
 - 10-22 uF ceramic
 - 220-470 uF low-ESR bulk capacitor footprint
 
-Final capacitor mix must be verified during transmit-step testing.
-
 ### Radio controls
 
-- TXEN, RXEN default low with pull-down resistors
-- NRST pulled high with local RC only if required by the driver timing
-- BUSY and DIO1 route away from the RF trace and switching node
+- TXEN and RXEN default low with pull-down resistors
+- NRST pulled high with local RC only if required by driver timing
+- BUSY and DIO1 route away from RF and switching nodes
 - DIO3 remains internal to the E22 TCXO function
 
 ## 9. RF path
@@ -288,7 +290,7 @@ Rules:
 
 - do not route beneath the E22 RF section unless allowed by its keepout
 - keep BQ25798 and TPS61088 hot loops compact
-- separate switch-node copper from I2C, crystal/TCXO-sensitive areas and RF
+- separate switch-node copper from I2C, harness signals and RF
 - join all grounds through a continuous plane; do not use split-ground islands
 - use dense thermal and current-sharing vias under QFN thermal pads and high-current pours
 
@@ -315,15 +317,16 @@ Rules:
 
 ## 14. Remaining schematic values marked TBD
 
-- exact battery and NTC network
+- exact protected battery capacity and permitted charge current
+- exact fixed TS-bias network for BQ25798 without an NTC
 - exact BQ25798 inductor and capacitor values
 - exact dual-input FETs
 - exact solar TVS and fuse rating
 - exact TPS61088 inductor, frequency, current limit and soft-start values
-- radio load-switch rise time capacitor
+- radio load-switch rise-time capacitor
 - long-press/hard-off implementation
-- pogo-contact mechanical footprint for XIAO underside pads
+- exact 8-pin JST-PH part number, harness wire gauge and strain relief
 
 ## Electrical design verdict
 
-The proposed electrical architecture satisfies the audited Rev A requirements and resolves the largest earlier conflict: clean solar plus USB charging while keeping the XIAO charger isolated. Two newly explicit design issues must be solved before layout freeze: the battery NTC needs its own connector because XT30 has only two contacts, and a socketed XIAO needs pogo contacts or another method to reach underside pads.
+The revised architecture matches the stated requirements: no battery-temperature monitoring, no pogo contacts, and a socketed XIAO with a removable underside wire harness. The electrical design remains feasible. The main tradeoff is that Rev A now depends on deployment guidance rather than automatic cold-charge protection, and the underside harness becomes a hand-assembled service component that must be strain-relieved carefully.
