@@ -12,20 +12,21 @@ RoyalNode is a rugged, solar-powered 915 MHz LoRa repeater platform built around
 - Solar charging with multi-day battery reserve
 - Dedicated, oversized radio power rail
 - Canadian climate considerations
-- Serviceable and testable Rev A hardware
+- Serviceable Rev A hardware without bench-only test points or shunts
 - MeshCore board support, subject to firmware integration work
 
 ## Current proposed power architecture
 
 - 6 V nominal, 20 W monocrystalline solar panel
-- True-MPPT buck-boost multi-cell charger
-- 2S 15 Ah protected Li-ion battery
+- BQ24650 standalone solar MPPT buck charger configured for one Li-ion cell
+- 1S 15 Ah protected Li-ion battery pack
+- TPS61088 synchronous boost converter generating 5.0 V for the radio
 - Dedicated regulated 5.0 V / 3 A radio rail
 - Separate low-noise XIAO rail
-- Battery, solar and radio-current telemetry
-- Low-temperature charge protection
+- MAX17048 single-cell fuel gauge or direct ADC battery telemetry
+- Low-temperature charge protection through battery NTC
 
-A 6 V / 20 W panel produces about 3.3 A at rated power. This matches the practical input-current ceiling of the current BQ25798 charger candidate. Panels above 20 W at 6 V require a different higher-current charger front end or multiple charger channels.
+A 1S pack operates from approximately 3.0 V to 4.2 V. At full radio load, the 5 V boost stage may draw roughly 2.0–2.6 A from the battery, so the pack, XT60 connection, fuse, copper and protection circuit must be designed for at least 5 A continuous capability with additional transient margin.
 
 ## Repository layout
 
@@ -44,13 +45,13 @@ RoyalNode/
 
 1. Confirming the exact E22-900M33S electrical interface and RF-control requirements.
 2. Implementing MeshCore support for the module's external PA, RF switching and TCXO behavior.
-3. Validating the high-current 5 V radio rail under repeated full-power transmission.
-4. Finalizing a charger architecture that safely supports a 6 V panel, 2S batteries, solar MPPT and cold-weather charging.
+3. Validating the TPS61088 5 V rail under repeated full-power transmission from a nearly discharged 1S pack.
+4. Finalizing the BQ24650 charger, MPPT setting, MOSFETs, inductor and thermal design for a 6 V / 20 W panel.
 5. Regulatory assessment for operation in Canada's 902–928 MHz band.
 
 ## Revision plan
 
-- **Rev A:** Engineering validation carrier with extensive test points and configurable routing.
+- **Rev A:** Deployment-focused engineering-validation carrier using 1S power architecture.
 - **Rev B:** Field deployment board after power, firmware and thermal validation.
 - **Rev C:** Production-oriented release after environmental and regulatory review.
 
