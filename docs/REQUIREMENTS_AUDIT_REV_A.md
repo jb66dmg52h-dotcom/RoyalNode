@@ -1,133 +1,140 @@
 # 2Watt Project Requirements Audit, Rev A
 
-## Purpose
+## Status
 
-This audit converts the conversation and prior engineering notes into a controlled set of Rev A requirements. It separates fixed requirements from preferences, recommendations and unresolved choices.
+Requirements frozen for KiCad schematic capture. `DESIGN_FREEZE_REV_A.md` is the primary source of truth.
 
 ## Fixed product requirements
 
 ### Radio and firmware
 
-- Use the EBYTE E22-900M33S 850-930 MHz module.
-- Support up to the module's 33 dBm hardware capability, while deployed firmware settings must comply with local regulations.
-- Use the standard Seeed Studio XIAO nRF52840 as the controller.
-- Target MeshCore repeater operation.
-- Preserve native USB firmware updates through the XIAO USB-C connector.
-- Provide the radio signals NSS, SCK, MOSI, MISO, BUSY, DIO1, NRST, TXEN and RXEN.
-- Configure the E22 TCXO correctly through the SX126x driver.
+- EBYTE E22-900M33S radio module
+- Standard Seeed Studio XIAO nRF52840 controller
+- MeshCore repeater target
+- Native USB-C firmware updates through the XIAO
+- Radio signals: NSS, SCK, MOSI, MISO, BUSY, DIO1, NRST, TXEN and RXEN
+- Correct E22 TCXO and external RF-switch control in firmware
 
 ### RF
 
-- Use a direct PCB connection from the E22 ANT pad to a board-mounted SMA female connector.
-- Do not use a u.FL intermediate connector.
-- Use a controlled 50-ohm trace based on the final PCB stack-up.
-- Keep the RF trace short, ground-referenced and isolated from switching nodes.
+- Direct E22 ANT to board-mounted SMA connection
+- No u.FL intermediate connector
+- Controlled 50-ohm route based on the final fabricator stack-up
+- Continuous ground reference and switching-node separation
 
 ### Battery and charging
 
-- Use a protected 1S flat LiPo battery.
-- Battery connector is board-mounted XT30.
-- Solar connector is board-mounted XT30.
-- Solar panel is not a fixed BOM item; deployment guidance recommends a compatible 12 V nominal panel class.
-- USB-C must support both firmware updates and main-battery charging.
-- Leave the XIAO BAT pad unconnected so its onboard charger remains isolated.
-- Provide battery-voltage and state-of-charge telemetry.
-- Battery-temperature monitoring is not included in Rev A.
-- The selected protected LiPo pack must provide its own internal over-charge, over-discharge, over-current and short-circuit protection.
+- Protected 1S flat LiPo
+- 10 Ah capacity target
+- At least 5 A continuous discharge capability
+- At least 2 A permitted charge current
+- Board-mounted XT30 battery connector
+- Board-mounted XT30 solar connector
+- 12 V nominal solar panel class
+- 10 W panel supported; 20 W recommended
+- USB-C charging through BQ25798
+- Solar MPPT and power-path operation
+- Maximum programmed charge current: 2.0 A
+- Battery voltage and state-of-charge telemetry through MAX17048
+- No battery-temperature monitoring
+- Battery pack must include internal over-charge, over-discharge, over-current and short-circuit protection
 
-### User interface and service
+### XIAO power and service
 
-- Provide a physical push-button power control.
-- Provide charging and system-status indication.
-- Rev A XIAO should be socketed for replacement and debugging.
-- E22 should be directly soldered to the carrier PCB.
-- XIAO underside pads will be connected using short wires soldered directly to the XIAO.
-- Those wires terminate in one removable JST-PH 2.0 plug that mates with a board-mounted JST-PH receptacle on the carrier PCB.
-- No pogo pins or spring contacts will be used beneath the XIAO.
+- XIAO remains socketed on its edge pins
+- Carrier powers XIAO through underside BAT and GND pads only
+- Short two-wire lead terminates in a keyed 2-pin JST-PH connector beside the XIAO socket
+- LM66100 ideal diode prevents reverse current into the main battery rail
+- Carrier does not drive XIAO 5V/VBUS
+- No pogo pins, SWD connector or multi-wire underside harness
+- Normal firmware and recovery use XIAO USB-C and onboard reset
+
+### User interface
+
+- One external charge LED only
+- No power button
+- Automatic startup when the protected battery is connected
+- Battery XT30 serves as the master disconnect
 
 ### Mechanical and manufacturing
 
-- First build quantity is five boards.
-- Use factory assembly for QFN/DFN ICs and small SMD parts.
-- Hand-install socketed XIAO, XIAO underside wire harness, E22 module, XT30 connectors, SMA, button and JST service connector unless the assembler can place them safely at reasonable cost.
-- Use a 4-layer controlled-impedance PCB.
-- Mechanically support XT30 and SMA insertion forces through footprint choice and enclosure design.
-- Provide strain relief for the XIAO underside wire harness so socket removal does not pull on the solder pads.
+- Board-only design; enclosure design is outside Rev A scope
+- First prototype quantity: five boards
+- Four-layer controlled-impedance PCB
+- Factory assembly for all pick-and-place-compatible components
+- Socket headers, XIAO power lead and any unsuitable mechanical connectors may be hand-installed
+- XT30 and SMA footprints must tolerate or transfer connector insertion force appropriately
 
-## Performance requirements
+## Electrical performance requirements
 
-### Radio power rail
+### 5 V radio rail
 
-- Nominal output: 5.0 V.
-- Continuous design target: at least 2 A.
-- Transient design target: 3 A class.
-- Must tolerate repeated E22 transmit transitions without resetting the XIAO.
-- Radio power must be independently switchable from the XIAO supply.
+- Nominal output: 5.0 V
+- Continuous design target: 2 A
+- Transient design target: 3 A
+- E22 connected directly to 5 V with no load switch or eFuse
+- TPS61088 soft-start, current limit and local bulk capacitance must prevent rail collapse
+- TXEN and RXEN default low during reset
 
-### Battery current path
+### Battery path
 
-- Design battery connector, fuse, copper, vias and protection for at least 5 A continuous capability.
-- Account for higher current at low battery voltage.
-- Disable or reduce full-power radio operation as the battery approaches low-voltage cutoff.
+- Copper, vias and connector path sized for at least 5 A continuous
+- Full-power operation may be reduced near low battery voltage in firmware
 
-### Charging
+### Charger
 
-- Charger must support one Li-ion/LiPo cell.
-- Charger must accept approximately 5 V USB and a recommended 12 V nominal solar panel class.
-- Charger must provide power-path operation so the unit can run while charging.
-- Charger must provide solar MPPT behavior.
-- Charge current must be configurable to the selected battery's permitted rate.
-- Rev A does not use a battery thermistor or external battery-temperature cutoff.
+- TI BQ25798RQMR
+- 1S startup configuration
+- 750 kHz switching frequency
+- 2.2 uH charger inductor
+- /CE tied low for autonomous charging
+- TS biased to the normal region using a fixed divider
+- Charger telemetry polled over I2C
 
-### Environmental
+## Removed functionality
 
-- Operating design target: outdoor Canadian conditions.
-- Electronics target range should align with industrial-grade components where practical.
-- Because Rev A omits battery-temperature monitoring, deployment instructions must warn against charging the LiPo outside the battery manufacturer's permitted temperature range.
+- Power button and latch controller
+- Radio load switch
+- eFuse
+- Battery thermistor and NTC connector
+- Full, fault and carrier status LEDs
+- SWD connector
+- Pogo contacts
+- Eight-wire XIAO harness
+- Solar-present and USB-present telemetry
+- Radio-disable jumper
+- Battery reverse-polarity circuit
+- GPS, display and environmental sensors
 
-## Preferred architecture decisions
+## Resolved compatibility issues
 
-- Main charger and power-path IC: TI BQ25798.
-- Radio boost converter: TI TPS61088.
-- Fuel gauge: MAX17048.
-- Radio load switch: TPS22990-class high-current load switch.
-- Push-button latch: MAX16054-class controller.
-- Shared I2C bus for BQ25798 and MAX17048.
-- XIAO edge pins dedicated to radio plus I2C; underside NFC pads repurposed as extra GPIO through the wired JST harness.
-- Use one 8-position JST-PH 2.0 harness for underside signals, allowing SWDIO, SWCLK, 3V3 reference, GND, NFC1, NFC2, RESET and one spare conductor.
+### XIAO USB backfeed
 
-## Requirements conflicts found
-
-### USB-C charging versus XIAO onboard charger
-
-Resolved by leaving XIAO BAT unconnected and routing USB VBUS into the main charger input.
+Resolved by powering the XIAO through BAT/GND via LM66100. The carrier never drives XIAO VBUS.
 
 ### XIAO GPIO count
 
-Resolved by using NFC1/P0.09 and NFC2/P0.10 as GPIO after UICR configuration, accessed through the underside wire harness.
+All eleven edge GPIOs are allocated to the E22 and shared I2C bus. No additional GPIO-dependent features remain.
 
-### Socketed XIAO versus underside pads
+### Radio surge
 
-Resolved by soldering a short removable harness to the XIAO underside pads. The harness plugs into one board-mounted JST-PH receptacle. The XIAO and harness are removed together.
+Resolved by the oversized TPS61088 stage, high-current inductor, controlled soft-start and 330-470 uF local E22 bulk capacitance.
 
-### Radio surge versus MCU stability
+### Solar panel flexibility
 
-Resolved architecturally by separating the radio branch with its own high-current boost stage, bulk capacitance and load switch.
+Resolved with a deployment envelope rather than a fixed panel SKU: 12 V nominal, 10 W supported, 20 W recommended.
 
-### Fixed solar panel versus deployer choice
+## Remaining implementation work
 
-Resolved by defining a safe panel compatibility envelope rather than one required panel SKU.
+No architecture-level decisions block KiCad. Remaining tasks are implementation and verification:
 
-## Open requirements that block final schematic freeze
-
-1. Exact protected flat LiPo capacity, dimensions, maximum charge rate and discharge rating.
-2. Whether the power button turns off only the XIAO/radio load or places BQ25798 into ship mode as well.
-3. Exact USB source current target: conservative 500 mA default or BC1.2-detected higher current.
-4. Exact recommended panel voltage envelope and maximum allowable cold-weather Voc.
-5. Exact XIAO socket/header height and 8-pin JST-PH connector orientation.
-6. Exact wire gauge, harness length and strain-relief method for the XIAO underside pads.
-7. Exact enclosure dimensions and connector orientation.
+1. Verify symbols and footprints against manufacturer drawings.
+2. Select exact capacitor MPNs after effective-capacitance and assembler-stock review.
+3. Capture the schematic and run ERC.
+4. Perform a schematic-level compatibility audit.
+5. Obtain the PCB fabricator stack-up and calculate the RF geometry.
+6. Place, route and run DRC.
 
 ## Audit verdict
 
-The product requirements are coherent and the main architecture is compatible. Removing battery-temperature monitoring simplifies the battery interface to the two-pin XT30, but it also removes automatic cold-charge protection. The wired underside harness is electrically straightforward and more serviceable than pogo contacts, provided it receives proper strain relief and a clearly keyed connector pinout.
+The frozen Rev A requirements are coherent and suitable for KiCad schematic capture. Prototype testing remains required for charging behavior, USB source handling, converter temperature, 5 V transient response and RF noise.
