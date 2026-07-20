@@ -22,8 +22,44 @@ Requirements:
 
 This supersedes all earlier one-pair or direct-source concepts.
 
-## Issue 2: Solar overvoltage and surge protection
+## Issue 2: Solar overvoltage and reverse-polarity protection
 
-**Status: OPEN**
+**Status: LOCKED**
 
-The previously selected SMBJ22A is rejected because its clamping voltage can exceed the BQ25798 30 V absolute maximum. The next decision is whether to use an active overvoltage cutoff controller or impose a lower panel Voc envelope with a different clamp strategy.
+Use an active input-protection stage based on:
+
+- Controller: Analog Devices LTC4365ITS8-1#TRMPBF
+- Package: TSOT-23-8
+- Temperature range: -40 C to +85 C
+- External protection devices: one back-to-back N-channel MOSFET pair
+
+Locked solar path:
+
+```text
+Solar XT30
+  -> 2 A fuse
+  -> LTC4365-1 protection controller
+  -> back-to-back N-channel protection MOSFETs
+  -> BQ25798 solar-source ACFET/RBFET mux pair
+  -> common BQ25798 VBUS
+```
+
+Locked threshold targets:
+
+- Undervoltage cutoff: approximately 7 V
+- Overvoltage cutoff: approximately 25 V
+
+Requirements:
+
+- The LTC4365 protection pair handles reverse polarity and disconnects the panel during excessive input voltage.
+- The BQ25798 mux pair remains a separate stage for source selection and source-to-source reverse blocking.
+- The previously selected SMBJ22A TVS is removed from the locked BOM.
+- The previously selected BSL303SPE P-channel reverse-polarity MOSFET is removed from the locked BOM.
+- Final UV/OV divider values and the exact external N-channel MOSFET part number must be calculated from the LTC4365 datasheet during schematic capture.
+- Recommended panel cold-weather Voc must remain below the 25 V cutoff target with suitable tolerance margin.
+
+## Issue 3: Shared USB-C charging-current policy
+
+**Status: NEXT**
+
+The next decision is the safe BQ25798 input-current limit when the same XIAO USB-C connector is used for firmware data and main-battery charging.
