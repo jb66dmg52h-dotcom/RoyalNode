@@ -117,6 +117,41 @@ Functional intent:
 
 ## Issue 5: BQ25798 BATP Kelvin routing
 
+**Status: LOCKED**
+
+Locked connection:
+
+```text
+Battery XT30 positive pad
+  -> dedicated Kelvin sense trace
+  -> 100 ohm series resistor
+  -> BQ25798 BATP
+```
+
+Routing and component requirements:
+
+- BATP sense origin is the battery XT30 positive pad itself.
+- Do not sense BATP from the BQ25798 BAT power pin, from the charger-side BAT copper, or from an intermediate high-current node.
+- Use a dedicated low-current sense trace from the battery connector pad to BATP.
+- The BATP sense trace must not carry battery charge or system current.
+- Route the BATP trace away from SW1, SW2 and other noisy switching nodes.
+- Place the 100 ohm series resistor close to the BQ25798 BATP pin.
+- Do not add a BATP capacitor unless explicitly required by TI guidance used during final schematic verification.
+- Keep BATP sensing tied to the actual battery-positive terminal side of any future switching element.
+
+Functional intent:
+
+- The charger measures actual battery-terminal voltage rather than voltage elevated by IR drop in the high-current charge path.
+- The Kelvin connection protects charge-voltage accuracy, especially at the 2 A charge target.
+
+## Issue 6: Exact external MOSFET selection and LTC4365 threshold divider
+
 **Status: NEXT**
 
-The next decision is the exact BATP sense connection, series resistance, routing point and Kelvin-routing rules so the charger measures true battery-terminal voltage rather than voltage drop in the high-current charge path.
+The remaining power-input implementation details are now component-level rather than architectural. Next, select the exact N-channel MOSFET part numbers for:
+
+1. The LTC4365 solar protection back-to-back pair.
+2. The BQ25798 solar ACFET/RBFET pair.
+3. The BQ25798 USB ACFET/RBFET pair.
+
+Also calculate and lock the exact LTC4365 resistor divider values for the approximately 7 V undervoltage and 25 V overvoltage thresholds.
