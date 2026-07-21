@@ -159,7 +159,6 @@ Use one common dual N-channel 40 V MOSFET device for all three back-to-back pair
 - Logic-level device
 - RDS(on) max at VGS = 4.5 V: 23.6 milliohm per MOSFET
 - QG typ at 4.5 V: 6 nC
-- Product status at lock date: Active and Preferred
 
 Use one dual-MOSFET package for each function:
 
@@ -167,11 +166,7 @@ Use one dual-MOSFET package for each function:
 2. One ISA170170N04LMDS package for the BQ25798 solar ACFET/RBFET pair.
 3. One ISA170170N04LMDS package for the BQ25798 USB ACFET/RBFET pair.
 
-This reduces the six discrete FETs to three identical dual-FET packages while preserving the required back-to-back topology.
-
 ### LTC4365 UV/OV divider
-
-Use the LTC4365 three-resistor ladder with:
 
 ```text
 VIN
@@ -189,25 +184,34 @@ VIN
 GND
 ```
 
-All three resistors: 1% tolerance minimum; 0.1% may be used if BOM cost permits.
-
-Nominal thresholds using the LTC4365 comparator equations:
+Nominal thresholds:
 
 - UV falling cutoff: approximately 6.98 V
 - UV rising/reconnect: approximately 7.33 V
 - OV rising cutoff: approximately 25.05 V
 - OV falling/reconnect: approximately 23.80 V
 
-These values satisfy the approximately 7 V undervoltage target and approximately 25 V overvoltage target while providing the device's inherent hysteresis.
+## Issue 7: BQ25798 TS policy for Rev A
 
-### Gate-drive compatibility
+**Status: LOCKED**
 
-- BQ25798 ACDRVx drives the external mux-FET gates approximately 5 V above VACx.
-- LTC4365 charge pump provides enhanced gate drive for its external N-channel MOSFET pair.
-- The selected logic-level MOSFET is characterized at 4.5 V gate drive and is therefore suitable for both stages.
+Rev A will not use a physical battery thermistor. The TS input will use a fixed simulated in-range condition rather than real battery-temperature sensing.
 
-## Issue 7: BQ25798 TS fixed-divider and remaining static-pin configuration
+Design intent:
+
+- Keep the BQ25798 TS input permanently in its normal-temperature operating region for Rev A.
+- Do not fit an external battery NTC connector on Rev A.
+- Treat this as a Rev A simplification only; a real temperature-sensing option may be reconsidered in a later hardware revision.
+- Exact TS network implementation is to follow the BQ25798 datasheet/reference design during schematic capture.
+
+## Issue 8: BQ25798 remaining static/configuration pins
 
 **Status: NEXT**
 
-The next schematic-level decision is to finalize the BQ25798 battery-temperature input configuration now that no thermistor will be used. Lock the exact TS resistor divider, confirm STAT LED wiring, confirm PROG = 4.7 kOhm, and resolve any required treatment of unused static/configuration pins before the BQ25798 power sheet is considered schematic-ready.
+Next, close out the remaining charger static/configuration details:
+
+- Confirm PROG = 4.7 kOhm for 1S / 750 kHz.
+- Lock STAT charge-LED wiring and resistor value.
+- Confirm treatment of unused D+/D- pins.
+- Confirm any required pullups, pulldowns, bypass capacitors, or no-connect rules on the remaining configuration/static pins.
+- Perform a final BQ25798 pin-by-pin schematic-readiness check before KiCad capture.
