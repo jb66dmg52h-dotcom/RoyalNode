@@ -18,7 +18,6 @@ Requirements:
 - Each source receives its own back-to-back N-channel MOSFET pair.
 - The BQ25798 controls the source-selection FETs through its source-driver outputs.
 - No source may backfeed the other source or its connector.
-- Exact MOSFET manufacturer part numbers remain to be selected during the input-stage schematic design.
 
 This supersedes all earlier one-pair or direct-source concepts.
 
@@ -55,7 +54,6 @@ Requirements:
 - The BQ25798 mux pair remains a separate stage for source selection and source-to-source reverse blocking.
 - The previously selected SMBJ22A TVS is removed from the locked BOM.
 - The previously selected BSL303SPE P-channel reverse-polarity MOSFET is removed from the locked BOM.
-- Final UV/OV divider values and the exact external N-channel MOSFET part number must be calculated from the LTC4365 datasheet during schematic capture.
 - Recommended panel cold-weather Voc must remain below the 25 V cutoff target with suitable tolerance margin.
 
 ## Issue 3: Shared USB-C charging-current policy
@@ -144,14 +142,72 @@ Functional intent:
 - The charger measures actual battery-terminal voltage rather than voltage elevated by IR drop in the high-current charge path.
 - The Kelvin connection protects charge-voltage accuracy, especially at the 2 A charge target.
 
-## Issue 6: Exact external MOSFET selection and LTC4365 threshold divider
+## Issue 6: External MOSFET selection and LTC4365 threshold divider
+
+**Status: LOCKED**
+
+### Common MOSFET device
+
+Use one common dual N-channel 40 V MOSFET device for all three back-to-back pairs:
+
+- Manufacturer: Infineon
+- Device: ISA170170N04LMDS
+- Ordering code: ISA170170N04LMDSXTMA1
+- Configuration: dual N-channel
+- VDS rating: 40 V
+- Package: SO-8 / PG-DSO-8
+- Logic-level device
+- RDS(on) max at VGS = 4.5 V: 23.6 milliohm per MOSFET
+- QG typ at 4.5 V: 6 nC
+- Product status at lock date: Active and Preferred
+
+Use one dual-MOSFET package for each function:
+
+1. One ISA170170N04LMDS package for the LTC4365 solar protection pair.
+2. One ISA170170N04LMDS package for the BQ25798 solar ACFET/RBFET pair.
+3. One ISA170170N04LMDS package for the BQ25798 USB ACFET/RBFET pair.
+
+This reduces the six discrete FETs to three identical dual-FET packages while preserving the required back-to-back topology.
+
+### LTC4365 UV/OV divider
+
+Use the LTC4365 three-resistor ladder with:
+
+```text
+VIN
+ |
+ R3 = 1.87 MOhm
+ |
+ UV
+ |
+ R2 = 104 kOhm
+ |
+ OV
+ |
+ R1 = 40.2 kOhm
+ |
+GND
+```
+
+All three resistors: 1% tolerance minimum; 0.1% may be used if BOM cost permits.
+
+Nominal thresholds using the LTC4365 comparator equations:
+
+- UV falling cutoff: approximately 6.98 V
+- UV rising/reconnect: approximately 7.33 V
+- OV rising cutoff: approximately 25.05 V
+- OV falling/reconnect: approximately 23.80 V
+
+These values satisfy the approximately 7 V undervoltage target and approximately 25 V overvoltage target while providing the device's inherent hysteresis.
+
+### Gate-drive compatibility
+
+- BQ25798 ACDRVx drives the external mux-FET gates approximately 5 V above VACx.
+- LTC4365 charge pump provides enhanced gate drive for its external N-channel MOSFET pair.
+- The selected logic-level MOSFET is characterized at 4.5 V gate drive and is therefore suitable for both stages.
+
+## Issue 7: BQ25798 TS fixed-divider and remaining static-pin configuration
 
 **Status: NEXT**
 
-The remaining power-input implementation details are now component-level rather than architectural. Next, select the exact N-channel MOSFET part numbers for:
-
-1. The LTC4365 solar protection back-to-back pair.
-2. The BQ25798 solar ACFET/RBFET pair.
-3. The BQ25798 USB ACFET/RBFET pair.
-
-Also calculate and lock the exact LTC4365 resistor divider values for the approximately 7 V undervoltage and 25 V overvoltage thresholds.
+The next schematic-level decision is to finalize the BQ25798 battery-temperature input configuration now that no thermistor will be used. Lock the exact TS resistor divider, confirm STAT LED wiring, confirm PROG = 4.7 kOhm, and resolve any required treatment of unused static/configuration pins before the BQ25798 power sheet is considered schematic-ready.
