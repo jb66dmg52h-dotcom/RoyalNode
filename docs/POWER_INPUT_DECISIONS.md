@@ -72,12 +72,6 @@ Locked policy:
 - BQ25798 D+ and D- remain unconnected.
 - Solar remains the primary high-power charging source.
 
-Reasoning:
-
-- Before enumeration, 100 mA is the conservative USB device budget.
-- After enumeration, 350 mA leaves headroom inside a conventional 500 mA USB budget for the XIAO, USB activity and the XIAO onboard charger.
-- USB charging is considered maintenance or emergency charging rather than the primary way to refill the 10 Ah battery.
-
 Firmware requirement:
 
 - Initialize the BQ25798 USB path at 100 mA.
@@ -86,6 +80,43 @@ Firmware requirement:
 
 ## Issue 4: LM66100 exact wiring
 
+**Status: LOCKED**
+
+Use LM66100DCKR as the always-enabled ideal-diode feed from the protected 1S battery/system node to the XIAO underside BAT input.
+
+Locked path:
+
+```text
+Protected battery/system node
+  -> LM66100 VIN
+  -> LM66100 VOUT
+  -> 2-pin JST-PH positive
+  -> XIAO BAT pad
+
+Common GND
+  -> 2-pin JST-PH ground
+  -> XIAO GND
+```
+
+Pin and support-component requirements:
+
+- VIN: protected battery/system node.
+- VOUT: JST positive output to XIAO BAT.
+- GND: common system ground.
+- CE: tie high to VIN for always-enabled operation.
+- ST: leave unconnected.
+- Input bypass capacitor: 1 uF ceramic located close to VIN/GND.
+- Output bypass capacitor: 1 uF ceramic located close to VOUT/GND.
+- No MCU GPIO control is required.
+
+Functional intent:
+
+- XIAO automatically receives battery power whenever the main protected battery is present.
+- Reverse current from the XIAO side toward the main battery rail is blocked by the ideal-diode path.
+- XIAO remains socketed and USB-C remains available for firmware/data operation.
+
+## Issue 5: BQ25798 BATP Kelvin routing
+
 **Status: NEXT**
 
-The next decision is the exact LM66100 CE, ST, input, output and bypass-capacitor wiring for the XIAO BAT supply path.
+The next decision is the exact BATP sense connection, series resistance, routing point and Kelvin-routing rules so the charger measures true battery-terminal voltage rather than voltage drop in the high-current charge path.
