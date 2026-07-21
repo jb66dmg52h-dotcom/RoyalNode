@@ -206,12 +206,34 @@ Design intent:
 
 ## Issue 8: BQ25798 remaining static/configuration pins
 
+**Status: LOCKED**
+
+Locked pin-audit decisions:
+
+- CE: tie directly to GND so charging is hardware-enabled; firmware retains charge control through EN_CHG.
+- ILIM_HIZ: tie to REGN so the hardware pin permits maximum input current; actual USB and solar current limits are managed through I2C.
+- INT: connect to a XIAO GPIO and add a 10 kOhm pull-up to the XIAO 3.3 V logic rail.
+- SDRV: no ship FET is used; fit 1 nF, 50 V ceramic from SDRV to GND.
+- PROG: 4.7 kOhm to GND for 1S / 750 kHz configuration.
+- D+ and D-: no connect.
+- QON: leave unconnected; use the internal pull-up.
+- SCL/SDA: connect to XIAO I2C with 10 kOhm pull-ups to 3.3 V.
+- BATP: retain the previously locked 100 ohm Kelvin-sense connection to battery XT30 positive.
+- STAT: retain TI-recommended 10 kOhm pull-up; final LED indicator implementation must preserve this loading and is not yet locked as a simple 1.5 kOhm LED path.
+
+Power-stage support components to follow TI reference values during schematic capture:
+
+- BTST1 to SW1: 47 nF ceramic, at least 10 V.
+- BTST2 to SW2: 47 nF ceramic, at least 10 V.
+- REGN: 4.7 uF ceramic, at least 10 V, close to the pin.
+- VBUS: local 2 x 10 uF plus 0.1 uF ceramic decoupling.
+- BAT: local 2 x 10 uF ceramic decoupling.
+- SYS: local 5 x 10 uF plus 0.1 uF ceramic decoupling.
+- PMID: local 3 x 10 uF plus 0.1 uF ceramic decoupling.
+- GND / exposed thermal pad: solid low-impedance ground connection with thermal vias.
+
+## Issue 9: STAT LED final implementation and complete BQ25798 schematic-ready review
+
 **Status: NEXT**
 
-Next, close out the remaining charger static/configuration details:
-
-- Confirm PROG = 4.7 kOhm for 1S / 750 kHz.
-- Lock STAT charge-LED wiring and resistor value.
-- Confirm treatment of unused D+/D- pins.
-- Confirm any required pullups, pulldowns, bypass capacitors, or no-connect rules on the remaining configuration/static pins.
-- Perform a final BQ25798 pin-by-pin schematic-readiness check before KiCad capture.
+Next, choose the exact STAT LED circuit so the TI-recommended 10 kOhm STAT pull-up remains intact, then perform one final BQ25798 schematic-ready checklist before drawing the charger sheet in KiCad.
