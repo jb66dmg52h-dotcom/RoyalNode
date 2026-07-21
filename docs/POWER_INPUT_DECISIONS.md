@@ -193,16 +193,15 @@ Nominal thresholds:
 
 ## Issue 7: BQ25798 TS policy for Rev A
 
-**Status: LOCKED**
+**Status: POLICY LOCKED; EXACT BYPASS NETWORK NOT SPECIFIED**
 
-Rev A will not use a physical battery thermistor. The TS input will use a fixed simulated in-range condition rather than real battery-temperature sensing.
+Rev A will not use a physical battery thermistor. The project policy is to use a fixed simulated in-range TS condition rather than real battery-temperature sensing.
 
 Design intent:
 
-- Keep the BQ25798 TS input permanently in its normal-temperature operating region for Rev A.
 - Do not fit an external battery NTC connector on Rev A.
-- Treat this as a Rev A simplification only; a real temperature-sensing option may be reconsidered in a later hardware revision.
-- Exact TS network implementation is to follow the BQ25798 datasheet/reference design during schematic capture.
+- Treat this as a Rev A simplification only; real battery temperature sensing should be reconsidered in a later hardware revision.
+- Exact fixed-TS network values are intentionally not specified in this design file.
 
 ## Issue 8: BQ25798 remaining static/configuration pins
 
@@ -219,7 +218,6 @@ Locked pin-audit decisions:
 - QON: leave unconnected; use the internal pull-up.
 - SCL/SDA: connect to XIAO I2C with 10 kOhm pull-ups to 3.3 V.
 - BATP: retain the previously locked 100 ohm Kelvin-sense connection to battery XT30 positive.
-- STAT: retain TI-recommended 10 kOhm pull-up; final LED indicator implementation must preserve this loading and is not yet locked as a simple 1.5 kOhm LED path.
 
 Power-stage support components to follow TI reference values during schematic capture:
 
@@ -232,8 +230,39 @@ Power-stage support components to follow TI reference values during schematic ca
 - PMID: local 3 x 10 uF plus 0.1 uF ceramic decoupling.
 - GND / exposed thermal pad: solid low-impedance ground connection with thermal vias.
 
-## Issue 9: STAT LED final implementation and complete BQ25798 schematic-ready review
+## Issue 9: STAT LED final implementation
+
+**Status: LOCKED**
+
+Use a buffered active-low STAT indicator so the BQ25798 STAT node keeps its recommended 10 kOhm pull-up and the LED current does not load the STAT pin directly.
+
+Locked circuit:
+
+```text
+3.3 V ---- 10 kOhm ----+---- BQ25798 STAT
+                       |
+                       +---- gate of BSS84 P-channel MOSFET
+
+BSS84 source -> 3.3 V
+BSS84 drain  -> LED anode
+LED cathode  -> 2.2 kOhm -> GND
+```
+
+Behavior:
+
+- STAT released/high: BSS84 gate rises to 3.3 V, MOSFET off, LED off.
+- STAT asserted/low during charging: BSS84 VGS becomes negative, MOSFET on, LED on.
+- The STAT pin itself only sinks current through the 10 kOhm pull-up and MOSFET gate leakage, preserving the intended open-drain loading.
+
+Parts:
+
+- QSTAT: BSS84, SOT-23 P-channel MOSFET.
+- RSTAT: 10 kOhm pull-up to XIAO 3.3 V rail.
+- RLED: 2.2 kOhm.
+- LED: low-current green or amber indicator, 0603 preferred.
+
+## Issue 10: TPS61088 5 V radio-rail schematic closure
 
 **Status: NEXT**
 
-Next, choose the exact STAT LED circuit so the TI-recommended 10 kOhm STAT pull-up remains intact, then perform one final BQ25798 schematic-ready checklist before drawing the charger sheet in KiCad.
+Next, finalize the TPS61088 support network for the dedicated 5 V / 2 A E22 radio rail: feedback divider, switching frequency resistor, current-limit resistor, compensation, EN treatment, input/output capacitance, and final inductor suitability.
