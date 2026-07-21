@@ -60,6 +60,32 @@ Requirements:
 
 ## Issue 3: Shared USB-C charging-current policy
 
+**Status: LOCKED**
+
+The XIAO USB-C connector remains shared between firmware/data operation and BQ25798 main-battery charging.
+
+Locked policy:
+
+- Initial BQ25798 USB input-current limit: 100 mA.
+- After successful USB enumeration by the XIAO: raise the BQ25798 USB input-current limit to 350 mA.
+- Never exceed 350 mA through the shared XIAO USB-C charging branch.
+- BQ25798 D+ and D- remain unconnected.
+- Solar remains the primary high-power charging source.
+
+Reasoning:
+
+- Before enumeration, 100 mA is the conservative USB device budget.
+- After enumeration, 350 mA leaves headroom inside a conventional 500 mA USB budget for the XIAO, USB activity and the XIAO onboard charger.
+- USB charging is considered maintenance or emergency charging rather than the primary way to refill the 10 Ah battery.
+
+Firmware requirement:
+
+- Initialize the BQ25798 USB path at 100 mA.
+- Raise to 350 mA only after the USB stack confirms successful enumeration.
+- Fall back to 100 mA after disconnect, USB reset or enumeration failure.
+
+## Issue 4: LM66100 exact wiring
+
 **Status: NEXT**
 
-The next decision is the safe BQ25798 input-current limit when the same XIAO USB-C connector is used for firmware data and main-battery charging.
+The next decision is the exact LM66100 CE, ST, input, output and bypass-capacitor wiring for the XIAO BAT supply path.
