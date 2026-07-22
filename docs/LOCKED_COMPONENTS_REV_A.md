@@ -29,12 +29,15 @@ Rev A intentionally has no dedicated fuel-gauge IC. Battery voltage and charger-
 
 The NTC is mandatory for the production assembly. There is no fixed TS bypass, simulated-temperature divider, or bench-test selection network.
 
-## Connectors
+## Connectors and sockets
 
 | Function | Locked part/class | Notes |
 |---|---|---|
-| Solar input | AMASS XT30PW board-mount | Final gender/orientation per mechanical design |
-| Battery input | AMASS XT30PW board-mount | Keyed, no carrier battery reverse-polarity stage |
+| Solar input | AMASS XT30PW-M | Male right-angle PCB connector; JLC assembly supported, wave solder |
+| Battery input | AMASS XT30PW-M | Male right-angle PCB connector; JLC assembly supported, wave solder |
+| XIAO socket, left | LXWCONN 254PM-1x7P-V | 1x7, 2.54 mm, vertical female, 8.5 mm body, gold contact, -40 to +105 C; JLC C53202181 |
+| XIAO socket, right | LXWCONN 254PM-1x7P-V | Same part as left socket |
+| XIAO mating headers | 1x7, 2.54 mm male pin headers on XIAO | Header pin length must be verified against socket engagement before assembly release |
 | XIAO power receptacle | JST B2B-PH-SM4-TB(LF)(SN) | 2-pin, 2.0 mm, board-mounted SMT |
 | XIAO cable housing | JST PHR-2 | Two-wire removable lead |
 | Battery NTC PCB header | Molex 5037630291 | Pico-Lock 1.00 mm, 2-circuit, right-angle SMT, positive lock, -40 to +105 C; JLCPCB C586113 |
@@ -42,7 +45,9 @@ The NTC is mandatory for the production assembly. There is no fixed TS bypass, s
 | Battery NTC crimp terminal | Molex 5037650098 | Pico-Lock female crimp terminal, gold mating surface, 30-28 AWG |
 | RF output | Molex 0732511150 / 732511150 | Standard-polarity 50-ohm SMA female edge mount for 1.60 mm PCB; JLCPCB C841205 |
 
-The Pico-Lock header is a current JLCPCB assembly-library part. Because JLCPCB inventory is dynamic, production BOM review must verify stock/pre-order status immediately before ordering.
+Board-side XT30 gender is deliberately male. The mating battery and solar harnesses use female XT30 connectors so energized harness contacts are recessed rather than exposed male bullets. Both board XT30s must be distinctly silkscreened BATTERY and SOLAR because the connectors are mechanically identical.
+
+JLCPCB lists genuine AMASS XT30PW-M as a supported wave-solder assembly part. Stock is dynamic and may require pre-order/consignment at build time. The XIAO sockets are also wave-solder parts and may require a fixture.
 
 ## BQ25798 locked startup values
 
