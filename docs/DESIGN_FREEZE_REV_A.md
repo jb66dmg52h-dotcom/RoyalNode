@@ -19,7 +19,7 @@ Rev A is frozen for KiCad schematic capture. This document is the primary source
 - Battery voltage and charger telemetry through BQ25798
 - Battery-mounted NTC temperature sensing for charge protection
 - One external charge LED
-- Direct 50-ohm PCB trace from E22 ANT to board-edge SMA
+- Direct 50-ohm grounded-coplanar RF path from E22 ANT to board-edge SMA
 - Automatic startup when battery is connected
 - Factory assembly for all pick-and-place-compatible parts
 
@@ -40,6 +40,10 @@ Rev A is frozen for KiCad schematic capture. This document is the primary source
 - Radio-disable jumper
 - Display, GPS and environmental sensors
 - Bench-test configuration jumpers or bypass networks
+- RF 0-ohm series link
+- RF pi matching/tuning network
+- External RF DC-block capacitor
+- RF test connector or jumper
 
 ## Locked power tree
 
@@ -119,6 +123,20 @@ All eleven exposed XIAO GPIO pins are allocated.
 - Pin 2: GND
 - XIAO-side wires solder directly to underside BAT and GND pads
 - XIAO remains socketed on its edge pins
+
+## Locked RF architecture
+
+- E22 pin 21 ANT is treated as a 50-ohm module interface.
+- E22 pin 21 ANT routes directly to the SMA center contact using a 50-ohm grounded coplanar waveguide.
+- E22 pins 20 and 22 are local RF ground pins and connect into the RF ground structure with short paths and nearby vias.
+- Layer 2 remains an uninterrupted ground reference beneath the entire ANT-to-SMA route.
+- No matching network, 0-ohm link or series DC-block capacitor is inserted into the RF path.
+- Ground-via fence target is no greater than 1.5 mm pitch where practical, with dense stitching at the E22 transition and SMA launch.
+- Route is kept as short and straight as practical; avoid 90-degree RF corners.
+- Exact RF trace width and coplanar gap are calculated only after the production 4-layer stack-up is selected.
+- SMA class: standard-polarity 50-ohm female edge-launch. Exact part waits for final board thickness and mechanical layout.
+- No unverified shunt RF ESD/TVS device is fitted in Rev A. Any future RF protection component must have explicit suitability for the antenna-line RF conditions rather than being selected only by capacitance and ESD rating.
+- Detailed RF rules are captured in `docs/RF_DESIGN_REV_A.md`.
 
 ## Locked electrical targets
 
