@@ -240,9 +240,22 @@ Population:
 
 ### E22 bulk capacitor
 
-The bulk capacitor remains intentionally not locked to an anonymous JLCPCB generic part. Rev A requires 330-470 uF, >=10 V, low-ESR, -40 C-or-better rated operation. A manufacturer-qualified part with explicit ESR/ripple/lifetime data must be selected before the BOM is declared complete.
+Use:
 
-This is the only remaining high-value capacitor selection in the radio power block.
+- Panasonic 10SVPC330M
+- 330 uF, 10 V, polymer aluminum, +/-20%
+- ESR: 19 mOhm at 100 kHz
+- ripple-current rating: 3.46 A at 100 kHz
+- operating temperature: -55 C to +105 C
+- endurance: 2000 h at 105 C
+- SMD can: 8 mm diameter x 6.9 mm maximum height
+- JLCPCB C347574
+
+Population:
+
+- E22 local 5 V rail: 1 x 330 uF, placed immediately beside the module power-entry region but outside the ANT/SMA RF keepout
+
+This part is selected instead of an anonymous generic electrolytic because its manufacturer/JLC data explicitly define ESR, ripple current, temperature range and lifetime. Its 6.9 mm height is also substantially more compact than many 330-470 uF polymer alternatives while retaining very low ESR.
 
 ## Parts intentionally not fitted
 
