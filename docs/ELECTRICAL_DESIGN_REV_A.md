@@ -50,12 +50,13 @@ The previously locked LTC4365-based solar protection architecture remains author
 - PROG: 4.7 kOhm, 1%, to GND for 1S default configuration
 - /CE: tied low
 - D+ and D- on BQ25798: no connection
-- SDA/SCL: shared 3.3 V I2C bus to XIAO D4/D5
+- SDA/SCL: 3.3 V I2C bus to XIAO D4/D5
 - charger status: one hardware charge LED
-- charger telemetry and fault state: polled over I2C
+- battery voltage, charger telemetry and fault state: polled from BQ25798 over I2C
 - watchdog: disabled by host firmware
 - ADC: enabled by host firmware
 - MPPT: enabled and restored by host firmware when solar charging is active
+- Rev A has no dedicated fuel gauge and does not provide a ModelGauge-style battery percentage estimate
 
 ### Battery temperature sensing
 
@@ -190,8 +191,8 @@ Near E22:
 | D1 | P0.03 | E22 DIO1 |
 | D2 | P0.28 | E22 BUSY |
 | D3 | P0.29 | E22 NSS / SPI chip select |
-| D4 | P0.04 | I2C SDA, BQ25798 + MAX17048 |
-| D5 | P0.05 | I2C SCL, BQ25798 + MAX17048 |
+| D4 | P0.04 | I2C SDA, BQ25798 |
+| D5 | P0.05 | I2C SCL, BQ25798 |
 | D6 | P1.11 | E22 RXEN |
 | D7 | P1.12 | TPS61088 EN |
 | D8 | P1.13 | E22 SPI SCK |
@@ -204,60 +205,19 @@ All eleven exposed XIAO GPIOs are allocated. BQ25798 INT is not routed to the XI
 
 The custom RoyalNode variant must use the XIAO nRF52840 SPI0 pins D8/D9/D10, define D3 as chip-select, D0 as reset, D2 as BUSY, D1 as DIO1, D6 as RXEN, and enable the SX1262 DIO2 RF-switch function for TXEN. TPS61088 D7 enable is handled by RoyalNode board startup/power-management code before radio initialization.
 
-## 7. Fuel gauge
+## 7. Battery telemetry
 
-### Locked device
+Rev A does not include the previously considered MAX17048 fuel gauge. The BQ25798 ADC and status registers are the sole carrier-board source of battery and charger telemetry.
 
-- U4: ADI MAX17048G+T10
-- 1-cell ModelGauge fuel gauge
-- 8-pin 2 mm x 2 mm TDFN package with exposed pad
-- powered directly from and senses the protected battery-positive node
-- operating supply range is compatible with the 1S 4.20 V maximum battery
-- no current-sense resistor is required
+Firmware may report:
 
-### Locked MAX17048 pin connections
+- battery voltage
+- charger state
+- charge-current measurement available from the BQ25798 ADC/status interface
+- input/solar voltage and input-current measurements when enabled
+- charger fault/status information
 
-| MAX17048 pin | Name | Rev A connection |
-|---|---|---|
-| 1 | CTG | GND |
-| 2 | CELL | Protected battery-positive node |
-| 3 | VDD | Protected battery-positive node; bypass locally with 0.1 uF ceramic to GND |
-| 4 | GND | GND / battery negative |
-| 5 | ALRT | No connection; firmware polls gauge over I2C |
-| 6 | QSTRT | GND; hardware quick-start is not used |
-| 7 | SCL | XIAO D5 shared I2C SCL |
-| 8 | SDA | XIAO D4 shared I2C SDA |
-| EP | Exposed pad | GND |
-
-For MAX17048, CELL is not internally connected but is still tied to battery positive in Rev A to follow the simple single-cell application connection and avoid leaving a battery-domain package pin floating on the PCB.
-
-### I2C implementation
-
-- MAX17048 shares D4/D5 with BQ25798.
-- Bus speed must not exceed 400 kHz.
-- Use one shared pair of I2C pull-up resistors for the complete bus rather than duplicate pull-ups at each IC.
-- Rev A shared pull-ups remain 10 kOhm to the XIAO 3.3 V logic rail unless bus-rise-time validation during bring-up requires a lower value.
-- No MAX17048 ALRT GPIO is allocated.
-
-### Firmware telemetry
-
-- Poll VCELL for battery voltage.
-- Poll SOC for relative state of charge.
-- CRATE may be used for charge/discharge-rate telemetry if useful.
-- ModelGauge uses voltage rather than a current-sense resistor, so no shunt is added to the battery path.
-- Firmware should not repeatedly issue Quick-Start; it is reserved for exceptional recovery/calibration cases because unnecessary Quick-Start commands can disturb the gauge's SOC estimate.
-
-### Temperature compensation
-
-The MAX17048 does not measure battery temperature itself. Its ModelGauge temperature compensation is performed by updating RCOMP from host firmware. Rev A already includes a physical battery NTC for the BQ25798 charge-safety function, but that NTC is not presently connected to an MCU ADC. Therefore Rev A does not claim active MAX17048 host temperature compensation. Initial firmware will use the gauge's default battery model/RCOMP behavior unless a later schematic revision deliberately adds MCU-accessible battery-temperature telemetry.
-
-### Layout
-
-- Place U4 close to the battery/system node and away from TPS61088 and BQ25798 high-di/dt switching loops.
-- Place the 0.1 uF VDD bypass capacitor immediately beside U4 between VDD and GND.
-- Route VDD/battery sense directly to the protected battery-positive node rather than from the noisy 5 V radio rail.
-- Keep SDA/SCL away from the E22 antenna feed and switching nodes.
-- Tie CTG, GND and exposed pad into the local ground plane with short connections.
+Rev A does not claim an accurate battery state-of-charge percentage. Any user-interface battery indication derived only from voltage must be clearly identified as an estimate rather than fuel-gauge SOC.
 
 ## 8. Charge LED
 
