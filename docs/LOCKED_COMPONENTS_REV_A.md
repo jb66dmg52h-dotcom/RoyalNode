@@ -8,8 +8,9 @@
 | Radio module | EBYTE E22-900M33S | High-power 915 MHz module |
 | Charger/power path | TI BQ25798RQMR | 29-pin VQFN-HR |
 | 5 V boost | TI TPS61088RHLR | 20-pin VQFN |
-| Fuel gauge | ADI MAX17048G+T10 | 1S fuel gauge |
 | XIAO reverse-current blocker | TI LM66100DCKR | 1.5 V to 5.5 V, 1.5 A ideal diode |
+
+Rev A intentionally has no dedicated fuel-gauge IC. Battery voltage and charger-state telemetry come from the BQ25798 over I2C.
 
 ## Magnetics
 
@@ -67,7 +68,7 @@ The NTC is mandatory for the production assembly. There is no fixed TS bypass, s
 - SDRV: 1 nF to GND
 - BATP: 100 Ohm series resistor on dedicated Kelvin trace
 - ILIM_HIZ: tied to REGN
-- INT: 10 kOhm pullup to 3.3 V and routed to XIAO GPIO
+- INT: 10 kOhm pullup to 3.3 V, not routed to XIAO; firmware polls over I2C
 
 ## TPS61088 production-locked values
 
@@ -110,6 +111,7 @@ Final capacitor manufacturer numbers may be substituted only when voltage rating
 
 ## Parts intentionally not fitted
 
+- MAX17048 or other dedicated fuel gauge
 - Power button controller
 - eFuse
 - Radio load switch
