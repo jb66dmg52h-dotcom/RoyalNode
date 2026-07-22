@@ -7,61 +7,76 @@
 - Minimum recommended size: 10 W
 - Preferred permanent-deployment size: 20 W
 - Installer must verify Vmp, Voc, Imp and cold-weather Voc
-- Board input target: 24 V maximum recommended operating Voc, subject to final schematic validation
+- Board protection thresholds are approximately 7 V undervoltage and 25 V overvoltage at the LTC4365 stage
 
-## 10 W panel calculation
+## Representative 10 W panel
 
-Representative 12 V-class 10 W panel assumptions:
+A representative 12 V-class 10 W panel may have Vmp around 17 V and Imp around 0.6 A. Exact values depend on the selected panel and must be taken from its datasheet.
 
-- Vmp: approximately 17 V
-- Imp: approximately 0.59 A
-- Maximum panel power: 10 W
-- Charger efficiency assumption: 90%
-- Usable power after charger loss: approximately 9 W
+A 10 W panel is sufficient for normal repeater operation in good sun, but battery recovery margin is limited during heavy traffic, winter conditions, shading or prolonged cloud.
 
-### Heavy continuous radio load
+## Representative 20 W panel
 
-Approximate load budget:
+A representative 12 V-class 20 W panel may have Vmp around 17-18 V and Imp around 1.1-1.2 A. Exact values depend on the selected panel.
 
-- E22 at full-power transmit: up to roughly 6 W at the 5 V rail
-- XIAO and support electronics: approximately 0.3-0.6 W
-- Converter losses and margin: approximately 1 W
-- Full-load system estimate: approximately 7.5-8 W
+20 W remains the preferred permanent-deployment size because it provides more margin for:
 
-Under ideal full sun, a 10 W panel leaves roughly 1 W for charging during continuous full-power transmission. At a battery voltage near 3.8 V, this is approximately 0.25 A after conversion losses.
+- winter and cloudy weather
+- recovery after multiple poor-solar days
+- battery charging while the radio is active
+- achieving the configured charge-current ceiling when solar conditions permit
 
-### Normal repeater duty cycle
+## Daily-energy context
 
-A repeater normally spends much more time receiving or idle than transmitting continuously. At an illustrative 2 W average system load, a 10 W panel can leave approximately 7 W for battery charging in strong sun, equivalent to roughly 1.6-1.8 A into a 1S battery after conversion losses.
+A nominal 3.7 V, 10 Ah battery stores roughly 37 Wh; a 20 Ah pack stores roughly 74 Wh. Real usable energy depends on pack protection thresholds, temperature, age and discharge rate.
 
-### Daily energy
+Solar yield depends strongly on season, panel angle, orientation, shading and weather. The board does not assume a fixed number of peak-sun-hours in its electrical design.
 
-At five peak-sun-hours:
+## Locked solar protection path
 
-- 10 W x 5 h = 50 Wh raw solar energy
-- approximately 45 Wh after 90% charge-path efficiency
+```text
+Solar XT30
+  -> Littelfuse 0483002.DR, 2 A fuse
+  -> LTC4365ITS8-1#TRMPBF surge/reverse-input controller
+  -> Infineon ISA170170N04LMDSXTMA1 back-to-back protection MOSFET pair
+  -> BQ25798 solar input-selector MOSFET pair
+  -> BQ25798 VBUS
+```
 
-A nominal 3.7 V, 10 Ah battery stores about 37 Wh. Therefore, one good solar day can theoretically replace about one full battery's nominal energy while also supporting the system load, but real results depend on orientation, weather, temperature, shading and radio traffic.
+### LTC4365 threshold network
 
-## 20 W recommendation
+Locked divider values:
 
-A 20 W panel is preferred for permanent outdoor deployments because it:
+- R3: 1.87 MOhm
+- R2: 104 kOhm
+- R1: 40.2 kOhm
 
-- provides more winter and cloudy-day margin
-- recovers the 10 Ah battery faster after poor weather
-- is more likely to maintain the configured 2 A charge current
-- better supports high radio traffic
+Design thresholds:
 
-A 20 W panel near 17 V Vmp produces roughly 1.18 A at maximum power. This remains within the locked 2 A solar-input fuse choice while providing substantially more energy than the 10 W option.
+- UV falling: approximately 6.98 V
+- UV rising: approximately 7.33 V
+- OV rising: approximately 25.05 V
+- OV falling: approximately 23.80 V
 
-## Locked solar protection
+The older SMBJ22A + BSL303SPE-only protection concept is superseded and must not be used for Rev A schematic capture.
 
-- Fuse: Littelfuse 0483002.DR, 2 A, 75 V, 1206 fast-acting SMD
-- TVS: Littelfuse SMBJ22A, unidirectional, 22 V standoff, 600 W
-- Reverse-polarity MOSFET: Infineon BSL303SPE, P-channel, -30 V, TSOP-6
+## BQ25798 solar charging
+
+- Solar is the primary charging source.
+- BQ25798 MPPT is enabled by host firmware when solar charging is active.
+- MPPT open-circuit measurement delay target: 300 ms.
+- MPPT measurement interval target: 2 minutes.
+- The final `VOC_PCT` setting must be selected from the actual production panel's Vmp/Voc ratio. It is not locked until the panel is selected.
+- Firmware must restore MPPT configuration after charger-reset conditions that clear the relevant register state.
+
+## Input-current considerations
+
+The 2 A fuse is on the solar connector/protection input. A 20 W 12 V-class panel typically remains well below 2 A Imp, but the actual panel's short-circuit current and protection coordination must still be checked before deployment.
+
+The BQ25798 input-current and charge-current limits determine how available solar power is split between system load and battery charging.
 
 ## Deployment verdict
 
-- 10 W: supported and workable for normal repeater duty cycle
-- 20 W: recommended for permanent outdoor use
-- Above 20 W: not prohibited by wattage alone, but input current and Voc must remain inside the board limits
+- 10 W: supported for lower-demand or favorable-sun deployments
+- 20 W: recommended for permanent outdoor deployments
+- larger panels are not automatically compatible merely because the wattage is higher; Voc, cold-weather Voc, Imp/Isc and protection limits must all remain within the board design limits
