@@ -2,7 +2,22 @@
 
 ## Status
 
-RF architecture is frozen for schematic capture. Transmission-line dimensions remain dependent on the final PCB fabricator stack-up.
+RF architecture is frozen for schematic capture. JLCPCB is the locked Rev A PCB fabricator. Transmission-line dimensions are to be generated from the selected JLCPCB production stack-up rather than generic FR-4 assumptions.
+
+## Production PCB stack-up
+
+- Fabricator: JLCPCB
+- Layer count: 4
+- Finished board thickness: 1.6 mm
+- Outer copper target: 1 oz
+- Inner copper target: 0.5 oz
+- Preferred JLCPCB stack-up: JLC04161H-3313
+- L1: components, critical power and RF
+- L2: uninterrupted ground plane
+- L3: power distribution and low-speed signals
+- L4: low-speed signals and ground copper
+- The JLCPCB impedance calculator/current production stack-up data are authoritative for final 50-ohm geometry.
+- If JLCPCB changes or withdraws this stack-up before fabrication, the RF geometry must be recalculated against the actual replacement stack-up before Gerber release.
 
 ## Radio interface
 
@@ -25,11 +40,12 @@ The ANT-to-SMA path contains no series resistor, no pi matching/tuning network a
 
 ## Transmission line
 
-- Structure: grounded coplanar waveguide (GCPW/CPWG) on the component layer.
+- Structure: grounded coplanar waveguide (GCPW/CPWG) on L1.
 - Nominal impedance: 50 ohms.
 - Reference: continuous Layer-2 ground plane directly beneath the complete RF route.
-- Trace width and coplanar gap are NOT fixed generic dimensions. They must be calculated from the actual production stack-up, including dielectric thickness, dielectric constant and finished copper thickness.
-- Fabrication drawing shall call out controlled impedance and the fabricator's stated tolerance.
+- Trace width and coplanar gap are calculated from JLCPCB's JLC04161H-3313 production parameters, including dielectric thickness, dielectric constant and finished copper thickness.
+- Do not substitute a generic online microstrip dimension.
+- Fabrication drawing shall call out controlled impedance and JLCPCB's stated production tolerance.
 
 ## Routing rules
 
@@ -51,8 +67,8 @@ The ANT-to-SMA path contains no series resistor, no pi matching/tuning network a
 ## SMA connector
 
 - Connector class: standard-polarity 50-ohm SMA female, board-edge/edge-launch style.
-- Exact manufacturer part remains dependent on final PCB thickness, launch geometry and enclosure/mechanical arrangement.
-- Do not lock an SMA footprint until its manufacturer drawing is checked against the selected board thickness and controlled-impedance launch.
+- Exact manufacturer part remains dependent on its verified 1.6 mm board recommendation and launch geometry.
+- Do not lock an SMA footprint until its manufacturer drawing is checked against the selected 1.6 mm JLCPCB stack-up and controlled-impedance launch.
 
 ## RF power
 
@@ -83,8 +99,8 @@ The following are intentionally absent from Rev A:
 
 Before PCB routing is considered final:
 
-1. Select the production fabricator and 4-layer stack-up.
-2. Select the exact SMA connector for that board thickness and mechanical layout.
-3. Calculate the 50-ohm GCPW geometry using the production stack-up.
+1. Verify JLC04161H-3313 remains available for the production order.
+2. Select the exact SMA connector for the 1.6 mm board and mechanical layout.
+3. Generate the 50-ohm GCPW width/gap using JLCPCB's current impedance calculator/production parameters.
 4. Confirm the connector launch geometry against the connector manufacturer's recommended footprint.
 5. Apply the RF keepout and via-fence rules above.
