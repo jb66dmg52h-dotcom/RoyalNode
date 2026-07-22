@@ -60,16 +60,92 @@ The Pico-Lock header is a current JLCPCB assembly-library part. Because JLCPCB i
 - ADC enabled by firmware
 - MPPT enabled/restored by firmware for solar operation
 
+## BQ25798 capacitor BOM
+
+### Main 10 uF power capacitors
+
+Use one common production part for VBUS, PMID, SYS and BAT:
+
+- TDK C3225X7R1H106KT000E
+- 10 uF, 50 V, X7R, +/-10%, 1210
+- JLCPCB C432929
+
+Population:
+
+- VBUS: 2 x 10 uF
+- PMID: 3 x 10 uF
+- SYS: 5 x 10 uF
+- BAT: 2 x 10 uF
+
+DC-bias audit:
+
+- TI requires at least 2 uF effective VBUS capacitance, 4 uF effective PMID capacitance, 6 uF effective SYS capacitance and 3 uF effective BAT capacitance.
+- TDK's characterization graph for C3225X7R1H106K250AC, the same 10 uF / 50 V / X7R / 1210 electrical construction family, shows roughly 45% nominal capacitance remaining at about 25 V DC bias and very small loss at 4.2 V.
+- Even using a conservative ~4.5 uF per capacitor at 25 V before tolerance, the VBUS pair provides about 9 uF and the PMID trio about 13.5 uF, both comfortably above TI minimum effective-capacitance requirements.
+- At the 1S battery/SYS voltage region, five SYS capacitors and two BAT capacitors retain very large margin over TI's 6 uF and 3 uF minimums.
+- The 50 V rating also provides comfortable voltage-rating margin above the approximately 25 V solar overvoltage threshold.
+
+### High-frequency 100 nF bypass capacitors
+
+Use:
+
+- TDK CGA2B3X7R1H104K050BD
+- 100 nF, 50 V, X7R, +/-10%, 0402
+- JLCPCB C2167088
+
+Population:
+
+- VBUS: 1 x 100 nF, closest capacitor to VBUS/GND
+- PMID: 1 x 100 nF, closest capacitor to PMID/GND
+- SYS: 1 x 100 nF, closest capacitor to SYS/GND
+
+The 50 V rating is deliberately common across these locations so the same bypass part can be used on the high-voltage input nodes and the low-voltage SYS node.
+
+### REGN capacitor
+
+Use:
+
+- TDK C3216X7R1E475K160AC
+- 4.7 uF, 25 V, X7R, +/-10%, 1206
+- production-status part
+
+Population:
+
+- REGN: 1 x 4.7 uF to power ground, placed immediately beside the IC
+
+The 25 V rating is substantially above the REGN operating voltage and provides better DC-bias margin than a minimally rated 10 V part.
+
+### Bootstrap capacitors
+
+Use:
+
+- TDK C1005X7R1H473M050BB
+- 47 nF, 50 V, X7R, +/-20%, 0402
+- JLCPCB C3846080
+
+Population:
+
+- BTST1-SW1: 1 x 47 nF
+- BTST2-SW2: 1 x 47 nF
+
+TI requires 10 V or higher bootstrap-capacitor rating; 50 V is intentionally conservative and the small capacitance has negligible DC-bias concern in this package/rating.
+
+### SDRV capacitor
+
+Use:
+
+- TDK C1005C0G1H102J050BA
+- 1 nF, 50 V, C0G, +/-5%, 0402
+- JLCPCB C2182279
+
+Population:
+
+- SDRV-GND: 1 x 1 nF
+
+C0G is used because the 1 nF value should remain essentially invariant with DC bias and temperature.
+
 ## BQ25798 locked supporting values
 
-- VBUS: 2 x 10 uF plus 100 nF
-- PMID: 3 x 10 uF plus 100 nF
-- SYS: 5 x 10 uF plus 100 nF
-- BAT: 2 x 10 uF
-- REGN: 4.7 uF
-- BTST1: 47 nF
-- BTST2: 47 nF
-- SDRV: 1 nF to GND
 - BATP: 100 Ohm series resistor on dedicated Kelvin trace
 - ILIM_HIZ: tied to REGN
 - INT: 10 kOhm pullup to 3.3 V, not routed to XIAO; firmware polls over I2C
@@ -90,7 +166,7 @@ The Pico-Lock header is a current JLCPCB assembly-library part. Because JLCPCB i
 - EN: XIAO-controlled, with 100 kOhm pulldown
 - No mode jumper, test selector, or other bench-only configuration feature
 
-## Capacitor targets
+## Remaining capacitor targets
 
 ### TPS61088 input
 
@@ -102,14 +178,6 @@ The Pico-Lock header is a current JLCPCB assembly-library part. Because JLCPCB i
 - 2 x 47 uF, 10 V ceramic, 1210 target near converter
 - exact capacitor manufacturer number must be checked for effective capacitance at 5 V DC bias
 - E22 local decoupling: 2 x 22 uF, 1 uF, multiple 100 nF, plus 330-470 uF low-ESR bulk
-
-### BQ25798
-
-- VBUS: 2 x 10 uF plus 100 nF
-- PMID: 3 x 10 uF plus 100 nF
-- SYS: 5 x 10 uF plus 100 nF
-- BAT: 2 x 10 uF
-- REGN: 4.7 uF
 
 Final capacitor manufacturer numbers may be substituted only when voltage rating, dielectric, package and effective capacitance after DC-bias derating are equal or better.
 
