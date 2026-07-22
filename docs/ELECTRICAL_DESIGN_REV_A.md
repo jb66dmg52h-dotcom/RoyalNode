@@ -8,16 +8,14 @@ Locked for KiCad schematic capture. Battery physical packaging and enclosure des
 
 ```text
 SOLAR XT30
-  -> 2 A fuse
-  -> reverse-polarity P-FET
-  -> 22 V TVS
+  -> 2 A input protection chain
   -> BQ25798 solar input
 
 XIAO USB-C VBUS
   -> protected/current-limited branch
   -> BQ25798 USB input
 
-PROTECTED 1S LIPO
+PROTECTED 1S LI-ION/LIPO
   <-> BATTERY XT30
   <-> BQ25798 BAT/SYS power path
 
@@ -34,20 +32,7 @@ PROTECTED BATTERY/SYSTEM NODE
 
 ## 1. Solar input
 
-### Locked parts
-
-- J1: board-mounted AMASS XT30PW
-- F1: Littelfuse 0483002.DR, 2 A, 75 V, 1206 fast-acting fuse
-- Q1: Infineon BSL303SPE, P-channel -30 V MOSFET
-- D1: Littelfuse SMBJ22A, unidirectional 22 V standoff TVS
-
-### Supported panel class
-
-- 12 V nominal
-- 10 W supported
-- 20 W recommended
-- recommended deployment Voc at or below 24 V including cold-weather rise
-- final silkscreen input limit to be confirmed during schematic review
+The previously locked LTC4365-based solar protection architecture remains authoritative in the project design notes. Final KiCad capture must use the current locked protection chain rather than the older P-FET/TVS-only concept.
 
 ## 2. Main charger and power path
 
@@ -55,8 +40,8 @@ PROTECTED BATTERY/SYSTEM NODE
 
 - U1: TI BQ25798RQMR
 - cell count: 1S
+- battery class: protected 3.6/3.7 V nominal Li-ion/LiPo, 4.20 V maximum
 - maximum programmed charge current: 2.0 A
-- autonomous default charge current remains at the device default until firmware configures 2.0 A
 - switching frequency: 750 kHz
 - inductor: Coilcraft XAL7070-222MEC, 2.2 uH
 
@@ -64,32 +49,52 @@ PROTECTED BATTERY/SYSTEM NODE
 
 - PROG: 4.7 kOhm, 1%, to GND for 1S default configuration
 - /CE: tied low
-- TS: equal 10 kOhm divider from REGN to GND, placing TS at 50% REGN
 - D+ and D- on BQ25798: no connection
-- SDA/SCL: shared 3.3 V I2C bus to XIAO D4/D5
+- SDA/SCL: shared 3.3 V I2C bus to XIAO
 - charger status: one hardware charge LED
 - charger telemetry: polled over I2C
+- watchdog: disabled by host firmware
+- ADC: enabled by host firmware
+- MPPT: enabled and restored by host firmware when solar charging is active
 
-### Initial capacitor targets
+### Battery temperature sensing
 
-- VBUS: 2 x 10 uF, 35 V, X7R plus 100 nF
-- PMID: 2 x 10 uF, 35 V, X7R
-- SYS: 4 x 22 uF, 10 V, X7R plus 100 uF bulk footprint
-- BAT: 2 x 22 uF, 10 V, X7R
-- REGN and SDRV parts: follow the latest TI reference schematic exactly
+- Physical battery-mounted NTC required
+- NTC: Semitec 103AT-2, 10 kOhm at 25 C
+- RTOP: 5.23 kOhm from REGN to TS
+- RBOT: 30.1 kOhm from TS to the NTC node
+- NTC from NTC node to GND
+- TS is not bypassed in normal operation
+- Charge policy target: suspend below 0 C and at/above 45 C for generic 4.2 V 1S Li-ion/LiPo packs
+- No bench-test jumper, simulated-temperature divider or alternate TS bypass network
 
-Selected capacitors must meet the required effective capacitance after DC-bias derating.
+### Locked BQ25798 supporting parts from the latest audit
+
+- VBUS: 2 x 10 uF plus 100 nF
+- PMID: 3 x 10 uF plus 100 nF
+- SYS: 5 x 10 uF plus 100 nF
+- BAT: 2 x 10 uF
+- REGN: 4.7 uF
+- BTST1: 47 nF
+- BTST2: 47 nF
+- SDRV: 1 nF to GND
+- BATP: 100 Ohm series resistor on a dedicated Kelvin trace from battery positive
+- ILIM_HIZ: tied to REGN
+- INT: routed to XIAO GPIO with 10 kOhm pullup
+
+Selected capacitors must meet required effective capacitance after DC-bias derating.
 
 ## 3. Battery interface
 
-- J2: board-mounted AMASS XT30PW
-- protected 1S flat LiPo
-- capacity target: 10 Ah
+- Board-mounted XT30 power connector
+- protected 1S 3.6/3.7 V nominal Li-ion/LiPo pack
+- target capacity: 10-20 Ah class
 - maximum voltage: 4.20 V
-- design minimum input: 3.0 V
+- design minimum system input: 2.7-3.0 V region, subject to battery protection cutoff
 - discharge capability: at least 5 A continuous, 8 A transient preferred
 - permitted charge current: at least 2 A
-- no battery thermistor
+- battery-mounted Semitec 103AT-2 NTC required
+- dedicated small locking temperature connector to be selected during connector BOM finalization
 - no carrier battery reverse-polarity protection
 
 ## 4. XIAO power path
@@ -104,6 +109,10 @@ The carrier does not drive the XIAO 5V/VBUS pin.
 - cable housing: JST PHR-2
 - wire 1: positive to XIAO BAT underside pad
 - wire 2: ground to XIAO GND underside pad
+- CE tied high
+- ST not connected
+- 1 uF input capacitor
+- 1 uF output capacitor
 
 The LM66100 blocks reverse current from the XIAO onboard charger into the main battery rail while adding very little voltage drop.
 
@@ -116,39 +125,51 @@ The LM66100 blocks reverse current from the XIAO onboard charger into the main b
 
 ## 5. TPS61088 5 V rail
 
-### Locked parts and values
+### Production-locked parts and values
 
 - U3: TI TPS61088RHLR
-- inductor: Coilcraft XAL7030-222MEC, 2.2 uH
-- output target: approximately 5.0 V
+- input: 1S Li-ion/LiPo system rail, 2.7-4.2 V operating design range
+- output target: 5.0 V nominal
 - continuous target: 2 A
-- transient target: 3 A
-- feedback: 178 kOhm top and 56 kOhm bottom, 1%
-- frequency resistor: 300 kOhm, 1%, approximately 500 kHz starting point
-- current-limit resistor: 140 kOhm, 1%
-- soft-start capacitor: 10 nF
-- EN: pulled high for automatic startup
-- MODE: configurable footprint for PFM versus forced PWM testing
+- inductor: Coilcraft XAL7030-222MEC, 2.2 uH
+- feedback divider: 176 kOhm top / 56.0 kOhm bottom, 0.1%
+- frequency resistor: 330 kOhm from FSW to SW
+- current-limit resistor: 100 kOhm to AGND
+- compensation: 20.0 kOhm and 4.7 nF
+- soft-start capacitor: 47 nF
+- VCC bypass: 2.2 uF
+- BOOT capacitor: 100 nF from BOOT to SW
+- MODE: floating for PFM/light-load efficiency
+- EN: controlled by XIAO GPIO with 100 kOhm pulldown so radio 5 V is off during MCU startup
+- no PFM/PWM selection jumper or bench-test configuration footprint
 
 ### Input capacitors
 
-- 2 x 22 uF, 10 V, X7R
-- 100 uF low-ESR bulk
-- 100 nF local bypass
-- 4.7 uF VCC bypass
+- 2 x 22 uF, 10 V ceramic
+- 100 nF local VIN bypass placed immediately at the IC
 
 ### Output and E22 capacitors
 
 Near TPS61088:
 
-- 3 x 22 uF, 10 V, X7R
+- 2 x 47 uF, 10 V ceramic, 1210 target
+- exact manufacturer part number must be verified for effective capacitance at 5 V DC bias
 
 Near E22:
 
-- 2 x 22 uF, 10 V, X7R
+- 2 x 22 uF, 10 V ceramic
 - 1 uF ceramic
 - multiple 100 nF ceramics
 - 330-470 uF low-ESR bulk
+
+### TPS61088 layout rules
+
+- inductor immediately adjacent to the converter
+- BOOT capacitor immediately adjacent to BOOT/SW pins
+- input and output capacitors immediately adjacent to their power/ground pins
+- smallest practical SW copper area
+- solid ground plane directly below converter area
+- keep the complete boost switching block away from E22 RF feed and SMA route
 
 ## 6. E22 interface
 
@@ -161,19 +182,15 @@ Near E22:
 
 ### XIAO GPIO map
 
-| XIAO | Function |
-|---|---|
-| D0 | E22 NRST |
-| D1 | E22 DIO1 |
-| D2 | E22 BUSY |
-| D3 | E22 NSS |
-| D4 | I2C SDA |
-| D5 | I2C SCL |
-| D6 | E22 TXEN |
-| D7 | E22 RXEN |
-| D8 | SPI SCK |
-| D9 | SPI MISO |
-| D10 | SPI MOSI |
+The earlier provisional D0-D10 map is no longer considered final. Final pin allocation must include:
+
+- E22 SPI: NSS, SCK, MISO, MOSI
+- E22 NRST, BUSY, DIO1, TXEN, RXEN
+- shared I2C SDA/SCL for BQ25798 and MAX17048
+- BQ25798 INT
+- TPS61088 EN
+
+This final allocation is the next design task and must be verified against the actual XIAO nRF52840 pin capabilities and E22 requirements.
 
 ## 7. Fuel gauge
 
@@ -186,18 +203,16 @@ Near E22:
 ## 8. Charge LED
 
 - one external charge LED only
-- driven from BQ25798 status output
-- LED current target: approximately 0.5-1 mA
+- buffered BQ25798 STAT implementation is authoritative
+- STAT uses 10 kOhm pullup and BSS84 P-channel MOSFET to drive LED through 2.2 kOhm to GND
 - no full, fault or carrier system LEDs
 
 ## 9. RF path
 
 - E22 ANT to board-edge SMA through a short 50-ohm controlled-impedance route
-- include a 0-ohm series link and optional unpopulated pi tuning footprint
 - solid ground reference directly below
 - ground-via fence along route
 - no digital or switching power route crossing RF keepout
-- connector candidate: Molex 0732512440
 - final RF geometry depends on fabricator stack-up
 
 ## 10. PCB stack-up
@@ -213,14 +228,15 @@ Keep the BQ25798 and TPS61088 hot loops compact. Place TPS61088 and its inductor
 
 ## 11. Automatic startup
 
-There is no power button. Connecting the protected battery powers the XIAO and enables TPS61088 automatically. The battery XT30 is the master disconnect.
+There is no power button. Connecting the protected battery powers the XIAO. The XIAO then intentionally enables the TPS61088 radio rail through its assigned EN GPIO after startup. The battery XT30 is the master disconnect.
 
 ## 12. KiCad entry criteria
 
-All architecture-level choices are frozen. KiCad work may begin with these remaining implementation tasks:
+Remaining implementation tasks:
 
+- finalize XIAO/E22/power-management pin map
 - verify exact footprints against manufacturer drawings
 - select specific capacitor manufacturer numbers after DC-bias review
 - reproduce TI reference-layout constraints
 - run ERC after schematic capture
-- perform a schematic-level compatibility review before PCB layout
+- perform schematic-level compatibility review before PCB layout
