@@ -16,7 +16,7 @@ Rev A is frozen for KiCad schematic capture. This document is the primary source
 - USB-C charging through the main charger
 - 12 V nominal solar panel support
 - 10 W panel supported; 20 W recommended
-- Battery voltage and state-of-charge telemetry
+- Battery voltage and charger telemetry through BQ25798
 - Battery-mounted NTC temperature sensing for charge protection
 - One external charge LED
 - Direct 50-ohm PCB trace from E22 ANT to board-edge SMA
@@ -25,6 +25,8 @@ Rev A is frozen for KiCad schematic capture. This document is the primary source
 
 ## Removed functions
 
+- Dedicated fuel gauge / MAX17048
+- Battery state-of-charge percentage estimation
 - Power button
 - eFuse
 - Radio load switch
@@ -87,8 +89,8 @@ The XIAO 5V/VBUS pad is not driven by the carrier board. The XIAO BAT pad is use
 | D1 | P0.03 | E22 DIO1 |
 | D2 | P0.28 | E22 BUSY |
 | D3 | P0.29 | E22 NSS / SPI chip select |
-| D4 | P0.04 | I2C SDA, shared by BQ25798 and MAX17048 |
-| D5 | P0.05 | I2C SCL, shared by BQ25798 and MAX17048 |
+| D4 | P0.04 | I2C SDA, BQ25798 |
+| D5 | P0.05 | I2C SCL, BQ25798 |
 | D6 | P1.11 | E22 RXEN, active high |
 | D7 | P1.12 | TPS61088 EN |
 | D8 | P1.13 | E22 SPI SCK |
@@ -124,6 +126,7 @@ All eleven exposed XIAO GPIO pins are allocated.
 - Battery discharge: at least 5 A continuous; 8 A transient preferred
 - Battery charge permission: at least 2 A
 - Maximum charge current: 2.0 A
+- Battery telemetry: BQ25798 voltage/charger telemetry only; no dedicated SOC gauge
 - E22 rail: 5.0 V nominal
 - 5 V rail: 2 A continuous design target
 - TPS61088 inductor: Coilcraft XAL7030-222MEC, 2.2 uH
