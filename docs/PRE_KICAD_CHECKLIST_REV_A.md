@@ -37,30 +37,65 @@
 ## Pin-audit status
 
 - [x] XIAO D0-D10 GPIO map verified against Seeed documentation
-- [x] E22-900M33S 22-pin electrical pin table verified against EBYTE current product documentation
+- [x] XIAO dedicated battery nets verified in current Seeed schematic as `BAT0` and `GND0`; the carrier uses a wire harness rather than bottom-pad contacts
+- [x] E22-900M33S 22-pin electrical pin table verified against current EBYTE documentation
 - [x] TPS61088RHLR electrical pin table verified against TI Rev. D
 - [x] LM66100DCKR electrical pin table verified against TI Rev. A
-- [ ] BQ25798RQMR full 29-pin connection map entered and checked against TI Rev. C
-- [ ] LTC4365ITS8-1 full 8-pin connection map entered and checked against ADI Rev. B
-- [ ] ISA170170N04LMDSXTMA1 dual-MOSFET pin orientation entered and checked against Infineon Rev. 2.0
+- [x] BQ25798RQMR full 29-pin connection map entered and checked against TI Rev. C
+- [x] LTC4365ITS8-1 full 8-pin connection map entered and checked against ADI Rev. B
+- [x] ISA170170N04LMDSXTMA1 dual-MOSFET pin orientation entered and checked against Infineon Rev. 2.0
+
+The authoritative pin table is `docs/PIN_AUDIT_REV_A.md`.
 
 ## Important audit correction
 
-The LM66100 hookup previously documented as `CE tied high` / `ST NC` is incorrect for the intended always-on reverse-current-blocking function. TI specifies:
+The LM66100 hookup previously documented as `CE tied high` / `ST NC` was incorrect for the intended always-on reverse-current-blocking function. Rev A now uses:
 
-- pin 3 CE must not float; connecting CE to VOUT enables always-on reverse-current blocking
-- pin 5 ST should be connected to GND when the status output is not used
+- pin 3 CE -> VOUT
+- pin 5 ST -> GND
 
-The canonical electrical/net-map documents must use CE -> VOUT and ST -> GND. This correction is mandatory before schematic capture.
+This correction is incorporated into the current electrical design and net map.
+
+## Net-map status
+
+- [x] Final net-by-net schematic capture map created
+- [x] Solar assigned to BQ25798 port 1 (`VAC1/ACDRV1`)
+- [x] USB assigned to BQ25798 port 2 (`VAC2/ACDRV2`)
+- [x] LTC4365 UV/OV divider topology explicitly mapped
+- [x] BQ25798 charger switching nets explicitly mapped
+- [x] TPS61088 switching/feedback/compensation nets explicitly mapped
+- [x] E22 digital and RF nets explicitly mapped
+- [x] XIAO header nets explicitly mapped
+
+The authoritative capture map is `docs/NET_MAP_REV_A.md`.
+
+## Footprint-audit status
+
+- [x] BQ25798 package identified as TI `RQM0029A`, 4 x 4 mm VQFN-HR; generic QFN substitution prohibited
+- [x] TPS61088 package identified as TI `RHL0020A`, including exposed PGND pad 21
+- [x] LM66100 package identified as TI `DCK0006A`
+- [x] LTC4365 TS8 package drawing identified as ADI `05-08-1637 Rev A`
+- [x] Infineon PG-DSO-8 dual-MOSFET pad functions identified
+- [x] E22 module body and 2.54 mm interface pitch verified
+- [x] Molex SMA 1.60 mm edge-mount requirement verified
+- [x] Pico-Lock NTC connector family mechanically identified
+- [ ] E22 exact castellated-pad dimensions/centers transcribed from EBYTE mechanical drawing
+- [ ] XT30PW-M exact AMASS land pattern/polarity drawing checked
+- [ ] XIAO socket row spacing and male-pin engagement checked against Seeed mechanical files
+- [ ] Molex SMA recommended PCB launch geometry transcribed/checked
+- [ ] Imported TI/ADI/Infineon CAD footprints compared dimension-by-dimension with current package drawings
+
+See `docs/FOOTPRINT_AUDIT_REV_A.md`.
 
 ## Remaining before schematic capture
 
-1. Finish the BQ25798, LTC4365 and dual-MOSFET pin-level audit.
-2. Correct all canonical LM66100 connection references to CE -> VOUT and ST -> GND.
-3. Verify every custom footprint pad number and courtyard against manufacturer mechanical drawings.
-4. Verify XIAO male-header pin engagement with the selected sockets.
-5. Produce a final net-by-net pin map suitable for direct KiCad capture.
-6. Run a final contradiction search across repository design documents.
+Electrical definition is now sufficient to begin symbol creation and schematic capture. The remaining pre-capture work is mechanical/library hygiene rather than architecture:
+
+1. Finish the remaining footprint-specific mechanical checks above.
+2. Run a final contradiction scan across repository design documents.
+3. Import/create the verified symbols and footprints in the project-local KiCad libraries.
+
+Do not wait for the final RF controlled-impedance trace width to draw the schematic; that belongs to PCB routing after the production stack-up is reconfirmed.
 
 ## Remaining after schematic capture but before PCB routing
 
