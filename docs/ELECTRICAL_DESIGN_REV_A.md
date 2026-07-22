@@ -221,9 +221,15 @@ Rev A does not claim an accurate battery state-of-charge percentage. Any user-in
 
 ## 8. Charge LED
 
-- one external charge LED only
-- buffered BQ25798 STAT implementation is authoritative
-- STAT uses 10 kOhm pullup and BSS84 P-channel MOSFET to drive LED through 2.2 kOhm to GND
+- one external charge/status LED only
+- BQ25798 STAT drives the LED directly using its open-drain output; no buffer transistor is used
+- topology: 3.3 V -> LED -> RLED -> STAT
+- no separate STAT pull-up is required for the LED path
+- charging: LED on
+- charge complete / charging disabled / battery-only operation: LED off
+- charger fault or charge suspend indication follows the BQ25798 STAT blink behavior
+- target LED current is approximately 0.5-1 mA to minimize repeater power consumption
+- exact RLED value is selected after the exact LED part and its forward-voltage range are chosen
 - no full, fault or carrier system LEDs
 
 ## 9. RF path
@@ -254,7 +260,7 @@ There is no power button. Connecting the protected battery powers the XIAO. The 
 Remaining implementation tasks:
 
 - verify exact footprints against manufacturer drawings
-- select specific capacitor manufacturer numbers after DC-bias review
+- select specific capacitor and LED manufacturer numbers after DC-bias/forward-voltage review
 - reproduce TI reference-layout constraints
 - run ERC after schematic capture
 - perform schematic-level compatibility review before PCB layout
