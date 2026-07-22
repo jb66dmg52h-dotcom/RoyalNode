@@ -14,7 +14,7 @@ The 2Watt Project is a solar-powered 915 MHz LoRa repeater carrier built around 
 - BQ25798 buck-boost charger with MPPT and power path
 - Battery-mounted Semitec 103AT-2 NTC connected to BQ25798 TS network
 - TPS61088 5 V boost rail for the E22
-- MAX17048 battery voltage and state-of-charge telemetry
+- Battery voltage and charger telemetry read directly from the BQ25798
 - XIAO powered through its underside BAT and GND pads using a two-wire JST-PH lead
 - LM66100 ideal diode between the main battery/system node and the XIAO BAT lead
 - USB-C firmware updates through the XIAO
@@ -33,6 +33,7 @@ The 2Watt Project is a solar-powered 915 MHz LoRa repeater carrier built around 
 
 ## Removed from Rev A
 
+- MAX17048 fuel gauge and battery percentage estimation
 - Power button
 - eFuse
 - Radio load switch
@@ -52,6 +53,7 @@ The 2Watt Project is a solar-powered 915 MHz LoRa repeater carrier built around 
 - Battery discharge capability: at least 5 A continuous, 8 A transient preferred
 - Maximum charge current: 2 A
 - Charge temperature sensing: battery-mounted 10 kOhm NTC; target policy suspends charging below 0 C and at/above 45 C
+- Battery telemetry: BQ25798 battery voltage and charger-state measurements; no dedicated SOC fuel gauge in Rev A
 - E22 rail: 5.0 V nominal
 - TPS61088 rail design target: 2 A continuous
 - TPS61088 inductor: Coilcraft XAL7030-222MEC, 2.2 uH
@@ -83,14 +85,13 @@ Earlier concept documents are superseded where they conflict with the design-fre
 
 ## Remaining work
 
-1. Finalize XIAO/E22/power-management GPIO map.
-2. Create or import verified KiCad symbols and footprints.
-3. Capture the Rev A schematic.
-4. Run ERC and a schematic-level compatibility audit.
-5. Obtain the fabricator's 4-layer stack-up and calculate the 50-ohm RF geometry.
-6. Place and route the PCB.
-7. Run DRC and manufacturing review.
-8. Order Rev A prototypes for production validation.
+1. Create or import verified KiCad symbols and footprints.
+2. Capture the Rev A schematic.
+3. Run ERC and a schematic-level compatibility audit.
+4. Obtain the fabricator's 4-layer stack-up and calculate the 50-ohm RF geometry.
+5. Place and route the PCB.
+6. Run DRC and manufacturing review.
+7. Order Rev A prototypes for production validation.
 
 ## Safety and regulatory note
 
