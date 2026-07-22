@@ -166,20 +166,83 @@ C0G is used because the 1 nF value should remain essentially invariant with DC b
 - EN: XIAO-controlled, with 100 kOhm pulldown
 - No mode jumper, test selector, or other bench-only configuration feature
 
-## Remaining capacitor targets
+## TPS61088 and E22 capacitor BOM
 
-### TPS61088 input
+### Common 22 uF power capacitor
 
-- 2 x 22 uF, 10 V ceramic
-- 100 nF local VIN bypass
+Use:
 
-### TPS61088 output
+- Murata GRM31CZ71C226ME15L
+- 22 uF, 16 V, X7R, +/-20%, 1206
+- JLCPCB C909845
 
-- 2 x 47 uF, 10 V ceramic, 1210 target near converter
-- exact capacitor manufacturer number must be checked for effective capacitance at 5 V DC bias
-- E22 local decoupling: 2 x 22 uF, 1 uF, multiple 100 nF, plus 330-470 uF low-ESR bulk
+Population:
 
-Final capacitor manufacturer numbers may be substituted only when voltage rating, dielectric, package and effective capacitance after DC-bias derating are equal or better.
+- TPS61088 VIN: 2 x 22 uF
+- E22 local 5 V rail: 2 x 22 uF
+
+The 16 V rating is intentionally above the 4.2 V battery input and 5 V E22 rail to reduce DC-bias loss compared with a 10 V-rated 22 uF part. JLCPCB currently lists substantial stock for this part.
+
+### TPS61088 output capacitors
+
+Use:
+
+- TDK C3225X5R1A476MT000E
+- 47 uF, 10 V, X5R, +/-20%, 1210
+- JLCPCB C76680
+
+Population:
+
+- TPS61088 VOUT: 2 x 47 uF
+
+Rationale:
+
+- TI recommends low-ESR ceramic output capacitance and explicitly warns that effective capacitance under DC bias must be considered.
+- A TI engineer reviewed a near-identical 2.5-4.2 V to 5 V / 2 A TPS61088 application using 2 x 47 uF, 1210, 10 V ceramic output capacitors and accepted that output-capacitor class while recommending the 20 kOhm / 4.7 nF compensation network used by Rev A.
+- C3225X5R1A476MT000E is a current JLCPCB assembly-library 47 uF / 10 V / X5R / 1210 part with current stock.
+- Final production validation still measures 5 V transient droop under repeated E22 full-power transmit bursts; that is validation of the assembled power stage, not a placeholder BOM decision.
+
+### TPS61088 VIN high-frequency bypass
+
+Use the existing common BQ bypass part:
+
+- TDK CGA2B3X7R1H104K050BD
+- 100 nF, 50 V, X7R, 0402
+- JLCPCB C2167088
+
+Population:
+
+- TPS61088 VIN: 1 x 100 nF immediately beside VIN/PGND
+
+### E22 1 uF local bypass
+
+Use:
+
+- Murata GCM188R71C105KA64D
+- 1 uF, 16 V, X7R, +/-10%, 0603
+- JLCPCB C161212
+
+Population:
+
+- E22 5 V rail: 1 x 1 uF close to the module VCC pins
+
+### E22 100 nF local bypass
+
+Use:
+
+- Murata GCJ188R71C104KA01D
+- 100 nF, 16 V, X7R, +/-10%, 0603
+- JLCPCB C710619
+
+Population:
+
+- E22 5 V rail: multiple 100 nF capacitors, one adjacent to each practical local VCC/ground entry region of the module footprint
+
+### E22 bulk capacitor
+
+The bulk capacitor remains intentionally not locked to an anonymous JLCPCB generic part. Rev A requires 330-470 uF, >=10 V, low-ESR, -40 C-or-better rated operation. A manufacturer-qualified part with explicit ESR/ripple/lifetime data must be selected before the BOM is declared complete.
+
+This is the only remaining high-value capacitor selection in the radio power block.
 
 ## Parts intentionally not fitted
 
