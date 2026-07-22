@@ -37,8 +37,12 @@ The NTC is mandatory for the production assembly. There is no fixed TS bypass, s
 | Battery input | AMASS XT30PW board-mount | Keyed, no carrier battery reverse-polarity stage |
 | XIAO power receptacle | JST B2B-PH-SM4-TB(LF)(SN) | 2-pin, 2.0 mm, board-mounted SMT |
 | XIAO cable housing | JST PHR-2 | Two-wire removable lead |
-| Battery NTC connector | Small locking 2-pin connector, exact family pending | Temperature sense only |
-| RF output | Board-edge SMA female | Exact part to be mechanically verified against stack-up/launch |
+| Battery NTC PCB header | Molex 5037630291 | Pico-Lock 1.00 mm, 2-circuit, right-angle SMT, positive lock, -40 to +105 C; JLCPCB C586113 |
+| Battery NTC cable housing | Molex 5037640201 | Pico-Lock 1.00 mm, 2-circuit positive-lock receptacle, -40 to +105 C |
+| Battery NTC crimp terminal | Molex 5037650098 | Pico-Lock female crimp terminal, gold mating surface, 30-28 AWG |
+| RF output | Molex 0732511150 / 732511150 | Standard-polarity 50-ohm SMA female edge mount for 1.60 mm PCB; JLCPCB C841205 |
+
+The Pico-Lock header is a current JLCPCB assembly-library part. Because JLCPCB inventory is dynamic, production BOM review must verify stock/pre-order status immediately before ordering.
 
 ## BQ25798 locked startup values
 
