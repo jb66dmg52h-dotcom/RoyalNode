@@ -79,9 +79,36 @@ The XIAO 5V/VBUS pad is not driven by the carrier board. The XIAO BAT pad is use
 
 ## Locked interfaces
 
-### XIAO to E22
+### Final XIAO GPIO map
 
-The final pin map is the next design item. Earlier provisional D0-D10 assignments are superseded until the final GPIO allocation is verified against the XIAO nRF52840, E22-900M33S, BQ25798 interrupt, shared I2C bus and TPS61088 EN requirements.
+| XIAO pin | nRF52840 GPIO | Function |
+|---|---|---|
+| D0 | P0.02 | E22 NRST |
+| D1 | P0.03 | E22 DIO1 |
+| D2 | P0.28 | E22 BUSY |
+| D3 | P0.29 | E22 NSS / SPI chip select |
+| D4 | P0.04 | I2C SDA, shared by BQ25798 and MAX17048 |
+| D5 | P0.05 | I2C SCL, shared by BQ25798 and MAX17048 |
+| D6 | P1.11 | E22 RXEN, active high |
+| D7 | P1.12 | TPS61088 EN |
+| D8 | P1.13 | E22 SPI SCK |
+| D9 | P1.14 | E22 SPI MISO |
+| D10 | P1.15 | E22 SPI MOSI |
+
+All eleven exposed XIAO GPIO pins are allocated.
+
+### E22 RF switch control
+
+- E22 DIO2 connects directly to E22 TXEN.
+- TXEN is therefore controlled by the SX1262 DIO2 RF-switch function and does not consume a XIAO GPIO.
+- E22 RXEN remains under XIAO control on D6.
+- Firmware must enable the SX1262 DIO2 RF-switch control function and must not also configure a separate MCU TXEN pin.
+
+### BQ25798 interrupt handling
+
+- BQ25798 INT does not consume a XIAO GPIO.
+- Charger status and fault registers are polled over I2C.
+- INT retains the datasheet-recommended 10 kOhm pull-up to the 3.3 V logic rail but is not routed to the MCU.
 
 ### XIAO power connector
 
@@ -108,7 +135,7 @@ The final pin map is the next design item. Earlier provisional D0-D10 assignment
 - TPS61088 VCC bypass: 2.2 uF
 - TPS61088 BOOT capacitor: 100 nF from BOOT to SW
 - TPS61088 MODE: floating for PFM/light-load efficiency
-- TPS61088 EN: XIAO-controlled; 100 kOhm pulldown keeps the 5 V radio rail off during MCU startup
+- TPS61088 EN: XIAO D7 controlled; 100 kOhm pulldown keeps the 5 V radio rail off during MCU startup
 - TPS61088 input capacitance: 2 x 22 uF plus 100 nF local VIN bypass
 - TPS61088 output capacitance: 2 x 47 uF, 10 V ceramic; exact manufacturer part must be verified for effective capacitance at 5 V bias
 - BQ25798 switching frequency: 750 kHz
@@ -128,7 +155,6 @@ The final pin map is the next design item. Earlier provisional D0-D10 assignment
 
 ## Remaining work inside KiCad
 
-- Finalize XIAO/E22/power-management GPIO map
 - Build or import verified symbols and footprints
 - Capture schematic
 - Run ERC
