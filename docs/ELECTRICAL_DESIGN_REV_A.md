@@ -50,9 +50,9 @@ The previously locked LTC4365-based solar protection architecture remains author
 - PROG: 4.7 kOhm, 1%, to GND for 1S default configuration
 - /CE: tied low
 - D+ and D- on BQ25798: no connection
-- SDA/SCL: shared 3.3 V I2C bus to XIAO
+- SDA/SCL: shared 3.3 V I2C bus to XIAO D4/D5
 - charger status: one hardware charge LED
-- charger telemetry: polled over I2C
+- charger telemetry and fault state: polled over I2C
 - watchdog: disabled by host firmware
 - ADC: enabled by host firmware
 - MPPT: enabled and restored by host firmware when solar charging is active
@@ -80,7 +80,7 @@ The previously locked LTC4365-based solar protection architecture remains author
 - SDRV: 1 nF to GND
 - BATP: 100 Ohm series resistor on a dedicated Kelvin trace from battery positive
 - ILIM_HIZ: tied to REGN
-- INT: routed to XIAO GPIO with 10 kOhm pullup
+- INT: 10 kOhm pull-up to 3.3 V; not routed to the MCU because all exposed XIAO GPIOs are allocated
 
 Selected capacitors must meet required effective capacitance after DC-bias derating.
 
@@ -140,7 +140,7 @@ The LM66100 blocks reverse current from the XIAO onboard charger into the main b
 - VCC bypass: 2.2 uF
 - BOOT capacitor: 100 nF from BOOT to SW
 - MODE: floating for PFM/light-load efficiency
-- EN: controlled by XIAO GPIO with 100 kOhm pulldown so radio 5 V is off during MCU startup
+- EN: XIAO D7 with 100 kOhm pulldown so radio 5 V is off during MCU startup
 - no PFM/PWM selection jumper or bench-test configuration footprint
 
 ### Input capacitors
@@ -175,22 +175,34 @@ Near E22:
 
 - E22 VCC pins connected directly to regulated 5 V
 - no load switch and no eFuse
-- TXEN and RXEN each receive pull-down resistors
 - NRST, BUSY and DIO1 route directly to assigned XIAO pins
-- DIO3 is reserved for the module TCXO function
-- firmware must configure the TCXO and TX/RX switching correctly
+- DIO3 remains the module TCXO control function used by the SX1262 driver
+- E22 DIO2 connects directly to E22 TXEN
+- TXEN is active high and is driven by the SX1262 DIO2 RF-switch function, not by a XIAO GPIO
+- RXEN is active high and is controlled by XIAO D6
+- firmware must enable the SX1262 DIO2 RF-switch function and must not define a separate MCU TXEN pin
 
-### XIAO GPIO map
+### Final XIAO GPIO map
 
-The earlier provisional D0-D10 map is no longer considered final. Final pin allocation must include:
+| XIAO pin | nRF52840 GPIO | Function |
+|---|---|---|
+| D0 | P0.02 | E22 NRST |
+| D1 | P0.03 | E22 DIO1 |
+| D2 | P0.28 | E22 BUSY |
+| D3 | P0.29 | E22 NSS / SPI chip select |
+| D4 | P0.04 | I2C SDA, BQ25798 + MAX17048 |
+| D5 | P0.05 | I2C SCL, BQ25798 + MAX17048 |
+| D6 | P1.11 | E22 RXEN |
+| D7 | P1.12 | TPS61088 EN |
+| D8 | P1.13 | E22 SPI SCK |
+| D9 | P1.14 | E22 SPI MISO |
+| D10 | P1.15 | E22 SPI MOSI |
 
-- E22 SPI: NSS, SCK, MISO, MOSI
-- E22 NRST, BUSY, DIO1, TXEN, RXEN
-- shared I2C SDA/SCL for BQ25798 and MAX17048
-- BQ25798 INT
-- TPS61088 EN
+All eleven exposed XIAO GPIOs are allocated. BQ25798 INT is not routed to the XIAO; charger status/faults are polled over I2C.
 
-This final allocation is the next design task and must be verified against the actual XIAO nRF52840 pin capabilities and E22 requirements.
+### MeshCore/RadioLib integration requirements
+
+The custom RoyalNode variant must use the XIAO nRF52840 SPI0 pins D8/D9/D10, define D3 as chip-select, D0 as reset, D2 as BUSY, D1 as DIO1, D6 as RXEN, and enable the SX1262 DIO2 RF-switch function for TXEN. TPS61088 D7 enable is handled by RoyalNode board startup/power-management code before radio initialization.
 
 ## 7. Fuel gauge
 
@@ -228,13 +240,12 @@ Keep the BQ25798 and TPS61088 hot loops compact. Place TPS61088 and its inductor
 
 ## 11. Automatic startup
 
-There is no power button. Connecting the protected battery powers the XIAO. The XIAO then intentionally enables the TPS61088 radio rail through its assigned EN GPIO after startup. The battery XT30 is the master disconnect.
+There is no power button. Connecting the protected battery powers the XIAO. The XIAO then intentionally enables the TPS61088 radio rail on D7 after startup. The battery XT30 is the master disconnect.
 
 ## 12. KiCad entry criteria
 
 Remaining implementation tasks:
 
-- finalize XIAO/E22/power-management pin map
 - verify exact footprints against manufacturer drawings
 - select specific capacitor manufacturer numbers after DC-bias review
 - reproduce TI reference-layout constraints
