@@ -40,10 +40,11 @@ The NTC is mandatory for the production assembly. There is no fixed TS bypass, s
 | XIAO mating headers | 1x7, 2.54 mm male pin headers on XIAO | Header pin length must be verified against socket engagement before assembly release |
 | XIAO power receptacle | JST B2B-PH-SM4-TB(LF)(SN) | 2-pin, 2.0 mm, board-mounted SMT |
 | XIAO cable housing | JST PHR-2 | Two-wire removable lead |
-| Battery NTC PCB header | Molex 5037630291 | Pico-Lock 1.00 mm, 2-circuit, right-angle SMT, positive lock, -40 to +105 C; JLCPCB C586113 |
-| Battery NTC cable housing | Molex 5037640201 | Pico-Lock 1.00 mm, 2-circuit positive-lock receptacle, -40 to +105 C |
-| Battery NTC crimp terminal | Molex 5037650098 | Pico-Lock female crimp terminal, gold mating surface, 30-28 AWG |
+| Battery NTC PCB header | CJT A2012WV-S-2P | 2-pin, 2.0 mm, vertical SMT, -40 to +105 C, 3 A; JLCPCB C273186; stocked assembly part |
+| Battery NTC cable housing | CJT A2012H-2P | Mating 2-pin A2012-series housing; exact terminal must be selected/verified before harness release |
 | RF output | Molex 0732511150 / 732511150 | Standard-polarity 50-ohm SMA female edge mount for 1.60 mm PCB; JLCPCB C841205 |
+
+The previous Molex Pico-Lock 5037630291 NTC connector family is removed from Rev A because JLC stock was poor. The CJT A2012 series is electrically far more capable than required for the thermistor signal and, importantly for a Canadian outdoor repeater, the PCB header is specified for -40 to +105 C rather than the -25 C lower limit of common JST PH/XH alternatives. JLCPCB listed thousands of A2012WV-S-2P headers in stock when selected. The header datasheet specifies mating with CJT A2012-series housings.
 
 Board-side XT30 gender is deliberately male. The mating battery and solar harnesses use female XT30 connectors so energized harness contacts are recessed rather than exposed male bullets. Both board XT30s must be distinctly silkscreened BATTERY and SOLAR because the connectors are mechanically identical.
 
