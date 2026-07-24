@@ -25,6 +25,7 @@ Design source of truth:
 - `docs/NET_MAP_REV_A.md`
 - `docs/PIN_AUDIT_REV_A.md`
 - `docs/RF_DESIGN_REV_A.md`
+- `docs/FOOTPRINT_SOURCE_LINKS_REV_A.md`
 - `bom/REV_A_LOCKED_CORE_BOM.csv`
 - `bom/REV_A_LOCKED_PASSIVES.csv`
 

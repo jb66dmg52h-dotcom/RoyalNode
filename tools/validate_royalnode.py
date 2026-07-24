@@ -53,6 +53,7 @@ def check_no_stale_design_terms() -> None:
         "docs/DESIGN_FREEZE_REV_A.md",
         "docs/FOOTPRINT_AUDIT_REV_A.md",
         "docs/KICAD_SYMBOL_AUDIT_REV_A.md",
+        "docs/FOOTPRINT_SOURCE_LINKS_REV_A.md",
         "docs/REFERENCE_DESIGNATORS_REV_A.md",
         "hardware/kicad/RoyalNode/SCHEMATIC_CAPTURE_SEED_REV_A.csv",
         "bom/REV_A_LOCKED_CORE_BOM.csv",
@@ -93,6 +94,19 @@ def check_symbols() -> None:
             fail(f"missing KiCad symbol {name}")
     if '(pin power_in line' not in sym:
         fail("symbol library appears malformed: no power pins found")
+
+
+def check_footprint_source_links() -> None:
+    text = read("docs/FOOTPRINT_SOURCE_LINKS_REV_A.md")
+    required = [
+        "https://www.cdebyte.com/pdf-down.aspx?id=4216",
+        "https://www.molex.com/en-us/products/part-detail/732511150",
+        "Sales Drawing SD-73251-115-001",
+        "DRAFT_NOT_RELEASED",
+    ]
+    for needle in required:
+        if needle not in text:
+            fail(f"footprint source links missing {needle!r}")
 
 
 def check_capture_seed(seed_rows: list[dict[str, str]]) -> None:
@@ -138,6 +152,7 @@ def main() -> None:
         fail("locked passive BOM has unexpectedly few rows")
     check_no_stale_design_terms()
     check_symbols()
+    check_footprint_source_links()
     check_capture_seed(seed_rows)
 
     print("RoyalNode validation passed")

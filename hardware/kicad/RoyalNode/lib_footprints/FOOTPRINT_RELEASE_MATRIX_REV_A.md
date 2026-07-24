@@ -9,6 +9,7 @@ Source document:
 ```text
 docs/FOOTPRINT_AUDIT_REV_A.md
 docs/REFERENCE_DESIGNATORS_REV_A.md
+docs/FOOTPRINT_SOURCE_LINKS_REV_A.md
 ```
 
 ## Release States
