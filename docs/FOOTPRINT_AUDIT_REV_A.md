@@ -108,7 +108,8 @@ KiCad rule:
 - The module body courtyard must include the full 38.5 x 24 mm outline.
 - Place the ANT end toward the SMA board edge.
 - Pin 21 must launch directly into the RF GCPW without a long neck or detour.
-- Final castellated-pad dimensions and exact pad-center positions remain to be transcribed from the EBYTE mechanical drawing/manual before the footprint is released.
+- Rev A may use the JLCPCB/LCSC `C22399506` EasyEDA import as a conditional release candidate because no physical module is available before fabrication.
+- The imported footprint must remain traceable to the exact JLC/LCSC part ID and must pass JLCPCB DFM/PCBA review before order approval.
 
 ## J_RF — Molex 0732511150 / 732511150
 

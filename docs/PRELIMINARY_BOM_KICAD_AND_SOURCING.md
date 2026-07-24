@@ -117,7 +117,7 @@ Also a good fit, especially when consigned or mixed-source parts are needed.
 
 ## Recommended Rev A manufacturing route
 
-Use a 4-layer impedance-controlled PCB with ENIG. Order five assembled boards with all fine-pitch/QFN and small SMD parts factory assembled. Keep the XIAO, XT30, SMA and possibly E22 as hand-soldered or consigned parts until their footprints and mechanical fit have been physically verified.
+Use a 4-layer impedance-controlled PCB with ENIG. Order the first Rev A boards as an engineering-validation build with all fine-pitch/QFN and small SMD parts factory assembled. Use the JLCPCB/LCSC `C22399506` EasyEDA footprint path for the E22 because no loose physical module is available before fabrication; perform the physical E22 fit check as first-article inspection after the first board or module arrives.
 
 ## Parts not ready to purchase
 

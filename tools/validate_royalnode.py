@@ -55,6 +55,7 @@ def check_no_stale_design_terms() -> None:
         "docs/KICAD_SYMBOL_AUDIT_REV_A.md",
         "docs/FOOTPRINT_SOURCE_LINKS_REV_A.md",
         "docs/MOLEX_SMA_FOOTPRINT_BLOCKER_REV_A.md",
+        "docs/E22_ASSEMBLER_FOOTPRINT_CROSSCHECK_REV_A.md",
         "docs/REFERENCE_DESIGNATORS_REV_A.md",
         "hardware/kicad/RoyalNode/SCHEMATIC_CAPTURE_SEED_REV_A.csv",
         "bom/REV_A_LOCKED_CORE_BOM.csv",
@@ -101,6 +102,8 @@ def check_footprint_source_links() -> None:
     text = read("docs/FOOTPRINT_SOURCE_LINKS_REV_A.md")
     required = [
         "https://www.cdebyte.com/pdf-down.aspx?id=4216",
+        "C22399506",
+        "E22_ASSEMBLER_FOOTPRINT_CROSSCHECK_REV_A.md",
         "https://www.molex.com/en-us/products/part-detail/732511150",
         "Sales Drawing SD-73251-115-001",
         "DRAFT_NOT_RELEASED",
@@ -140,9 +143,38 @@ def check_e22_manual_draft_footprint() -> None:
     if '(pad "21" smd rect' not in text:
         fail("E22 manual-draft footprint missing ANT pad 21")
     audit = read("docs/E22_FOOTPRINT_TRANSCRIPTION_REV_A.md")
-    for needle in ["Pin 21", "ANT", "1:1", "physical E22-900M33S"]:
+    for needle in ["Pin 21", "ANT", "C22399506", "E22_ASSEMBLER_FOOTPRINT_CROSSCHECK_REV_A.md"]:
         if needle not in audit:
             fail(f"E22 footprint transcription audit missing {needle!r}")
+
+
+def check_e22_assembler_crosscheck() -> None:
+    fp_path = ROOT / "hardware/kicad/RoyalNode/lib_footprints/RoyalNode.pretty/MOD2_E22_900M33S_JLC_C22399506_IMPORT_RC.kicad_mod"
+    if not fp_path.exists():
+        fail("missing E22 JLC/LCSC C22399506 import release-candidate footprint")
+    text = fp_path.read_text(encoding="utf-8")
+    for needle in ["NOT_RELEASED", "C22399506", "MOD2_E22_900M33S_JLC_C22399506_IMPORT_RC"]:
+        if needle not in text:
+            fail(f"E22 JLC import footprint missing {needle!r}")
+    pad_count = len(re.findall(r"^\s*\(pad\s+\"?\d+\"?\s+smd\s+rect", text, re.M))
+    if pad_count != 22:
+        fail(f"E22 JLC import footprint should have 22 pads, found {pad_count}")
+    if not re.search(r"^\s*\(pad\s+\"?21\"?\s+smd\s+rect", text, re.M):
+        fail("E22 JLC import footprint missing ANT pad 21")
+
+    crosscheck = read("docs/E22_ASSEMBLER_FOOTPRINT_CROSSCHECK_REV_A.md")
+    required = [
+        "C22399506",
+        "JLCPCB",
+        "LCSC",
+        "EasyEDA",
+        "1.50 x 2.20 mm",
+        "first article",
+        "physical E22-900M33S module is available before the board order",
+    ]
+    for needle in required:
+        if needle not in crosscheck:
+            fail(f"E22 assembler cross-check missing {needle!r}")
 
 
 def check_capture_seed(seed_rows: list[dict[str, str]]) -> None:
@@ -191,6 +223,7 @@ def main() -> None:
     check_footprint_source_links()
     check_draft_envelope_footprints()
     check_e22_manual_draft_footprint()
+    check_e22_assembler_crosscheck()
     check_capture_seed(seed_rows)
 
     print("RoyalNode validation passed")

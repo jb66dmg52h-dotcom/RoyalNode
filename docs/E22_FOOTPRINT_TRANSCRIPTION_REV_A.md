@@ -8,7 +8,13 @@ A project-local E22 footprint transcription has been created:
 hardware/kicad/RoyalNode/lib_footprints/RoyalNode.pretty/MOD2_E22_900M33S_EBYTE_MANUAL_DRAFT.kicad_mod
 ```
 
-This footprint is **not released**. It is a manufacturer-manual draft and must be checked with a 1:1 print and a physical E22-900M33S module before PCB ordering.
+This footprint is **not released**. It is a manufacturer-manual draft used as one side of the Rev A footprint audit.
+
+Because no physical E22-900M33S module is available before the first board order, physical module verification is no longer a pre-order blocker. The pre-order gate is now the assembler-footprint cross-check in:
+
+```text
+docs/E22_ASSEMBLER_FOOTPRINT_CROSSCHECK_REV_A.md
+```
 
 ## Source
 
@@ -135,14 +141,12 @@ The manual table confirms:
 - Pin 22: GND
 - DIO3 is internal and powers the 32 MHz TCXO when configured for 2.2 V
 
-## Release Checklist
+## Manual-Transcription Checklist
 
-- [ ] Print the footprint at 1:1 scale.
-- [ ] Place a physical E22-900M33S module on the print.
-- [ ] Confirm pin-1 orientation.
-- [ ] Confirm the IPX/U.FL corner and ANT pin side match the physical module.
-- [ ] Confirm all 22 castellated pads align.
-- [ ] Confirm pin 21 points toward the intended SMA/RF corridor.
-- [ ] Confirm paste/mask behavior with the PCB assembler.
-- [ ] Only then rename or copy the footprint to a released Rev A footprint.
-
+- [x] Transcribe body size, pad count, pitch, and pad-center pattern from the EBYTE manual.
+- [x] Confirm Pin 21 is ANT and pins 20/22 are RF grounds.
+- [x] Create a project-local manual-draft KiCad footprint.
+- [x] Import the exact JLC/LCSC `C22399506` EasyEDA footprint for comparison.
+- [x] Document the JLC/EasyEDA larger-pad land pattern and origin difference.
+- [ ] Confirm paste/mask behavior with the PCB assembler during DFM/PCBA review.
+- [ ] Run first-article physical inspection after the first Rev A board or module arrives.

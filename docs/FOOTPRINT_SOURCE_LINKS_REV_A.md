@@ -38,15 +38,19 @@ Footprint release requirements:
 - Extract the exact E22-900M33S mechanical drawing from the E22-M Series user manual.
 - Confirm body size, castellated pad count, pad pitch, pin-1 orientation, ANT pin location, and keepout guidance.
 - Pin 21 must align with the RF GCPW launch toward J5.
+- Cross-check against the exact JLCPCB/LCSC PCBA part `C22399506`.
+- Use JLCPCB DFM/PCBA review as the pre-order assembler check because no physical module is available before Rev A fabrication.
 
 Transcription status:
 
 ```text
 docs/E22_FOOTPRINT_TRANSCRIPTION_REV_A.md
 hardware/kicad/RoyalNode/lib_footprints/RoyalNode.pretty/MOD2_E22_900M33S_EBYTE_MANUAL_DRAFT.kicad_mod
+docs/E22_ASSEMBLER_FOOTPRINT_CROSSCHECK_REV_A.md
+hardware/kicad/RoyalNode/lib_footprints/RoyalNode.pretty/MOD2_E22_900M33S_JLC_C22399506_IMPORT_RC.kicad_mod
 ```
 
-This is still not released until a physical-module check is complete.
+The physical module check is deferred to Rev A first-article inspection. It is not a pre-order blocker.
 
 ### J5 — Molex 0732511150 / 732511150
 
