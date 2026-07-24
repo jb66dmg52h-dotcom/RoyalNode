@@ -54,6 +54,7 @@ def check_no_stale_design_terms() -> None:
         "docs/FOOTPRINT_AUDIT_REV_A.md",
         "docs/KICAD_SYMBOL_AUDIT_REV_A.md",
         "docs/FOOTPRINT_SOURCE_LINKS_REV_A.md",
+        "docs/MOLEX_SMA_FOOTPRINT_BLOCKER_REV_A.md",
         "docs/REFERENCE_DESIGNATORS_REV_A.md",
         "hardware/kicad/RoyalNode/SCHEMATIC_CAPTURE_SEED_REV_A.csv",
         "bom/REV_A_LOCKED_CORE_BOM.csv",
@@ -107,6 +108,10 @@ def check_footprint_source_links() -> None:
     for needle in required:
         if needle not in text:
             fail(f"footprint source links missing {needle!r}")
+    blocker = read("docs/MOLEX_SMA_FOOTPRINT_BLOCKER_REV_A.md")
+    for needle in ["Sales Drawing SD-73251-115-001", "no electrical pads", "not sufficient to create the PCB launch"]:
+        if needle not in blocker:
+            fail(f"Molex SMA blocker missing {needle!r}")
 
 
 def check_draft_envelope_footprints() -> None:

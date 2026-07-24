@@ -72,6 +72,12 @@ Required drawing before footprint release:
 Sales Drawing SD-73251-115-001
 ```
 
+Current blocker:
+
+```text
+docs/MOLEX_SMA_FOOTPRINT_BLOCKER_REV_A.md
+```
+
 Footprint release requirements:
 
 - Use the Molex sales drawing, not a generic SMA edge footprint.
