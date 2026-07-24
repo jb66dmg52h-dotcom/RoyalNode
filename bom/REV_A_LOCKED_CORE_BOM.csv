@@ -1,0 +1,20 @@
+Reference,Quantity,Manufacturer,Manufacturer Part Number,Description,Package Or Form,Assembly Notes,Status
+MOD1,1,Seeed Studio,XIAO nRF52840 standard,Socketed nRF52840 MCU module,21 x 17.8 mm module,Install in two 1x7 sockets; XIAO underside BAT/GND powered by J3 harness,locked
+MOD2,1,EBYTE,E22-900M33S,33 dBm 915 MHz LoRa module,38.5 x 24.0 mm castellated module,Pin 21 routes directly to SMA GCPW; no U.FL pigtail in Rev A,locked
+U1,1,Texas Instruments,BQ25798RQMR,1S solar/USB buck-boost charger and power-path controller,RQM 29-pin VQFN-HR / HOTROD,Footprint must match TI RQM0029A; generic QFN not allowed,locked
+U2,1,Texas Instruments,LM66100DCKR,Ideal diode / reverse-current blocker,DCK 6-pin SC-70,CE connects to VOUT; ST connects to GND,locked
+U3,1,Texas Instruments,TPS61088RHLR,High-current 1S-to-5 V synchronous boost converter,RHL 20-pin VQFN + exposed pad,Exposed pad is pad 21 PGND; footprint must match TI RHL0020A,locked
+U4,1,Analog Devices,LTC4365ITS8-1#TRMPBF,UV/OV/reverse input protection controller,TS8 8-pin TSOT-23,SHDN pulled to VIN through 100 kOhm; FAULT NC in Rev A,locked
+Q1,1,Infineon,ISA170170N04LMDSXTMA1,Dual N-channel MOSFET for solar protection back-to-back pair,PG-DSO-8,Driven by LTC4365 GATE,locked
+Q2,1,Infineon,ISA170170N04LMDSXTMA1,Dual N-channel MOSFET for BQ solar input selector,PG-DSO-8,Driven by BQ25798 ACDRV1,locked
+Q3,1,Infineon,ISA170170N04LMDSXTMA1,Dual N-channel MOSFET for BQ USB input selector,PG-DSO-8,Driven by BQ25798 ACDRV2,locked
+L1,1,Coilcraft,XAL7070-222MEC,2.2 uH charger inductor,Shielded molded inductor,Use Coilcraft recommended land pattern,locked
+L2,1,Coilcraft,XAL7030-222MEC,2.2 uH boost inductor,Shielded molded inductor,Use Coilcraft recommended land pattern,locked
+J1,1,AMASS,XT30PW-M,Solar input power connector,Right-angle PCB male XT30,Silkscreen SOLAR; mating harness uses female XT30,locked
+J2,1,AMASS,XT30PW-M,Battery input power connector,Right-angle PCB male XT30,Silkscreen BATTERY; mating harness uses female XT30,locked
+J3,1,JST,B2B-PH-SM4-TB(LF)(SN),XIAO battery harness connector,2-pin 2.0 mm SMT JST-PH,Wires to XIAO underside BAT/GND pads,locked
+J4,1,CJT,A2012WV-S-2P,Battery NTC connector,2-pin 2.0 mm vertical SMT,Pin 1 NTC_SENSE; pin 2 GND; mates with A2012H-2P,locked
+J5,1,Molex,0732511150,50 ohm standard-polarity SMA female edge launch,1.60 mm PCB edge mount,Use exact Molex launch; merge with final 50 ohm GCPW geometry,locked
+F1,1,Littelfuse,0483002.DR,2 A solar input fuse,SMD fuse,Located immediately after solar XT30 positive,locked
+TH1,1,Semitec,103AT-2,10 kOhm battery-mounted NTC,Thermistor on battery harness,Required for production; no TS bypass network,locked
+D1,1,TBD,TBD,Low-current red charge LED,SMD LED,Driven by BQ25798 STAT sink path,selected_class

@@ -20,6 +20,9 @@ Current status:
 Design source of truth:
 
 - `docs/DESIGN_FREEZE_REV_A.md`
+- `docs/REFERENCE_DESIGNATORS_REV_A.md`
 - `docs/NET_MAP_REV_A.md`
 - `docs/PIN_AUDIT_REV_A.md`
 - `docs/RF_DESIGN_REV_A.md`
+- `bom/REV_A_LOCKED_CORE_BOM.csv`
+- `bom/REV_A_LOCKED_PASSIVES.csv`
