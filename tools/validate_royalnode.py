@@ -122,6 +122,24 @@ def check_draft_envelope_footprints() -> None:
             fail(f"{path.relative_to(ROOT)} is an envelope footprint but contains pads")
 
 
+def check_e22_manual_draft_footprint() -> None:
+    path = ROOT / "hardware/kicad/RoyalNode/lib_footprints/RoyalNode.pretty/MOD2_E22_900M33S_EBYTE_MANUAL_DRAFT.kicad_mod"
+    if not path.exists():
+        fail("missing E22 manual-draft footprint")
+    text = path.read_text(encoding="utf-8")
+    if "NOT_RELEASED" not in text:
+        fail("E22 manual-draft footprint must remain marked NOT_RELEASED")
+    pad_count = len(re.findall(r"^\s*\(pad\s+\"", text, re.M))
+    if pad_count != 22:
+        fail(f"E22 manual-draft footprint should have 22 pads, found {pad_count}")
+    if '(pad "21" smd rect' not in text:
+        fail("E22 manual-draft footprint missing ANT pad 21")
+    audit = read("docs/E22_FOOTPRINT_TRANSCRIPTION_REV_A.md")
+    for needle in ["Pin 21", "ANT", "1:1", "physical E22-900M33S"]:
+        if needle not in audit:
+            fail(f"E22 footprint transcription audit missing {needle!r}")
+
+
 def check_capture_seed(seed_rows: list[dict[str, str]]) -> None:
     required_nets = {
         "GND",
@@ -167,6 +185,7 @@ def main() -> None:
     check_symbols()
     check_footprint_source_links()
     check_draft_envelope_footprints()
+    check_e22_manual_draft_footprint()
     check_capture_seed(seed_rows)
 
     print("RoyalNode validation passed")

@@ -39,6 +39,15 @@ Footprint release requirements:
 - Confirm body size, castellated pad count, pad pitch, pin-1 orientation, ANT pin location, and keepout guidance.
 - Pin 21 must align with the RF GCPW launch toward J5.
 
+Transcription status:
+
+```text
+docs/E22_FOOTPRINT_TRANSCRIPTION_REV_A.md
+hardware/kicad/RoyalNode/lib_footprints/RoyalNode.pretty/MOD2_E22_900M33S_EBYTE_MANUAL_DRAFT.kicad_mod
+```
+
+This is still not released until a physical-module check is complete.
+
 ### J5 — Molex 0732511150 / 732511150
 
 Primary product page:
@@ -156,4 +165,3 @@ Release requirement:
 A project-local footprint may be added as `draft` for placement planning, but it must include `DRAFT_NOT_RELEASED` in its description and must not be used for release routing.
 
 Only footprints checked against the sources above can be marked `checked` or `released_rev_a`.
-

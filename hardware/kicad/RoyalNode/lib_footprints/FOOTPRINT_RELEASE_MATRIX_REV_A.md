@@ -33,7 +33,7 @@ docs/FOOTPRINT_SOURCE_LINKS_REV_A.md
 | U4 | LTC4365ITS8-1, ADI TS8 TSOT-23-8 | Medium | `not_started` | Use ADI TS8 recommended pad layout |
 | Q1-Q3 | ISA170170N04LMDS, Infineon PG-DSO-8 | Medium | `not_started` | Confirm duplicated drain/source pin mapping and consistent orientation |
 | MOD1 | Seeed XIAO nRF52840 socket assembly | Medium | `draft_envelope_only` | Verify XIAO row spacing and socket engagement before release |
-| MOD2 | EBYTE E22-900M33S castellated module | High | `draft_envelope_only` | Transcribe EBYTE mechanical drawing; verify pin 21 ANT launch geometry |
+| MOD2 | EBYTE E22-900M33S castellated module | High | `manual_draft_not_released` | Manual transcription exists; verify with 1:1 print and physical module before release |
 | J1/J2 | AMASS XT30PW-M right-angle male | Medium | `draft_envelope_only` | Confirm polarity from physical connector and add mating-plug clearance |
 | J3 | JST B2B-PH-SM4-TB(LF)(SN) | Low | `not_started` | Use JST official/verified KiCad PH-SM4-TB 2-pin footprint |
 | J4 | CJT A2012WV-S-2P | Low | `not_started` | Use manufacturer/JLC footprint and pin-1 marker |
