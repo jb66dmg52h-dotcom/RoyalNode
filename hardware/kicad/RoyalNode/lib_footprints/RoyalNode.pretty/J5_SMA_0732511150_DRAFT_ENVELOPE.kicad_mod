@@ -1,0 +1,68 @@
+(footprint "J5_SMA_0732511150_DRAFT_ENVELOPE"
+  (version 20260206)
+  (generator "royalnode")
+  (layer "F.Cu")
+  (descr "DRAFT_NOT_RELEASED mechanical envelope only for Molex 0732511150 edge-launch SMA; no electrical pads; do not use for fabrication")
+  (tags "RoyalNode DRAFT_NOT_RELEASED Molex 0732511150 SMA envelope")
+  (property "Reference" "J5"
+    (at 0 -7 0)
+    (layer "F.SilkS")
+    (effects
+      (font
+        (size 1 1)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Value" "SMA EDGE DRAFT ENVELOPE"
+    (at 0 7 0)
+    (layer "F.Fab")
+    (effects
+      (font
+        (size 1 1)
+        (thickness 0.15)
+      )
+    )
+  )
+  (attr smd)
+  (fp_rect
+    (start -5 -6)
+    (end 8 6)
+    (stroke
+      (width 0.1)
+      (type solid)
+    )
+    (fill no)
+    (layer "F.Fab")
+  )
+  (fp_line
+    (start 0 -7)
+    (end 0 7)
+    (stroke
+      (width 0.1)
+      (type dash)
+    )
+    (layer "Dwgs.User")
+  )
+  (fp_text user "BOARD EDGE"
+    (at 0 0 90)
+    (layer "Dwgs.User")
+    (effects
+      (font
+        (size 0.8 0.8)
+        (thickness 0.12)
+      )
+    )
+  )
+  (fp_text user "DRAFT_NOT_RELEASED - use Molex sales drawing before pads"
+    (at 2 0 0)
+    (layer "Cmts.User")
+    (effects
+      (font
+        (size 0.8 0.8)
+        (thickness 0.12)
+      )
+    )
+  )
+)
+

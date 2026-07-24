@@ -18,6 +18,7 @@ docs/FOOTPRINT_SOURCE_LINKS_REV_A.md
 |---|---|
 | `not_started` | No project-local footprint exists yet |
 | `draft` | Footprint exists but must not be used for release routing |
+| `draft_envelope_only` | Mechanical outline exists with no electrical pads and must not be assigned to schematic symbols |
 | `imported_unchecked` | Vendor/third-party CAD imported but not checked against package drawing |
 | `checked` | Pad numbering and package geometry checked against manufacturer drawing |
 | `released_rev_a` | Approved for Rev A placement/routing |
@@ -31,12 +32,12 @@ docs/FOOTPRINT_SOURCE_LINKS_REV_A.md
 | U3 | TPS61088RHLR, TI RHL0020A VQFN-20 + EP pad 21 | High | `not_started` | Exposed pad must be pad 21; thermal via concept required |
 | U4 | LTC4365ITS8-1, ADI TS8 TSOT-23-8 | Medium | `not_started` | Use ADI TS8 recommended pad layout |
 | Q1-Q3 | ISA170170N04LMDS, Infineon PG-DSO-8 | Medium | `not_started` | Confirm duplicated drain/source pin mapping and consistent orientation |
-| MOD1 | Seeed XIAO nRF52840 socket assembly | Medium | `not_started` | Verify XIAO row spacing and socket engagement before release |
-| MOD2 | EBYTE E22-900M33S castellated module | High | `not_started` | Transcribe EBYTE mechanical drawing; verify pin 21 ANT launch geometry |
-| J1/J2 | AMASS XT30PW-M right-angle male | Medium | `not_started` | Confirm polarity from physical connector and add mating-plug clearance |
+| MOD1 | Seeed XIAO nRF52840 socket assembly | Medium | `draft_envelope_only` | Verify XIAO row spacing and socket engagement before release |
+| MOD2 | EBYTE E22-900M33S castellated module | High | `draft_envelope_only` | Transcribe EBYTE mechanical drawing; verify pin 21 ANT launch geometry |
+| J1/J2 | AMASS XT30PW-M right-angle male | Medium | `draft_envelope_only` | Confirm polarity from physical connector and add mating-plug clearance |
 | J3 | JST B2B-PH-SM4-TB(LF)(SN) | Low | `not_started` | Use JST official/verified KiCad PH-SM4-TB 2-pin footprint |
 | J4 | CJT A2012WV-S-2P | Low | `not_started` | Use manufacturer/JLC footprint and pin-1 marker |
-| J5 | Molex 0732511150 SMA edge launch | High | `not_started` | Use Molex launch for 1.60 mm PCB and merge with final GCPW stack-up |
+| J5 | Molex 0732511150 SMA edge launch | High | `draft_envelope_only` | Use Molex launch for 1.60 mm PCB and merge with final GCPW stack-up |
 | L_BQ | Coilcraft XAL7070-222MEC | Medium | `not_started` | Use Coilcraft recommended land pattern and body courtyard |
 | L_BOOST | Coilcraft XAL7030-222MEC | Medium | `not_started` | Use Coilcraft recommended land pattern and body courtyard |
 | C_BULK | Panasonic 10SVPC330M | Medium | `not_started` | Use polarized SMD polymer footprint with clear polarity marking |

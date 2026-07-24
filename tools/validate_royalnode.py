@@ -109,6 +109,19 @@ def check_footprint_source_links() -> None:
             fail(f"footprint source links missing {needle!r}")
 
 
+def check_draft_envelope_footprints() -> None:
+    fp_dir = ROOT / "hardware/kicad/RoyalNode/lib_footprints/RoyalNode.pretty"
+    draft_files = sorted(fp_dir.glob("*DRAFT_ENVELOPE.kicad_mod"))
+    if len(draft_files) < 4:
+        fail("expected at least four DRAFT_ENVELOPE planning footprints")
+    for path in draft_files:
+        text = path.read_text(encoding="utf-8")
+        if "DRAFT_NOT_RELEASED" not in text:
+            fail(f"{path.relative_to(ROOT)} missing DRAFT_NOT_RELEASED marker")
+        if re.search(r"^\s*\(pad\b", text, re.M):
+            fail(f"{path.relative_to(ROOT)} is an envelope footprint but contains pads")
+
+
 def check_capture_seed(seed_rows: list[dict[str, str]]) -> None:
     required_nets = {
         "GND",
@@ -153,6 +166,7 @@ def main() -> None:
     check_no_stale_design_terms()
     check_symbols()
     check_footprint_source_links()
+    check_draft_envelope_footprints()
     check_capture_seed(seed_rows)
 
     print("RoyalNode validation passed")
