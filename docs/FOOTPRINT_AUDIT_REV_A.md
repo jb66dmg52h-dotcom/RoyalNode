@@ -125,19 +125,21 @@ KiCad rule:
 - Board edge position is part of the footprint/mechanical definition.
 - The final RF center-pad transition must be merged with JLCPCB's controlled-impedance GCPW geometry, not simply continued at arbitrary width under the connector.
 
-## J_NTC — Molex 5037630291
+## J_NTC — CJT A2012WV-S-2P
 
-- Manufacturer: Molex Pico-Lock
+- Manufacturer: CJT
+- Series: A2012
 - 2 circuits
-- 1.00 mm mating and termination pitch
-- right-angle SMT
-- positive lock
-- mated height: 1.50 mm
+- 2.00 mm pitch
+- vertical SMT
+- current rating: 3 A
 - operating range: -40 to +105 C
+- JLCPCB assembly part: C273186
+- Mating cable housing: CJT A2012H-2P
 
 KiCad rule:
 
-- Use Molex-recommended pad layout/CAD for 5037630291.
+- Use CJT/JLC manufacturer-recommended pad layout for A2012WV-S-2P.
 - Pin 1 silkscreen marker is mandatory because pin 1 is `NTC_SENSE` and pin 2 is GND in the RoyalNode assembly drawing.
 
 ## J_BAT / J_SOLAR — AMASS XT30PW-M

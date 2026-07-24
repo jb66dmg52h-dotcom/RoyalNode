@@ -15,6 +15,7 @@ These symbols are intended to make schematic capture possible from the frozen Re
 The symbol pins were generated from the current Rev A source-of-truth documents:
 
 - `docs/DESIGN_FREEZE_REV_A.md`
+- `docs/REFERENCE_DESIGNATORS_REV_A.md`
 - `docs/PIN_AUDIT_REV_A.md`
 - `docs/LOCKED_COMPONENTS_REV_A.md`
 - `docs/NET_MAP_REV_A.md`
@@ -25,8 +26,8 @@ The older `docs/PRELIMINARY_BOM_KICAD_AND_SOURCING.md` is not authoritative for 
 
 | Symbol | Intended reference | Source basis |
 |---|---|---|
-| `RoyalNode:RN_XIAO_nRF52840_SOCKET` | U | Final XIAO GPIO map from design freeze and pin audit |
-| `RoyalNode:RN_E22_900M33S` | U | EBYTE 22-pin castellated module pin table |
+| `RoyalNode:RN_XIAO_nRF52840_SOCKET` | MOD | Final XIAO GPIO map from design freeze and pin audit |
+| `RoyalNode:RN_E22_900M33S` | MOD | EBYTE 22-pin castellated module pin table |
 | `RoyalNode:RN_BQ25798RQMR` | U | TI BQ25798 RQM 29-pin pin audit |
 | `RoyalNode:RN_TPS61088RHLR` | U | TI TPS61088 RHL 20-pin plus exposed pad 21 pin audit |
 | `RoyalNode:RN_LM66100DCKR` | U | TI LM66100 DCK 6-pin correction from pin audit |
@@ -65,4 +66,3 @@ These symbols do not authorize PCB release. The following footprints still requi
 - Molex 0732511150 SMA edge launch
 - Coilcraft XAL7030/XAL7070 inductors
 - Panasonic 10SVPC330M polymer capacitor
-
