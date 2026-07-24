@@ -17,3 +17,5 @@ hardware/releases/*
 
 # OS/editor noise
 .DS_Store
+__pycache__/
+*.pyc

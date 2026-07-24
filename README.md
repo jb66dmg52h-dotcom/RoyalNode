@@ -83,6 +83,21 @@ Earlier concept documents are superseded where they conflict with the design-fre
 └── test/              Bring-up procedures and measurements
 ```
 
+## Local KiCad project
+
+Open the Mac/KiCad project here:
+
+```text
+hardware/kicad/RoyalNode/RoyalNode.kicad_pro
+```
+
+Useful local checks:
+
+```bash
+make validate
+make kicad-checks
+```
+
 ## Remaining work
 
 1. Create or import verified KiCad symbols and footprints.
