@@ -1,0 +1,5 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "RoyalNode")(type "KiCad")(uri "${KIPRJMOD}/lib_footprints/RoyalNode.pretty")(options "")(descr "Project-local RoyalNode footprints"))
+)
+

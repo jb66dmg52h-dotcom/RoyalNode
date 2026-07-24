@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "RoyalNode")(type "KiCad")(uri "${KIPRJMOD}/lib_symbols/RoyalNode.kicad_sym")(options "")(descr "Project-local RoyalNode symbols"))
+)
+

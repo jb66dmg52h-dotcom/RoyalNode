@@ -1,0 +1,28 @@
+(kicad_sch
+  (version 20250114)
+  (generator "eeschema")
+  (generator_version "10.0")
+  (uuid "b94e0f26-17d5-4e2d-8d4b-c9388b86dc8e")
+  (paper "A3")
+  (title_block
+    (title "RoyalNode Rev A")
+    (date "2026-07-24")
+    (rev "A")
+    (company "RoyalNode")
+    (comment 1 "Solar-powered 2 W LoRa repeater carrier")
+    (comment 2 "Capture source: docs/DESIGN_FREEZE_REV_A.md and docs/NET_MAP_REV_A.md")
+  )
+  (lib_symbols)
+  (text "RoyalNode Rev A schematic capture starts here.\n\nAuthoritative source documents:\n- docs/DESIGN_FREEZE_REV_A.md\n- docs/NET_MAP_REV_A.md\n- docs/PIN_AUDIT_REV_A.md\n- docs/RF_DESIGN_REV_A.md\n\nNext KiCad task: create/import verified symbols and footprints, then capture the power tree, XIAO socket, E22 module, charger, 5 V boost, and RF connector sheets."
+    (exclude_from_sim no)
+    (at 25.4 38.1 0)
+    (effects
+      (font
+        (size 2.0 2.0)
+      )
+      (justify left top)
+    )
+    (uuid "92d65bb8-0a41-4ac4-92df-dd9047e25c4f")
+  )
+)
+

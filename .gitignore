@@ -1,0 +1,19 @@
+# KiCad autosaves, backups, and generated manufacturing outputs
+*.kicad_prl
+*.kicad_pro-bak
+*.kicad_sch-bak
+*.kicad_pcb-bak
+*.lck
+~*.lck
+*-backups/
+fp-info-cache
+
+# KiCad generated outputs; release artifacts should be copied intentionally.
+hardware/fabrication/*
+!hardware/fabrication/.gitkeep
+hardware/releases/*
+!hardware/releases/RevA/
+!hardware/releases/RevA/.gitkeep
+
+# OS/editor noise
+.DS_Store
