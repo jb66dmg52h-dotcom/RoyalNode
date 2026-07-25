@@ -44,6 +44,22 @@ SYMBOL_MAP = {
     "L2": ("RoyalNode:RN_TWO_PIN_POWER_PART", "Coilcraft XAL7030-222MEC", (248.92, 124.46)),
 }
 
+FOOTPRINT_MAP = {
+    "MOD1": "RoyalNode:MOD1_XIAO_NRF52840_SOCKET_C53202181_RC",
+    "MOD2": "RoyalNode:MOD2_E22_900M33S_JLC_C22399506_RC",
+    "U1": "RoyalNode:U1_BQ25798_RQM0029A_RC",
+    "U2": "RoyalNode:U2_LM66100_DCK0006A_SC70_6_RC",
+    "U3": "RoyalNode:U3_TPS61088_RHL0020A_THERMALVIAS_RC",
+    "U4": "RoyalNode:U4_LTC4365_TSOT23_8_RC",
+    "Q1": "RoyalNode:Q_POWER_INFINEON_PG_DSO_8_27_RC",
+    "Q2": "RoyalNode:Q_POWER_INFINEON_PG_DSO_8_27_RC",
+    "Q3": "RoyalNode:Q_POWER_INFINEON_PG_DSO_8_27_RC",
+    "J1": "RoyalNode:J_POWER_XT30PW_M_C431092_RC",
+    "J2": "RoyalNode:J_POWER_XT30PW_M_C431092_RC",
+    "L1": "RoyalNode:L1_COILCRAFT_XAL7070_222MEC_RC",
+    "L2": "RoyalNode:L2_COILCRAFT_XAL7030_222MEC_RC",
+}
+
 CAPTURED_ORDER = [
     "MOD1",
     "MOD2",
@@ -194,6 +210,7 @@ def placed_symbol(
     y: float,
     pins: list[str],
     *,
+    footprint: str = "",
     in_bom: bool = True,
     on_board: bool = True,
 ) -> str:
@@ -228,7 +245,7 @@ def placed_symbol(
         )
       )
     )
-    (property "Footprint" ""
+    (property "Footprint" "{quote(footprint)}"
       (at {x:.2f} {y:.2f} 0)
       (effects
         (font
@@ -320,7 +337,7 @@ def main() -> None:
         missing = [pin for pin in seed_pins if pin not in available_pins]
         if missing:
             raise SystemExit(f"{ref} missing pins in symbol: {', '.join(missing)}")
-        body.append(placed_symbol(ref, lib_id, value, x, y, seed_pins))
+        body.append(placed_symbol(ref, lib_id, value, x, y, seed_pins, footprint=FOOTPRINT_MAP.get(ref, "")))
         for row in by_ref[ref]:
             pin = row["Pin"]
             net = row["Net"]

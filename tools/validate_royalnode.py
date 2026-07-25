@@ -324,6 +324,32 @@ def check_generated_pcb_placement() -> None:
             fail(f"PCB placement status missing {needle!r}")
 
 
+def check_generated_schematic_footprints() -> None:
+    schematic = read("hardware/kicad/RoyalNode/RoyalNode.kicad_sch")
+    required_footprints = {
+        "MOD1": "RoyalNode:MOD1_XIAO_NRF52840_SOCKET_C53202181_RC",
+        "MOD2": "RoyalNode:MOD2_E22_900M33S_JLC_C22399506_RC",
+        "U1": "RoyalNode:U1_BQ25798_RQM0029A_RC",
+        "U2": "RoyalNode:U2_LM66100_DCK0006A_SC70_6_RC",
+        "U3": "RoyalNode:U3_TPS61088_RHL0020A_THERMALVIAS_RC",
+        "U4": "RoyalNode:U4_LTC4365_TSOT23_8_RC",
+        "Q1": "RoyalNode:Q_POWER_INFINEON_PG_DSO_8_27_RC",
+        "Q2": "RoyalNode:Q_POWER_INFINEON_PG_DSO_8_27_RC",
+        "Q3": "RoyalNode:Q_POWER_INFINEON_PG_DSO_8_27_RC",
+        "J1": "RoyalNode:J_POWER_XT30PW_M_C431092_RC",
+        "J2": "RoyalNode:J_POWER_XT30PW_M_C431092_RC",
+        "L1": "RoyalNode:L1_COILCRAFT_XAL7070_222MEC_RC",
+        "L2": "RoyalNode:L2_COILCRAFT_XAL7030_222MEC_RC",
+    }
+    for ref, footprint in required_footprints.items():
+        pattern = (
+            rf'\(property "Reference" "{re.escape(ref)}".*?'
+            rf'\(property "Footprint" "{re.escape(footprint)}"'
+        )
+        if not re.search(pattern, schematic, re.S):
+            fail(f"schematic symbol {ref} missing footprint assignment {footprint}")
+
+
 def check_capture_seed(seed_rows: list[dict[str, str]]) -> None:
     required_nets = {
         "GND",
@@ -426,6 +452,7 @@ def main() -> None:
     check_power_rc_footprints()
     check_capture_seed(seed_rows)
     check_generated_schematic()
+    check_generated_schematic_footprints()
     check_generated_pcb_placement()
 
     print("RoyalNode validation passed")

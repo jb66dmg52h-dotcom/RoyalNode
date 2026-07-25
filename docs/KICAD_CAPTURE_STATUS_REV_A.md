@@ -2,7 +2,7 @@
 
 ## Current Milestone
 
-Milestone `K1c` is complete.
+Milestone `K1d` is in progress.
 
 The root schematic is generated from:
 
@@ -22,6 +22,22 @@ MOD1, MOD2, U1, U2, U3, U4, Q1, Q2, Q3, J1, J2, J3, J4, J5, F1, L1, L2
 It also places 52 support passive references from `PASSIVE_CAPTURE_SEED_REV_A.csv` and 6 ERC-only power flags.
 
 The capture uses deterministic UUIDs and embedded RoyalNode symbol definitions so KiCad can parse and ERC-check it without relying on an external symbol cache.
+
+## Footprint Assignment Status
+
+The generated schematic now assigns project-local release-candidate footprints to the major Rev A parts that already have local footprints:
+
+- `MOD1` XIAO socket composite footprint
+- `MOD2` E22-900M33S factory PCBA footprint
+- `U1` BQ25798
+- `U2` LM66100
+- `U3` TPS61088
+- `U4` LTC4365
+- `Q1`-`Q3` Infineon power FET footprint
+- `J1`/`J2` XT30 power connector footprints
+- `L1`/`L2` Coilcraft power-inductor footprints
+
+The SMA footprint remains intentionally unassigned in the schematic because the board still uses a draft placement envelope while the RF launch is reviewed. Low-risk passives remain generic two-terminal schematic placeholders until passive package assignments are generated.
 
 ## What Is Captured
 
@@ -61,10 +77,10 @@ Current ERC result after generation:
 
 ## Next Capture Work
 
-Next milestone `K1d`:
+Next milestone `K1e`:
 
-1. Replace generic two-pin passive placeholders with resistor, capacitor, LED, thermistor, fuse, and inductor-specific project symbols where useful.
-2. Assign only verified or intentionally draft footprints according to the footprint release matrix.
+1. Assign package-specific footprints to support passives.
+2. Replace generic two-pin passive placeholders with resistor, capacitor, LED, thermistor, fuse, and inductor-specific project symbols where useful.
 3. Start schematic-to-board synchronization after footprint status is clear.
 4. Move from label-heavy generated capture toward sheet-level grouping if the flat root sheet becomes hard to review.
 
