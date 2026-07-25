@@ -1126,6 +1126,8 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("segment", "solar-fused-fuse-to-q1", "1"),
     stable_uuid("segment", "solar-fused-fuse-to-q1", "2"),
     stable_uuid("segment", "solar-fused-backbone", "2"),
+    stable_uuid("segment", "solar-fused-divider-to-u4-backbone", "0"),
+    stable_uuid("segment", "solar-fused-divider-to-u4-backbone", "1"),
     stable_uuid("segment", "solar-protected-u4-fanout", "0"),
     stable_uuid("segment", "solar-protected-u4-sense-backbone", "0"),
     stable_uuid("segment", "solar-protected-u4-sense-backbone", "1"),
