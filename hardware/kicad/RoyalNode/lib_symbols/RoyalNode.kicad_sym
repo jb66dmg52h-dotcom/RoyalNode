@@ -1299,7 +1299,7 @@
             )
           )
         )
-        (pin power_in line
+        (pin passive line
           (at 21.59 -7.620000000000001 180)
           (length 3.81)
           (name "SW2"
@@ -1335,7 +1335,7 @@
             )
           )
         )
-        (pin power_in line
+        (pin passive line
           (at 21.59 -12.700000000000003 180)
           (length 3.81)
           (name "SW1"
@@ -1492,7 +1492,7 @@
             )
           )
         )
-        (pin power_in line
+        (pin passive line
           (at -19.05 5.08 0)
           (length 3.81)
           (name "SW"
@@ -1510,7 +1510,7 @@
             )
           )
         )
-        (pin power_in line
+        (pin passive line
           (at -19.05 2.540000000000001 0)
           (length 3.81)
           (name "SW"
@@ -1528,7 +1528,7 @@
             )
           )
         )
-        (pin power_in line
+        (pin passive line
           (at -19.05 0.0 0)
           (length 3.81)
           (name "SW"
@@ -1546,7 +1546,7 @@
             )
           )
         )
-        (pin power_in line
+        (pin passive line
           (at -19.05 -2.540000000000001 0)
           (length 3.81)
           (name "SW"
@@ -1690,7 +1690,7 @@
             )
           )
         )
-        (pin power_out line
+        (pin passive line
           (at 19.05 2.540000000000001 180)
           (length 3.81)
           (name "VOUT"
@@ -1708,7 +1708,7 @@
             )
           )
         )
-        (pin power_out line
+        (pin passive line
           (at 19.05 0.0 180)
           (length 3.81)
           (name "VOUT"
@@ -1955,7 +1955,7 @@
             )
           )
         )
-        (pin output line
+        (pin passive line
           (at 13.97 1.2699999999999996 180)
           (length 3.81)
           (name "ST"
@@ -2872,6 +2872,94 @@
             )
           )
           (number "2"
+            (effects
+              (font
+                (size 1.0 1.0)
+              )
+            )
+          )
+        )
+    )
+  )
+  (symbol "RN_PWR_FLAG"
+    (pin_numbers hide)
+    (pin_names
+      (offset 0.762)
+    )
+    (exclude_from_sim no)
+    (in_bom no)
+    (on_board no)
+      (property "Reference" "PF"
+        (at 0 5.08 0)
+        (effects
+          (font
+            (size 1.27 1.27)
+          )
+        )
+      )
+      (property "Value" "PWR_FLAG"
+        (at 0 -5.08 0)
+        (effects
+          (font
+            (size 1.27 1.27)
+          )
+        )
+      )
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27)
+          )
+        (hide yes)
+        )
+      )
+      (property "Datasheet" "~"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27)
+          )
+        (hide yes)
+        )
+      )
+      (property "Description" "ERC-only power flag; not a physical part."
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27)
+          )
+        (hide yes)
+        )
+      )
+    (symbol "RN_PWR_FLAG_0_1"
+      (polyline
+        (pts
+          (xy -2.54 1.27)
+          (xy 0 3.81)
+          (xy 2.54 1.27)
+        )
+        (stroke
+          (width 0.254)
+          (type default)
+        )
+        (fill
+          (type none)
+        )
+      )
+    )
+    (symbol "RN_PWR_FLAG_1_1"
+        (pin power_out line
+          (at 0 0 270)
+          (length 2.54)
+          (name "PWR"
+            (effects
+              (font
+                (size 1.0 1.0)
+              )
+            )
+          )
+          (number "1"
             (effects
               (font
                 (size 1.0 1.0)

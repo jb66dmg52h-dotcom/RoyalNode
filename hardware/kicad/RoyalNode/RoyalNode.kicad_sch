@@ -528,7 +528,7 @@
             )
           )
         )
-        (pin power_in line
+        (pin passive line
           (at 21.59 -7.620000000000001 180)
           (length 3.81)
           (name "SW2"
@@ -564,7 +564,7 @@
             )
           )
         )
-        (pin power_in line
+        (pin passive line
           (at 21.59 -12.700000000000003 180)
           (length 3.81)
           (name "SW1"
@@ -1516,7 +1516,7 @@
             )
           )
         )
-        (pin output line
+        (pin passive line
           (at 13.97 1.2699999999999996 180)
           (length 3.81)
           (name "ST"
@@ -1756,6 +1756,94 @@
             )
           )
           (number "8"
+            (effects
+              (font
+                (size 1.0 1.0)
+              )
+            )
+          )
+        )
+    )
+  )
+  (symbol "RoyalNode:RN_PWR_FLAG"
+    (pin_numbers hide)
+    (pin_names
+      (offset 0.762)
+    )
+    (exclude_from_sim no)
+    (in_bom no)
+    (on_board no)
+      (property "Reference" "PF"
+        (at 0 5.08 0)
+        (effects
+          (font
+            (size 1.27 1.27)
+          )
+        )
+      )
+      (property "Value" "PWR_FLAG"
+        (at 0 -5.08 0)
+        (effects
+          (font
+            (size 1.27 1.27)
+          )
+        )
+      )
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27)
+          )
+        (hide yes)
+        )
+      )
+      (property "Datasheet" "~"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27)
+          )
+        (hide yes)
+        )
+      )
+      (property "Description" "ERC-only power flag; not a physical part."
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27)
+          )
+        (hide yes)
+        )
+      )
+    (symbol "RN_PWR_FLAG_0_1"
+      (polyline
+        (pts
+          (xy -2.54 1.27)
+          (xy 0 3.81)
+          (xy 2.54 1.27)
+        )
+        (stroke
+          (width 0.254)
+          (type default)
+        )
+        (fill
+          (type none)
+        )
+      )
+    )
+    (symbol "RN_PWR_FLAG_1_1"
+        (pin power_out line
+          (at 0 0 270)
+          (length 2.54)
+          (name "PWR"
+            (effects
+              (font
+                (size 1.0 1.0)
+              )
+            )
+          )
+          (number "1"
             (effects
               (font
                 (size 1.0 1.0)
@@ -2041,7 +2129,7 @@
             )
           )
         )
-        (pin power_in line
+        (pin passive line
           (at -19.05 5.08 0)
           (length 3.81)
           (name "SW"
@@ -2059,7 +2147,7 @@
             )
           )
         )
-        (pin power_in line
+        (pin passive line
           (at -19.05 2.540000000000001 0)
           (length 3.81)
           (name "SW"
@@ -2077,7 +2165,7 @@
             )
           )
         )
-        (pin power_in line
+        (pin passive line
           (at -19.05 0.0 0)
           (length 3.81)
           (name "SW"
@@ -2095,7 +2183,7 @@
             )
           )
         )
-        (pin power_in line
+        (pin passive line
           (at -19.05 -2.540000000000001 0)
           (length 3.81)
           (name "SW"
@@ -2239,7 +2327,7 @@
             )
           )
         )
-        (pin power_out line
+        (pin passive line
           (at 19.05 2.540000000000001 180)
           (length 3.81)
           (name "VOUT"
@@ -2257,7 +2345,7 @@
             )
           )
         )
-        (pin power_out line
+        (pin passive line
           (at 19.05 0.0 180)
           (length 3.81)
           (name "VOUT"
@@ -2904,7 +2992,7 @@
     )
     (uuid "41e41adc-9b45-520b-85d7-0df4724f00fd")
   )
-  (text "Two-terminal power-path parts F1/L1/L2 are captured with RN_TWO_PIN_POWER_PART.\\nExact fuse and inductor footprints remain pending footprint release."
+  (text "Two-terminal power-path parts and support passives are captured with RN_TWO_PIN_POWER_PART.\\nExact passive footprints remain pending footprint release and layout review."
     (exclude_from_sim no)
     (at 202.00 268.00 0)
     (effects
@@ -2913,7 +3001,7 @@
       )
       (justify left top)
     )
-    (uuid "f746ddef-0c48-5012-9867-221511cdc971")
+    (uuid "31d1a995-e473-57a3-be15-2f2e16db2dab")
   )
   (symbol
     (lib_id "RoyalNode:RN_XIAO_nRF52840_SOCKET")
@@ -6470,7 +6558,7 @@
     )
     (uuid "cc080e1c-8746-5dd7-81db-b42786828de1")
   )
-  (global_label "SOLAR_FUSED"
+  (global_label "LTC_SHDN"
     (shape bidirectional)
     (at 173.99 133.35 0)
     (fields_autoplaced yes)
@@ -6480,7 +6568,7 @@
       )
       (justify left)
     )
-    (uuid "9ffed844-47b1-563f-8c50-6623465b7149")
+    (uuid "b059ae28-d8c4-5216-9485-2abad25a674f")
     (property "Intersheetrefs" "${INTERSHEET_REFS}"
       (at 173.99 133.35 0)
       (effects
@@ -8628,6 +8716,6872 @@
     (uuid "9fc500f2-3e99-5a49-926f-b7da2661cd76")
     (property "Intersheetrefs" "${INTERSHEET_REFS}"
       (at 267.97 124.46 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 35.56 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "75869688-7af8-521f-b282-cb1c33233c0c")
+    (property "Reference" "R100"
+      (at 335.28 11.56 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "1.87 MOhm 1%"
+      (at 335.28 59.56 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "c2cc42c6-cd8a-5c21-9efe-4d2d7b947208")
+    )
+    (pin "2"
+      (uuid "b20df5f9-aa5a-5d7a-85dd-82f830a12ab7")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/acebfd39-153f-51af-b835-d403abcfee5d"
+          (reference "R100")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 35.56)
+      (xy 316.23 35.56)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "221c157e-95ec-5ffb-b4e0-35ea610f563c")
+  )
+  (global_label "SOLAR_FUSED"
+    (shape bidirectional)
+    (at 316.23 35.56 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "4111d8b2-003b-562d-9f88-7ea085349bdb")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 35.56 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 35.56)
+      (xy 354.33 35.56)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "bf46320e-95f9-54a2-8fa2-13923ed33d3f")
+  )
+  (global_label "UV_NODE"
+    (shape bidirectional)
+    (at 354.33 35.56 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "ed4c2b5c-d97d-5ae6-b809-976ff1deeaca")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 43.18 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "93e3b58b-8904-5791-bf84-297aab3de744")
+    (property "Reference" "R101"
+      (at 335.28 19.18 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "104 kOhm 0.1%"
+      (at 335.28 67.18 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 43.18 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 43.18 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "97ff7003-c80e-5dad-815d-c66927ab1989")
+    )
+    (pin "2"
+      (uuid "92269843-af2a-5c63-84c8-2c0caa2fc609")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/3f465c62-8877-5a4b-985e-ff3e5bad59e9"
+          (reference "R101")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 43.18)
+      (xy 316.23 43.18)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "348786ed-b396-51aa-8373-9c2319c4c2cb")
+  )
+  (global_label "UV_NODE"
+    (shape bidirectional)
+    (at 316.23 43.18 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "3d7aae8d-a70e-5777-9ed3-5b4de5d6e2a4")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 43.18 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 43.18)
+      (xy 354.33 43.18)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "cce48c48-9f72-5fcd-b2ee-feefe3eb4412")
+  )
+  (global_label "OV_NODE"
+    (shape bidirectional)
+    (at 354.33 43.18 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "3cc96b75-da20-531e-8a0f-c87fa68ad375")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 43.18 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 50.80 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "42e72a64-9683-58db-aa66-a89ccaf102a6")
+    (property "Reference" "R102"
+      (at 335.28 26.80 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "40.2 kOhm 0.1%"
+      (at 335.28 74.80 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 50.80 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 50.80 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "98fab371-8338-5727-861b-998b0420d736")
+    )
+    (pin "2"
+      (uuid "70abd851-41a3-52b9-afaa-8f9407f55cba")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/83697fdc-7871-5d85-b4f2-5f34cb14e3a8"
+          (reference "R102")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 50.80)
+      (xy 316.23 50.80)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "22162a16-a3c7-5050-8d46-8303f8b81641")
+  )
+  (global_label "OV_NODE"
+    (shape bidirectional)
+    (at 316.23 50.80 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "521efde2-161e-5dce-9283-dd739a663c40")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 50.80 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 50.80)
+      (xy 354.33 50.80)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "c3592ad4-617f-51c2-913c-c9f23ca28d4c")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 354.33 50.80 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "db0b42a2-d766-5797-bc8f-691bed2efd7a")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 50.80 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 58.42 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "6e261dfb-eed0-558b-8d23-1b9f2221c374")
+    (property "Reference" "R103"
+      (at 335.28 34.42 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "100 kOhm"
+      (at 335.28 82.42 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 58.42 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 58.42 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "2a9d996d-4de3-58f4-890f-96b2387ed14b")
+    )
+    (pin "2"
+      (uuid "251d0d9b-4b16-5246-9fd7-34735a2ab3ea")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/597e3403-43cc-5bf7-83fb-769c30f2bce4"
+          (reference "R103")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 58.42)
+      (xy 316.23 58.42)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "39d4b55f-466a-5110-8e5d-3a392964e813")
+  )
+  (global_label "SOLAR_FUSED"
+    (shape bidirectional)
+    (at 316.23 58.42 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "7b4b80f9-4b7e-5458-b3b5-14ecc203aea6")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 58.42 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 58.42)
+      (xy 354.33 58.42)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "b048aab8-ab24-5cfd-9b50-f3bf897fbe0b")
+  )
+  (global_label "LTC_SHDN"
+    (shape bidirectional)
+    (at 354.33 58.42 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "44e7126e-626d-5edf-a1b8-2918e69eb90b")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 58.42 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 66.04 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "37fd3497-c90c-5ecf-ab09-e52f80100d0c")
+    (property "Reference" "C200"
+      (at 335.28 42.04 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "10 uF 50 V"
+      (at 335.28 90.04 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 66.04 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 66.04 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "dadba09c-6cb5-5887-93e9-2f41295cb056")
+    )
+    (pin "2"
+      (uuid "63ba35d4-4e45-561b-900a-3b6b8c702d62")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/88ceabc6-0a9b-5ffb-b6ad-be19c5cddcb5"
+          (reference "C200")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 66.04)
+      (xy 316.23 66.04)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "cfacee72-bc22-5368-8b97-57d0a70960e2")
+  )
+  (global_label "BQ_VBUS"
+    (shape bidirectional)
+    (at 316.23 66.04 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "35ae5285-8a7a-5486-b29d-c386c9c2e184")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 66.04 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 66.04)
+      (xy 354.33 66.04)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "c8986b16-b9f7-50ec-8b6b-9b873091ead6")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 354.33 66.04 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "dc747528-983c-5879-85e6-0d19b968bfb4")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 66.04 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 73.66 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "45e3e207-a67c-50cc-86d0-5adaa29cd9fa")
+    (property "Reference" "C201"
+      (at 335.28 49.66 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "10 uF 50 V"
+      (at 335.28 97.66 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 73.66 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 73.66 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "56470472-37f0-5508-b07c-dd4ed938850a")
+    )
+    (pin "2"
+      (uuid "68dfcf1d-0d0a-57f9-93dd-1e8ef9fdfc68")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/3f7fdf1a-3393-506b-82ba-2bd1bc193f44"
+          (reference "C201")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 73.66)
+      (xy 316.23 73.66)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "667c9d40-e749-5469-8820-18ad72d94eb3")
+  )
+  (global_label "BQ_VBUS"
+    (shape bidirectional)
+    (at 316.23 73.66 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "c044c220-12a0-5347-a6bd-8ca6960c517a")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 73.66 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 73.66)
+      (xy 354.33 73.66)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "8154de35-de05-5fbb-bea7-a4da20ff7d9b")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 354.33 73.66 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "baefda71-bd17-56e2-a0cc-1c123eb6af1c")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 73.66 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 81.28 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "a82fecb6-7928-554e-a58c-4b581fe21043")
+    (property "Reference" "C202"
+      (at 335.28 57.28 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "10 uF 50 V"
+      (at 335.28 105.28 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 81.28 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 81.28 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "2e45b513-d9c9-55b1-91c0-3a0da7764da8")
+    )
+    (pin "2"
+      (uuid "ebbcb0ae-6810-58e0-afcd-7c40759154d7")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/bf403e62-da5b-50c5-b96e-83f7e773758b"
+          (reference "C202")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 81.28)
+      (xy 316.23 81.28)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "0a0e3fda-0bd0-5c46-9f9e-594d56718623")
+  )
+  (global_label "BQ_PMID"
+    (shape bidirectional)
+    (at 316.23 81.28 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "65d531ec-4bcd-59fb-87ef-a9aac6052c46")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 81.28 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 81.28)
+      (xy 354.33 81.28)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "f8d333c8-c876-503e-8366-022bb1f68329")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 354.33 81.28 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "35b7132b-3a04-563c-ba57-d2cd55bdd707")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 81.28 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 88.90 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "db082b82-7146-5246-978c-f5b70b41136f")
+    (property "Reference" "C203"
+      (at 335.28 64.90 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "10 uF 50 V"
+      (at 335.28 112.90 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 88.90 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 88.90 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "4e84aa18-617a-5162-a33d-f7d0561402fd")
+    )
+    (pin "2"
+      (uuid "4840d74f-f4cd-5342-aab9-e1976062f4c7")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/7e835296-5f19-5238-a340-9e81201b439e"
+          (reference "C203")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 88.90)
+      (xy 316.23 88.90)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "0b6b9ea2-5312-56df-94e9-857434c20811")
+  )
+  (global_label "BQ_PMID"
+    (shape bidirectional)
+    (at 316.23 88.90 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "37205b65-8edf-585f-b1cc-af11f08f5e12")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 88.90 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 88.90)
+      (xy 354.33 88.90)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "059c0255-9d12-5e72-8593-8e690e372316")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 354.33 88.90 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "ec755c9e-45cc-5de5-9b24-14264e5c95c6")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 88.90 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 96.52 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "8501891a-3bf4-5a1e-b581-c69e388763b5")
+    (property "Reference" "C204"
+      (at 335.28 72.52 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "10 uF 50 V"
+      (at 335.28 120.52 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 96.52 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 96.52 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "6c6c8209-2494-5f6b-ae4e-96ebccf72740")
+    )
+    (pin "2"
+      (uuid "3b16e74d-3f5d-5f34-a42f-2ad3c629aa23")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/3c568291-cea2-56d1-9bb1-9cbe3ba3c685"
+          (reference "C204")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 96.52)
+      (xy 316.23 96.52)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "2ea6d086-c6ff-5161-adc9-02fb09108ef8")
+  )
+  (global_label "BQ_PMID"
+    (shape bidirectional)
+    (at 316.23 96.52 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "2c4e80b4-8673-514f-91b9-192b8af95a85")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 96.52 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 96.52)
+      (xy 354.33 96.52)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "f324f2df-0746-563a-838e-3a60be4048c7")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 354.33 96.52 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "79c0f656-9e9b-5ccd-8058-101a239e2cb7")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 96.52 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 104.14 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "a3312a9e-df4b-5282-8242-b8c0079ea0c5")
+    (property "Reference" "C205"
+      (at 335.28 80.14 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "10 uF 50 V"
+      (at 335.28 128.14 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 104.14 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 104.14 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "a73b3f5c-3681-56cb-ae7d-899602aa9980")
+    )
+    (pin "2"
+      (uuid "78724eed-0a55-5bed-a877-57c23a5d5e2a")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/1d0a40ad-6c82-57f6-9a5b-73a9a5a2ccd3"
+          (reference "C205")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 104.14)
+      (xy 316.23 104.14)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "34042d27-c084-5dd8-ae72-7b659352b899")
+  )
+  (global_label "BQ_SYS"
+    (shape bidirectional)
+    (at 316.23 104.14 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "ddaddbf9-4bec-54b7-a01f-b3f514d5882f")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 104.14 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 104.14)
+      (xy 354.33 104.14)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "d6d7bb6e-ee43-5206-9a39-949bb28ce09a")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 354.33 104.14 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "fa0d3bba-2a3f-5d4a-8c0c-1ef108ed0cf9")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 104.14 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 111.76 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "484adb76-221e-538c-a7d0-46d81bf5f9ce")
+    (property "Reference" "C206"
+      (at 335.28 87.76 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "10 uF 50 V"
+      (at 335.28 135.76 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 111.76 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 111.76 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "d33723c6-8158-5c7d-9685-73dac7b7473f")
+    )
+    (pin "2"
+      (uuid "c417d285-a8f7-55c4-aba3-16d61c3b51f6")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/903401dd-3097-568e-9ce3-af8a800dd48e"
+          (reference "C206")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 111.76)
+      (xy 316.23 111.76)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "34872b98-efce-5e6b-b87a-d7738457b0cc")
+  )
+  (global_label "BQ_SYS"
+    (shape bidirectional)
+    (at 316.23 111.76 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "33fb97fe-f3e8-59bf-93f8-2b0f8a5a9e72")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 111.76 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 111.76)
+      (xy 354.33 111.76)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "304b7e0b-df9e-5f4d-9eb4-a5876276a40f")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 354.33 111.76 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "adba9af3-f3d0-59c8-b46e-26ba222735c9")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 111.76 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 119.38 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "e3544300-2e44-5832-9817-24f14425ad19")
+    (property "Reference" "C207"
+      (at 335.28 95.38 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "10 uF 50 V"
+      (at 335.28 143.38 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 119.38 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 119.38 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "0510bff7-23da-59a8-8ee8-05280e061aa3")
+    )
+    (pin "2"
+      (uuid "8c9eb818-10f4-5320-a003-543ae3dba07c")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/a3687406-14f7-5a6d-920d-18cc3013c57f"
+          (reference "C207")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 119.38)
+      (xy 316.23 119.38)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "897bdf09-c58d-56aa-b684-c72fcdcfcad5")
+  )
+  (global_label "BQ_SYS"
+    (shape bidirectional)
+    (at 316.23 119.38 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "b9331eb7-43e0-50fa-822d-f325599157f5")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 119.38 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 119.38)
+      (xy 354.33 119.38)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "51cf10f9-2818-59a4-80a8-d6e9fad79af0")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 354.33 119.38 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "42126835-decd-5f06-ad24-e09128e84c4b")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 119.38 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 127.00 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "f3c6ca85-5dd3-5918-ad49-cb715242bcf1")
+    (property "Reference" "C208"
+      (at 335.28 103.00 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "10 uF 50 V"
+      (at 335.28 151.00 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 127.00 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 127.00 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "bb219cc8-989e-56eb-b719-aecc9a832d10")
+    )
+    (pin "2"
+      (uuid "749577d9-96b8-553d-a67d-cd3fd789fddb")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/e6da0250-93ba-5b5e-8f62-10c9a08bfe83"
+          (reference "C208")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 127.00)
+      (xy 316.23 127.00)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "5ad4a87d-a1a7-5965-8a71-455950e787f1")
+  )
+  (global_label "BQ_SYS"
+    (shape bidirectional)
+    (at 316.23 127.00 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "b27ac4ce-5dcd-5a3a-a90b-1690582e04f5")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 127.00 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 127.00)
+      (xy 354.33 127.00)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "802b1dff-0ff4-5578-b7b2-ad4b7556dc6a")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 354.33 127.00 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "0761effd-9d1a-51ba-a1f5-43d7259300e1")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 127.00 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 134.62 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "457eaf6d-633c-5e82-b435-f62528c5c933")
+    (property "Reference" "C209"
+      (at 335.28 110.62 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "10 uF 50 V"
+      (at 335.28 158.62 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 134.62 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 134.62 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "1467137f-8517-5285-b100-7e8eff439790")
+    )
+    (pin "2"
+      (uuid "cd6e8bdd-d951-5686-9d25-fe6580d68000")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/619df5fd-4927-505e-8f04-55054d2ccf45"
+          (reference "C209")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 134.62)
+      (xy 316.23 134.62)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "c4ed5202-9987-551d-8f27-1fa14a85c3c3")
+  )
+  (global_label "BQ_SYS"
+    (shape bidirectional)
+    (at 316.23 134.62 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "511557ae-42cd-531e-ad40-b9283512c73f")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 134.62 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 134.62)
+      (xy 354.33 134.62)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "b4382adc-6b29-52a8-b9a3-b24fcd7d7eef")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 354.33 134.62 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "40731cc8-107c-52dc-af20-de000ba8084a")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 134.62 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 142.24 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "2f3ea2ca-87a2-56ad-a3f9-393fc26ad798")
+    (property "Reference" "C210"
+      (at 335.28 118.24 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "10 uF 50 V"
+      (at 335.28 166.24 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 142.24 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 142.24 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "66d4e9dd-9ccd-597f-96cf-e1db31ecd0f5")
+    )
+    (pin "2"
+      (uuid "1e657b66-dbc4-595c-ae53-86d60eb9b7c0")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/2a7af619-32e6-53f1-8651-f1d61b9166fa"
+          (reference "C210")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 142.24)
+      (xy 316.23 142.24)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "5b5c9a43-4a53-5df6-9a06-1c52fa5fb2a1")
+  )
+  (global_label "BAT_RAW"
+    (shape bidirectional)
+    (at 316.23 142.24 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "11c81db8-6fa2-5b16-aff1-2392ae36218f")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 142.24 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 142.24)
+      (xy 354.33 142.24)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "028964f8-fbc5-5e0e-8eef-f15342755d66")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 354.33 142.24 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "0a0eea18-29df-5414-98fb-5721a558273b")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 142.24 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 149.86 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "f53301cf-d0cb-5881-a998-4e945a31d66d")
+    (property "Reference" "C211"
+      (at 335.28 125.86 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "10 uF 50 V"
+      (at 335.28 173.86 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 149.86 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 149.86 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "62283e62-9e88-5381-a420-e612530e960c")
+    )
+    (pin "2"
+      (uuid "d555560e-861f-5736-b47c-59c12311a781")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/6fcb571d-fb06-5471-a2f0-e8174fd8af1a"
+          (reference "C211")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 149.86)
+      (xy 316.23 149.86)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "0e9e4fbf-8e37-52ff-9a76-765097d4fe7b")
+  )
+  (global_label "BAT_RAW"
+    (shape bidirectional)
+    (at 316.23 149.86 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "27a6df8a-842a-5649-81c8-999b99fc9465")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 149.86 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 149.86)
+      (xy 354.33 149.86)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "789cc4ef-7c2a-5b3b-bcaa-88c694c67b7e")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 354.33 149.86 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "2a76c3b1-bdb0-539a-9d59-5af71ae32ab4")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 149.86 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 157.48 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "f4d50144-f70e-56a4-af9f-a8ea08679811")
+    (property "Reference" "C212"
+      (at 335.28 133.48 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "100 nF 50 V"
+      (at 335.28 181.48 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 157.48 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 157.48 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "566e0268-be96-56d4-bd92-b12f8057138d")
+    )
+    (pin "2"
+      (uuid "4b67ad8f-18aa-584d-ad1f-1622e7c8612c")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/c61dc734-948d-593a-8ce6-9249cc2f7922"
+          (reference "C212")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 157.48)
+      (xy 316.23 157.48)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "d3c7c747-38e1-597e-a29d-e92b8ffabc4f")
+  )
+  (global_label "BQ_VBUS"
+    (shape bidirectional)
+    (at 316.23 157.48 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "db5a5176-f8c4-5947-8c50-920bf7a467a2")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 157.48 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 157.48)
+      (xy 354.33 157.48)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "ecb07bcf-b69f-5d06-ac13-a2df0a20202e")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 354.33 157.48 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "5716a479-a5e1-508b-bcf3-9bf7b9d4a62b")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 157.48 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 165.10 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "60395c5a-fc85-530f-aae4-df5f95727c63")
+    (property "Reference" "C213"
+      (at 335.28 141.10 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "100 nF 50 V"
+      (at 335.28 189.10 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 165.10 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 165.10 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "6a7fa551-ca64-572a-835b-331024fd9c80")
+    )
+    (pin "2"
+      (uuid "190c1b87-466c-5dba-8239-352875515d85")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/a087755f-ff06-563e-b2de-cdeabb73b1f4"
+          (reference "C213")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 165.10)
+      (xy 316.23 165.10)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "faa39697-e9cf-5080-93c9-40beaa875de0")
+  )
+  (global_label "BQ_PMID"
+    (shape bidirectional)
+    (at 316.23 165.10 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "21523e26-8f26-55dc-a352-075a34c6b4e8")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 165.10 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 165.10)
+      (xy 354.33 165.10)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "2e084013-760a-521e-b53f-d912223cb4a2")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 354.33 165.10 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "3fded688-4932-551f-832e-4569eb721b86")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 165.10 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 172.72 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "d4d2b36f-0f65-5f7b-addd-f1d66ca56c80")
+    (property "Reference" "C214"
+      (at 335.28 148.72 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "100 nF 50 V"
+      (at 335.28 196.72 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 172.72 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 172.72 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "518f5bea-26f9-5331-820c-8d81c7c5888b")
+    )
+    (pin "2"
+      (uuid "dec47eea-f5db-55e0-8ab9-79dfc8d78096")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/6f5eb563-a3f0-5081-be23-fa707a525cb6"
+          (reference "C214")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 172.72)
+      (xy 316.23 172.72)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "8074f23c-7a06-553d-a9d5-140992128299")
+  )
+  (global_label "BQ_SYS"
+    (shape bidirectional)
+    (at 316.23 172.72 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "24063d7f-25bd-5d5e-b058-1e7ccfbbd9de")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 172.72 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 172.72)
+      (xy 354.33 172.72)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "d399b7b4-2c9d-5348-93e1-5ec335c20bb8")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 354.33 172.72 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "3801f5ce-86e5-5c4b-8d03-0d8c8063d96a")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 172.72 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 180.34 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "139a6854-536f-5d30-856f-6ee9b0bdbd2c")
+    (property "Reference" "C215"
+      (at 335.28 156.34 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "4.7 uF 25 V"
+      (at 335.28 204.34 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 180.34 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 180.34 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "2439f105-3fe5-53aa-8621-2b466482e408")
+    )
+    (pin "2"
+      (uuid "d836a177-59fc-5437-9a61-12a73ca3f3b1")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/9de7c124-4fd3-5382-ab03-70049f54a9f7"
+          (reference "C215")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 180.34)
+      (xy 316.23 180.34)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "c0fb3e4d-3272-5d71-b538-98e8fe7f947b")
+  )
+  (global_label "BQ_REGN"
+    (shape bidirectional)
+    (at 316.23 180.34 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "7d01030f-e2a3-5c19-a766-38ea92950b30")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 180.34 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 180.34)
+      (xy 354.33 180.34)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "6ccaf970-5617-5f8e-bde9-0311cbefeb6a")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 354.33 180.34 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "61e4ea14-2ea4-5b90-8b4e-22e7af713251")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 180.34 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 187.96 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "5370e221-41f3-5873-a08e-8d6adeff88cf")
+    (property "Reference" "C216"
+      (at 335.28 163.96 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "47 nF 50 V"
+      (at 335.28 211.96 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 187.96 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 187.96 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "f9200509-5e0c-5a98-adcd-6c230ba7ecf7")
+    )
+    (pin "2"
+      (uuid "cc30eb2e-6ec4-55c4-9cb0-7b075c8e69b8")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/00a02c46-cb46-50d4-9535-412e9a6a3ed4"
+          (reference "C216")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 187.96)
+      (xy 316.23 187.96)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "2e6a41ee-1936-51b4-a275-e98144c78a91")
+  )
+  (global_label "BQ_BTST1"
+    (shape bidirectional)
+    (at 316.23 187.96 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "57524dfe-bbac-5fec-a251-f795d3f9e1d6")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 187.96 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 187.96)
+      (xy 354.33 187.96)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "d8fcdf18-eba6-5109-bcfa-f373c22c2f58")
+  )
+  (global_label "BQ_SW1"
+    (shape bidirectional)
+    (at 354.33 187.96 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "61fc37b9-ea40-5702-b21a-6e0c5681a55a")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 187.96 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 335.28 195.58 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "9dde812c-4e5d-5872-bcd9-595e78aab776")
+    (property "Reference" "C217"
+      (at 335.28 171.58 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "47 nF 50 V"
+      (at 335.28 219.58 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 335.28 195.58 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 335.28 195.58 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "67582463-cf4d-537f-991a-6146153f15f2")
+    )
+    (pin "2"
+      (uuid "fcaf095e-8430-5fe8-8faf-c4a84a237ae2")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/b4fc42de-0ef6-5c59-955a-8f095b88354e"
+          (reference "C217")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 323.85 195.58)
+      (xy 316.23 195.58)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "71169279-d6ab-505b-806d-72992ae886c0")
+  )
+  (global_label "BQ_BTST2"
+    (shape bidirectional)
+    (at 316.23 195.58 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "771a5a0b-23f9-5a21-9a0e-e98d76034441")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 316.23 195.58 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 346.71 195.58)
+      (xy 354.33 195.58)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "7dfaafcb-366b-59cc-b8c4-eb2e1168fdc1")
+  )
+  (global_label "BQ_SW2"
+    (shape bidirectional)
+    (at 354.33 195.58 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "b9a237c3-0554-57f1-a89e-4dc09bdb8523")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 354.33 195.58 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 35.56 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "83f6c78f-2e3b-57c3-8550-aca7a0b2821b")
+    (property "Reference" "C218"
+      (at 386.08 11.56 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "1 nF 50 V"
+      (at 386.08 59.56 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "1a1f0c00-df41-534e-a181-a22002f1c437")
+    )
+    (pin "2"
+      (uuid "5999fe1c-8e59-5e57-b3e7-0c1a62885bb2")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/5baa4ff1-6ec6-5182-b733-bd2d9b01f35c"
+          (reference "C218")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 35.56)
+      (xy 367.03 35.56)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "f1c24de2-ac22-5681-b2ec-28dec3059a9f")
+  )
+  (global_label "BQ_SDRV"
+    (shape bidirectional)
+    (at 367.03 35.56 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "bb470927-3749-5b2d-9906-5e8d23d49a84")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 35.56 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 35.56)
+      (xy 405.13 35.56)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "4bb1f260-75ae-5b49-99e5-d0c29f82bc99")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 405.13 35.56 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "300a03c0-99b6-560f-8e2a-1622344786e2")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 43.18 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "52d8ca9f-2668-5bad-8c59-d6df7a8c3c2c")
+    (property "Reference" "R200"
+      (at 386.08 19.18 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "5.23 kOhm 1%"
+      (at 386.08 67.18 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 43.18 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 43.18 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "ec29a3af-15bb-5b50-b498-923d9fe6c85c")
+    )
+    (pin "2"
+      (uuid "94f24412-c4ef-58f6-a8ee-c0a075fe668f")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/e8f0b1e3-5290-59a6-b11a-63f48d5d7cf0"
+          (reference "R200")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 43.18)
+      (xy 367.03 43.18)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "5dee2283-3779-5caf-8019-b250aa2bb816")
+  )
+  (global_label "BQ_REGN"
+    (shape bidirectional)
+    (at 367.03 43.18 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "bc93fad1-95d2-5b3d-8d5d-700a87ece5f1")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 43.18 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 43.18)
+      (xy 405.13 43.18)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "692407d2-d9f7-58c5-b92b-be30e3a280b6")
+  )
+  (global_label "BQ_TS"
+    (shape bidirectional)
+    (at 405.13 43.18 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "faadd57d-b1fd-56f3-9f29-c99de5acbe4a")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 43.18 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 50.80 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "b9e94df4-a32b-555a-97c3-4ca544a90773")
+    (property "Reference" "R201"
+      (at 386.08 26.80 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "30.1 kOhm 1%"
+      (at 386.08 74.80 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 50.80 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 50.80 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "57a03653-ae13-5901-884e-e1acef3494b6")
+    )
+    (pin "2"
+      (uuid "38be08ff-83e9-5919-8827-5e5276d0943d")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/150cd58b-c581-5c0e-baf9-6194eb0ef6f1"
+          (reference "R201")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 50.80)
+      (xy 367.03 50.80)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "1d0b1e18-537e-5d78-8ef2-2551003400e8")
+  )
+  (global_label "BQ_TS"
+    (shape bidirectional)
+    (at 367.03 50.80 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "78fe022b-e815-5f48-8010-8273294d9eb7")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 50.80 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 50.80)
+      (xy 405.13 50.80)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "a533e32b-8971-56dc-885c-c5aea12f952a")
+  )
+  (global_label "NTC_SENSE"
+    (shape bidirectional)
+    (at 405.13 50.80 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "0c8375be-a112-5674-9531-16a555adca83")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 50.80 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 58.42 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "8b52d5d3-acfd-5867-957b-94a926db7e4c")
+    (property "Reference" "R202"
+      (at 386.08 34.42 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "100 Ohm"
+      (at 386.08 82.42 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 58.42 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 58.42 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "06be7c6b-4136-5ca4-87cc-8df378d0f85a")
+    )
+    (pin "2"
+      (uuid "9e5f2ad2-ac36-5f1f-bfb9-5309ca063a36")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/c762c0c4-72dd-5cf2-b6d2-73c6aa71a8cc"
+          (reference "R202")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 58.42)
+      (xy 367.03 58.42)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "d8d87cd7-cd70-52f6-b1ac-84dfeded7596")
+  )
+  (global_label "BAT_RAW"
+    (shape bidirectional)
+    (at 367.03 58.42 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "e6b7dfed-73cb-5242-84c8-0e1b0f91c3b8")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 58.42 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 58.42)
+      (xy 405.13 58.42)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "75c644ee-f673-5a4d-b9ca-71e5508d4fda")
+  )
+  (global_label "BATP_KELVIN"
+    (shape bidirectional)
+    (at 405.13 58.42 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "154488f6-98e5-5e4c-9444-11f82e413b77")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 58.42 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 66.04 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "df66e409-546f-518a-8c19-4be3c2f265e3")
+    (property "Reference" "R203"
+      (at 386.08 42.04 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "4.70 kOhm 1%"
+      (at 386.08 90.04 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 66.04 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 66.04 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "4a716b69-76bc-5214-827a-4619e5e1a164")
+    )
+    (pin "2"
+      (uuid "49f02865-d838-5939-ad0c-95950e97a40b")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/7dda19a2-d73f-5d93-8785-5f482de9ec68"
+          (reference "R203")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 66.04)
+      (xy 367.03 66.04)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "5d71d80e-cc66-516c-abd6-dc5357577b79")
+  )
+  (global_label "BQ_PROG"
+    (shape bidirectional)
+    (at 367.03 66.04 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "a5197a48-f3ed-5001-9322-025193d2eb22")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 66.04 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 66.04)
+      (xy 405.13 66.04)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "3170d3be-4a05-57c5-b69c-5d84a3737ebc")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 405.13 66.04 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "3e8fb19b-5811-58f7-99eb-9137a4d65f0c")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 66.04 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 73.66 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "6ad93171-7f8d-517a-938a-43c19107685f")
+    (property "Reference" "R204"
+      (at 386.08 49.66 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "10 kOhm"
+      (at 386.08 97.66 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 73.66 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 73.66 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "a8a75359-8567-50fe-8173-37cb7abbb890")
+    )
+    (pin "2"
+      (uuid "a5b31aca-9bdc-5e3e-9274-5dc3914d215e")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/621f27e5-1af7-522c-aed8-7875bda2f63a"
+          (reference "R204")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 73.66)
+      (xy 367.03 73.66)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "d5d5442a-bcd9-5647-8610-e679cce7d782")
+  )
+  (global_label "3V3"
+    (shape bidirectional)
+    (at 367.03 73.66 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "2bdacb53-5abe-5111-88db-671f9f83d319")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 73.66 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 73.66)
+      (xy 405.13 73.66)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "dcf42454-4c7c-5dff-bef8-25e6869200d3")
+  )
+  (global_label "BQ_INT"
+    (shape bidirectional)
+    (at 405.13 73.66 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "a05673f0-17c6-50f4-b45a-33bd3d2acf4e")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 73.66 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 81.28 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "165feb9f-52cf-5673-84b1-ea6409c0064e")
+    (property "Reference" "R205"
+      (at 386.08 57.28 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "10 kOhm"
+      (at 386.08 105.28 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 81.28 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 81.28 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "c5bc4604-a5bd-5d36-9434-8078e2897bd3")
+    )
+    (pin "2"
+      (uuid "8aad7cad-464c-5b2e-866f-1d3b84e29bdc")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/24c42d70-58a9-5444-b952-ff60db8530b0"
+          (reference "R205")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 81.28)
+      (xy 367.03 81.28)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "b6ed2a50-5b55-5384-9a12-541c463a0f60")
+  )
+  (global_label "3V3"
+    (shape bidirectional)
+    (at 367.03 81.28 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "9b8f3127-a7e8-504c-a279-a1d9117c2e02")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 81.28 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 81.28)
+      (xy 405.13 81.28)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "b33f5336-db27-5abc-ba86-25332f5fbe0b")
+  )
+  (global_label "I2C_SDA"
+    (shape bidirectional)
+    (at 405.13 81.28 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "164e1915-9dc7-5bf7-9def-b50884ea08c6")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 81.28 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 88.90 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "a3d210d7-534d-5dcc-a73b-2f3b4775861e")
+    (property "Reference" "R206"
+      (at 386.08 64.90 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "10 kOhm"
+      (at 386.08 112.90 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 88.90 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 88.90 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "80ab2751-6225-58c3-9ff8-79ca54208047")
+    )
+    (pin "2"
+      (uuid "a1bcc34a-fa65-5742-bf69-559b262a92ca")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/0844d21d-1dff-5ffc-b27c-15e7d21ce162"
+          (reference "R206")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 88.90)
+      (xy 367.03 88.90)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "d599dd3e-8679-5f69-98bb-1086061287a9")
+  )
+  (global_label "3V3"
+    (shape bidirectional)
+    (at 367.03 88.90 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "35a8bdd5-039f-57f6-8175-e4971a3299cb")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 88.90 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 88.90)
+      (xy 405.13 88.90)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "55f0429a-1a5d-599a-b5bd-fe02f569ea22")
+  )
+  (global_label "I2C_SCL"
+    (shape bidirectional)
+    (at 405.13 88.90 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "43a9dd5c-ad0f-5c81-ad54-073deee50628")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 88.90 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 96.52 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "323d65f8-c739-5343-b37f-d0c9060e6459")
+    (property "Reference" "D1"
+      (at 386.08 72.52 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "Red 0603 LED"
+      (at 386.08 120.52 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 96.52 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 96.52 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "4f2b9348-9f83-5bfc-bb8e-1d22e21b8528")
+    )
+    (pin "2"
+      (uuid "65144368-1e28-5bee-896b-46d2f00b48f7")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/7d673d7e-7809-5920-8e50-5f5b2ce4fd16"
+          (reference "D1")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 96.52)
+      (xy 367.03 96.52)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "e81ecd1f-e0bf-5b67-8544-88736dfcf68c")
+  )
+  (global_label "3V3"
+    (shape bidirectional)
+    (at 367.03 96.52 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "873c685f-3a8c-5416-aa46-0eef7e07255a")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 96.52 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 96.52)
+      (xy 405.13 96.52)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "1fe807d2-75be-5415-89bd-1c9722b8bbc6")
+  )
+  (global_label "CHG_LED_K"
+    (shape bidirectional)
+    (at 405.13 96.52 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "79ade69f-966a-5ff1-b214-322e1a65effd")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 96.52 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 104.14 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "00f5aa22-0178-506a-be43-be61e2bd50f1")
+    (property "Reference" "R207"
+      (at 386.08 80.14 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "2.2 kOhm 1%"
+      (at 386.08 128.14 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 104.14 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 104.14 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "1f0ff19d-7786-56ac-930f-c4432d270675")
+    )
+    (pin "2"
+      (uuid "40e4fa5d-8c16-5396-82f2-a0f55da25dae")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/73de8993-f29a-54b8-b044-a00958fbf3b4"
+          (reference "R207")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 104.14)
+      (xy 367.03 104.14)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "26b66c2d-a26f-56de-a793-89f974bc5896")
+  )
+  (global_label "CHG_LED_K"
+    (shape bidirectional)
+    (at 367.03 104.14 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "99f0a485-fb21-5045-bc6f-209aeaaef1f9")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 104.14 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 104.14)
+      (xy 405.13 104.14)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "f3dfbe19-01ba-5de0-b1fb-373f94c4da07")
+  )
+  (global_label "BQ_STAT"
+    (shape bidirectional)
+    (at 405.13 104.14 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "216ec21a-e89f-50ab-819d-2b9f09081843")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 104.14 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 111.76 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "aa06e612-7c48-5587-8e7d-ba6ce3295877")
+    (property "Reference" "C400"
+      (at 386.08 87.76 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "22 uF 16 V"
+      (at 386.08 135.76 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 111.76 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 111.76 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "433a30bd-f478-5bac-9620-9a6abf531eaa")
+    )
+    (pin "2"
+      (uuid "d95ec41c-2777-5abb-a232-080eee1531a1")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/ac0fddbc-d0af-59f5-b966-c9d3a2f492ad"
+          (reference "C400")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 111.76)
+      (xy 367.03 111.76)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "7781502b-b458-5f34-a0a6-4df6dd2269df")
+  )
+  (global_label "BQ_SYS"
+    (shape bidirectional)
+    (at 367.03 111.76 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "738e6a43-fcbc-5a63-bf30-21c2b393f2d6")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 111.76 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 111.76)
+      (xy 405.13 111.76)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "44ed22f7-3585-5658-aa1c-7de6da0d95a1")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 405.13 111.76 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "c6453e25-f1ef-5a59-ad87-af1d9695f149")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 111.76 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 119.38 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "26918f04-4548-554f-b2de-6622add14dd2")
+    (property "Reference" "C401"
+      (at 386.08 95.38 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "22 uF 16 V"
+      (at 386.08 143.38 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 119.38 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 119.38 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "db90d9d8-cfea-5a75-8618-cd286930ff8d")
+    )
+    (pin "2"
+      (uuid "e2404f2a-621d-5864-80fc-e0c647189b6e")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/c174864c-5eb0-52f2-b250-763b90f0959a"
+          (reference "C401")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 119.38)
+      (xy 367.03 119.38)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "301278a7-281c-5dfd-85d0-6c5bdd077e98")
+  )
+  (global_label "BQ_SYS"
+    (shape bidirectional)
+    (at 367.03 119.38 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "6352afa1-d3d7-5d1f-b9db-11fd5abc259c")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 119.38 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 119.38)
+      (xy 405.13 119.38)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "55e56a62-8797-5c46-86c7-8c06a9908486")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 405.13 119.38 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "0293ade3-152a-518a-9425-b99ee90cd951")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 119.38 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 127.00 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "73509e10-8c6c-5216-b86e-d6d5bdaf6854")
+    (property "Reference" "C402"
+      (at 386.08 103.00 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "47 uF 10 V"
+      (at 386.08 151.00 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 127.00 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 127.00 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "3d055a8b-28d7-5a26-ac84-585beb71657b")
+    )
+    (pin "2"
+      (uuid "7a7e57d2-719f-574d-be57-3dbd626ca2da")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/cb8fc934-137c-5d51-a716-85d7bb96d3d8"
+          (reference "C402")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 127.00)
+      (xy 367.03 127.00)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "d63dad7f-ab3e-5bff-81a3-6eb982ce6a40")
+  )
+  (global_label "5V_RADIO"
+    (shape bidirectional)
+    (at 367.03 127.00 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "4e3a3ac6-920b-5c99-aba2-5ed0d422fdc1")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 127.00 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 127.00)
+      (xy 405.13 127.00)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "52c2b1d7-9f44-5c9e-80f4-e80a922dea64")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 405.13 127.00 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "27f46783-ff10-593d-a679-4ee87c1de0b0")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 127.00 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 134.62 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "b2b4c487-b985-5034-9bb9-db76b68c78a1")
+    (property "Reference" "C403"
+      (at 386.08 110.62 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "47 uF 10 V"
+      (at 386.08 158.62 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 134.62 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 134.62 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "af34b8fe-db41-548d-81fb-10dcd5c7bd4b")
+    )
+    (pin "2"
+      (uuid "f55db0ae-c85a-5d97-adc6-06b7f9fa1bd4")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/570af1d8-9e61-5dc6-bae0-4ee84c726f13"
+          (reference "C403")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 134.62)
+      (xy 367.03 134.62)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "842d1ebf-fb4c-53dc-9231-fe31b3fd537e")
+  )
+  (global_label "5V_RADIO"
+    (shape bidirectional)
+    (at 367.03 134.62 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "578e9ab1-2910-5d68-894c-48efc3c05d90")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 134.62 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 134.62)
+      (xy 405.13 134.62)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "44127590-62fc-5139-a178-95f9504257b5")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 405.13 134.62 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "9b2d99e2-6672-5794-b780-56f063677eab")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 134.62 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 142.24 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "891ed08a-d76f-5522-8096-1808811f18b9")
+    (property "Reference" "C404"
+      (at 386.08 118.24 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "100 nF 50 V"
+      (at 386.08 166.24 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 142.24 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 142.24 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "5bf17129-65df-5c2f-8deb-85f239c508a0")
+    )
+    (pin "2"
+      (uuid "5dee6ebc-99e5-51f1-b42b-9c6dfc978f78")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/2cd671a3-3e00-5b67-a02e-81baf0614ac4"
+          (reference "C404")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 142.24)
+      (xy 367.03 142.24)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "019b21d8-903a-5043-8173-7b5f7d240ad3")
+  )
+  (global_label "BQ_SYS"
+    (shape bidirectional)
+    (at 367.03 142.24 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "c16c150a-9321-56f7-8c73-a0ef1d0be539")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 142.24 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 142.24)
+      (xy 405.13 142.24)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "e643c554-5630-57e6-ab28-55e7c12bd99a")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 405.13 142.24 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "a91c7aea-b891-562e-97a6-14e5918d7a6d")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 142.24 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 149.86 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "aca530b2-d5ae-526a-bc49-1ece025b1f47")
+    (property "Reference" "C405"
+      (at 386.08 125.86 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "2.2 uF"
+      (at 386.08 173.86 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 149.86 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 149.86 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "1cb2ac78-0a76-56cf-8de3-cd3f845f8c90")
+    )
+    (pin "2"
+      (uuid "21739ae1-d730-5fcf-a307-6e30af55f54e")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/dd64629c-dcb4-5b33-a396-aab78fc724e5"
+          (reference "C405")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 149.86)
+      (xy 367.03 149.86)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "c7819beb-9320-5d8a-8b05-f912b4a5fe16")
+  )
+  (global_label "BOOST_VCC"
+    (shape bidirectional)
+    (at 367.03 149.86 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "06dd6b4a-1930-5d91-b666-50b529cff218")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 149.86 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 149.86)
+      (xy 405.13 149.86)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "9add91c2-5054-51f7-b9ca-106843f2d025")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 405.13 149.86 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "8de26241-3155-5ea5-8437-983e95eacdce")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 149.86 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 157.48 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "85813075-462d-590f-b77c-73937104c657")
+    (property "Reference" "C406"
+      (at 386.08 133.48 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "100 nF"
+      (at 386.08 181.48 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 157.48 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 157.48 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "4bc6147f-164c-50d4-aabc-6bb23f9a678b")
+    )
+    (pin "2"
+      (uuid "28d1d1d2-92e9-5c74-a44f-397c057ac040")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/1016f0d9-4738-5b76-8da7-41951d69fd73"
+          (reference "C406")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 157.48)
+      (xy 367.03 157.48)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "177a4e42-81ee-5569-8e7e-214fc042135a")
+  )
+  (global_label "BOOST_BOOT"
+    (shape bidirectional)
+    (at 367.03 157.48 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "8da13e51-af69-57a2-9506-f69d7de3d2c5")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 157.48 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 157.48)
+      (xy 405.13 157.48)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "43d48460-e917-58cf-8050-fd14fe604be3")
+  )
+  (global_label "BOOST_SW"
+    (shape bidirectional)
+    (at 405.13 157.48 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "65ee8c03-8301-5994-b05f-fdf54009414a")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 157.48 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 165.10 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "7b6d46bd-e59f-5971-af68-4f0719b9f2f8")
+    (property "Reference" "C407"
+      (at 386.08 141.10 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "47 nF"
+      (at 386.08 189.10 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 165.10 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 165.10 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "733aa66f-2b8f-5643-8f1c-ecadb0e79e24")
+    )
+    (pin "2"
+      (uuid "8dae0167-71a3-57e8-aca4-26ad84145f80")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/c39b05a3-ae25-5f71-8e83-0ca6425118ea"
+          (reference "C407")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 165.10)
+      (xy 367.03 165.10)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "941eb37e-f03b-5557-b5a7-4f2d60b6fdc6")
+  )
+  (global_label "BOOST_SS"
+    (shape bidirectional)
+    (at 367.03 165.10 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "a3392a89-924c-59fd-8310-a091de51a7cf")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 165.10 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 165.10)
+      (xy 405.13 165.10)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "7736f540-6955-5f39-9564-e3cb7a09f1b3")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 405.13 165.10 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "0ba8917d-4900-51be-8162-a6c6e7f9540a")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 165.10 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 172.72 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "3ba621c7-49ed-5c26-9008-66a5b8e2af9d")
+    (property "Reference" "C408"
+      (at 386.08 148.72 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "4.7 nF"
+      (at 386.08 196.72 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 172.72 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 172.72 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "9e030bb6-306d-56bb-9572-69bd1f7585ad")
+    )
+    (pin "2"
+      (uuid "5ddf4cdd-7219-5e73-bcd7-a6f1c3dc1cd2")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/f71ab780-6048-5b5f-807c-8d0943895eab"
+          (reference "C408")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 172.72)
+      (xy 367.03 172.72)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "ce7c0ae0-737b-5f9a-b5f5-ebc3c72e055e")
+  )
+  (global_label "BOOST_COMP_RC"
+    (shape bidirectional)
+    (at 367.03 172.72 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "8a6acf49-b03c-5b3a-95d8-e64c91d2e5ce")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 172.72 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 172.72)
+      (xy 405.13 172.72)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "a6237c29-ed8d-557c-806c-08fec368c151")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 405.13 172.72 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "3fb0edd7-77f7-5672-bc24-9e9648272e6a")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 172.72 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 180.34 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "0431c7e0-e4c5-503d-92af-4ce3fbc933e6")
+    (property "Reference" "R400"
+      (at 386.08 156.34 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "176 kOhm 0.1%"
+      (at 386.08 204.34 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 180.34 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 180.34 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "0563221e-9387-5d7a-a118-099c445d4d06")
+    )
+    (pin "2"
+      (uuid "791f5a43-9702-581d-b0ab-ceaf5fec1e35")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/1e60b87e-336d-5f04-a2aa-b87dc31e83fa"
+          (reference "R400")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 180.34)
+      (xy 367.03 180.34)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "50d798d5-7ef8-59ed-a680-1e2ad76f20ef")
+  )
+  (global_label "5V_RADIO"
+    (shape bidirectional)
+    (at 367.03 180.34 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "8b29c37c-e7dc-5300-a33a-01a1946daf26")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 180.34 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 180.34)
+      (xy 405.13 180.34)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "e9358866-432b-5c6f-9e98-c4f93c890d8e")
+  )
+  (global_label "BOOST_FB"
+    (shape bidirectional)
+    (at 405.13 180.34 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "0583ddb1-ad65-5540-8e00-a072e3626bf6")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 180.34 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 187.96 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "3ab0b73b-5cc9-58ef-a4c0-306c8dd82f6a")
+    (property "Reference" "R401"
+      (at 386.08 163.96 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "56.0 kOhm 0.1%"
+      (at 386.08 211.96 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 187.96 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 187.96 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "78a5c099-740b-545a-ae2c-365a87a4a8e0")
+    )
+    (pin "2"
+      (uuid "2996a5ec-ec22-5fae-a6d5-568e64e3c95e")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/a52a5d08-fe08-58f4-87e8-070d6e52b2a5"
+          (reference "R401")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 187.96)
+      (xy 367.03 187.96)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "50c11a6f-3348-56fa-ad5f-05eb441bfd41")
+  )
+  (global_label "BOOST_FB"
+    (shape bidirectional)
+    (at 367.03 187.96 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "3f4bde7c-ed35-5890-b900-faa58b991d48")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 187.96 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 187.96)
+      (xy 405.13 187.96)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "7f5bcd2e-2027-591d-b2ee-ea3d8d298a2f")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 405.13 187.96 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "d739041b-35b9-514e-9751-8309876f5f52")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 187.96 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 386.08 195.58 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "703e405c-2b12-5f09-8af6-a0b8c7d80187")
+    (property "Reference" "R402"
+      (at 386.08 171.58 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "330 kOhm"
+      (at 386.08 219.58 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 386.08 195.58 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 386.08 195.58 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "af6a7f9b-1c8f-5b2b-a06c-a86a7c778e9f")
+    )
+    (pin "2"
+      (uuid "e902c279-25f7-5160-b963-b49f4da7dc37")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/f878c97e-623d-51f9-80a7-fe2245bcf2db"
+          (reference "R402")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 374.65 195.58)
+      (xy 367.03 195.58)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "adbe8ac0-3f99-5ac9-8f3a-8adae0ac8b7c")
+  )
+  (global_label "BOOST_FSW"
+    (shape bidirectional)
+    (at 367.03 195.58 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "aa026f95-df9a-5b0c-851b-d00cec69700c")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 367.03 195.58 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 397.51 195.58)
+      (xy 405.13 195.58)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "c6da7cf3-4e0f-58fb-b021-a8c9d6050cb3")
+  )
+  (global_label "BOOST_SW"
+    (shape bidirectional)
+    (at 405.13 195.58 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "b3ad75ac-5470-5953-8369-24e5267e06cd")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 405.13 195.58 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 436.88 35.56 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "ece5031e-805f-5e60-9e51-a823ca8bd1af")
+    (property "Reference" "R403"
+      (at 436.88 11.56 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "100 kOhm"
+      (at 436.88 59.56 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 436.88 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 436.88 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "dc8f3f00-5985-569b-a8ab-f91a4168c2a3")
+    )
+    (pin "2"
+      (uuid "5f352157-8a9a-5d69-8428-bdf9da356c7f")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/416c7d63-f6f5-53e5-a774-ac1e80f84228"
+          (reference "R403")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 425.45 35.56)
+      (xy 417.83 35.56)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "7d5299b9-dc03-596d-8417-2fd38285ae6f")
+  )
+  (global_label "BOOST_ILIM"
+    (shape bidirectional)
+    (at 417.83 35.56 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "f9aa6553-4af9-54a2-aa79-98cb4c30c22a")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 417.83 35.56 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 448.31 35.56)
+      (xy 455.93 35.56)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "89ed466e-f8ec-51a4-abf0-a8a7e6fcf4ca")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 455.93 35.56 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "eb5ccb6b-9650-5118-a954-06050646e991")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 455.93 35.56 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 436.88 43.18 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "a3e3d4dd-9bf8-5ad0-9018-a48ecca15ebc")
+    (property "Reference" "R404"
+      (at 436.88 19.18 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "20.0 kOhm"
+      (at 436.88 67.18 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 436.88 43.18 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 436.88 43.18 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "f75d3c26-fbd3-5ce1-b9d1-be401f474b6d")
+    )
+    (pin "2"
+      (uuid "8350c11c-4be0-5692-92ef-44d1164fc1ba")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/f06b554b-ea32-564c-8277-549fc5282b77"
+          (reference "R404")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 425.45 43.18)
+      (xy 417.83 43.18)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "9350c738-be92-5f05-a713-302f05a199df")
+  )
+  (global_label "BOOST_COMP"
+    (shape bidirectional)
+    (at 417.83 43.18 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "a4b0a45a-1492-5178-81b0-dc5c27be8fac")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 417.83 43.18 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 448.31 43.18)
+      (xy 455.93 43.18)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "fa64c0e4-f4c7-569e-bc32-6efecb90b80b")
+  )
+  (global_label "BOOST_COMP_RC"
+    (shape bidirectional)
+    (at 455.93 43.18 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "6fab4063-8c92-5e5f-aee0-d75ab00260da")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 455.93 43.18 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 436.88 50.80 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "754d98f6-06a1-5480-82a1-83fd69f8aafc")
+    (property "Reference" "R405"
+      (at 436.88 26.80 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "100 kOhm"
+      (at 436.88 74.80 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 436.88 50.80 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 436.88 50.80 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "2789110c-22f9-5645-b912-49edf0a78d20")
+    )
+    (pin "2"
+      (uuid "6816d002-a90f-5f4d-adad-7547f6fd549f")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/9ed37155-2920-5592-b74e-4e2256be9dd9"
+          (reference "R405")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 425.45 50.80)
+      (xy 417.83 50.80)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "39b97882-d690-53f4-97f3-a53c331a890f")
+  )
+  (global_label "BOOST_EN"
+    (shape bidirectional)
+    (at 417.83 50.80 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "52b4208f-ffe9-5800-9ea9-9f7d21859d28")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 417.83 50.80 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 448.31 50.80)
+      (xy 455.93 50.80)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "2fca749f-d5b1-59a8-9393-cad967995986")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 455.93 50.80 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "87cfc504-dd6b-5a70-873a-10e4af9469de")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 455.93 50.80 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 436.88 58.42 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "93660f9b-a00d-5364-99ba-d592523117c6")
+    (property "Reference" "C500"
+      (at 436.88 34.42 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "22 uF 16 V"
+      (at 436.88 82.42 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 436.88 58.42 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 436.88 58.42 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "d8231eb8-d8f4-5d1d-af3c-1383740b46a2")
+    )
+    (pin "2"
+      (uuid "f2a5cdd5-fd1a-5c28-81de-093b9e9bb86f")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/fd23cea3-a2ba-5604-9a62-57436fc89565"
+          (reference "C500")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 425.45 58.42)
+      (xy 417.83 58.42)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "9100189a-6aa2-58b1-92c9-5d66c469af92")
+  )
+  (global_label "5V_RADIO"
+    (shape bidirectional)
+    (at 417.83 58.42 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "73fd8224-d786-5f2a-9749-8badcc3c87ff")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 417.83 58.42 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 448.31 58.42)
+      (xy 455.93 58.42)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "cd738064-49c0-5f9d-a413-a44fb4cdf02e")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 455.93 58.42 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "17935338-a481-57c9-b544-5f6e787df4e9")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 455.93 58.42 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 436.88 66.04 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "c0371e29-ac6b-551e-8522-76632bc7d8c3")
+    (property "Reference" "C501"
+      (at 436.88 42.04 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "22 uF 16 V"
+      (at 436.88 90.04 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 436.88 66.04 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 436.88 66.04 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "e8b77f95-61b2-5542-8244-c929351bc2b3")
+    )
+    (pin "2"
+      (uuid "95e3635e-576c-58c8-aa9c-07cd23df8050")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/cb37d45c-61ac-5661-bf22-f84b4a09f44f"
+          (reference "C501")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 425.45 66.04)
+      (xy 417.83 66.04)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "3d52ac64-ca25-594a-98d2-777bcc1ca75c")
+  )
+  (global_label "5V_RADIO"
+    (shape bidirectional)
+    (at 417.83 66.04 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "8d5127c0-cc6f-5d42-a4b4-40b8d03fe281")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 417.83 66.04 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 448.31 66.04)
+      (xy 455.93 66.04)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "df1f540d-dcc8-5ae3-a659-d9bd02098eec")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 455.93 66.04 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "a146b7a5-de32-5b31-938d-909d3b6c697b")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 455.93 66.04 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 436.88 73.66 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "1abfd012-65c5-5ee1-af61-d414828c35fe")
+    (property "Reference" "C502"
+      (at 436.88 49.66 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "1 uF 16 V"
+      (at 436.88 97.66 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 436.88 73.66 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 436.88 73.66 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "f0318a37-086d-581c-b5e9-5550028edb56")
+    )
+    (pin "2"
+      (uuid "7a711006-af95-5ad5-8143-4ebcad4e5cf9")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/04228f9e-4675-5d9e-96c5-abc710789985"
+          (reference "C502")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 425.45 73.66)
+      (xy 417.83 73.66)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "02e65916-7bad-5786-b4a5-d0c1bc0f7385")
+  )
+  (global_label "5V_RADIO"
+    (shape bidirectional)
+    (at 417.83 73.66 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "aabcf117-c7ee-59a6-9c33-b95d8601b62f")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 417.83 73.66 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 448.31 73.66)
+      (xy 455.93 73.66)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "04d8c496-7093-5e3c-9bc4-9a8fa7b95268")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 455.93 73.66 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "debcb7b8-002d-5511-ac5b-49ee3d954a2f")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 455.93 73.66 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 436.88 81.28 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "2aa559ad-1bec-54e3-8285-bf74edaf2f60")
+    (property "Reference" "C503"
+      (at 436.88 57.28 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "330 uF 10 V polymer"
+      (at 436.88 105.28 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 436.88 81.28 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 436.88 81.28 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "d0c2598d-0c11-5cc4-a869-27130e84d603")
+    )
+    (pin "2"
+      (uuid "f3534190-94c7-595d-adfd-e392b9befdf1")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/1e467cb9-e8b9-5c25-b344-0c96f046d1e7"
+          (reference "C503")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 425.45 81.28)
+      (xy 417.83 81.28)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "6ee14e01-1725-576d-bf32-b4a3f6151f12")
+  )
+  (global_label "5V_RADIO"
+    (shape bidirectional)
+    (at 417.83 81.28 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "f1874c6b-c105-5f3b-8c9b-fea14f68350c")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 417.83 81.28 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 448.31 81.28)
+      (xy 455.93 81.28)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "8433298b-7b26-5a8b-adc6-4727b2ab12e9")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 455.93 81.28 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "0f0860a8-e2ce-5d13-bbfa-8a2cc5a3aa98")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 455.93 81.28 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 436.88 88.90 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "0c053fec-43f8-549d-843b-53c7bffa5b33")
+    (property "Reference" "TH1"
+      (at 436.88 64.90 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "10 kOhm NTC"
+      (at 436.88 112.90 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 436.88 88.90 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 436.88 88.90 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "74498e24-6600-594d-bd89-515daf0fffb1")
+    )
+    (pin "2"
+      (uuid "87d86014-3d15-54a4-a0c6-94a31442b223")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/5766fa7b-c8ff-5197-89d0-532a3278e961"
+          (reference "TH1")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 425.45 88.90)
+      (xy 417.83 88.90)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "b66cc9d4-f9aa-5083-8488-7781ac3a5569")
+  )
+  (global_label "NTC_SENSE"
+    (shape bidirectional)
+    (at 417.83 88.90 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "2dc49a4e-6f8f-530b-8d3c-7079663046cf")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 417.83 88.90 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 448.31 88.90)
+      (xy 455.93 88.90)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "018e4af2-c8d8-52aa-a3db-f973551cbdc9")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 455.93 88.90 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "eacf2670-a9d8-567f-b579-d58010d070fe")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 455.93 88.90 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_PWR_FLAG")
+    (at 15.24 241.30 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom no)
+    (on_board no)
+    (dnp no)
+    (uuid "4747098a-cb25-505d-85c1-6f1900245d46")
+    (property "Reference" "PF1"
+      (at 15.24 217.30 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "PWR_FLAG"
+      (at 15.24 265.30 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 15.24 241.30 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 15.24 241.30 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "b3f2c6e0-cae2-5c56-88b9-8544acb5ac7c")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/969ab827-a4e4-5e7d-bed6-5d32760d3368"
+          (reference "PF1")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 15.24 241.30)
+      (xy 7.62 241.30)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "d3cacb38-e811-5260-83d2-d5b1ee51b457")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 7.62 241.30 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "e86027df-a1c1-531b-a711-ae81f12f5699")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 7.62 241.30 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_PWR_FLAG")
+    (at 15.24 248.92 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom no)
+    (on_board no)
+    (dnp no)
+    (uuid "de01a2c3-fb0e-5b18-8b68-7caaa168ad93")
+    (property "Reference" "PF2"
+      (at 15.24 224.92 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "PWR_FLAG"
+      (at 15.24 272.92 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 15.24 248.92 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 15.24 248.92 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "0685120e-346e-5798-848e-23e5a703835c")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/9d1687d7-212e-59d9-9b8e-6e0ea31c17e8"
+          (reference "PF2")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 15.24 248.92)
+      (xy 7.62 248.92)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "78737f4f-f951-5991-83fd-3e166842745d")
+  )
+  (global_label "USB_VBUS_RAW"
+    (shape bidirectional)
+    (at 7.62 248.92 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "b1c953fa-b0be-58da-82ac-ea51c3690f5f")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 7.62 248.92 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_PWR_FLAG")
+    (at 15.24 256.54 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom no)
+    (on_board no)
+    (dnp no)
+    (uuid "dd09f17d-3233-583d-8f4f-20b99c6b2f24")
+    (property "Reference" "PF3"
+      (at 15.24 232.54 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "PWR_FLAG"
+      (at 15.24 280.54 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 15.24 256.54 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 15.24 256.54 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "1a021382-a119-5fd3-9452-b5675c5a5995")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/ee8989ea-43b8-5b8d-a8c1-2f122e1b525a"
+          (reference "PF3")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 15.24 256.54)
+      (xy 7.62 256.54)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "62385db5-d23a-564d-beb4-ddf23b5c6300")
+  )
+  (global_label "SOLAR_FUSED"
+    (shape bidirectional)
+    (at 7.62 256.54 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "f7d7fbfc-1fec-5c9b-aca3-603dab9195f7")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 7.62 256.54 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_PWR_FLAG")
+    (at 15.24 264.16 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom no)
+    (on_board no)
+    (dnp no)
+    (uuid "07402a9c-50f8-5e31-93c4-cf6f9cc5d7d3")
+    (property "Reference" "PF4"
+      (at 15.24 240.16 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "PWR_FLAG"
+      (at 15.24 288.16 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 15.24 264.16 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 15.24 264.16 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "965d6471-2d09-5a2b-8424-1b6f9deaa117")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/d93ccd85-88a6-5bd3-90e3-ecea9e0a262f"
+          (reference "PF4")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 15.24 264.16)
+      (xy 7.62 264.16)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "1d40f5b6-c562-5be3-9f9c-d62a7dcbc1ba")
+  )
+  (global_label "SOLAR_PROTECTED"
+    (shape bidirectional)
+    (at 7.62 264.16 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "3eca5fde-da6e-56b1-bc59-3c4a795c8951")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 7.62 264.16 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_PWR_FLAG")
+    (at 15.24 271.78 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom no)
+    (on_board no)
+    (dnp no)
+    (uuid "be8a33aa-30d8-552d-bf56-bdc0649f583d")
+    (property "Reference" "PF5"
+      (at 15.24 247.78 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "PWR_FLAG"
+      (at 15.24 295.78 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 15.24 271.78 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 15.24 271.78 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "869d11f6-d181-52b5-a591-3d97186c111b")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/1d80c4e6-fef7-5cdb-88fd-9e2327a897ee"
+          (reference "PF5")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 15.24 271.78)
+      (xy 7.62 271.78)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "9533602a-2394-5e92-9f33-c93f46acc469")
+  )
+  (global_label "BAT_RAW"
+    (shape bidirectional)
+    (at 7.62 271.78 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "ddac4ac1-6fd1-567f-b69c-73541872b811")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 7.62 271.78 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_PWR_FLAG")
+    (at 15.24 279.40 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom no)
+    (on_board no)
+    (dnp no)
+    (uuid "00d4e2cf-ac87-52d1-b2ea-f16e2dc56b81")
+    (property "Reference" "PF6"
+      (at 15.24 255.40 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "PWR_FLAG"
+      (at 15.24 303.40 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 15.24 279.40 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 15.24 279.40 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "0d4d599f-5bea-5b0a-b0d8-7ce8567ac6cb")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/aba99098-9df8-58a3-8f7d-5f63e54fbc13"
+          (reference "PF6")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 15.24 279.40)
+      (xy 7.62 279.40)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "57d6af24-7e52-5982-9081-852f17135cf0")
+  )
+  (global_label "BQ_VBUS"
+    (shape bidirectional)
+    (at 7.62 279.40 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "1ef73370-1f4c-50ab-8eb0-b7c02326bf5d")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 7.62 279.40 180)
       (effects
         (font
           (size 1.27 1.27)

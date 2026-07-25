@@ -91,6 +91,7 @@ def check_symbols() -> None:
         "RN_SMA_EDGE",
         "RN_JST_PH_2",
         "RN_TWO_PIN_POWER_PART",
+        "RN_PWR_FLAG",
     ]
     for name in required_symbols:
         if f'(symbol "{name}"' not in sym:
@@ -210,7 +211,7 @@ def check_capture_seed(seed_rows: list[dict[str, str]]) -> None:
 
 def check_generated_schematic() -> None:
     generator = read("tools/generate_kicad_capture.py")
-    for needle in ["SCHEMATIC_CAPTURE_SEED_REV_A.csv", "RN_TWO_PIN_POWER_PART", "CAPTURED_ORDER"]:
+    for needle in ["SCHEMATIC_CAPTURE_SEED_REV_A.csv", "PASSIVE_CAPTURE_SEED_REV_A.csv", "RN_TWO_PIN_POWER_PART", "RN_PWR_FLAG", "CAPTURED_ORDER"]:
         if needle not in generator:
             fail(f"KiCad capture generator missing {needle!r}")
 
@@ -233,18 +234,27 @@ def check_generated_schematic() -> None:
         "F1",
         "L1",
         "L2",
+        "R100",
+        "R101",
+        "R102",
+        "R103",
+        "D1",
+        "R207",
+        "TH1",
+        "PF1",
+        "PF6",
     ]
     for ref in required_refs:
         if f'(property "Reference" "{ref}"' not in schematic:
             fail(f"generated schematic missing reference {ref}")
-    for net in ["E22_TXEN_DIO2", "RF_915", "5V_RADIO", "SOLAR_RAW", "BAT_RAW", "BQ_SW1", "BQ_SW2", "BOOST_SW"]:
+    for net in ["E22_TXEN_DIO2", "RF_915", "5V_RADIO", "SOLAR_RAW", "BAT_RAW", "BQ_SW1", "BQ_SW2", "BOOST_SW", "UV_NODE", "OV_NODE", "LTC_SHDN", "CHG_LED_K"]:
         if f'(global_label "{net}"' not in schematic:
             fail(f"generated schematic missing net label {net}")
     if 'Generated from SCHEMATIC_CAPTURE_SEED_REV_A.csv' not in schematic:
         fail("schematic title block no longer records the capture seed")
 
     status = read("docs/KICAD_CAPTURE_STATUS_REV_A.md")
-    for needle in ["K1a", "36 messages", "K1b", "Do not add test points"]:
+    for needle in ["K1c", "0 messages", "52 support passive", "6 ERC-only power flags", "Do not add test points"]:
         if needle not in status:
             fail(f"KiCad capture status missing {needle!r}")
 

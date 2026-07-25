@@ -17,6 +17,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 KICAD_DIR = ROOT / "hardware/kicad/RoyalNode"
 SEED = KICAD_DIR / "SCHEMATIC_CAPTURE_SEED_REV_A.csv"
+PASSIVE_SEED = KICAD_DIR / "PASSIVE_CAPTURE_SEED_REV_A.csv"
 SYMBOL_LIB = KICAD_DIR / "lib_symbols/RoyalNode.kicad_sym"
 SCHEMATIC = KICAD_DIR / "RoyalNode.kicad_sch"
 
@@ -61,6 +62,17 @@ CAPTURED_ORDER = [
     "F1",
     "L1",
     "L2",
+]
+
+PASSIVE_SYMBOL = "RoyalNode:RN_TWO_PIN_POWER_PART"
+PWR_FLAG_SYMBOL = "RoyalNode:RN_PWR_FLAG"
+PWR_FLAGS = [
+    ("PF1", "GND", (15.24, 241.30)),
+    ("PF2", "USB_VBUS_RAW", (15.24, 248.92)),
+    ("PF3", "SOLAR_FUSED", (15.24, 256.54)),
+    ("PF4", "SOLAR_PROTECTED", (15.24, 264.16)),
+    ("PF5", "BAT_RAW", (15.24, 271.78)),
+    ("PF6", "BQ_VBUS", (15.24, 279.40)),
 ]
 
 
@@ -174,7 +186,17 @@ def no_connect(ref: str, pin: str, symbol_x: float, symbol_y: float, pin_x: floa
   )'''
 
 
-def placed_symbol(ref: str, lib_id: str, value: str, x: float, y: float, pins: list[str]) -> str:
+def placed_symbol(
+    ref: str,
+    lib_id: str,
+    value: str,
+    x: float,
+    y: float,
+    pins: list[str],
+    *,
+    in_bom: bool = True,
+    on_board: bool = True,
+) -> str:
     pin_entries = "\n".join(
         f'''    (pin "{quote(pin)}"
       (uuid "{stable_uuid("pin", ref, pin)}")
@@ -186,8 +208,8 @@ def placed_symbol(ref: str, lib_id: str, value: str, x: float, y: float, pins: l
     (at {x:.2f} {y:.2f} 0)
     (unit 1)
     (exclude_from_sim no)
-    (in_bom yes)
-    (on_board yes)
+    (in_bom {"yes" if in_bom else "no"})
+    (on_board {"yes" if on_board else "no"})
     (dnp no)
     (uuid "{stable_uuid("symbol", ref)}")
     (property "Reference" "{quote(ref)}"
@@ -250,8 +272,16 @@ def text_block(text: str, x: float, y: float, size: float = 1.8) -> str:
   )'''
 
 
+def passive_position(index: int) -> tuple[float, float]:
+    rows_per_column = 22
+    column = index // rows_per_column
+    row = index % rows_per_column
+    return 335.28 + column * 50.80, 35.56 + row * 7.62
+
+
 def main() -> None:
     rows = list(csv.DictReader(SEED.open(newline="", encoding="utf-8")))
+    passive_rows = list(csv.DictReader(PASSIVE_SEED.open(newline="", encoding="utf-8")))
     by_ref: dict[str, list[dict[str, str]]] = defaultdict(list)
     for row in rows:
         by_ref[row["Reference"]].append(row)
@@ -261,7 +291,10 @@ def main() -> None:
         ref: parse_pin_blocks(symbol_short_name(symbol[0]), lib_text)
         for ref, symbol in SYMBOL_MAP.items()
     }
-    used_symbol_names = sorted({symbol_short_name(SYMBOL_MAP[ref][0]) for ref in CAPTURED_ORDER})
+    used_symbol_names = sorted(
+        {symbol_short_name(SYMBOL_MAP[ref][0]) for ref in CAPTURED_ORDER}
+        | {symbol_short_name(PASSIVE_SYMBOL), symbol_short_name(PWR_FLAG_SYMBOL)}
+    )
     embedded_symbols = "\n".join(top_level_symbol_block(name, lib_text) for name in used_symbol_names)
 
     body: list[str] = []
@@ -273,8 +306,8 @@ def main() -> None:
         1.6,
     ))
     body.append(text_block(
-        "Two-terminal power-path parts F1/L1/L2 are captured with RN_TWO_PIN_POWER_PART.\\n"
-        "Exact fuse and inductor footprints remain pending footprint release.",
+        "Two-terminal power-path parts and support passives are captured with RN_TWO_PIN_POWER_PART.\\n"
+        "Exact passive footprints remain pending footprint release and layout review.",
         202.0,
         268.0,
         1.3,
@@ -299,6 +332,26 @@ def main() -> None:
             body.append(wire_for_pin(ref, pin, x, y, pin_x, pin_y))
             body.append(global_label(ref, pin, net, lx, ly, angle))
 
+    passive_pins = parse_pin_blocks(symbol_short_name(PASSIVE_SYMBOL), lib_text)
+    for index, row in enumerate(passive_rows):
+        ref = row["Reference"]
+        value = row["Value"]
+        x, y = passive_position(index)
+        body.append(placed_symbol(ref, PASSIVE_SYMBOL, value, x, y, ["1", "2"]))
+        for pin, net in [("1", row["Pin 1 Net"]), ("2", row["Pin 2 Net"])]:
+            pin_x, pin_y, _ = passive_pins[pin]
+            lx, ly, angle = label_endpoint(x, y, pin_x, pin_y)
+            body.append(wire_for_pin(ref, pin, x, y, pin_x, pin_y))
+            body.append(global_label(ref, pin, net, lx, ly, angle))
+
+    pwr_flag_pins = parse_pin_blocks(symbol_short_name(PWR_FLAG_SYMBOL), lib_text)
+    for ref, net, (x, y) in PWR_FLAGS:
+        body.append(placed_symbol(ref, PWR_FLAG_SYMBOL, "PWR_FLAG", x, y, ["1"], in_bom=False, on_board=False))
+        pin_x, pin_y, _ = pwr_flag_pins["1"]
+        lx, ly, angle = label_endpoint(x, y, pin_x, pin_y)
+        body.append(wire_for_pin(ref, "1", x, y, pin_x, pin_y))
+        body.append(global_label(ref, "1", net, lx, ly, angle))
+
     schematic = f'''(kicad_sch
   (version 20250114)
   (generator "royalnode_capture_generator")
@@ -322,6 +375,8 @@ def main() -> None:
     SCHEMATIC.write_text(schematic, encoding="utf-8")
     print(f"Generated {SCHEMATIC.relative_to(ROOT)}")
     print(f"Captured references: {', '.join(CAPTURED_ORDER)}")
+    print(f"Captured passives: {len(passive_rows)}")
+    print(f"Captured power flags: {len(PWR_FLAGS)}")
 
 
 if __name__ == "__main__":

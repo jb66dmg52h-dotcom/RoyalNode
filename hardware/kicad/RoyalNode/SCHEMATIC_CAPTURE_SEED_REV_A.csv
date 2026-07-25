@@ -95,7 +95,7 @@ U4,LTC4365ITS8-1,1,VIN,SOLAR_FUSED,After 2 A solar fuse
 U4,LTC4365ITS8-1,2,UV,UV_NODE,LTC4365 threshold divider node
 U4,LTC4365ITS8-1,3,OV,OV_NODE,LTC4365 threshold divider node
 U4,LTC4365ITS8-1,4,GND,GND,Ground
-U4,LTC4365ITS8-1,5,SHDN,SOLAR_FUSED,100 kOhm pullup branch to VIN
+U4,LTC4365ITS8-1,5,SHDN,LTC_SHDN,100 kOhm pullup branch to SOLAR_FUSED
 U4,LTC4365ITS8-1,6,FAULT,NC,Explicit no-connect; no solar fault telemetry GPIO in Rev A
 U4,LTC4365ITS8-1,7,VOUT,SOLAR_PROTECTED,Protected solar output sense
 U4,LTC4365ITS8-1,8,GATE,SOLAR_PROT_GATE,Common gates of solar protection MOSFET pair
