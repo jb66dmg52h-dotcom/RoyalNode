@@ -36,13 +36,6 @@ def check_drc(text: str) -> None:
         fail("DRC report missing violation count")
     violation_count = int(found.group(1))
 
-    unconnected = re.search(r"\*\* Found (\d+) unconnected pads \*\*", text)
-    if not unconnected:
-        fail("DRC report missing unconnected-pad count")
-    unconnected_count = int(unconnected.group(1))
-    if unconnected_count != EXPECTED_UNCONNECTED:
-        fail(f"expected {EXPECTED_UNCONNECTED} unconnected pads, found {unconnected_count}")
-
     main_section = text.split("** Found", 2)[1]
     tags = re.findall(r"^\[([^\]]+)\]:", main_section, flags=re.M)
     if tags != EXPECTED_DRC_TAGS:
@@ -51,6 +44,13 @@ def check_drc(text: str) -> None:
         fail(f"expected {len(EXPECTED_DRC_TAGS)} DRC violation, found {violation_count}")
     if "Footprint MOD2" not in text or "MOD2_E22_900M33S_JLC_C22399506_RC" not in text:
         fail("known MOD2 footprint warning is missing or changed")
+
+    unconnected = re.search(r"\*\* Found (\d+) unconnected pads \*\*", text)
+    if not unconnected:
+        fail("DRC report missing unconnected-pad count")
+    unconnected_count = int(unconnected.group(1))
+    if unconnected_count != EXPECTED_UNCONNECTED:
+        fail(f"expected {EXPECTED_UNCONNECTED} unconnected pads, found {unconnected_count}")
 
 
 def main() -> None:
