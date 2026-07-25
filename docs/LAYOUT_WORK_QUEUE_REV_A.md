@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 41 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 39 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 3 known footprint/library warnings, `MOD2`, `U3` and `L2`
-- Unrouted: 41 ratsnest pairs
+- Unrouted: 39 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
@@ -68,6 +68,8 @@ Route only after BQ25798 and TPS61088 placement is compact:
 - `BOOST_SW`
 
 The current layout ties the adjacent TPS61088 switch pins into L2 with compact local top-layer copper. C406 and R402 have been moved into the boost-stage neighborhood and their BOOT/FSW switch-node branches are routed. The remaining boost support passives still need a grouped placement pass.
+
+C216 is now relocated below U1 with `BQ_BTST1` and the local capacitor side of `BQ_SW1` routed. The remaining `BQ_SW1` ratsnest item is the inductor/power-loop path, not the bootstrap-cap connection.
 
 ## Pass 5: Remaining Sense And Control Nets
 

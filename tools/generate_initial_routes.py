@@ -536,6 +536,20 @@ SEGMENTS = [
         "points": [(62.40, 73.40), (63.10, 73.40)],
     },
     {
+        "name": "bq-btst1-c216-local",
+        "net": "BQ_BTST1",
+        "layer": "F.Cu",
+        "width": 0.15,
+        "points": [(63.10, 74.60), (61.60, 74.60), (61.60, 70.50), (62.33, 70.50)],
+    },
+    {
+        "name": "bq-sw1-c216-local",
+        "net": "BQ_SW1",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(64.55, 73.30), (64.55, 70.50), (63.88, 70.50)],
+    },
+    {
         "name": "bq-ts-divider-local",
         "net": "BQ_TS",
         "layer": "F.Cu",
