@@ -30,7 +30,7 @@ Requirements frozen for KiCad schematic capture. `DESIGN_FREEZE_REV_A.md` is the
 - At least 2 A permitted charge current
 - Board-mounted XT30 battery connector
 - Board-mounted XT30 solar connector
-- 12 V nominal solar panel class
+- 6 V class solar panel
 - 10 W panel supported; 20 W recommended
 - USB-C charging through BQ25798
 - Solar MPPT and power-path operation
@@ -43,7 +43,7 @@ Requirements frozen for KiCad schematic capture. `DESIGN_FREEZE_REV_A.md` is the
 
 - XIAO remains socketed on its edge pins
 - Carrier powers XIAO through underside BAT and GND pads only
-- Short two-wire lead terminates in a keyed 2-pin JST-PH connector beside the XIAO socket
+- Short two-wire lead terminates in a keyed 2-pin JST-GH connector beside the XIAO socket
 - LM66100 ideal diode prevents reverse current into the main battery rail
 - Carrier does not drive XIAO 5V/VBUS
 - No pogo pins, SWD connector or multi-wire underside harness
@@ -122,7 +122,7 @@ Resolved by the oversized TPS61088 stage, high-current inductor, controlled soft
 
 ### Solar panel flexibility
 
-Resolved with a deployment envelope rather than a fixed panel SKU: 12 V nominal, 10 W supported, 20 W recommended.
+Resolved with a deployment envelope rather than a fixed panel SKU: 6 V class, 20 W recommended.
 
 ## Remaining implementation work
 

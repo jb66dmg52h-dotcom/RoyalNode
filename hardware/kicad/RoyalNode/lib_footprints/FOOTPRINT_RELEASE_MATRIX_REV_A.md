@@ -40,7 +40,7 @@ docs/FOOTPRINT_SOURCE_LINKS_REV_A.md
 | J4 | JST-GH SM02B-GHS-TB 2-pin horizontal | Low | `conditional_release_candidate` | Same JST-GH footprint as J3; confirm NTC harness pin 1 marker and battery-pack cable mate |
 | J5 | Molex 0732511150 SMA edge launch | High | `draft_envelope_only` | JLC/LCSC `C841205` import exists but is not placed; use Molex launch for 1.60 mm PCB and merge with final GCPW stack-up |
 | J6 | JST-GH SM04B-GHS-TB 4-pin horizontal | Low | `conditional_release_candidate` | Project-local copy of KiCad JST-GH footprint; optional MeshCore environmental I2C connector only |
-| F1 | Littelfuse 0483002.DR, 483 series 1206 chip fuse | Low | `conditional_release_candidate` | Project-local copy of KiCad 1206 fuse footprint; verify against Littelfuse 483 package drawing |
+| F1 | Littelfuse 0483005.DR, 483 series 1206 chip fuse | Low | `conditional_release_candidate` | Project-local copy of KiCad 1206 fuse footprint; verify against Littelfuse 483 package drawing and selected panel Isc |
 | L_BQ | Coilcraft XAL7070-222MEC | Medium | `conditional_release_candidate` | Project-local KiCad Coilcraft XAL7070 footprint; confirm against Coilcraft recommended land pattern |
 | L_BOOST | Coilcraft XAL7030-222MEC | Medium | `conditional_release_candidate` | Project-local KiCad Coilcraft XAL7030-222 footprint; confirm against Coilcraft recommended land pattern |
 | C_BULK | Panasonic 10SVPC330M | Medium | `conditional_release_candidate` | Project-local copy of KiCad `CP_Elec_8x6.9`; verify Panasonic package drawing and pad-1 positive polarity |

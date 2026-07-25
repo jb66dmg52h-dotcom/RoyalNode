@@ -21,7 +21,7 @@ Protected 1S battery/system node
         |
  low-current ideal diode or Schottky
         |
- 2-pin JST-PH lead
+ 2-pin JST-GH lead
         |
  XIAO BAT + GND
 ```
@@ -65,7 +65,7 @@ Required implementation details:
 Status: compatible, configuration-sensitive.
 
 - Supports 1S Li-ion/LiPo.
-- Accepts 5 V USB and 12 V-class solar input.
+- Accepts 5 V USB and 6 V-class solar input.
 - Supports buck-boost charging, MPPT and power-path operation.
 - 2 A charge current is suitable for the 10 Ah design target, subject to the final battery's allowed charge current.
 

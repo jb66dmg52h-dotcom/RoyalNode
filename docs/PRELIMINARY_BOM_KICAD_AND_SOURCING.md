@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This is a Rev A engineering BOM, not an order-ready production BOM. Exact passive values and some protection/power-control parts remain subject to TI reference-design calculations, battery selection and PCB stack-up.
+This is a historical sourcing sketch, not the current Rev A implementation BOM. Use `bom/REV_A_LOCKED_CORE_BOM.csv`, `bom/REV_A_LOCKED_PASSIVES.csv`, `docs/LOCKED_COMPONENTS_REV_A.md` and the generated KiCad files for current implementation. Rows below may mention parts that were removed from the active design, such as MAX17048, eFuse/load-switch circuitry and a power button.
 
 ## Core parts
 
@@ -24,7 +24,7 @@ This is a Rev A engineering BOM, not an order-ready production BOM. Exact passiv
 | J1 | Solar input | Board-mounted AMASS XT30, keyed/oriented for solar | 1 | Exact MPN open |
 | J2 | Battery input | Board-mounted AMASS XT30, different gender/orientation | 1 | Exact MPN open |
 | J3 | RF output | Board-edge 50-ohm SMA female; Molex 0732512440 is a sourcing candidate | 1 | Candidate |
-| J4 | SWD service | JST-PH 2.0 mm, 4-pin SMT, side-entry preferred | 1 | Exact MPN open |
+| J4 | SWD service | JST-GH 2.0 mm, 4-pin SMT, side-entry preferred | 1 | Exact MPN open |
 | SW1 | User power button | Sealed or enclosure-actuated momentary switch | 1 | Mechanical selection open |
 | LED1 | Charging | Low-current LED from charger status logic | 1 | Generic |
 | LED2 | Full/standby | Low-current LED from charger status logic | 1 | Generic |
@@ -75,7 +75,7 @@ BQ25798 integrates the main four-switch buck-boost power stage and battery FET, 
 | TPS61088RHLR | Not confirmed in stock KiCad library | Generic 20-pin VQFN package can be adapted | Build/verify thermal pad and paste pattern from TI drawing |
 | MAX17048G+T10 | May not be in stock library | Generic 2 x 2 mm 8-TDFN-EP footprint available or adaptable | Verify exposed pad and pin-1 orientation |
 | XT30 PCB connector | AMASS connector footprints may exist depending on KiCad version | Exact board-mount variant must match selected MPN | Do not use a generic XT30 footprint without mechanical check |
-| JST-PH 4-pin SMT | Generic symbol available | Official KiCad JST-PH footprints generally available | Select exact side/top-entry MPN first |
+| JST-GH 4-pin SMT | Generic symbol available | Official KiCad JST-GH footprints generally available | Select exact side/top-entry MPN first |
 | Board-edge SMA | Generic connector symbol available | Several KiCad coax footprints exist, but exact launch geometry is stack-up specific | Build or modify footprint from connector datasheet |
 
 ## Current supplier check
@@ -130,5 +130,5 @@ Do not order these until schematic calculations are complete:
 - XIAO supply converter/power mux
 - power-button controller
 - input TVS/fuse/reverse-protection parts
-- exact XT30 and JST-PH connector variants
+- exact XT30 and JST-GH connector variants
 - battery pack and NTC

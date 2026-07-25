@@ -16,6 +16,6 @@ J3,1,JST,SM02B-GHS-TB(LF)(SN),XIAO battery harness connector,2-pin 1.25 mm SMT J
 J4,1,JST,SM02B-GHS-TB(LF)(SN),Battery NTC connector,2-pin 1.25 mm SMT JST-GH,Pin 1 NTC_SENSE; pin 2 GND; battery harness uses GHR-02V-S housing,locked
 J5,1,Molex,0732511150,50 ohm standard-polarity SMA female edge launch,1.60 mm PCB edge mount,Use exact Molex launch; merge with final 50 ohm GCPW geometry,locked
 J6,1,JST,SM04B-GHS-TB(LF)(SN),Optional BME680/environmental I2C connector,4-pin 1.25 mm SMT JST-GH,Pinout 3V3/GND/SDA/SCL; MeshCore-supported environmental telemetry only,optional
-F1,1,Littelfuse,0483002.DR,2 A solar input fuse,SMD fuse,Located immediately after solar XT30 positive,locked
+F1,1,Littelfuse,0483005.DR,5 A solar input fuse,SMD 483-series 1206 fuse,Located immediately after solar XT30 positive; verify time-current behavior against selected 6 V / 20 W panel Isc,locked_candidate
 TH1,1,Semitec,103AT-2,10 kOhm battery-mounted NTC,Thermistor on battery harness,Required for production; no TS bypass network,locked
 D1,1,TBD,TBD,Low-current red charge LED,SMD LED,Driven by BQ25798 STAT sink path,selected_class

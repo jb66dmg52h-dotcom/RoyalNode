@@ -8706,7 +8706,7 @@
         )
       )
     )
-    (property "Value" "Littelfuse 0483002.DR"
+    (property "Value" "Littelfuse 0483005.DR"
       (at 55.88 208.15 0)
       (effects
         (font
@@ -9072,7 +9072,7 @@
         )
       )
     )
-    (property "Value" "1.87 MOhm 1%"
+    (property "Value" "1.78 MOhm 1%"
       (at 335.28 59.56 0)
       (effects
         (font
@@ -9194,7 +9194,7 @@
         )
       )
     )
-    (property "Value" "104 kOhm 0.1%"
+    (property "Value" "180 kOhm 0.1%"
       (at 335.28 67.18 0)
       (effects
         (font

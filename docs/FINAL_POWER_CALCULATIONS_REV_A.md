@@ -5,7 +5,7 @@
 These calculations size the Rev A charger and 5 V radio supply around:
 
 - protected 1S 3.6/3.7 V Li-ion/LiPo pack, 10-20 Ah class
-- 12 V nominal solar panel, 10 W supported / 20 W recommended
+- 6 V class solar panel, 20 W recommended
 - Seeed Studio XIAO nRF52840
 - EBYTE E22-900M33S at up to approximately 33 dBm
 - USB-C charging through the XIAO USB-C connector into the BQ25798 input-selector path
@@ -90,9 +90,9 @@ Final capacitor manufacturer numbers must be checked for effective capacitance a
 
 ### Solar input power
 
-A representative 20 W, 12 V-class panel with Vmp around 17-18 V supplies roughly 1.1-1.2 A near maximum power. This is sufficient to support a 2 A battery-charge target under strong sun while also covering normal repeater load depending on radio duty cycle.
+A representative 20 W, 6 V-class panel can supply roughly 3.0-3.5 A near maximum power. This is sufficient to support a 2 A battery-charge target under strong sun while also covering normal repeater load depending on radio duty cycle, provided the selected panel Vmp/Voc/Isc and the fuse/protection path are verified.
 
-A 10 W panel can operate the node but provides less battery-recovery margin during radio activity and poor solar conditions.
+A 10 W panel is now treated as a bench or light-duty option only because it provides less battery-recovery margin during radio activity and poor solar conditions.
 
 ### USB input policy
 

@@ -92,7 +92,7 @@ Source basis: Analog Devices LTC4365 Rev. B pin configuration and pin functions.
 
 | Pin | Name | RoyalNode Rev A connection |
 |---:|---|---|
-| 1 | VIN | Solar input after 2 A fuse |
+| 1 | VIN | Solar input after solar fuse |
 | 2 | UV | LTC threshold divider node |
 | 3 | OV | LTC threshold divider node |
 | 4 | GND | GND |

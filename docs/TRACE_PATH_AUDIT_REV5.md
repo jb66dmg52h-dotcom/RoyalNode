@@ -2,6 +2,8 @@
 
 ## Verdict
 
+Historical audit retained for reasoning. Current implementation authority is `docs/CURRENT_STATUS_REV_A.md`, `docs/DESIGN_FREEZE_REV_A.md`, `docs/LOCKED_COMPONENTS_REV_A.md`, the BOM CSV files and the generated KiCad project. Where this audit conflicts with those files, the current implementation files win.
+
 The radio, battery, XIAO power isolation, fuel gauge and 5 V boost paths are fundamentally compatible. The design is **not yet ready for schematic freeze** because two upstream power-path details are incomplete or mismatched:
 
 1. The solar and USB sources need a fully defined BQ25798 dual-input mux implementation with external ACFET/RBFET devices.
@@ -12,11 +14,11 @@ A third limitation must be locked into the design: the shared XIAO USB-C connect
 ## Path 1: Solar connector to charger
 
 ```text
-12 V nominal panel
+6 V class panel
 -> XT30PW
--> 2 A fuse
--> reverse-polarity P-FET
--> surge clamp
+-> 5 A-class fuse
+-> LTC4365 protection controller
+-> back-to-back protection MOSFETs
 -> BQ25798 input mux
 -> BQ25798 VBUS
 ```
@@ -25,15 +27,15 @@ A third limitation must be locked into the design: the shared XIAO USB-C connect
 
 Compatible.
 
-- A 10 W panel near 17 V Vmp supplies about 0.6 A.
-- A 20 W panel supplies about 1.2 A.
-- The 2 A fuse has appropriate operating margin for both.
+- A 10 W 6 V-class panel may supply about 1.7 A near maximum power.
+- A 20 W 6 V-class panel may supply about 3.0-3.5 A near maximum power.
+- The 5 A-class fuse has appropriate operating margin for both.
 
-### Fuse to BSL303SPE P-FET
+### Fuse to LTC4365 protection stage
 
 Compatible for the expected panel current.
 
-- The MOSFET's -30 V drain-source rating is above the normal voltage of a 12 V-class panel.
+- The MOSFET's -30 V drain-source rating is above the normal voltage of a 6 V-class panel.
 - The final panel recommendation must keep cold-weather Voc comfortably below 30 V.
 - The P-FET orientation must be checked carefully so its body diode allows correct startup while blocking reverse polarity.
 
@@ -108,7 +110,7 @@ Accepted limitation: no battery-temperature sensing. TS is biased into the norma
 ```text
 protected battery/system node
 -> LM66100DCKR
--> board-mounted 2-pin JST-PH
+-> board-mounted 2-pin JST-GH
 -> two-wire harness
 -> XIAO BAT and GND underside pads
 ```

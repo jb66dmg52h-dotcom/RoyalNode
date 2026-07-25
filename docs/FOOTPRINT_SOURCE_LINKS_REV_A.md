@@ -101,7 +101,7 @@ Footprint release requirements:
 
 ## Power and Charger Sources
 
-### F1 — Littelfuse 0483002.DR
+### F1 — Littelfuse 0483005.DR
 
 Primary product family:
 
@@ -111,7 +111,7 @@ https://www.littelfuse.com/products/fuses-overcurrent-protection/fuses/surface-m
 
 Release requirement:
 
-- Confirm the exact `0483002.DR` ordering code belongs to the Littelfuse 483 series 1206 chip-fuse package.
+- Confirm the exact `0483005.DR` ordering code belongs to the Littelfuse 483 series 1206 chip-fuse package.
 - Verify land pattern against the current Littelfuse 483 package drawing before release.
 - Confirm the fuse current rating and interrupt behavior against the selected solar panel `Isc` and the upstream wiring.
 - Current project footprint: `F1_LITTELFUSE_483_1206_RC`.

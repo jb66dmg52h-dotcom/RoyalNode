@@ -164,18 +164,18 @@ KiCad rule:
 - Silkscreen must unambiguously read `BATTERY` and `SOLAR` because the connectors are mechanically interchangeable but electrically very different.
 - Pin polarity must be checked against the physical connector molding before Gerber release.
 
-## F1 — Littelfuse 0483002.DR
+## F1 — Littelfuse 0483005.DR
 
 - Manufacturer: Littelfuse
 - Series: 483 thin-film chip fuse
 - Function: solar input fuse
-- Locked value: 2 A
+- Locked candidate value: 5 A
 - Package target: 1206 / 3216 metric chip fuse
 - Project-local release-candidate footprint: `F1_LITTELFUSE_483_1206_RC`
 
 KiCad rule:
 
-- Use a 1206 chip-fuse footprint only after confirming the current Littelfuse 483 package drawing for the exact `0483002.DR` ordering code.
+- Use a 1206 chip-fuse footprint only after confirming the current Littelfuse 483 package drawing for the exact `0483005.DR` ordering code.
 - Place F1 immediately after the solar XT30 positive pin and before the LTC4365-controlled protection path.
 - Maintain enough copper width for the expected 6 V / 20 W solar-panel current while preserving fuse function.
 

@@ -71,7 +71,7 @@ Rules:
 ```text
 6 V / 20 W class solar
   -> XT30
-  -> Littelfuse 0483002.DR 2 A fuse
+  -> Littelfuse 0483005.DR 5 A-class fuse
   -> LTC4365ITS8-1#TRMPBF protection controller
   -> Infineon ISA170170N04LMDSXTMA1 back-to-back protection MOSFET pair
   -> BQ25798 solar input selector MOSFET pair

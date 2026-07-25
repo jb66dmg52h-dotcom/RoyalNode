@@ -55,17 +55,17 @@ Only one SDA/SCL pull-up pair is fitted on the carrier.
 
 Locked values:
 
-- R3: 1.87 MOhm
-- R2: 104 kOhm
+- R3: 1.78 MOhm
+- R2: 180 kOhm
 - R1: 40.2 kOhm
 
 Production parts:
 
-- R3: Vishay CRCW06031M87FKTA, 1.87 MOhm, 1%, 0603, JLC C4212657
-- R2: Vishay TNPW0603104KBEEA, 104 kOhm, 0.1%, 25 ppm/C, 0603, JLC C1693693
-- R1: Yageo AT0603BRD0740K2L, 40.2 kOhm, 0.1%, 25 ppm/C, 0603, JLC C855848
+- R3: TBD stocked 1.78 MOhm, 1%, 0603
+- R2: TBD stocked 180 kOhm, 0.1% preferred, 0603
+- R1: TBD stocked 40.2 kOhm, 0.1% preferred, 0603
 
-R3 at 1% is accepted for Rev A. The LTC4365 datasheet design procedure itself uses standard 1% divider values, and the LTC4365 UV/OV comparator threshold is specified at 500 mV typical with 492.5-507.5 mV limits. Normal deployed panel cold-weather Voc must remain below the BQ25798 recommended 24 V operating limit; the approximately 25 V LTC4365 threshold is a protection ceiling, not a normal operating target.
+The 1.78 MOhm / 180 kOhm / 40.2 kOhm chain is the 6 V-panel candidate, targeting roughly 4.54 V UV cutoff and roughly 24.9 V OV cutoff before threshold tolerance and hysteresis. Normal deployed panel cold-weather Voc must remain below the BQ25798 recommended operating limit; the approximately 25 V LTC4365 threshold is a protection ceiling, not a normal operating target.
 
 ## TPS61088
 

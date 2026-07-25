@@ -47,7 +47,7 @@ The hardware should be documented for a compatible panel class rather than a sin
 
 - 12 V nominal monocrystalline panel
 - approximately 10–20 W
-- Vmp in the normal mid-to-high-teen range for 12 V-class panels
+- Vmp in the normal mid-to-high-teen range for 6 V-class panels
 - Voc and cold-weather Voc below the charger input limit with engineering margin
 - panel current within the input connector, fuse and charger design limits
 

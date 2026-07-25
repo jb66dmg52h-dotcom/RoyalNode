@@ -36,7 +36,7 @@ Locked solar path:
 
 ```text
 Solar XT30
-  -> 2 A fuse
+  -> 5 A-class fuse
   -> LTC4365-1 protection controller
   -> back-to-back N-channel protection MOSFETs
   -> BQ25798 solar-source ACFET/RBFET mux pair
@@ -45,7 +45,7 @@ Solar XT30
 
 Locked threshold targets:
 
-- Undervoltage cutoff: approximately 7 V
+- Undervoltage cutoff: approximately 4.5 V for the current 6 V solar-panel class
 - Overvoltage cutoff: approximately 25 V
 
 Requirements:
@@ -55,6 +55,7 @@ Requirements:
 - The previously selected SMBJ22A TVS is removed from the locked BOM.
 - The previously selected BSL303SPE P-channel reverse-polarity MOSFET is removed from the locked BOM.
 - Recommended panel cold-weather Voc must remain below the 25 V cutoff target with suitable tolerance margin.
+- The fuse and wiring must support the selected 6 V / 20 W panel's maximum-power current and short-circuit current.
 
 ## Issue 3: Shared USB-C charging-current policy
 
@@ -88,11 +89,11 @@ Locked path:
 Protected battery/system node
   -> LM66100 VIN
   -> LM66100 VOUT
-  -> 2-pin JST-PH positive
+  -> 2-pin JST-GH positive
   -> XIAO BAT pad
 
 Common GND
-  -> 2-pin JST-PH ground
+  -> 2-pin JST-GH ground
   -> XIAO GND
 ```
 
@@ -171,11 +172,11 @@ Use one dual-MOSFET package for each function:
 ```text
 VIN
  |
- R3 = 1.87 MOhm
+ R3 = 1.78 MOhm
  |
  UV
  |
- R2 = 104 kOhm
+ R2 = 180 kOhm
  |
  OV
  |
@@ -186,22 +187,23 @@ GND
 
 Nominal thresholds:
 
-- UV falling cutoff: approximately 6.98 V
-- UV rising/reconnect: approximately 7.33 V
-- OV rising cutoff: approximately 25.05 V
-- OV falling/reconnect: approximately 23.80 V
+- UV falling cutoff: approximately 4.54 V nominal
+- UV rising/reconnect: final value to be checked against LTC4365 hysteresis and selected panel behavior
+- OV rising cutoff: approximately 24.9 V nominal
+- OV falling/reconnect: final value to be checked against LTC4365 hysteresis
 
 ## Issue 7: BQ25798 TS policy for Rev A
 
-**Status: POLICY LOCKED; EXACT BYPASS NETWORK NOT SPECIFIED**
+**Status: LOCKED**
 
-Rev A will not use a physical battery thermistor. The project policy is to use a fixed simulated in-range TS condition rather than real battery-temperature sensing.
+Rev A uses a real battery-mounted NTC. The earlier fixed simulated-temperature TS concept is superseded.
 
 Design intent:
 
-- Do not fit an external battery NTC connector on Rev A.
-- Treat this as a Rev A simplification only; real battery temperature sensing should be reconsidered in a later hardware revision.
-- Exact fixed-TS network values are intentionally not specified in this design file.
+- Fit a 2-pin JST-GH battery NTC connector.
+- Use a Semitec 103AT-2 10 kOhm NTC mounted to the battery pack.
+- Use the locked 5.23 kOhm REGN-to-TS and 30.1 kOhm TS-to-NTC-node network.
+- Do not add a TS bypass jumper or simulated-temperature bench network.
 
 ## Issue 8: BQ25798 remaining static/configuration pins
 
@@ -211,7 +213,7 @@ Locked pin-audit decisions:
 
 - CE: tie directly to GND so charging is hardware-enabled; firmware retains charge control through EN_CHG.
 - ILIM_HIZ: tie to REGN so the hardware pin permits maximum input current; actual USB and solar current limits are managed through I2C.
-- INT: connect to a XIAO GPIO and add a 10 kOhm pull-up to the XIAO 3.3 V logic rail.
+- INT: add a 10 kOhm pull-up to the XIAO 3.3 V logic rail, but do not route INT to the XIAO in Rev A.
 - SDRV: no ship FET is used; fit 1 nF, 50 V ceramic from SDRV to GND.
 - PROG: 4.7 kOhm to GND for 1S / 750 kHz configuration.
 - D+ and D-: no connect.

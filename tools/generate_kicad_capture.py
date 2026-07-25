@@ -40,7 +40,7 @@ SYMBOL_MAP = {
     "J4": ("RoyalNode:RN_JST_GH_2", "JST-GH BATTERY NTC", (149.86, 233.68)),
     "J5": ("RoyalNode:RN_SMA_EDGE", "Molex 0732511150 SMA", (55.88, 266.70)),
     "J6": ("RoyalNode:RN_JST_GH_4", "JST-GH BME680 I2C", (149.86, 266.70)),
-    "F1": ("RoyalNode:RN_TWO_PIN_POWER_PART", "Littelfuse 0483002.DR", (55.88, 184.15)),
+    "F1": ("RoyalNode:RN_TWO_PIN_POWER_PART", "Littelfuse 0483005.DR", (55.88, 184.15)),
     "L1": ("RoyalNode:RN_TWO_PIN_POWER_PART", "Coilcraft XAL7070-222MEC", (149.86, 170.18)),
     "L2": ("RoyalNode:RN_TWO_PIN_POWER_PART", "Coilcraft XAL7030-222MEC", (248.92, 124.46)),
 }

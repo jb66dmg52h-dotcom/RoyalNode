@@ -136,7 +136,7 @@ PLACEMENTS = [
     },
     {
         "ref": "F1",
-        "value": "Littelfuse 0483002.DR 1206 RC",
+        "value": "Littelfuse 0483005.DR 1206 RC",
         "file": "F1_LITTELFUSE_483_1206_RC.kicad_mod",
         "library_name": "F1_LITTELFUSE_483_1206_RC",
         "at": (87.0, 54.0, 0),
@@ -357,6 +357,7 @@ def footprint_block(item: dict[str, object]) -> str:
     text = text.replace('(property "Value" "SMA EDGE DRAFT ENVELOPE"', f'(property "Value" "{value}"', 1)
     text = text.replace('(property "Value" "XT30PW-M C431092 RC"', f'(property "Value" "{value}"', 1)
     text = text.replace('(property "Value" "XT30PW-M DRAFT ENVELOPE"', f'(property "Value" "{value}"', 1)
+    text = text.replace('(property "Value" "F1_LITTELFUSE_483_1206_RC"', f'(property "Value" "{value}"', 1)
 
     lines = text.splitlines()
     lines.insert(4, f'  (at {x:.2f} {y:.2f} {rot})')

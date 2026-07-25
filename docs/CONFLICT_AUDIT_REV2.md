@@ -2,7 +2,7 @@
 
 ## Overall verdict
 
-The core radio, MCU, telemetry and connector selections are compatible. The largest architecture change from this audit is replacing the earlier BQ24650 concept with BQ25798 for Rev A. BQ25798 better matches the actual requirement because it accepts both a 12 V-class solar source and 5 V USB, supports a 1S LiPo, includes buck-boost charging, MPPT, power-path management and optional dual-input selection.
+The core radio, MCU, telemetry and connector selections are compatible. The largest architecture change from this audit is replacing the earlier BQ24650 concept with BQ25798 for Rev A. BQ25798 better matches the actual requirement because it accepts both a 6 V-class solar source and 5 V USB, supports a 1S LiPo, includes buck-boost charging, MPPT, power-path management and optional dual-input selection.
 
 The design is ready for detailed schematic capture after the remaining power-button and exact passive-component calculations are completed.
 
@@ -63,11 +63,11 @@ The XIAO must be powered through its documented 5V pin, not by treating 3V3 as a
 
 Decision gate: choose the lower-quiescent-current implementation after idle-power calculations.
 
-### 8. JST-PH 2.0 service connector
+### 8. Debug/service connector
 
-Status: compatible.
+Status: superseded.
 
-A 4-pin SMT JST-PH service connector can carry SWDIO, SWCLK, 3V3 reference and ground. It must not be used to power the product. Confirm chosen connector orientation and cable availability before footprint freeze.
+The current Rev A design has no JST debug/programming connector. Normal programming uses XIAO USB-C, and recovery uses the XIAO module's SWD pads if required.
 
 ### 9. XT30 connectors
 
@@ -109,6 +109,6 @@ A safe autonomous/default configuration must be confirmed so the board cannot ov
 3. Exact TPS61088 power-stage calculations and load-disconnect circuit.
 4. Exact XIAO supply implementation.
 5. Exact push-button latch/controller.
-6. Exact XT30, JST-PH and SMA manufacturer part numbers.
+6. Exact XT30, JST-GH and SMA manufacturer part numbers.
 7. Final 4-layer stack-up and controlled-impedance calculation.
 8. MeshCore board definition for TXEN, RXEN, TCXO and power mapping.

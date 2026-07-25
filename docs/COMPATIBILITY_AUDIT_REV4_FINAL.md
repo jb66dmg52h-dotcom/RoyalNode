@@ -2,6 +2,8 @@
 
 ## Verdict
 
+Historical audit retained for reasoning. Current implementation authority is `docs/CURRENT_STATUS_REV_A.md`, `docs/DESIGN_FREEZE_REV_A.md`, `docs/LOCKED_COMPONENTS_REV_A.md`, the BOM CSV files and the generated KiCad project. Where this audit conflicts with those files, the current implementation files win.
+
 Rev A is compatible at the architecture level and may proceed to KiCad schematic capture. No unresolved feature decision blocks the schematic.
 
 ## Compatibility matrix
@@ -9,9 +11,9 @@ Rev A is compatible at the architecture level and may proceed to KiCad schematic
 | Interface | Result | Final treatment |
 |---|---|---|
 | Protected 1S LiPo to BQ25798 | Compatible | 1S profile, 2 A maximum charge target |
-| 12 V-class solar to BQ25798 | Compatible | 2 A fuse, reverse-polarity P-FET, 22 V TVS |
+| 6 V-class solar to BQ25798 | Compatible | 5 A-class fuse, LTC4365 protection stage, external BQ25798 selector FETs |
 | XIAO USB-C VBUS to BQ25798 | Compatible with protected branch | Carrier does not drive VBUS; USB current starts conservatively |
-| Battery/system node to XIAO | Compatible | LM66100 to JST-PH to XIAO BAT/GND |
+| Battery/system node to XIAO | Compatible | LM66100 to JST-GH to XIAO BAT/GND |
 | XIAO onboard charger to main battery | Isolated | LM66100 blocks reverse current toward main rail |
 | BQ25798 and MAX17048 on I2C | Compatible | Shared 3.3 V pull-ups, separate addresses, polling |
 | 1S rail to TPS61088 | Compatible | 2.2 uH high-current inductor and calculated current limit |
@@ -26,9 +28,9 @@ Rev A is compatible at the architecture level and may proceed to KiCad schematic
 
 ### BQ25798
 
-- Handles 5 V USB and 12 V-class solar through separate input paths.
+- Handles 5 V USB and 6 V-class solar through separate input paths.
 - Provides 1S charging and system power path.
-- Uses 4.7 kOhm PROG, /CE low and fixed TS bias.
+- Uses 4.7 kOhm PROG, /CE low and real battery-mounted NTC TS sensing.
 - Charger data is polled over I2C.
 
 ### TPS61088 and E22
@@ -36,7 +38,7 @@ Rev A is compatible at the architecture level and may proceed to KiCad schematic
 - TPS61088 is sized for 2 A continuous and 3 A transient at 5 V.
 - E22 is connected directly to the 5 V output.
 - 330-470 uF bulk and ceramic decoupling are placed locally at the radio.
-- TXEN and RXEN pull-downs prevent accidental transmit during MCU reset.
+- E22 DIO2 drives TXEN and the XIAO controls RXEN; firmware sequencing prevents accidental transmit during startup.
 
 ### XIAO
 
@@ -47,9 +49,9 @@ Rev A is compatible at the architecture level and may proceed to KiCad schematic
 
 ### Solar input
 
-- 10 W panel works for normal repeater duty cycle.
+- 10 W panel is retained only as a bench/light-duty option.
 - 20 W panel is recommended for permanent deployment.
-- The 2 A fuse supports both panel sizes with current margin.
+- The 5 A-class fuse supports both panel sizes with current margin.
 
 ## Known limitations accepted for Rev A
 

@@ -52,7 +52,7 @@ Use this file for new KiCad work.
 
 | Ref | Part/class | Function |
 |---|---|---|
-| F1 | Littelfuse 0483002.DR | Solar input fuse |
+| F1 | Littelfuse 0483005.DR | Solar input fuse |
 | D1 | Low-current red LED | BQ25798 charge status |
 
 ## Passive Numbering Blocks

@@ -8,7 +8,7 @@ Locked for KiCad schematic capture. Battery physical packaging and enclosure des
 
 ```text
 SOLAR XT30
-  -> 2 A input protection chain
+  -> 5 A-class fused input protection chain
   -> BQ25798 solar input (VAC1 / ACDRV1, primary port)
 
 XIAO USB-C VBUS

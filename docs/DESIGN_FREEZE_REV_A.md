@@ -51,7 +51,7 @@ Rev A architecture is frozen and the KiCad schematic/placement scaffold is activ
 ```text
 6 V / 20 W class solar panel
   -> board-mounted XT30
-  -> 2 A input protection chain
+  -> 5 A-class fused input protection chain
   -> BQ25798 solar input
 
 XIAO USB-C VBUS
@@ -145,6 +145,7 @@ All eleven exposed XIAO GPIO pins are allocated.
 - Battery discharge: at least 5 A continuous; 8 A transient preferred
 - Battery charge permission: at least 2 A
 - Maximum charge current: 2.0 A
+- Solar input fuse: 5 A class, currently Littelfuse 0483005.DR candidate; verify time-current behavior against selected panel Isc
 - Battery telemetry: BQ25798 voltage/charger telemetry only; no dedicated SOC gauge
 - E22 rail: 5.0 V nominal
 - 5 V rail: 2 A continuous design target

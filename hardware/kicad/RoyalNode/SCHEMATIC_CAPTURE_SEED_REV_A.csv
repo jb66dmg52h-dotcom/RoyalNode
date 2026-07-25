@@ -91,7 +91,7 @@ U3,TPS61088RHLR,18,COMP,BOOST_COMP,20.0 kOhm / 4.7 nF compensation network
 U3,TPS61088RHLR,19,ILIM,BOOST_ILIM,100 kOhm to GND
 U3,TPS61088RHLR,20,AGND,GND,Signal ground
 U3,TPS61088RHLR,21,PGND_EP,GND,Exposed thermal/power pad with thermal vias
-U4,LTC4365ITS8-1,1,VIN,SOLAR_FUSED,After 2 A solar fuse
+U4,LTC4365ITS8-1,1,VIN,SOLAR_FUSED,After solar input fuse
 U4,LTC4365ITS8-1,2,UV,UV_NODE,LTC4365 threshold divider node
 U4,LTC4365ITS8-1,3,OV,OV_NODE,LTC4365 threshold divider node
 U4,LTC4365ITS8-1,4,GND,GND,Ground
@@ -144,5 +144,5 @@ L1,Coilcraft XAL7070-222MEC,1,Terminal 1,BQ_SW1,Charger inductor terminal
 L1,Coilcraft XAL7070-222MEC,2,Terminal 2,BQ_SW2,Charger inductor terminal
 L2,Coilcraft XAL7030-222MEC,1,Terminal 1,BQ_SYS,Boost inductor input side
 L2,Coilcraft XAL7030-222MEC,2,Terminal 2,BOOST_SW,Boost switch-node side
-F1,Littelfuse 0483002.DR,1,Terminal 1,SOLAR_RAW,Solar fuse input
-F1,Littelfuse 0483002.DR,2,Terminal 2,SOLAR_FUSED,Solar fuse output
+F1,Littelfuse 0483005.DR,1,Terminal 1,SOLAR_RAW,Solar fuse input
+F1,Littelfuse 0483005.DR,2,Terminal 2,SOLAR_FUSED,Solar fuse output

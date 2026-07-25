@@ -8,7 +8,7 @@
 - [x] TPS61088 5 V radio supply
 - [x] LM66100 XIAO BAT isolation architecture
 - [x] 1S protected Li-ion/LiPo battery architecture
-- [x] 12 V nominal solar input
+- [x] 6 V class solar input
 - [x] Real battery NTC
 - [x] No fuel gauge
 - [x] No eFuse

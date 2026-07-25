@@ -90,12 +90,12 @@ The XIAO underside battery pads are harness-only connections and are not represe
 Connect:
 
 - Solar XT30 positive
-- input side of Littelfuse 0483002.DR 2 A fuse
+- input side of Littelfuse 0483005.DR 5 A-class fuse
 
 ### `SOLAR_FUSED`
 Connect:
 
-- output side of 2 A fuse
+- output side of solar input fuse
 - LTC4365 pin 1 VIN
 - LTC4365 SHDN pull-up branch: 100 kOhm to pin 5 SHDN
 - top of LTC4365 UV/OV divider
@@ -107,11 +107,11 @@ Use the series chain:
 ```text
 SOLAR_FUSED
    |
- R3 1.87 MOhm
+ R3 1.78 MOhm
    |
   UV_NODE --------> LTC4365 pin 2 UV
    |
- R2 104 kOhm
+ R2 180 kOhm
    |
   OV_NODE --------> LTC4365 pin 3 OV
    |
