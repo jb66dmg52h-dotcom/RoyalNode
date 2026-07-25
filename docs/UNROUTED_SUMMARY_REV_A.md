@@ -4,7 +4,7 @@ Generated from `hardware/fabrication/RoyalNode_drc.rpt`.
 
 This file is a layout planning aid, not a manufacturing release note. Counts are KiCad ratsnest-pair counts, so a net with several components can appear multiple times.
 
-Total unrouted pairs: 85
+Total unrouted pairs: 84
 
 | Net | Ratsnest pairs | Layout note |
 |---|---:|---|
@@ -42,5 +42,4 @@ Total unrouted pairs: 85
 | `LTC_SHDN` | 1 |  |
 | `OV_NODE` | 1 |  |
 | `SOLAR_PROT_COMMON` | 1 |  |
-| `SOLAR_PROT_GATE` | 1 |  |
 | `UV_NODE` | 1 |  |

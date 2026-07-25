@@ -128,7 +128,7 @@ Only stable local/control nets are routed in this first pass:
 - `OV_NODE`: local charger input-overvoltage divider chain link between R101 and R102.
 - `GND`: short local U2 duplicate-ground pin tie.
 - `XIAO_BAT_ISO`: short local U2 CE/VOUT tie.
-- `SOLAR_PROT_GATE`: short local Q1 gate pin tie only; source/drain power pads remain unrouted.
+- `SOLAR_PROT_GATE`: U4 gate output is now routed to the Q1 gate tie using short top-layer fanouts and a back-layer escape; source/drain power pads remain unrouted.
 - `BQ_ACDRV1`: short local Q2 gate pin tie only; source/drain power pads remain unrouted.
 - `BQ_ACDRV2`: short local Q3 gate pin tie only; source/drain power pads remain unrouted.
 - `SOLAR_FUSED`: short wide local Q1 adjacent-drain pad tie only; external/source path remains unrouted.
@@ -226,7 +226,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-85 expected unrouted ratsnest items
+84 expected unrouted ratsnest items
 0 footprint errors
 3 known footprint/library warnings: MOD2, U3 and L2
 ```
