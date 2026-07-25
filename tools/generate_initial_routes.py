@@ -193,6 +193,20 @@ SEGMENTS = [
         "points": [(27.63, 38.00), (29.00, 38.00), (29.00, 44.40), (21.18, 44.40), (21.18, 42.80)],
     },
     {
+        "name": "u2-gnd-local",
+        "net": "GND",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(83.16, 49.00), (84.84, 49.00)],
+    },
+    {
+        "name": "u2-xiao-bat-iso-local",
+        "net": "XIAO_BAT_ISO",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(83.16, 49.65), (82.40, 49.65), (82.40, 50.30), (85.60, 50.30), (85.60, 48.35), (84.84, 48.35)],
+    },
+    {
         "name": "e22-nrst-fanout",
         "net": "E22_NRST",
         "layer": "F.Cu",
@@ -521,7 +535,7 @@ def main() -> None:
         raise SystemExit("PCB file does not end with a closing S-expression")
     body = text[:-1].rstrip()
     PCB.write_text(f"{body}\n{generated_blocks()}\n)\n", encoding="utf-8")
-    print("Generated initial routes, E22 control/SPI, J6 I2C, charge LED/STAT, temp/UV/OV-divider links and L2 ground reference plane")
+    print("Generated initial routes, E22 control/SPI, J6 I2C, charge LED/STAT, temp/UV/OV-divider, U2 local links and L2 ground reference plane")
 
 
 if __name__ == "__main__":
