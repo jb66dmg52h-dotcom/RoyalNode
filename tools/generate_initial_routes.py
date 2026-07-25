@@ -106,7 +106,7 @@ SEGMENTS = [
         "net": "BOOST_BOOT",
         "layer": "F.Cu",
         "width": 0.20,
-        "points": [(60.65, 53.75), (61.45, 53.75), (61.45, 49.60), (62.13, 49.60)],
+        "points": [(60.65, 53.75), (62.50, 53.75), (62.50, 49.60), (62.13, 49.60)],
     },
     {
         "name": "boost-boot-c406-sw",
@@ -893,6 +893,13 @@ SEGMENTS = [
         "points": [(57.35, 61.20), (57.58, 61.20)],
     },
     {
+        "name": "boost-ss-c407-local",
+        "net": "BOOST_SS",
+        "layer": "F.Cu",
+        "width": 0.15,
+        "points": [(59.75, 52.85), (59.76, 51.30)],
+    },
+    {
         "name": "e22-nrst-fanout",
         "net": "E22_NRST",
         "layer": "F.Cu",
@@ -1290,6 +1297,7 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("segment", "boost-ilim-r403-fanout", "0"),
     stable_uuid("via", "boost-ilim-u3-via"),
     stable_uuid("via", "boost-ilim-r403-via"),
+    stable_uuid("segment", "boost-ss-c407-local", "1"),
 }
 
 

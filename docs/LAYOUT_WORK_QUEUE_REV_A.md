@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 43 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 42 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 3 known footprint/library warnings, `MOD2`, `U3` and `L2`
-- Unrouted: 43 ratsnest pairs
+- Unrouted: 42 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
@@ -96,7 +96,7 @@ These should avoid switch-node copper and RF launch copper.
 - Two 2026-07-25 `BOOST_FB` divider-only relocation trials were rejected. A left/below-U3 placement collided with the E22 SPI/MISO edge and MOD2 courtyard; a lower/right-U3 placement shorted against TPS61088 ground/exposed-pad geometry and the `5V_RADIO` side of R400. Keep `BOOST_FB` blocked until the TPS61088 small-passive strategy is reworked as a group.
 - The accepted 2026-07-25 U3/L2 rotation puts TPS61088 VOUT toward the E22 5 V entry and BOOST_SW toward the XAL7030 inductor. Continue boost placement from this topology.
 - A 2026-07-25 `SOLAR_PROTECTED` U4-sense branch trial was rejected. The left-side route crossed the accepted `SOLAR_PROT_GATE` path; the right-side route crossed the fused-solar back-layer hop or collided with the XIAO battery-isolation route. Treat U4 protected-output sensing as a placement/pour-level follow-up, not a casual single-trace route.
-- A 2026-07-25 `BOOST_SS` / C407 relocation above U3 was rejected. It collided with the accepted E22_NSS escape and crowded U3 exposed-ground geometry. Revisit C407 after the U3 small-signal escape strategy is adjusted.
+- `BOOST_SS` is now locally routed after relocating C407 above U3 and shifting the BOOT route right to clear the capacitor ground pad.
 - A 2026-07-25 rotated `BOOST_VCC` / C405 placement below U3 was rejected. It put the VCC pad away from U3, starved the U3 top-ground thermal relief and introduced an extra library-mismatch warning. Revisit C405 with a local footprint/placement pass instead of a quick rotation.
 - A 2026-07-25 `BQ_SYS` U3-VIN-to-L2 input hop trial was rejected. It crossed the accepted BOOT branch and crowded the L2 BOOST_SW pad. Route this as a deliberate boost-input copper shape after the BOOT/VIN/passive strategy is reviewed.
 - A 2026-07-25 `USB_VBUS_RAW` XIAO-to-Q3 right-side route trial was rejected. The outside path hit the XT30/J1 no-net mechanical pad; the inward path crossed I2C, XIAO_BAT_ISO or fused-solar back-layer tracks. Revisit USB_VBUS_RAW with a deliberate layer-transition plan.
