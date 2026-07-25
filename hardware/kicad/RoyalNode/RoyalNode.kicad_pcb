@@ -17171,6 +17171,14 @@
 		(uuid "d6e350b7-2a51-50b9-9c9f-78bf6a3c6e66")
 	)
 	(segment
+		(start 22.83 38)
+		(end 25.98 38)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "UV_NODE")
+		(uuid "657d1874-c53d-5cdd-8247-58112da72d64")
+	)
+	(segment
 		(start 53.65 61.62)
 		(end 54.6 61.62)
 		(width 0.2)

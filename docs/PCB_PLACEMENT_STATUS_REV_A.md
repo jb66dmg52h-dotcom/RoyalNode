@@ -126,6 +126,7 @@ Only stable, low-current nets are routed in this first pass:
 - `CHG_LED_K`: short local charge-LED cathode link between D1 and R207.
 - `BQ_STAT`: charge LED resistor to BQ25798 STAT through a bottom-layer return route.
 - `BQ_TS`: short local battery-temperature divider link between R200 and R201.
+- `UV_NODE`: short local charger input-undervoltage divider link between R100 and R101.
 
 The J6 routes use short top-layer fanouts and vias, then a mix of `In2.Cu` and bottom-layer tracks into the XIAO socket pads. The I2C pair is split across bottom and inner signal layers near the XIAO to avoid the existing RXEN/control corridor. The BQ25798 I2C pins use short local fanouts before joining the same bus, and the pullups sit next to the XIAO/J6 side of the bus. The E22 control routes use short top-layer fanouts, vias, then `In2.Cu` tracks. The E22 SPI routes use left-side fanouts and a bottom-layer stepped bus to avoid the current boost-stage region. This keeps them away from the unresolved RF launch and avoids treating the staged power passives as final placement.
 
@@ -203,7 +204,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-157 expected unrouted ratsnest items
+156 expected unrouted ratsnest items
 0 footprint errors
 1 warning: MOD2 library footprint mismatch
 ```
