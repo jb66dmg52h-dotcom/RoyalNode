@@ -26,6 +26,7 @@ The export script creates:
 - Excellon drill files
 - drill map and drill report
 - KiCad BOM CSV
+- richer JLCPCB-oriented draft BOM with manufacturer and known LCSC fields
 - KiCad position/CPL CSV
 - schematic netlist
 - zipped Gerber, drill and assembly bundles

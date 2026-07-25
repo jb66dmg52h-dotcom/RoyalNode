@@ -9,6 +9,8 @@ unrouted nets and unreleased RF/SMA geometry.
 from __future__ import annotations
 
 import os
+import csv
+import re
 import shutil
 import subprocess
 import zipfile
@@ -25,6 +27,9 @@ DRILL = OUT / "drill"
 ASSEMBLY = OUT / "assembly"
 REPORTS = OUT / "reports"
 KICAD_CLI = Path(os.environ.get("KICAD_CLI", "/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli"))
+CORE_BOM = ROOT / "bom/REV_A_LOCKED_CORE_BOM.csv"
+PASSIVE_BOM = ROOT / "bom/REV_A_LOCKED_PASSIVES.csv"
+PASSIVE_SEED = PROJECT_DIR / "PASSIVE_CAPTURE_SEED_REV_A.csv"
 
 
 def run(args: list[str]) -> None:
@@ -67,6 +72,92 @@ def write_blocker_note() -> None:
         ),
         encoding="utf-8",
     )
+
+
+def read_csv(path: Path) -> list[dict[str, str]]:
+    with path.open(newline="", encoding="utf-8") as handle:
+        return list(csv.DictReader(handle))
+
+
+def lcsc_from_notes(notes: str) -> str:
+    match = re.search(r"\b(?:JLCPCB\s*)?(C\d+)\b", notes)
+    return match.group(1) if match else ""
+
+
+def write_draft_jlc_bom() -> None:
+    """Write a richer quote BOM from the locked sourcing tables.
+
+    The KiCad BOM remains useful as a schematic export. This file is shaped for
+    early PCBA sourcing review and keeps unresolved/off-board parts visible.
+    """
+    core_rows = read_csv(CORE_BOM)
+    passive_rows = {row["Reference"]: row for row in read_csv(PASSIVE_BOM)}
+    passive_seed = read_csv(PASSIVE_SEED)
+
+    rows: list[dict[str, str]] = []
+    for row in core_rows:
+        ref = row["Reference"]
+        scope = "off-board" if ref == "TH1" else "pcba"
+        rows.append(
+            {
+                "Designator": ref,
+                "Qty": row["Quantity"],
+                "Comment": row["Description"],
+                "Value": row["Manufacturer Part Number"],
+                "Footprint": row["Package Or Form"],
+                "Manufacturer": row["Manufacturer"],
+                "Manufacturer Part Number": row["Manufacturer Part Number"],
+                "LCSC Part Number": lcsc_from_notes(row["Assembly Notes"]),
+                "Assembly Scope": scope,
+                "Status": row["Status"],
+                "Notes": row["Assembly Notes"],
+            }
+        )
+
+    grouped_passives: dict[str, list[dict[str, str]]] = {}
+    for row in passive_seed:
+        grouped_passives.setdefault(row["Source Group"], []).append(row)
+
+    for group, seed_rows in sorted(grouped_passives.items()):
+        locked = passive_rows.get(group)
+        if not locked:
+            continue
+        designators = ",".join(row["Reference"] for row in seed_rows)
+        footprint = seed_rows[0]["Footprint"]
+        rows.append(
+            {
+                "Designator": designators,
+                "Qty": str(len(seed_rows)),
+                "Comment": locked["Description"],
+                "Value": seed_rows[0]["Value"],
+                "Footprint": footprint,
+                "Manufacturer": locked["Manufacturer"],
+                "Manufacturer Part Number": locked["Manufacturer Part Number"],
+                "LCSC Part Number": lcsc_from_notes(locked["Assembly Notes"]),
+                "Assembly Scope": "pcba",
+                "Status": locked["Status"],
+                "Notes": locked["Assembly Notes"],
+            }
+        )
+
+    output = ASSEMBLY / "RoyalNode_RevA_JLCPCB_DRAFT_BOM.csv"
+    with output.open("w", newline="", encoding="utf-8") as handle:
+        fieldnames = [
+            "Designator",
+            "Qty",
+            "Comment",
+            "Value",
+            "Footprint",
+            "Manufacturer",
+            "Manufacturer Part Number",
+            "LCSC Part Number",
+            "Assembly Scope",
+            "Status",
+            "Notes",
+        ]
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
 
 
 def main() -> None:
@@ -150,6 +241,7 @@ def main() -> None:
         ]
     )
 
+    write_draft_jlc_bom()
     write_blocker_note()
     zip_dir(GERBERS, OUT / "RoyalNode_RevA_Gerbers_DRAFT_NOT_FOR_FAB.zip")
     zip_dir(DRILL, OUT / "RoyalNode_RevA_Drill_DRAFT_NOT_FOR_FAB.zip")
