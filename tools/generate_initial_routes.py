@@ -16,14 +16,6 @@ ROOT = Path(__file__).resolve().parents[1]
 PCB = ROOT / "hardware/kicad/RoyalNode/RoyalNode.kicad_pcb"
 NAMESPACE = uuid.UUID("0c64c82f-b03a-455f-93ce-ceb8a0674a31")
 
-NETS = {
-    "GND": 1,
-    "3V3": 2,
-    "E22_TXEN_DIO2": 44,
-    "I2C_SCL": 45,
-    "I2C_SDA": 46,
-}
-
 SEGMENTS = [
     {
         "name": "e22-dio2-to-txen",
@@ -88,6 +80,76 @@ SEGMENTS = [
         "width": 0.20,
         "points": [(93.88, 20.75), (58.80, 20.75), (58.80, 36.08), (62.61, 36.08)],
     },
+    {
+        "name": "e22-nrst-fanout",
+        "net": "E22_NRST",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(53.65, 61.62), (54.60, 61.62)],
+    },
+    {
+        "name": "e22-nrst-backbone",
+        "net": "E22_NRST",
+        "layer": "In2.Cu",
+        "width": 0.20,
+        "points": [(54.60, 61.62), (54.60, 22.80), (62.61, 22.80), (62.61, 23.38)],
+    },
+    {
+        "name": "e22-dio1-fanout",
+        "net": "E22_DIO1",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(53.65, 66.70), (55.20, 66.70)],
+    },
+    {
+        "name": "e22-dio1-backbone",
+        "net": "E22_DIO1",
+        "layer": "In2.Cu",
+        "width": 0.20,
+        "points": [(55.20, 66.70), (55.20, 25.50), (62.61, 25.50), (62.61, 25.92)],
+    },
+    {
+        "name": "e22-busy-fanout",
+        "net": "E22_BUSY",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(53.65, 64.16), (55.80, 64.16)],
+    },
+    {
+        "name": "e22-busy-backbone",
+        "net": "E22_BUSY",
+        "layer": "In2.Cu",
+        "width": 0.20,
+        "points": [(55.80, 64.16), (55.80, 28.00), (62.61, 28.00), (62.61, 28.46)],
+    },
+    {
+        "name": "e22-nss-fanout",
+        "net": "E22_NSS",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(53.65, 51.46), (57.00, 51.46)],
+    },
+    {
+        "name": "e22-nss-backbone",
+        "net": "E22_NSS",
+        "layer": "In2.Cu",
+        "width": 0.20,
+        "points": [(57.00, 51.46), (57.00, 30.60), (62.61, 30.60), (62.61, 31.00)],
+    },
+    {
+        "name": "e22-rxen-direct",
+        "net": "E22_RXEN",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(30.35, 56.54), (28.60, 56.54)],
+    },
+    {
+        "name": "e22-rxen-backbone",
+        "net": "E22_RXEN",
+        "layer": "In2.Cu",
+        "width": 0.20,
+        "points": [(28.60, 56.54), (28.60, 68.50), (62.61, 68.50), (62.61, 38.62)],
+    },
 ]
 
 VIAS = [
@@ -95,6 +157,11 @@ VIAS = [
     {"name": "j6-gnd-via", "net": "GND", "at": (91.38, 23.80)},
     {"name": "j6-sda-via", "net": "I2C_SDA", "at": (92.62, 21.50)},
     {"name": "j6-scl-via", "net": "I2C_SCL", "at": (93.88, 20.75)},
+    {"name": "e22-nrst-via", "net": "E22_NRST", "at": (54.60, 61.62)},
+    {"name": "e22-dio1-via", "net": "E22_DIO1", "at": (55.20, 66.70)},
+    {"name": "e22-busy-via", "net": "E22_BUSY", "at": (55.80, 64.16)},
+    {"name": "e22-nss-via", "net": "E22_NSS", "at": (57.00, 51.46)},
+    {"name": "e22-rxen-via", "net": "E22_RXEN", "at": (28.60, 56.54)},
 ]
 
 def stable_uuid(*parts: str) -> str:
@@ -102,6 +169,28 @@ def stable_uuid(*parts: str) -> str:
 
 
 GROUND_ZONE_UUID = stable_uuid("zone", "l2-ground-reference")
+RETIRED_GENERATED_UUIDS = {
+    stable_uuid("segment", "e22-rxen-direct", "1"),
+    stable_uuid("segment", "e22-rxen-direct", "2"),
+    stable_uuid("segment", "e22-sck-fanout", "0"),
+    stable_uuid("segment", "e22-sck-backbone", "0"),
+    stable_uuid("segment", "e22-sck-backbone", "1"),
+    stable_uuid("segment", "e22-sck-backbone", "2"),
+    stable_uuid("segment", "e22-sck-backbone", "3"),
+    stable_uuid("segment", "e22-miso-fanout", "0"),
+    stable_uuid("segment", "e22-miso-backbone", "0"),
+    stable_uuid("segment", "e22-miso-backbone", "1"),
+    stable_uuid("segment", "e22-miso-backbone", "2"),
+    stable_uuid("segment", "e22-miso-backbone", "3"),
+    stable_uuid("segment", "e22-mosi-fanout", "0"),
+    stable_uuid("segment", "e22-mosi-backbone", "0"),
+    stable_uuid("segment", "e22-mosi-backbone", "1"),
+    stable_uuid("segment", "e22-mosi-backbone", "2"),
+    stable_uuid("segment", "e22-mosi-backbone", "3"),
+    stable_uuid("via", "e22-sck-via"),
+    stable_uuid("via", "e22-miso-via"),
+    stable_uuid("via", "e22-mosi-via"),
+}
 
 
 def generated_uuids() -> set[str]:
@@ -113,6 +202,7 @@ def generated_uuids() -> set[str]:
     for via in VIAS:
         ids.add(stable_uuid("via", str(via["name"])))
     ids.add(GROUND_ZONE_UUID)
+    ids.update(RETIRED_GENERATED_UUIDS)
     return ids
 
 
@@ -120,7 +210,7 @@ def remove_generated_routes(text: str) -> str:
     ids = generated_uuids()
     result: list[str] = []
     idx = 0
-    pattern = re.compile(r"\n  \((segment|via|zone)\b")
+    pattern = re.compile(r"\n[ \t]*\((segment|via|zone)\b")
     while True:
         match = pattern.search(text, idx)
         if not match:
@@ -149,28 +239,26 @@ def remove_generated_routes(text: str) -> str:
 
 
 def segment_block(name: str, index: int, net: str, layer: str, width: float, start: tuple[float, float], end: tuple[float, float]) -> str:
-    net_id = NETS[net]
     return (
         f'  (segment\n'
         f'    (start {start[0]:.2f} {start[1]:.2f})\n'
         f'    (end {end[0]:.2f} {end[1]:.2f})\n'
         f'    (width {width:.2f})\n'
         f'    (layer "{layer}")\n'
-        f'    (net {net_id})\n'
+        f'    (net "{net}")\n'
         f'    (uuid "{stable_uuid("segment", name, str(index))}")\n'
         f'  )'
     )
 
 
 def via_block(name: str, net: str, at: tuple[float, float]) -> str:
-    net_id = NETS[net]
     return (
         f'  (via\n'
         f'    (at {at[0]:.2f} {at[1]:.2f})\n'
         f'    (size 0.60)\n'
         f'    (drill 0.30)\n'
         f'    (layers "F.Cu" "B.Cu")\n'
-        f'    (net {net_id})\n'
+        f'    (net "{net}")\n'
         f'    (uuid "{stable_uuid("via", name)}")\n'
         f'  )'
     )
@@ -231,7 +319,7 @@ def main() -> None:
         raise SystemExit("PCB file does not end with a closing S-expression")
     body = text[:-1].rstrip()
     PCB.write_text(f"{body}\n{generated_blocks()}\n)\n", encoding="utf-8")
-    print("Generated initial routes and L2 ground reference plane")
+    print("Generated initial routes, E22 control subset and L2 ground reference plane")
 
 
 if __name__ == "__main__":

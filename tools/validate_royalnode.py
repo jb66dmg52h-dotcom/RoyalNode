@@ -413,7 +413,30 @@ def check_net_classes() -> None:
 
 def check_initial_routes() -> None:
     route_generator = read("tools/generate_initial_routes.py")
-    for needle in ["E22_TXEN_DIO2", "3V3", "GND", "I2C_SDA", "I2C_SCL", "j6-3v3-backbone", "j6-gnd-backbone", "j6-sda-backbone", "j6-scl-backbone", "L2_GND_REFERENCE"]:
+    for needle in [
+        "E22_TXEN_DIO2",
+        "E22_NRST",
+        "E22_DIO1",
+        "E22_BUSY",
+        "E22_NSS",
+        "E22_RXEN",
+        "3V3",
+        "GND",
+        "I2C_SDA",
+        "I2C_SCL",
+        "j6-3v3-backbone",
+        "j6-gnd-backbone",
+        "j6-sda-backbone",
+        "j6-scl-backbone",
+        "e22-nrst-backbone",
+        "e22-dio1-backbone",
+        "e22-busy-backbone",
+        "e22-nss-backbone",
+        "e22-rxen-direct",
+        "e22-rxen-backbone",
+        'net "{net}"',
+        "L2_GND_REFERENCE",
+    ]:
         if needle not in route_generator:
             fail(f"initial route generator missing {needle!r}")
 
@@ -424,15 +447,41 @@ def check_initial_routes() -> None:
         fail("Makefile DRC target must refill and save zones")
 
     pcb = read("hardware/kicad/RoyalNode/RoyalNode.kicad_pcb")
-    for net_name in ["GND", "3V3", "E22_TXEN_DIO2", "I2C_SDA", "I2C_SCL"]:
+    for net_name in [
+        "GND",
+        "3V3",
+        "E22_TXEN_DIO2",
+        "I2C_SDA",
+        "I2C_SCL",
+        "E22_NRST",
+        "E22_DIO1",
+        "E22_BUSY",
+        "E22_NSS",
+        "E22_RXEN",
+    ]:
         if not re.search(rf'\(net\s+"{re.escape(net_name)}"\)', pcb):
             fail(f"PCB missing generated initial route for net {net_name!r}")
-    for needle in ['(layer "B.Cu")', '(via', '(start 30.35 59.08)', '(end 30.35 61.62)', '(layer "In1.Cu")', '(name "L2_GND_REFERENCE")']:
+    for needle in ['(layer "B.Cu")', '(layer "In2.Cu")', '(via', '(start 30.35 59.08)', '(end 30.35 61.62)', '(layer "In1.Cu")', '(name "L2_GND_REFERENCE")']:
         if needle not in pcb:
             fail(f"PCB missing expected initial route geometry {needle!r}")
 
     status = read("docs/PCB_PLACEMENT_STATUS_REV_A.md")
-    for needle in ["Initial Routed Nets", "E22_TXEN_DIO2", "I2C_SDA", "I2C_SCL", "L2_GND_REFERENCE"]:
+    for needle in [
+        "Initial Routed Nets",
+        "E22_TXEN_DIO2",
+        "E22_NRST",
+        "E22_DIO1",
+        "E22_BUSY",
+        "E22_NSS",
+        "E22_RXEN",
+        "SPI_SCK",
+        "SPI_MISO",
+        "SPI_MOSI",
+        "deferred",
+        "I2C_SDA",
+        "I2C_SCL",
+        "L2_GND_REFERENCE",
+    ]:
         if needle not in status:
             fail(f"PCB placement status missing initial-route note {needle!r}")
 
