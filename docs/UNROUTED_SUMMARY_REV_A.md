@@ -4,7 +4,7 @@ Generated from `hardware/fabrication/RoyalNode_drc.rpt`.
 
 This file is a layout planning aid, not a manufacturing release note. Counts are KiCad ratsnest-pair counts, so a net with several components can appear multiple times.
 
-Total unrouted pairs: 80
+Total unrouted pairs: 76
 
 | Net | Ratsnest pairs | Layout note |
 |---|---:|---|
@@ -19,15 +19,12 @@ Total unrouted pairs: 80
 | `3V3` | 2 |  |
 | `BOOST_EN` | 2 | Hold for TPS61088/R405 local fanout placement pass. |
 | `BOOST_FB` | 2 |  |
-| `BOOST_SW` | 2 | Switch node; keep compact and route only after TPS61088 power-loop placement. |
 | `BQ_SW1` | 2 | Switch node; keep compact and route only after BQ25798 power-loop placement. |
 | `BQ_SW2` | 2 | Switch node; keep compact and route only after BQ25798 power-loop placement. |
 | `USB_VBUS_RAW` | 2 |  |
 | `BATP_KELVIN` | 1 |  |
-| `BOOST_BOOT` | 1 |  |
 | `BOOST_COMP` | 1 |  |
 | `BOOST_COMP_RC` | 1 |  |
-| `BOOST_FSW` | 1 |  |
 | `BOOST_ILIM` | 1 |  |
 | `BOOST_SS` | 1 |  |
 | `BOOST_VCC` | 1 |  |
