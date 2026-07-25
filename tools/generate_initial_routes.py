@@ -53,6 +53,20 @@ SEGMENTS = [
         "points": [(60.65, 55.25), (60.65, 55.75)],
     },
     {
+        "name": "boost-sw-u3-to-l2-upper",
+        "net": "BOOST_SW",
+        "layer": "F.Cu",
+        "width": 0.40,
+        "points": [(60.65, 54.75), (62.40, 54.75), (62.40, 55.00), (64.14, 55.00)],
+    },
+    {
+        "name": "boost-sw-u3-to-l2-lower",
+        "net": "BOOST_SW",
+        "layer": "F.Cu",
+        "width": 0.40,
+        "points": [(60.65, 55.25), (62.40, 55.25), (62.40, 55.00)],
+    },
+    {
         "name": "i2c-pullup-3v3-link",
         "net": "3V3",
         "layer": "F.Cu",
