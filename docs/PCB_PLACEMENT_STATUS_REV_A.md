@@ -224,6 +224,14 @@ PCB DRC:
 1 warning: MOD2 library footprint mismatch
 ```
 
+Refresh the generated unrouted punch list with:
+
+```text
+make layout-status
+```
+
+The current output is tracked in `docs/UNROUTED_SUMMARY_REV_A.md`.
+
 ## Next Placement Work
 
 Next milestone `P1b`:
