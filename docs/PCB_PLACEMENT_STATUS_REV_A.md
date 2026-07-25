@@ -92,6 +92,26 @@ The first power-stage placement cluster now exists:
 
 The generated PCB scaffold is now net-aware. The placement generator reads `SCHEMATIC_CAPTURE_SEED_REV_A.csv` and `PASSIVE_CAPTURE_SEED_REV_A.csv`, creates the board net table, and annotates generated footprint pads with their net names and pin functions. This produces a useful ratsnest for placement and future routing review.
 
+## Initial Routed Nets
+
+The PCB now has a small generated-routing pass from:
+
+```text
+tools/generate_initial_routes.py
+```
+
+Only stable, low-current nets are routed in this first pass:
+
+- `E22_TXEN_DIO2`: short local top-layer link between E22 DIO2 and TXEN.
+- `3V3`: J6 optional BME680/environmental connector to the XIAO 3.3 V pin.
+- `GND`: J6 optional BME680/environmental connector to the XIAO ground pin.
+- `I2C_SDA`: J6 optional BME680/environmental connector to XIAO D4.
+- `I2C_SCL`: J6 optional BME680/environmental connector to XIAO D5.
+
+The J6 routes use short top-layer fanouts, vias, then bottom-layer traces to the XIAO socket pads. This keeps them away from the unresolved RF launch and avoids treating the staged power passives as final placement.
+
+The RF path, high-current power rails, ground pours, BQ25798/TPS61088 switch nodes and final power-loop routes remain unrouted until their placement and footprint review gates are settled.
+
 ## Net-Class Policy
 
 The KiCad project now defines Rev A routing classes in `hardware/kicad/RoyalNode/RoyalNode.kicad_pro` and documents them in `docs/PCB_NET_CLASSES_REV_A.md`.
@@ -160,7 +180,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-182 expected unrouted ratsnest items
+177 expected unrouted ratsnest items
 0 footprint errors
 1 warning: MOD2 library footprint mismatch
 ```

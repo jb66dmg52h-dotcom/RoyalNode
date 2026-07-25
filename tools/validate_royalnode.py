@@ -414,6 +414,30 @@ def check_net_classes() -> None:
             fail(f"PCB net-class doc missing {needle!r}")
 
 
+def check_initial_routes() -> None:
+    route_generator = read("tools/generate_initial_routes.py")
+    for needle in ["E22_TXEN_DIO2", "3V3", "GND", "I2C_SDA", "I2C_SCL", "j6-3v3-backbone", "j6-gnd-backbone", "j6-sda-backbone", "j6-scl-backbone"]:
+        if needle not in route_generator:
+            fail(f"initial route generator missing {needle!r}")
+
+    makefile = read("Makefile")
+    if "generate-routes" not in makefile:
+        fail("Makefile missing generate-routes target")
+
+    pcb = read("hardware/kicad/RoyalNode/RoyalNode.kicad_pcb")
+    for net in ['(net 1)', '(net 2)', '(net 44)', '(net 45)', '(net 46)']:
+        if net not in pcb:
+            fail(f"PCB missing generated initial route for {net}")
+    for needle in ['(layer "B.Cu")', '(via', '(start 30.35 59.08)', '(end 30.35 61.62)']:
+        if needle not in pcb:
+            fail(f"PCB missing expected initial route geometry {needle!r}")
+
+    status = read("docs/PCB_PLACEMENT_STATUS_REV_A.md")
+    for needle in ["Initial Routed Nets", "E22_TXEN_DIO2", "I2C_SDA", "I2C_SCL"]:
+        if needle not in status:
+            fail(f"PCB placement status missing initial-route note {needle!r}")
+
+
 def check_generated_schematic_footprints() -> None:
     schematic = read("hardware/kicad/RoyalNode/RoyalNode.kicad_sch")
     required_footprints = {
@@ -575,6 +599,7 @@ def main() -> None:
     check_generated_schematic_footprints()
     check_generated_pcb_placement()
     check_net_classes()
+    check_initial_routes()
 
     print("RoyalNode validation passed")
     print(f"  core BOM rows: {len(core_rows)}")
