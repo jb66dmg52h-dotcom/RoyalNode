@@ -132,6 +132,7 @@ Only stable local/control nets are routed in this first pass:
 - `SOLAR_PROT_COMMON`: Q1 common pads are now tied with a left-shifted back-layer loop that clears the gate backbone.
 - `BQ_SOLAR_SELECTOR_COMMON`: Q2 common pads are now tied with the same left-shifted back-layer loop pattern.
 - `BQ_USB_SELECTOR_COMMON`: Q3 common pads are now tied with the same left-shifted back-layer loop pattern.
+- `BQ_VBUS`: Q2 and Q3 output-side pads are now joined with a right-side back-layer backbone; U1 and local FET cross-pads remain unrouted.
 - `BQ_ACDRV1`: short local Q2 gate pin tie only; source/drain power pads remain unrouted.
 - `BQ_ACDRV2`: short local Q3 gate pin tie only; source/drain power pads remain unrouted.
 - `SOLAR_FUSED`: F1 output is now routed to Q1 through a short wide top/back/top path; U4/divider sensing branches remain unrouted.
@@ -229,7 +230,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-73 expected unrouted ratsnest items
+72 expected unrouted ratsnest items
 0 footprint errors
 3 known footprint/library warnings: MOD2, U3 and L2
 ```
