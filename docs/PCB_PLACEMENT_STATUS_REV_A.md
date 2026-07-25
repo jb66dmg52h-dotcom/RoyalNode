@@ -149,6 +149,8 @@ The RF path, high-current power rails, ground pours, BQ25798/TPS61088 switch nod
 
 `BOOST_EN` also remains unrouted after a trial route showed the current TPS61088/R405 placement needs a proper local fanout pass around the TPS61088 exposed ground pad and mask openings. Do not route this net as a casual long generated trace; adjust the boost-control passive placement and then fan out the EN pin cleanly.
 
+Two additional R405 relocation trials were rejected on 2026-07-25. A left-of-U3 placement collided with the E22 SPI pad/courtyard corridor, and an above-U3 placement collided with the E22_NSS route/via corridor. The failed generated segment has been retired in `tools/generate_initial_routes.py`.
+
 `BQ_REGN` to `ILIM_HIZ` also remains unrouted after trial routes crossed the existing BQ25798 I2C fanouts or crowded the BQ25798 inductor/switch-node area. Treat this as a BQ25798 local-fanout placement task, not a long generated trace task.
 
 The local `GND` link between the protection-divider ground pads also remains unrouted. Trial routes either clipped the neighboring `OV_NODE`/`BOOST_EN` pads or conflicted with the existing `OV_NODE` divider route. Revisit this after the protection divider and R405 placement are adjusted.
