@@ -69,7 +69,7 @@ Rules:
 ## Power tree
 
 ```text
-12 V nominal solar
+6 V / 20 W class solar
   -> XT30
   -> Littelfuse 0483002.DR 2 A fuse
   -> LTC4365ITS8-1#TRMPBF protection controller

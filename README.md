@@ -1,8 +1,8 @@
-# 2Watt Project
+# RoyalNode / 2Watt Project
 
-The 2Watt Project is a solar-powered 915 MHz LoRa repeater carrier built around the Seeed Studio XIAO nRF52840 and EBYTE E22-900M33S high-power radio module.
+RoyalNode, also tracked as the 2Watt Project, is a solar-powered 915 MHz LoRa repeater carrier built around the Seeed Studio XIAO nRF52840 and EBYTE E22-900M33S high-power radio module.
 
-> **Status:** Rev A design frozen for KiCad schematic capture
+> **Status:** Rev A KiCad schematic and PCB placement scaffold are active. The board is not fabrication ready.
 
 ## Locked architecture
 
@@ -20,15 +20,16 @@ The 2Watt Project is a solar-powered 915 MHz LoRa repeater carrier built around 
 - USB-C firmware updates through the XIAO
 - USB-C battery charging through the BQ25798
 - One external charge LED
+- Optional MeshCore-supported BME680 environmental I2C port
 - Direct controlled-impedance RF path from E22 ANT to board-edge SMA
 - XIAO-controlled TPS61088 enable for radio power sequencing
 - 4-layer controlled-impedance PCB
 
 ## Solar guidance
 
-- 12 V nominal panel class
-- 10 W supported
-- 20 W recommended for permanent deployment
+- 6 V class panel
+- 20 W target for permanent deployment
+- BQ25798 must be configured and validated against the selected panel's actual Vmp, Voc and Imp
 - Installer must verify Vmp, Voc, Imp and cold-weather Voc
 
 ## Removed from Rev A
@@ -44,7 +45,7 @@ The 2Watt Project is a solar-powered 915 MHz LoRa repeater carrier built around 
 - Solar/USB-present telemetry
 - Battery reverse-polarity circuit
 - Radio-disable jumper
-- Display, GPS and environmental sensors
+- Display, GPS and non-MeshCore accessory sensors
 - Bench-test jumpers, simulated-temperature bypass networks and mode-selection test footprints
 
 ## Power summary
@@ -63,11 +64,13 @@ The 2Watt Project is a solar-powered 915 MHz LoRa repeater carrier built around 
 ## Canonical documents
 
 - `docs/DESIGN_FREEZE_REV_A.md`
+- `docs/CURRENT_STATUS_REV_A.md`
 - `docs/WIRING_BLUEPRINT.md`
 - `docs/ELECTRICAL_DESIGN_REV_A.md`
 - `docs/LOCKED_COMPONENTS_REV_A.md`
 - `docs/FINAL_POWER_CALCULATIONS_REV_A.md`
 - `docs/SOLAR_DESIGN_GUIDE_REV_A.md`
+- `docs/PCB_NET_CLASSES_REV_A.md`
 
 Earlier concept documents are superseded where they conflict with the design-freeze document.
 
@@ -100,12 +103,12 @@ make kicad-checks
 
 ## Remaining work
 
-1. Create or import verified KiCad symbols and footprints.
-2. Capture the Rev A schematic.
-3. Run ERC and a schematic-level compatibility audit.
-4. Obtain the fabricator's 4-layer stack-up and calculate the 50-ohm RF geometry.
-5. Place and route the PCB.
-6. Run DRC and manufacturing review.
+1. Resolve or formally accept the E22 footprint-library warning through the manufacturing review path.
+2. Unblock the Molex edge-launch SMA footprint and final 50-ohm GCPW geometry.
+3. Confirm XIAO socket orientation, XT30 polarity and connector mating clearance.
+4. Refine power-stage placement from the generated ratsnest.
+5. Route the PCB.
+6. Run DRC, ERC, JLCPCB DFM and PCBA review.
 7. Order Rev A prototypes for production validation.
 
 ## Safety and regulatory note

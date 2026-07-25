@@ -2,7 +2,7 @@
 
 ## Status
 
-Rev A is frozen for KiCad schematic capture. This document is the primary source of truth. Earlier concept notes are superseded where they conflict with this file.
+Rev A architecture is frozen and the KiCad schematic/placement scaffold is active. This document is one of the primary sources of truth. Earlier concept notes are superseded where they conflict with this file or `docs/CURRENT_STATUS_REV_A.md`.
 
 ## Locked functions
 
@@ -14,11 +14,12 @@ Rev A is frozen for KiCad schematic capture. This document is the primary source
 - Board-mounted XT30 solar input
 - USB-C firmware updates through the XIAO
 - USB-C charging through the main charger
-- 12 V nominal solar panel support
-- 10 W panel supported; 20 W recommended
+- 6 V class solar panel support
+- 20 W panel target for permanent deployment
 - Battery voltage and charger telemetry through BQ25798
 - Battery-mounted NTC temperature sensing for charge protection
 - One external charge LED
+- Optional MeshCore-supported BME680 environmental I2C port
 - Direct 50-ohm grounded-coplanar RF path from E22 ANT to board-edge SMA
 - Automatic startup when battery is connected
 - Factory assembly for all pick-and-place-compatible parts
@@ -38,7 +39,7 @@ Rev A is frozen for KiCad schematic capture. This document is the primary source
 - USB-present telemetry
 - Battery reverse-polarity protection
 - Radio-disable jumper
-- Display, GPS and environmental sensors
+- Display, GPS and non-MeshCore accessory sensors
 - Bench-test configuration jumpers or bypass networks
 - RF 0-ohm series link
 - RF pi matching/tuning network
@@ -48,7 +49,7 @@ Rev A is frozen for KiCad schematic capture. This document is the primary source
 ## Locked power tree
 
 ```text
-12 V nominal solar panel
+6 V / 20 W class solar panel
   -> board-mounted XT30
   -> 2 A input protection chain
   -> BQ25798 solar input
@@ -176,11 +177,10 @@ All eleven exposed XIAO GPIO pins are allocated.
 
 ## Remaining work inside KiCad
 
-- Build or import verified symbols and footprints
-- Capture schematic
-- Run ERC
-- Perform schematic compatibility review
-- Place components
+- Resolve or formally accept the E22 footprint-library warning through manufacturing review
+- Unblock the Molex edge-launch SMA footprint
 - Obtain fabricator stack-up and calculate 50-ohm geometry
+- Confirm XIAO socket orientation and XT30 polarity/mating clearance
+- Refine power-stage placement from the generated ratsnest
 - Route power and RF
 - Run DRC and manufacturing review
