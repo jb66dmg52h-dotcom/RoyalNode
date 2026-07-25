@@ -85,6 +85,62 @@ def check_no_stale_design_terms() -> None:
                 fail(f"stale term {term!r} found in {rel}:{lineno}: {reason}")
 
 
+def check_solar_input_requirements() -> None:
+    current_files = [
+        "docs/REQUIREMENTS.md",
+        "docs/ARCHITECTURE.md",
+        "docs/DESIGN_FREEZE_REV_A.md",
+        "docs/SOLAR_DESIGN_GUIDE_REV_A.md",
+        "docs/POWER_INPUT_DECISIONS.md",
+        "docs/NET_MAP_REV_A.md",
+        "docs/FOOTPRINT_AUDIT_REV_A.md",
+        "docs/FOOTPRINT_SOURCE_LINKS_REV_A.md",
+        "docs/REFERENCE_DESIGNATORS_REV_A.md",
+        "bom/REV_A_LOCKED_CORE_BOM.csv",
+        "bom/REV_A_LOCKED_PASSIVES.csv",
+        "hardware/kicad/RoyalNode/SCHEMATIC_CAPTURE_SEED_REV_A.csv",
+        "hardware/kicad/RoyalNode/PASSIVE_CAPTURE_SEED_REV_A.csv",
+        "hardware/kicad/RoyalNode/RoyalNode.kicad_sch",
+        "hardware/kicad/RoyalNode/RoyalNode.kicad_pcb",
+    ]
+    stale_solar_terms = [
+        "0483002",
+        "2 A fuse",
+        "2A fuse",
+        "2 A input protection",
+        "12 V nominal solar",
+        "12 V-class",
+        "12 V class",
+        "7 V undervoltage",
+        "1.87 MOhm",
+        "104 kOhm",
+        "6.98 V",
+        "7.33 V",
+        "25.05 V",
+        "23.80 V",
+    ]
+    for rel in current_files:
+        text = read(rel)
+        for term in stale_solar_terms:
+            if term in text:
+                fail(f"stale solar-input term {term!r} found in {rel}")
+
+    required_by_file = {
+        "bom/REV_A_LOCKED_CORE_BOM.csv": ["0483005.DR", "5 A solar input fuse"],
+        "docs/SOLAR_DESIGN_GUIDE_REV_A.md": ["Nominal panel class: 6 V", "0483005.DR", "1.78 MOhm", "180 kOhm"],
+        "docs/POWER_INPUT_DECISIONS.md": ["5 A-class fuse", "1.78 MOhm", "180 kOhm", "4.54 V"],
+        "hardware/kicad/RoyalNode/SCHEMATIC_CAPTURE_SEED_REV_A.csv": ["Littelfuse 0483005.DR"],
+        "hardware/kicad/RoyalNode/PASSIVE_CAPTURE_SEED_REV_A.csv": ["1.78 MOhm 1%", "180 kOhm 0.1%"],
+        "hardware/kicad/RoyalNode/RoyalNode.kicad_sch": ["Littelfuse 0483005.DR", "1.78 MOhm 1%", "180 kOhm 0.1%"],
+        "hardware/kicad/RoyalNode/RoyalNode.kicad_pcb": ["Littelfuse 0483005.DR 1206 RC", "1.78 MOhm 1%", "180 kOhm 0.1%"],
+    }
+    for rel, needles in required_by_file.items():
+        text = read(rel)
+        for needle in needles:
+            if needle not in text:
+                fail(f"solar-input guard missing {needle!r} in {rel}")
+
+
 def check_symbols() -> None:
     sym = read("hardware/kicad/RoyalNode/lib_symbols/RoyalNode.kicad_sym")
     required_symbols = [
@@ -645,6 +701,7 @@ def main() -> None:
     if len(locked_passive_rows) < 25:
         fail("locked passive BOM has unexpectedly few rows")
     check_no_stale_design_terms()
+    check_solar_input_requirements()
     check_symbols()
     check_footprint_source_links()
     check_draft_envelope_footprints()
