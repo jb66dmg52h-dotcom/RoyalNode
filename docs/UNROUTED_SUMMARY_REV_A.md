@@ -4,7 +4,7 @@ Generated from `hardware/fabrication/RoyalNode_drc.rpt`.
 
 This file is a layout planning aid, not a manufacturing release note. Counts are KiCad ratsnest-pair counts, so a net with several components can appear multiple times.
 
-Total unrouted pairs: 86
+Total unrouted pairs: 85
 
 | Net | Ratsnest pairs | Layout note |
 |---|---:|---|
@@ -43,5 +43,4 @@ Total unrouted pairs: 86
 | `OV_NODE` | 1 |  |
 | `SOLAR_PROT_COMMON` | 1 |  |
 | `SOLAR_PROT_GATE` | 1 |  |
-| `SOLAR_RAW` | 1 | Route with input protection path after XT30/fuse placement review. |
 | `UV_NODE` | 1 |  |
