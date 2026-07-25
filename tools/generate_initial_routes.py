@@ -270,6 +270,13 @@ SEGMENTS = [
         "points": [(94.38, 87.80), (94.38, 89.15)],
     },
     {
+        "name": "j4-ntc-sense-service-route",
+        "net": "NTC_SENSE",
+        "layer": "B.Cu",
+        "width": 0.20,
+        "points": [(36.03, 89.00), (36.03, 93.60), (83.88, 93.60), (83.88, 86.65)],
+    },
+    {
         "name": "q1-solar-prot-gate-local",
         "net": "SOLAR_PROT_GATE",
         "layer": "F.Cu",
@@ -469,6 +476,8 @@ VIAS = [
     {"name": "j6-scl-service-via", "net": "I2C_SCL", "at": (96.88, 24.45)},
     {"name": "j3-xiao-bat-iso-u2-via", "net": "XIAO_BAT_ISO", "at": (85.60, 50.30)},
     {"name": "j3-xiao-bat-iso-pad-via", "net": "XIAO_BAT_ISO", "at": (94.38, 87.80)},
+    {"name": "j4-ntc-sense-r201-via", "net": "NTC_SENSE", "at": (36.03, 89.00)},
+    {"name": "j4-ntc-sense-pad-via", "net": "NTC_SENSE", "at": (83.88, 86.65)},
     {"name": "bq-stat-r207-via", "net": "BQ_STAT", "at": (42.60, 93.00)},
     {"name": "bq-stat-u1-via", "net": "BQ_STAT", "at": (62.40, 73.40)},
     {"name": "e22-nrst-via", "net": "E22_NRST", "at": (54.60, 61.62)},
