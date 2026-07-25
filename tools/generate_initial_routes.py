@@ -53,62 +53,6 @@ SEGMENTS = [
         "points": [(60.65, 55.25), (60.65, 55.75)],
     },
     {
-        "name": "j6-3v3-fanout",
-        "net": "3V3",
-        "layer": "F.Cu",
-        "width": 0.20,
-        "points": [(90.12, 25.15), (90.12, 22.30)],
-    },
-    {
-        "name": "j6-3v3-backbone",
-        "net": "3V3",
-        "layer": "In2.Cu",
-        "width": 0.20,
-        "points": [(90.12, 22.30), (82.00, 22.30), (82.00, 33.54), (80.39, 33.54)],
-    },
-    {
-        "name": "j6-gnd-fanout",
-        "net": "GND",
-        "layer": "F.Cu",
-        "width": 0.20,
-        "points": [(91.38, 25.15), (91.38, 23.80)],
-    },
-    {
-        "name": "j6-gnd-backbone",
-        "net": "GND",
-        "layer": "In2.Cu",
-        "width": 0.20,
-        "points": [(91.38, 23.80), (84.00, 23.80), (84.00, 38.62), (80.39, 38.62)],
-    },
-    {
-        "name": "j6-sda-fanout",
-        "net": "I2C_SDA",
-        "layer": "F.Cu",
-        "width": 0.20,
-        "points": [(92.62, 25.15), (92.62, 22.20)],
-    },
-    {
-        "name": "j6-sda-backbone",
-        "net": "I2C_SDA",
-        "layer": "B.Cu",
-        "width": 0.20,
-        "points": [(92.62, 22.20), (92.62, 41.40), (59.20, 41.40), (59.20, 33.54), (62.61, 33.54)],
-    },
-    {
-        "name": "j6-scl-fanout",
-        "net": "I2C_SCL",
-        "layer": "F.Cu",
-        "width": 0.20,
-        "points": [(93.88, 25.15), (93.88, 23.60)],
-    },
-    {
-        "name": "j6-scl-backbone",
-        "net": "I2C_SCL",
-        "layer": "In2.Cu",
-        "width": 0.20,
-        "points": [(93.88, 23.60), (93.88, 42.80), (63.80, 42.80), (63.80, 36.08), (62.61, 36.08)],
-    },
-    {
         "name": "i2c-pullup-3v3-link",
         "net": "3V3",
         "layer": "F.Cu",
@@ -130,6 +74,13 @@ SEGMENTS = [
         "points": [(86.62, 32.00), (86.62, 41.40)],
     },
     {
+        "name": "i2c-sda-bus-join",
+        "net": "I2C_SDA",
+        "layer": "B.Cu",
+        "width": 0.20,
+        "points": [(67.20, 41.40), (86.62, 41.40)],
+    },
+    {
         "name": "i2c-pullup-scl-fanout",
         "net": "I2C_SCL",
         "layer": "F.Cu",
@@ -142,6 +93,13 @@ SEGMENTS = [
         "layer": "In2.Cu",
         "width": 0.20,
         "points": [(87.60, 34.60), (87.60, 42.80)],
+    },
+    {
+        "name": "i2c-scl-bus-join",
+        "net": "I2C_SCL",
+        "layer": "In2.Cu",
+        "width": 0.20,
+        "points": [(64.80, 42.80), (87.60, 42.80)],
     },
     {
         "name": "bq-sda-fanout",
@@ -426,10 +384,6 @@ SEGMENTS = [
 ]
 
 VIAS = [
-    {"name": "j6-3v3-via", "net": "3V3", "at": (90.12, 22.30)},
-    {"name": "j6-gnd-via", "net": "GND", "at": (91.38, 23.80)},
-    {"name": "j6-sda-via", "net": "I2C_SDA", "at": (92.62, 22.20)},
-    {"name": "j6-scl-via", "net": "I2C_SCL", "at": (93.88, 23.60)},
     {"name": "i2c-pullup-sda-via", "net": "I2C_SDA", "at": (86.62, 32.00)},
     {"name": "i2c-pullup-scl-via", "net": "I2C_SCL", "at": (87.60, 34.60)},
     {"name": "bq-sda-via", "net": "I2C_SDA", "at": (67.20, 78.80)},
@@ -461,6 +415,15 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("zone", "bottom-ground-fill"),
     stable_uuid("segment", "e22-rxen-direct", "1"),
     stable_uuid("segment", "e22-rxen-direct", "2"),
+    stable_uuid("segment", "j6-3v3-fanout", "0"),
+    stable_uuid("segment", "j6-3v3-fanout", "1"),
+    stable_uuid("segment", "j6-3v3-backbone", "0"),
+    stable_uuid("segment", "j6-3v3-backbone", "1"),
+    stable_uuid("segment", "j6-3v3-backbone", "2"),
+    stable_uuid("segment", "j6-gnd-fanout", "0"),
+    stable_uuid("segment", "j6-gnd-backbone", "0"),
+    stable_uuid("segment", "j6-gnd-backbone", "1"),
+    stable_uuid("segment", "j6-gnd-backbone", "2"),
     stable_uuid("segment", "j6-sda-fanout", "0"),
     stable_uuid("segment", "j6-sda-fanout", "1"),
     stable_uuid("segment", "j6-sda-backbone", "0"),
@@ -509,6 +472,8 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("segment", "protection-gnd-r102-fanout", "0"),
     stable_uuid("segment", "protection-gnd-bottom", "0"),
     stable_uuid("segment", "protection-gnd-r405-fanout", "0"),
+    stable_uuid("via", "j6-3v3-via"),
+    stable_uuid("via", "j6-gnd-via"),
     stable_uuid("via", "j6-sda-via"),
     stable_uuid("via", "j6-scl-via"),
     stable_uuid("via", "boost-en-xiao-via"),
@@ -652,7 +617,7 @@ def main() -> None:
         raise SystemExit("PCB file does not end with a closing S-expression")
     body = text[:-1].rstrip()
     PCB.write_text(f"{body}\n{generated_blocks()}\n)\n", encoding="utf-8")
-    print("Generated initial routes, E22 control/SPI/VCC, TPS61088 local output/SW pins, J6 I2C, charge LED/STAT, temp/UV/OV-divider, U1/U2/Q-gate/MOSFET-drain local links and top/L2 ground pours")
+    print("Generated initial routes, E22 control/SPI/VCC, TPS61088 local output/SW pins, charge LED/STAT, temp/UV/OV-divider, U1/U2/Q-gate/MOSFET-drain local links and top/L2 ground pours")
 
 
 if __name__ == "__main__":

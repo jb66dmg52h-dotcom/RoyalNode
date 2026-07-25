@@ -67,8 +67,8 @@ PLACEMENTS = [
         "value": "JST-GH XIAO BAT HARNESS",
         "file": "J_LOW_JST_GH_SM02B_GHS_TB_RC.kicad_mod",
         "library_name": "J_LOW_JST_GH_SM02B_GHS_TB_RC",
-        "at": (92.0, 36.5, 0),
-        "note": "Internal two-wire XIAO underside BAT/GND harness; JST-GH family.",
+        "at": (95.0, 91.0, 0),
+        "note": "Internal two-wire XIAO underside BAT/GND harness; moved to the bottom service edge away from J6, RF and XIAO SPI fanout.",
     },
     {
         "ref": "J4",
@@ -83,8 +83,8 @@ PLACEMENTS = [
         "value": "JST-GH BME680 I2C",
         "file": "J_LOW_JST_GH_SM04B_GHS_TB_RC.kicad_mod",
         "library_name": "J_LOW_JST_GH_SM04B_GHS_TB_RC",
-        "at": (92.0, 27.0, 0),
-        "note": "Optional MeshCore-supported environmental I2C port; JST-GH family.",
+        "at": (95.0, 24.8, 0),
+        "note": "Optional MeshCore-supported environmental I2C port; moved toward the top edge to clear J3 service access.",
     },
     {
         "ref": "U1",

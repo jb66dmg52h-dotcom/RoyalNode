@@ -49,9 +49,9 @@ The passive anchors are staging placements for footprint/net review, not final r
 | `J5` | `J5_SMA_0732511150_DRAFT_ENVELOPE` | 100.0, 41.3 mm | 0 deg | Draft envelope only |
 | `J1` | `J_POWER_XT30PW_M_C431092_RC` | 93.0, 62.0 mm | 0 deg | Imported XT30 release candidate |
 | `J2` | `J_POWER_XT30PW_M_C431092_RC` | 93.0, 78.0 mm | 0 deg | Imported XT30 release candidate |
-| `J3` | `J_LOW_JST_GH_SM02B_GHS_TB_RC` | 92.0, 36.5 mm | 0 deg | XIAO BAT/GND internal harness release candidate |
+| `J3` | `J_LOW_JST_GH_SM02B_GHS_TB_RC` | 95.0, 91.0 mm | 0 deg | XIAO BAT/GND internal harness release candidate |
 | `J4` | `J_LOW_JST_GH_SM02B_GHS_TB_RC` | 84.5, 88.5 mm | 0 deg | Battery NTC internal harness release candidate |
-| `J6` | `J_LOW_JST_GH_SM04B_GHS_TB_RC` | 92.0, 27.0 mm | 0 deg | Optional BME680/environmental I2C connector release candidate |
+| `J6` | `J_LOW_JST_GH_SM04B_GHS_TB_RC` | 95.0, 24.8 mm | 0 deg | Optional BME680/environmental I2C connector release candidate |
 | `U1` | `U1_BQ25798_RQM0029A_RC` | 65.0, 75.0 mm | 0 deg | Charger/controller release candidate |
 | `L1` | `L1_COILCRAFT_XAL7070_222MEC_RC` | 65.0, 84.0 mm | 0 deg | Charger inductor release candidate |
 | `U3` | `U3_TPS61088_RHL0020A_THERMALVIAS_RC` | 59.0, 55.0 mm | 180 deg | Radio boost converter release candidate, VOUT toward E22 |
@@ -75,9 +75,9 @@ The XIAO composite socket footprint is placed in the upper-right area with USB-C
 
 The XT30 solar and battery connectors are placed on the right/lower-right side of the board to keep high-current wiring away from the RF launch as much as possible within the 85 x 75 mm outline. Both use imported JLC/LCSC `C431092` EasyEDA geometry for AMASS `XT30PW-M30.G.Y`.
 
-J3 and J4 are now placed as 2-pin JST-GH release-candidate connectors. J3 is the internal XIAO underside BAT/GND lead after the LM66100 isolation path. J4 is the battery-mounted NTC safety lead for the BQ25798 TS network. Neither is a general accessory or deployed telemetry port.
+J3 and J4 are now placed as 2-pin JST-GH release-candidate connectors. J3 is the internal XIAO underside BAT/GND lead after the LM66100 isolation path and has been moved to the bottom service edge so it no longer crowds J6, C503 or the SMA corridor. J4 is the battery-mounted NTC safety lead for the BQ25798 TS network. Neither is a general accessory or deployed telemetry port.
 
-J6 is now placed as a 4-pin JST-GH release-candidate connector for the optional MeshCore-supported environmental I2C module only. Its pinout is 3V3, GND, SDA and SCL.
+J6 is now placed as a 4-pin JST-GH release-candidate connector for the optional MeshCore-supported environmental I2C module only. It has been moved to the top-edge service corridor, separated from J3. Its pinout is 3V3, GND, SDA and SCL.
 
 F1 is now placed as a Littelfuse 483-series 1206 release-candidate footprint immediately after the solar XT30 positive path and before the protected solar-input path.
 
@@ -118,12 +118,9 @@ Only stable local/control nets are routed in this first pass:
 - `SPI_SCK`: E22 SCK to XIAO D8 through a short fanout, via, bottom-layer bus route and top-layer XIAO entry.
 - `SPI_MISO`: E22 MISO to XIAO D9 through a short fanout, via, bottom-layer bus route and top-layer XIAO entry.
 - `SPI_MOSI`: E22 MOSI to XIAO D10 through a short fanout, via, bottom-layer bus route and top-layer XIAO entry.
-- `3V3`: J6 optional BME680/environmental connector to the XIAO 3.3 V pin.
-- `GND`: J6 optional BME680/environmental connector to the XIAO ground pin.
-- `I2C_SDA`: J6 optional BME680/environmental connector to the XIAO D4/SDA pin.
-- `I2C_SCL`: J6 optional BME680/environmental connector to the XIAO D5/SCL pin.
-- `I2C_SDA`: BQ25798 SDA and R205 pullup into the same XIAO/J6 I2C bus.
-- `I2C_SCL`: BQ25798 SCL and R206 pullup into the same XIAO/J6 I2C bus.
+- `3V3`: XIAO 3.3 V pin to the local I2C pullups.
+- `I2C_SDA`: BQ25798 SDA and R205 pullup into the same XIAO I2C bus.
+- `I2C_SCL`: BQ25798 SCL and R206 pullup into the same XIAO I2C bus.
 - `CHG_LED_K`: short local charge-LED cathode link between D1 and R207.
 - `BQ_STAT`: charge LED resistor to BQ25798 STAT through a bottom-layer return route.
 - `BQ_TS`: short local battery-temperature divider link between R200 and R201.
@@ -141,7 +138,7 @@ Only stable local/control nets are routed in this first pass:
 - `BAT_RAW`: short local U1 duplicate BAT pin tie only; rail fanout remains unrouted.
 - `BOOST_SW`: short local TPS61088 switch-node pin-pair ties only; inductor loop remains unrouted.
 
-The J6 routes use short top-layer fanouts and vias, then a mix of `In2.Cu` and bottom-layer tracks into the XIAO socket pads. The I2C pair is split across bottom and inner signal layers near the XIAO to avoid the existing RXEN/control corridor. The BQ25798 I2C pins use short local fanouts before joining the same bus, and the pullups sit next to the XIAO/J6 side of the bus. The E22 control routes use short top-layer fanouts, vias, then `In2.Cu` tracks. The E22 SPI routes use left-side fanouts and a bottom-layer stepped bus to avoid the current boost-stage region. This keeps them away from the unresolved RF launch and avoids treating the staged power passives as final placement.
+The optional J6 environmental connector is intentionally left unrouted after the connector-access rework; its old generated fanout was retired because it created service-clearance and routing conflicts. The active I2C pair is split across bottom and inner signal layers near the XIAO to avoid the existing RXEN/control corridor. The BQ25798 I2C pins use short local fanouts before joining the same XIAO-side bus, and the pullups sit next to that bus. The E22 control routes use short top-layer fanouts, vias, then `In2.Cu` tracks. The E22 SPI routes use left-side fanouts and a bottom-layer stepped bus to avoid the current boost-stage region. This keeps them away from the unresolved RF launch and avoids treating the staged power passives as final placement.
 
 The same generated pass now adds `TOP_GND_FILL` on `F.Cu` and `L2_GND_REFERENCE` on `In1.Cu`, both tied to `GND` and inset 0.5 mm from the current 85 x 75 mm board outline. The top fill clears the broad passive/module ground ratsnest without creating shorts, while Layer 2 remains the intended continuous reference plane. A generated bottom pour trial was rejected because it created an isolated thermal island at the XIAO socket ground pad; bottom-side copper should be revisited only with a more deliberate via/stitching plan.
 
@@ -229,7 +226,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-90 expected unrouted ratsnest items
+95 expected unrouted ratsnest items
 0 footprint errors
 3 known footprint/library warnings: MOD2, U3 and L2
 ```
