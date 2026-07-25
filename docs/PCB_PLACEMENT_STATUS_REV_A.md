@@ -108,14 +108,15 @@ Only stable, low-current nets are routed in this first pass:
 - `E22_BUSY`: E22 busy signal to XIAO D2 through a short fanout, via and Layer-3 route.
 - `E22_NSS`: E22 chip select to XIAO D3 through a short fanout, via and Layer-3 route.
 - `E22_RXEN`: E22 receive-enable to XIAO D6 through a short fanout, via and Layer-3 route.
+- `SPI_SCK`: E22 SCK to XIAO D8 through a short fanout, via, bottom-layer bus route and top-layer XIAO entry.
+- `SPI_MISO`: E22 MISO to XIAO D9 through a short fanout, via, bottom-layer bus route and top-layer XIAO entry.
+- `SPI_MOSI`: E22 MOSI to XIAO D10 through a short fanout, via, bottom-layer bus route and top-layer XIAO entry.
 - `3V3`: J6 optional BME680/environmental connector to the XIAO 3.3 V pin.
 - `GND`: J6 optional BME680/environmental connector to the XIAO ground pin.
-- `I2C_SDA`: J6 optional BME680/environmental connector to XIAO D4.
-- `I2C_SCL`: J6 optional BME680/environmental connector to XIAO D5.
 
-The J6 routes use short top-layer fanouts, vias, then bottom-layer traces to the XIAO socket pads. The E22 control routes use short top-layer fanouts, vias, then `In2.Cu` tracks. This keeps them away from the unresolved RF launch and avoids treating the staged power passives as final placement.
+The J6 power routes use short top-layer fanouts, vias, then `In2.Cu` traces to the XIAO socket pads. The E22 control routes use short top-layer fanouts, vias, then `In2.Cu` tracks. The E22 SPI routes use left-side fanouts and a bottom-layer stepped bus to avoid the current boost-stage region. This keeps them away from the unresolved RF launch and avoids treating the staged power passives as final placement.
 
-The E22 SPI nets (`SPI_SCK`, `SPI_MISO`, `SPI_MOSI`) remain unrouted. A trial route exposed that the current boost-converter/inductor placement blocks the cleanest SPI corridor, so those nets are deferred until the power-stage placement is reviewed.
+The J6 I2C signal nets (`I2C_SDA`, `I2C_SCL`) remain unrouted. Routing trials showed that the present J6/J3/XIAO placement pinches the optional sensor connector corridor, so those nets are deferred until the low-current connector placement is reviewed.
 
 The same generated pass now adds the `L2_GND_REFERENCE` zone on `In1.Cu`, tied to `GND`, inset 0.5 mm from the current 85 x 75 mm board outline. This implements the intended continuous Layer-2 ground reference for the scaffold. Additional ground stitching vias are still a future routing task.
 
@@ -189,7 +190,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-169 expected unrouted ratsnest items
+168 expected unrouted ratsnest items
 0 footprint errors
 1 warning: MOD2 library footprint mismatch
 ```

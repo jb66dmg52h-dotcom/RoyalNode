@@ -34,7 +34,7 @@ SEGMENTS = [
     {
         "name": "j6-3v3-backbone",
         "net": "3V3",
-        "layer": "B.Cu",
+        "layer": "In2.Cu",
         "width": 0.20,
         "points": [(90.12, 22.30), (82.00, 22.30), (82.00, 33.54), (80.39, 33.54)],
     },
@@ -48,37 +48,9 @@ SEGMENTS = [
     {
         "name": "j6-gnd-backbone",
         "net": "GND",
-        "layer": "B.Cu",
+        "layer": "In2.Cu",
         "width": 0.20,
         "points": [(91.38, 23.80), (84.00, 23.80), (84.00, 38.62), (80.39, 38.62)],
-    },
-    {
-        "name": "j6-sda-fanout",
-        "net": "I2C_SDA",
-        "layer": "F.Cu",
-        "width": 0.20,
-        "points": [(92.62, 25.15), (92.62, 21.50)],
-    },
-    {
-        "name": "j6-sda-backbone",
-        "net": "I2C_SDA",
-        "layer": "B.Cu",
-        "width": 0.20,
-        "points": [(92.62, 21.50), (60.00, 21.50), (60.00, 33.54), (62.61, 33.54)],
-    },
-    {
-        "name": "j6-scl-fanout",
-        "net": "I2C_SCL",
-        "layer": "F.Cu",
-        "width": 0.20,
-        "points": [(93.88, 25.15), (93.88, 20.75)],
-    },
-    {
-        "name": "j6-scl-backbone",
-        "net": "I2C_SCL",
-        "layer": "B.Cu",
-        "width": 0.20,
-        "points": [(93.88, 20.75), (58.80, 20.75), (58.80, 36.08), (62.61, 36.08)],
     },
     {
         "name": "e22-nrst-fanout",
@@ -150,18 +122,85 @@ SEGMENTS = [
         "width": 0.20,
         "points": [(28.60, 56.54), (28.60, 68.50), (62.61, 68.50), (62.61, 38.62)],
     },
+    {
+        "name": "e22-sck-fanout",
+        "net": "SPI_SCK",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(53.65, 54.00), (50.40, 54.00)],
+    },
+    {
+        "name": "e22-sck-backbone",
+        "net": "SPI_SCK",
+        "layer": "B.Cu",
+        "width": 0.20,
+        "points": [(50.40, 54.00), (50.40, 24.60), (88.00, 24.60), (88.00, 25.92)],
+    },
+    {
+        "name": "e22-sck-xiao-entry",
+        "net": "SPI_SCK",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(88.00, 25.92), (80.39, 25.92)],
+    },
+    {
+        "name": "e22-miso-fanout",
+        "net": "SPI_MISO",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(53.65, 59.08), (51.20, 59.08)],
+    },
+    {
+        "name": "e22-miso-backbone",
+        "net": "SPI_MISO",
+        "layer": "B.Cu",
+        "width": 0.20,
+        "points": [(51.20, 59.08), (51.20, 27.00), (87.00, 27.00), (87.00, 28.46)],
+    },
+    {
+        "name": "e22-miso-xiao-entry",
+        "net": "SPI_MISO",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(87.00, 28.46), (80.39, 28.46)],
+    },
+    {
+        "name": "e22-mosi-fanout",
+        "net": "SPI_MOSI",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(53.65, 56.54), (52.40, 56.54)],
+    },
+    {
+        "name": "e22-mosi-backbone",
+        "net": "SPI_MOSI",
+        "layer": "B.Cu",
+        "width": 0.20,
+        "points": [(52.40, 56.54), (52.40, 32.20), (86.00, 32.20), (86.00, 31.00)],
+    },
+    {
+        "name": "e22-mosi-xiao-entry",
+        "net": "SPI_MOSI",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(86.00, 31.00), (80.39, 31.00)],
+    },
 ]
 
 VIAS = [
     {"name": "j6-3v3-via", "net": "3V3", "at": (90.12, 22.30)},
     {"name": "j6-gnd-via", "net": "GND", "at": (91.38, 23.80)},
-    {"name": "j6-sda-via", "net": "I2C_SDA", "at": (92.62, 21.50)},
-    {"name": "j6-scl-via", "net": "I2C_SCL", "at": (93.88, 20.75)},
     {"name": "e22-nrst-via", "net": "E22_NRST", "at": (54.60, 61.62)},
     {"name": "e22-dio1-via", "net": "E22_DIO1", "at": (55.20, 66.70)},
     {"name": "e22-busy-via", "net": "E22_BUSY", "at": (55.80, 64.16)},
     {"name": "e22-nss-via", "net": "E22_NSS", "at": (57.00, 51.46)},
     {"name": "e22-rxen-via", "net": "E22_RXEN", "at": (28.60, 56.54)},
+    {"name": "e22-sck-e22-via", "net": "SPI_SCK", "at": (50.40, 54.00)},
+    {"name": "e22-sck-xiao-via", "net": "SPI_SCK", "at": (88.00, 25.92)},
+    {"name": "e22-miso-e22-via", "net": "SPI_MISO", "at": (51.20, 59.08)},
+    {"name": "e22-miso-xiao-via", "net": "SPI_MISO", "at": (87.00, 28.46)},
+    {"name": "e22-mosi-e22-via", "net": "SPI_MOSI", "at": (52.40, 56.54)},
+    {"name": "e22-mosi-xiao-via", "net": "SPI_MOSI", "at": (86.00, 31.00)},
 ]
 
 def stable_uuid(*parts: str) -> str:
@@ -172,21 +211,18 @@ GROUND_ZONE_UUID = stable_uuid("zone", "l2-ground-reference")
 RETIRED_GENERATED_UUIDS = {
     stable_uuid("segment", "e22-rxen-direct", "1"),
     stable_uuid("segment", "e22-rxen-direct", "2"),
-    stable_uuid("segment", "e22-sck-fanout", "0"),
-    stable_uuid("segment", "e22-sck-backbone", "0"),
-    stable_uuid("segment", "e22-sck-backbone", "1"),
-    stable_uuid("segment", "e22-sck-backbone", "2"),
-    stable_uuid("segment", "e22-sck-backbone", "3"),
-    stable_uuid("segment", "e22-miso-fanout", "0"),
-    stable_uuid("segment", "e22-miso-backbone", "0"),
-    stable_uuid("segment", "e22-miso-backbone", "1"),
-    stable_uuid("segment", "e22-miso-backbone", "2"),
-    stable_uuid("segment", "e22-miso-backbone", "3"),
-    stable_uuid("segment", "e22-mosi-fanout", "0"),
-    stable_uuid("segment", "e22-mosi-backbone", "0"),
-    stable_uuid("segment", "e22-mosi-backbone", "1"),
-    stable_uuid("segment", "e22-mosi-backbone", "2"),
-    stable_uuid("segment", "e22-mosi-backbone", "3"),
+    stable_uuid("segment", "j6-sda-fanout", "0"),
+    stable_uuid("segment", "j6-sda-fanout", "1"),
+    stable_uuid("segment", "j6-sda-backbone", "0"),
+    stable_uuid("segment", "j6-sda-backbone", "1"),
+    stable_uuid("segment", "j6-sda-backbone", "2"),
+    stable_uuid("segment", "j6-scl-fanout", "0"),
+    stable_uuid("segment", "j6-scl-fanout", "1"),
+    stable_uuid("segment", "j6-scl-backbone", "0"),
+    stable_uuid("segment", "j6-scl-backbone", "1"),
+    stable_uuid("segment", "j6-scl-backbone", "2"),
+    stable_uuid("via", "j6-sda-via"),
+    stable_uuid("via", "j6-scl-via"),
     stable_uuid("via", "e22-sck-via"),
     stable_uuid("via", "e22-miso-via"),
     stable_uuid("via", "e22-mosi-via"),
@@ -319,7 +355,7 @@ def main() -> None:
         raise SystemExit("PCB file does not end with a closing S-expression")
     body = text[:-1].rstrip()
     PCB.write_text(f"{body}\n{generated_blocks()}\n)\n", encoding="utf-8")
-    print("Generated initial routes, E22 control subset and L2 ground reference plane")
+    print("Generated initial routes, E22 control/SPI subset and L2 ground reference plane")
 
 
 if __name__ == "__main__":

@@ -422,18 +422,17 @@ def check_initial_routes() -> None:
         "E22_RXEN",
         "3V3",
         "GND",
-        "I2C_SDA",
-        "I2C_SCL",
         "j6-3v3-backbone",
         "j6-gnd-backbone",
-        "j6-sda-backbone",
-        "j6-scl-backbone",
         "e22-nrst-backbone",
         "e22-dio1-backbone",
         "e22-busy-backbone",
         "e22-nss-backbone",
         "e22-rxen-direct",
         "e22-rxen-backbone",
+        "e22-sck-backbone",
+        "e22-miso-backbone",
+        "e22-mosi-backbone",
         'net "{net}"',
         "L2_GND_REFERENCE",
     ]:
@@ -458,6 +457,9 @@ def check_initial_routes() -> None:
         "E22_BUSY",
         "E22_NSS",
         "E22_RXEN",
+        "SPI_SCK",
+        "SPI_MISO",
+        "SPI_MOSI",
     ]:
         if not re.search(rf'\(net\s+"{re.escape(net_name)}"\)', pcb):
             fail(f"PCB missing generated initial route for net {net_name!r}")
