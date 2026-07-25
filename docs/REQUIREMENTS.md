@@ -37,11 +37,11 @@ RoyalNode Rev A is an engineering-validation platform for a rugged, solar-powere
 
 ### High-current power connectors
 
-- Battery input: XT60.
-- Solar input: XT60.
-- XT60-equivalent locking connectors may be used only if they meet or exceed XT60 contact reliability, current capability and mechanical retention.
-- PCB-mounted XT60 connectors are preferred where enclosure space permits.
-- Panel-mounted XT60 connectors with short 16–18 AWG silicone-wire pigtails are acceptable.
+- Battery input: board-mounted XT30.
+- Solar input: board-mounted XT30.
+- XT30-equivalent locking connectors may be used only if they meet or exceed XT30 contact reliability, current capability and mechanical retention.
+- PCB-mounted XT30 connectors are preferred where enclosure space permits.
+- Panel-mounted XT30 connectors with short 16–18 AWG silicone-wire pigtails are acceptable.
 - Solar and battery connector positions must be mechanically keyed and clearly labeled to prevent cross-connection.
 
 ### Low-current signal connectors
@@ -114,7 +114,7 @@ The following shall not be included as deployed telemetry sensors unless future 
 
 - Socketed XIAO nRF52840 on Rev A.
 - Serviceable EBYTE radio module.
-- XT60 battery and solar connectors.
+- XT30 battery and solar connectors.
 - No low-current connector except the optional 4-pin JST-GH environmental-sensor port.
 - Solar wiring sized for approximately 3.3 A continuous current with low voltage drop.
 - Battery wiring sized for at least 5 A continuous capability.
@@ -164,5 +164,5 @@ Rev A is successful when:
 7. Battery voltage or state of charge appears correctly through MeshCore telemetry.
 8. MCU temperature appears through MeshCore where supported.
 9. Optional BME680 temperature, humidity and pressure appear through MeshCore when fitted.
-10. XT60 and any fitted JST-GH connector pass continuity, retention and polarity checks.
+10. XT30 and any fitted JST-GH connector pass continuity, retention and polarity checks.
 11. The board survives multi-day outdoor pilot testing without unexplained resets.

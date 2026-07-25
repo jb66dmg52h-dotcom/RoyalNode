@@ -5,14 +5,14 @@
 ```text
 6 V / 20 W solar panel
           |
-  XT60, fuse, reverse protection,
+  XT30, fuse, reverse protection,
   TVS and input filtering
           |
   BQ24650 1S solar MPPT buck charger
           |
   1S 15 Ah protected Li-ion battery
           |
-      XT60 + main fuse
+      XT30 + main fuse
           |
           +-------------------------------+
           |                               |
@@ -52,7 +52,7 @@ The pack no longer needs cell balancing because all parallel cells operate as on
 - over-current and short-circuit protection
 - at least 5 A continuous discharge capability
 - transient capability above 5 A
-- a main fuse near the XT60 connection
+- a main fuse near the XT30 connection
 
 At a 6 W radio load and approximately 85–90% boost efficiency, the battery may supply roughly 1.6 A at 4.2 V and approximately 2.2–2.6 A near the low end of the allowed battery range. Copper, fuse, protection FETs and wiring are sized with substantial margin.
 
@@ -126,7 +126,7 @@ The board-mounted SMA is connected to EBYTE ANT pin 21 through a short 50-ohm co
 - 5.0 V / 3 A radio-rail target
 - Seeed XIAO nRF52840
 - EBYTE E22-900M33S
-- XT60 battery and solar connectors
+- XT30 battery and solar connectors
 - optional BME680 JST-GH connector
 - PCB-mounted edge-launch SMA
 - four-layer PCB and two-ounce outer copper preference
@@ -146,8 +146,8 @@ The board-mounted SMA is connected to EBYTE ANT pin 21 through a short 50-ohm co
 
 ## Connector architecture
 
-- Battery: XT60
-- Solar: XT60
+- Battery: XT30
+- Solar: XT30
 - Optional environmental sensor: 4-pin JST-GH
 - Antenna: PCB-mounted edge-launch SMA
 - Programming: XIAO USB-C
