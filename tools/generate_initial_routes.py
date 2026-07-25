@@ -1298,6 +1298,7 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("via", "boost-ilim-u3-via"),
     stable_uuid("via", "boost-ilim-r403-via"),
     stable_uuid("segment", "boost-ss-c407-local", "1"),
+    stable_uuid("segment", "boost-vcc-c405-local", "0"),
 }
 
 
