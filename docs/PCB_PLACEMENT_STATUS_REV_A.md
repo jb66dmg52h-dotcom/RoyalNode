@@ -129,6 +129,7 @@ Only stable local/control nets are routed in this first pass:
 - `GND`: short local U2 duplicate-ground pin tie.
 - `XIAO_BAT_ISO`: short local U2 CE/VOUT tie.
 - `SOLAR_PROT_GATE`: U4 gate output is now routed to the Q1 gate tie using short top-layer fanouts and a back-layer escape; source/drain power pads remain unrouted.
+- `SOLAR_PROT_COMMON`: Q1 common pads are now tied with a left-shifted back-layer loop that clears the gate backbone.
 - `BQ_ACDRV1`: short local Q2 gate pin tie only; source/drain power pads remain unrouted.
 - `BQ_ACDRV2`: short local Q3 gate pin tie only; source/drain power pads remain unrouted.
 - `SOLAR_FUSED`: F1 output is now routed to Q1 through a short wide top/back/top path; U4/divider sensing branches remain unrouted.
@@ -226,7 +227,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-76 expected unrouted ratsnest items
+75 expected unrouted ratsnest items
 0 footprint errors
 3 known footprint/library warnings: MOD2, U3 and L2
 ```

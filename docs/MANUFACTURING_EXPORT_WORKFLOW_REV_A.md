@@ -42,7 +42,7 @@ Known blockers:
 - J5 is still a draft SMA envelope, not a released Molex edge-launch footprint.
 - Final 50 ohm GCPW width/gap still needs the JLCPCB stack-up calculation.
 - High-current power rails and switching loops are not complete.
-- Current DRC has 76 expected unconnected items.
+- Current DRC has 75 expected unconnected items.
 - Current known footprint/library warnings are MOD2, U3 and L2.
 
 ## Intended Use
