@@ -46,7 +46,7 @@ kicad-cli sch erc --exit-code-violations --severity-all
 
 kicad-cli pcb drc --severity-all
   3 known footprint/library warnings: MOD2, U3 and L2
-  44 expected unconnected/ratsnest items because the board is not routed
+  43 expected unconnected/ratsnest items because the board is not routed
 ```
 
 The known footprint warnings are tracked because MOD2 is a local JLC/LCSC release candidate for a factory-installed E22 module and U3/L2 are local release-candidate power footprints whose board instances are rotated for the accepted boost topology. These must be cleared by KiCad footprint update/save behavior or explicitly accepted through JLCPCB DFM/PCBA review before fabrication release.
@@ -55,7 +55,7 @@ J3 has been moved to the bottom service edge to clear the J6/SMA/C503 area. J6 h
 
 `BOOST_EN` remains intentionally unrouted until the TPS61088 local fanout and R405 placement are reviewed. A generated trial route was rejected because it crowded the exposed ground pad and solder-mask openings.
 
-`BQ_REGN`/`ILIM_HIZ` and the protection-divider `GND` local link are also intentionally unrouted until their local placement/fanout is improved. Generated trial routes were rejected and retired because they crossed I2C/OV routes or crowded adjacent pads.
+`BQ_REGN` and the protection-divider `GND` local link remain intentionally unrouted until their local placement/fanout is improved. Generated trial routes were rejected and retired because they crossed I2C/OV routes or crowded adjacent pads. `BOOST_ILIM` is now locally routed after moving R403 beside the TPS61088.
 
 ## Active Blockers
 

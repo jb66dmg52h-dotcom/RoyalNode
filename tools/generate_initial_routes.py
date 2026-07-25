@@ -879,6 +879,20 @@ SEGMENTS = [
         "points": [(34.10, 29.00), (34.93, 29.00)],
     },
     {
+        "name": "boost-ilim-u3-fanout",
+        "net": "BOOST_ILIM",
+        "layer": "F.Cu",
+        "width": 0.15,
+        "points": [(57.35, 56.75), (57.35, 61.20)],
+    },
+    {
+        "name": "boost-ilim-internal-run",
+        "net": "BOOST_ILIM",
+        "layer": "F.Cu",
+        "width": 0.15,
+        "points": [(57.35, 61.20), (57.58, 61.20)],
+    },
+    {
         "name": "e22-nrst-fanout",
         "net": "E22_NRST",
         "layer": "F.Cu",
@@ -1271,6 +1285,11 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("via", "e22-sck-via"),
     stable_uuid("via", "e22-miso-via"),
     stable_uuid("via", "e22-mosi-via"),
+    stable_uuid("segment", "boost-ilim-internal-run", "1"),
+    stable_uuid("segment", "boost-ilim-internal-run", "2"),
+    stable_uuid("segment", "boost-ilim-r403-fanout", "0"),
+    stable_uuid("via", "boost-ilim-u3-via"),
+    stable_uuid("via", "boost-ilim-r403-via"),
 }
 
 
