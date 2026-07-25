@@ -1327,6 +1327,12 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("segment", "q1-solar-protected-right-entry", "0"),
     stable_uuid("via", "q1-solar-protected-left-via"),
     stable_uuid("via", "q1-solar-protected-right-via"),
+    stable_uuid("segment", "bq-btst2-c217-local", "0"),
+    stable_uuid("segment", "bq-btst2-c217-local", "1"),
+    stable_uuid("segment", "bq-btst2-c217-local", "2"),
+    stable_uuid("segment", "bq-sw2-c217-local", "0"),
+    stable_uuid("segment", "bq-sw2-c217-local", "1"),
+    stable_uuid("segment", "bq-sw2-c217-local", "2"),
 }
 
 

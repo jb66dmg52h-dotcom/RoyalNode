@@ -71,6 +71,8 @@ The current layout ties the adjacent TPS61088 switch pins into L2 with compact l
 
 C216 is now relocated below U1 with `BQ_BTST1` and the local capacitor side of `BQ_SW1` routed. The remaining `BQ_SW1` ratsnest item is the inductor/power-loop path, not the bootstrap-cap connection.
 
+A 2026-07-25 C217 `BQ_BTST2`/local `BQ_SW2` trial was rejected. The proposed lower-right placement collided with C218 ground, the accepted 3.3 V pullup path, and the existing `BQ_INT`/`BQ_PROG` fanout. Treat C217 as part of a coordinated right-side U1 fanout pass.
+
 ## Pass 5: Remaining Sense And Control Nets
 
 Route after nearby placement is stable:
