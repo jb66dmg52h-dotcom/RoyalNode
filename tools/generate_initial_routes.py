@@ -144,6 +144,13 @@ SEGMENTS = [
         "points": [(64.80, 80.60), (64.80, 42.80)],
     },
     {
+        "name": "charge-led-k-local",
+        "net": "CHG_LED_K",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(35.99, 93.00), (39.98, 93.00)],
+    },
+    {
         "name": "e22-nrst-fanout",
         "net": "E22_NRST",
         "layer": "F.Cu",
@@ -470,7 +477,7 @@ def main() -> None:
         raise SystemExit("PCB file does not end with a closing S-expression")
     body = text[:-1].rstrip()
     PCB.write_text(f"{body}\n{generated_blocks()}\n)\n", encoding="utf-8")
-    print("Generated initial routes, E22 control/SPI, J6 I2C and L2 ground reference plane")
+    print("Generated initial routes, E22 control/SPI, J6 I2C, charge LED link and L2 ground reference plane")
 
 
 if __name__ == "__main__":

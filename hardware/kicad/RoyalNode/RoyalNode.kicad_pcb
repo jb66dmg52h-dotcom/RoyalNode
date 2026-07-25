@@ -16827,6 +16827,14 @@
 		(uuid "b5175222-9d08-5350-8b87-794fd13e5ef9")
 	)
 	(segment
+		(start 35.99 93)
+		(end 39.98 93)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "CHG_LED_K")
+		(uuid "39e35dc8-6c8e-5fe2-bf61-69991a0acd4a")
+	)
+	(segment
 		(start 80.39 33.54)
 		(end 84.98 33)
 		(width 0.2)
