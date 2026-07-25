@@ -226,7 +226,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-91 expected unrouted ratsnest items
+89 expected unrouted ratsnest items
 0 footprint errors
 3 known footprint/library warnings: MOD2, U3 and L2
 ```
