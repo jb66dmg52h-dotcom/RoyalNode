@@ -113,10 +113,10 @@ Only stable, low-current nets are routed in this first pass:
 - `SPI_MOSI`: E22 MOSI to XIAO D10 through a short fanout, via, bottom-layer bus route and top-layer XIAO entry.
 - `3V3`: J6 optional BME680/environmental connector to the XIAO 3.3 V pin.
 - `GND`: J6 optional BME680/environmental connector to the XIAO ground pin.
+- `I2C_SDA`: J6 optional BME680/environmental connector to the XIAO D4/SDA pin.
+- `I2C_SCL`: J6 optional BME680/environmental connector to the XIAO D5/SCL pin.
 
-The J6 power routes use short top-layer fanouts, vias, then `In2.Cu` traces to the XIAO socket pads. The E22 control routes use short top-layer fanouts, vias, then `In2.Cu` tracks. The E22 SPI routes use left-side fanouts and a bottom-layer stepped bus to avoid the current boost-stage region. This keeps them away from the unresolved RF launch and avoids treating the staged power passives as final placement.
-
-The J6 I2C signal nets (`I2C_SDA`, `I2C_SCL`) remain unrouted. Routing trials showed that the present J6/J3/XIAO placement pinches the optional sensor connector corridor, so those nets are deferred until the low-current connector placement is reviewed.
+The J6 routes use short top-layer fanouts and vias, then a mix of `In2.Cu` and bottom-layer tracks into the XIAO socket pads. The I2C pair is split across bottom and inner signal layers near the XIAO to avoid the existing RXEN/control corridor. The E22 control routes use short top-layer fanouts, vias, then `In2.Cu` tracks. The E22 SPI routes use left-side fanouts and a bottom-layer stepped bus to avoid the current boost-stage region. This keeps them away from the unresolved RF launch and avoids treating the staged power passives as final placement.
 
 The same generated pass now adds the `L2_GND_REFERENCE` zone on `In1.Cu`, tied to `GND`, inset 0.5 mm from the current 85 x 75 mm board outline. This implements the intended continuous Layer-2 ground reference for the scaffold. Additional ground stitching vias are still a future routing task.
 
@@ -190,7 +190,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-168 expected unrouted ratsnest items
+166 expected unrouted ratsnest items
 0 footprint errors
 1 warning: MOD2 library footprint mismatch
 ```

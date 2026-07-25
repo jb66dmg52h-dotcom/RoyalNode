@@ -53,6 +53,34 @@ SEGMENTS = [
         "points": [(91.38, 23.80), (84.00, 23.80), (84.00, 38.62), (80.39, 38.62)],
     },
     {
+        "name": "j6-sda-fanout",
+        "net": "I2C_SDA",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(92.62, 25.15), (92.62, 22.20)],
+    },
+    {
+        "name": "j6-sda-backbone",
+        "net": "I2C_SDA",
+        "layer": "B.Cu",
+        "width": 0.20,
+        "points": [(92.62, 22.20), (92.62, 41.40), (59.20, 41.40), (59.20, 33.54), (62.61, 33.54)],
+    },
+    {
+        "name": "j6-scl-fanout",
+        "net": "I2C_SCL",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(93.88, 25.15), (93.88, 23.60)],
+    },
+    {
+        "name": "j6-scl-backbone",
+        "net": "I2C_SCL",
+        "layer": "In2.Cu",
+        "width": 0.20,
+        "points": [(93.88, 23.60), (93.88, 42.80), (63.80, 42.80), (63.80, 36.08), (62.61, 36.08)],
+    },
+    {
         "name": "e22-nrst-fanout",
         "net": "E22_NRST",
         "layer": "F.Cu",
@@ -190,6 +218,8 @@ SEGMENTS = [
 VIAS = [
     {"name": "j6-3v3-via", "net": "3V3", "at": (90.12, 22.30)},
     {"name": "j6-gnd-via", "net": "GND", "at": (91.38, 23.80)},
+    {"name": "j6-sda-via", "net": "I2C_SDA", "at": (92.62, 22.20)},
+    {"name": "j6-scl-via", "net": "I2C_SCL", "at": (93.88, 23.60)},
     {"name": "e22-nrst-via", "net": "E22_NRST", "at": (54.60, 61.62)},
     {"name": "e22-dio1-via", "net": "E22_DIO1", "at": (55.20, 66.70)},
     {"name": "e22-busy-via", "net": "E22_BUSY", "at": (55.80, 64.16)},
@@ -216,11 +246,13 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("segment", "j6-sda-backbone", "0"),
     stable_uuid("segment", "j6-sda-backbone", "1"),
     stable_uuid("segment", "j6-sda-backbone", "2"),
+    stable_uuid("segment", "j6-sda-backbone", "3"),
     stable_uuid("segment", "j6-scl-fanout", "0"),
     stable_uuid("segment", "j6-scl-fanout", "1"),
     stable_uuid("segment", "j6-scl-backbone", "0"),
     stable_uuid("segment", "j6-scl-backbone", "1"),
     stable_uuid("segment", "j6-scl-backbone", "2"),
+    stable_uuid("segment", "j6-scl-backbone", "3"),
     stable_uuid("via", "j6-sda-via"),
     stable_uuid("via", "j6-scl-via"),
     stable_uuid("via", "e22-sck-via"),
@@ -355,7 +387,7 @@ def main() -> None:
         raise SystemExit("PCB file does not end with a closing S-expression")
     body = text[:-1].rstrip()
     PCB.write_text(f"{body}\n{generated_blocks()}\n)\n", encoding="utf-8")
-    print("Generated initial routes, E22 control/SPI subset and L2 ground reference plane")
+    print("Generated initial routes, E22 control/SPI, J6 I2C and L2 ground reference plane")
 
 
 if __name__ == "__main__":

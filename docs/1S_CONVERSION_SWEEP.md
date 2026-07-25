@@ -30,8 +30,8 @@ RoyalNode Rev A shall use:
 | Low-voltage thresholds | 2S thresholds | 1S thresholds | Replace firmware values |
 | Battery fuse | Lower current possible | Higher-current path required | Recalculate |
 | Battery wiring | 18–20 AWG possible | 16–18 AWG preferred | Increase capacity |
-| Battery connector | XT60 | Board-mounted XT30 | Replace footprint |
-| Solar connector | XT60 | Board-mounted XT30 | Replace footprint |
+| Battery connector | Oversized high-current connector | Board-mounted XT30 | Replace footprint |
+| Solar connector | Oversized high-current connector | Board-mounted XT30 | Replace footprint |
 | USB-C | Firmware only or undefined | Firmware, external power and charging | Add controlled power-path design |
 | Power control | Undefined | Push-button latching/load-switch architecture | Add |
 | Indicators | Undefined | Charging and system-status LEDs | Add |
