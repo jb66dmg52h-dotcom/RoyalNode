@@ -13,7 +13,7 @@ make layout-status
 Current result:
 
 - ERC: 0 violations
-- DRC: 1 known warning, `MOD2` footprint/library mismatch
+- DRC: 3 known footprint/library warnings, `MOD2`, `U3` and `L2`
 - Unrouted: 140 ratsnest pairs
 
 ## Pass 1: Placement Blockers
@@ -83,5 +83,7 @@ These should avoid switch-node copper and RF launch copper.
 - The 2026-07-25 Molex product-page recheck keeps `732511150` selected, but does not release the footprint. The sales drawing/recommended launch geometry is still required.
 - Do not route `BOOST_EN` until the TPS61088/R405 fanout placement is fixed.
 - Two R405 relocation trials near the TPS61088 EN pin were rejected: one collided with the E22 SPI pad/courtyard corridor and one collided with the E22_NSS route/via corridor. Treat `BOOST_EN` as a placement-corridor problem, not as a single missing short segment.
+- A TPS61088 small-passive relocation trial that moved C405/C406/C407/C408 and R400/R401/R402/R403/R404 into the immediate U3 top/left corridor was rejected on 2026-07-25. It shorted into the existing E22_NSS/SPI fanout, overlapped the E22 courtyard and collided with the L2 inductor courtyard. Treat the boost support network as requiring a U3/L2 placement shift or a bottom-side/local-via strategy, not a simple top-side shove toward the E22.
+- The accepted 2026-07-25 U3/L2 rotation puts TPS61088 VOUT toward the E22 5 V entry and BOOST_SW toward the XAL7030 inductor. Continue boost placement from this topology.
 - A BQ25798 right-side TS-divider relocation trial was rejected because it shorted `BQ_TS` to `BQ_REGN` and violated U1/capacitor courtyards. Treat `BQ_REGN`/`BQ_TS` as a compact HOTROD-package placement pass, not as a generic passive-grid cleanup.
 - Do not force ground traces where a pour/stitching plan is required.

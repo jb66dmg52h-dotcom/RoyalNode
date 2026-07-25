@@ -409,7 +409,7 @@ def check_generated_pcb_placement() -> None:
         "J_POWER_XT30PW_M_C431092_RC",
         "MOD1_XIAO_NRF52840_SOCKET_C53202181_RC",
         "factory PCBA footprint",
-        "lib_footprint_mismatch on MOD2",
+        "3 known footprint/library warnings",
         "Do not add test points",
     ]:
         if needle not in status:

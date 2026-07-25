@@ -54,8 +54,8 @@ The passive anchors are staging placements for footprint/net review, not final r
 | `J6` | `J_LOW_JST_GH_SM04B_GHS_TB_RC` | 92.0, 27.0 mm | 0 deg | Optional BME680/environmental I2C connector release candidate |
 | `U1` | `U1_BQ25798_RQM0029A_RC` | 65.0, 75.0 mm | 0 deg | Charger/controller release candidate |
 | `L1` | `L1_COILCRAFT_XAL7070_222MEC_RC` | 65.0, 84.0 mm | 0 deg | Charger inductor release candidate |
-| `U3` | `U3_TPS61088_RHL0020A_THERMALVIAS_RC` | 59.0, 55.0 mm | 0 deg | Radio boost converter release candidate |
-| `L2` | `L2_COILCRAFT_XAL7030_222MEC_RC` | 66.5, 55.0 mm | 0 deg | Boost inductor release candidate |
+| `U3` | `U3_TPS61088_RHL0020A_THERMALVIAS_RC` | 59.0, 55.0 mm | 180 deg | Radio boost converter release candidate, VOUT toward E22 |
+| `L2` | `L2_COILCRAFT_XAL7030_222MEC_RC` | 66.5, 55.0 mm | 180 deg | Boost inductor release candidate, BOOST_SW toward U3 |
 | `U2` | `U2_LM66100_DCK0006A_SC70_6_RC` | 84.0, 49.0 mm | 0 deg | XIAO ideal-diode release candidate |
 | `U4` | `U4_LTC4365_TSOT23_8_RC` | 74.0, 50.0 mm | 0 deg | Solar protection controller release candidate |
 | `F1` | `F1_LITTELFUSE_483_1206_RC` | 87.0, 54.0 mm | 0 deg | Solar input fuse release candidate |
@@ -88,7 +88,7 @@ R205 and R206, the I2C pullups, are now moved out of the generic lower passive s
 The first power-stage placement cluster now exists:
 
 - BQ25798 plus XAL7070 inductor in the lower middle, between the input connectors and battery/SYS region.
-- TPS61088 plus XAL7030 inductor immediately right of the E22 module, away from the RF corridor and close enough for a short 5 V radio rail.
+- TPS61088 plus XAL7030 inductor immediately right of the E22 module, away from the RF corridor and close enough for a short 5 V radio rail. U3 and L2 are now rotated 180 degrees so U3 VOUT faces the E22 radio VCC entry and U3 BOOST_SW faces the inductor.
 - LTC4365 and ISA170170N04LMDS FETs between the input connectors and charger region.
 - LM66100 near the XIAO side of the board for the XIAO battery-feed isolation path.
 
@@ -150,6 +150,10 @@ The RF path, high-current power rails, ground pours, BQ25798/TPS61088 switch nod
 `BOOST_EN` also remains unrouted after a trial route showed the current TPS61088/R405 placement needs a proper local fanout pass around the TPS61088 exposed ground pad and mask openings. Do not route this net as a casual long generated trace; adjust the boost-control passive placement and then fan out the EN pin cleanly.
 
 Two additional R405 relocation trials were rejected on 2026-07-25. A left-of-U3 placement collided with the E22 SPI pad/courtyard corridor, and an above-U3 placement collided with the E22_NSS route/via corridor. The failed generated segment has been retired in `tools/generate_initial_routes.py`.
+
+A wider TPS61088 small-passive relocation trial was also rejected on 2026-07-25. Placing C405/C406/C407/C408 and R400/R401/R402/R403/R404 immediately around the U3 top/left side caused shorts against E22_NSS/SPI copper, E22 courtyard overlap and L2 inductor courtyard overlap. Future boost placement work should either move the U3/L2 power stage as a unit or use a bottom-side/local-via support-passive strategy after checking assembly constraints.
+
+The accepted 2026-07-25 boost topology rotation keeps U3 and L2 at the same centers but rotates both 180 degrees. This moves the TPS61088 VOUT pads to the E22 side and the BOOST_SW pads toward L2. KiCad DRC reports no new clearance, short, courtyard or solder-mask violations from this rotation.
 
 `BQ_REGN` to `ILIM_HIZ` also remains unrouted after trial routes crossed the existing BQ25798 I2C fanouts or crowded the BQ25798 inductor/switch-node area. Treat this as a BQ25798 local-fanout placement task, not a long generated trace task.
 
@@ -227,7 +231,7 @@ PCB DRC:
 ```text
 140 expected unrouted ratsnest items
 0 footprint errors
-1 warning: MOD2 library footprint mismatch
+3 known footprint/library warnings: MOD2, U3 and L2
 ```
 
 Refresh the generated unrouted punch list with:

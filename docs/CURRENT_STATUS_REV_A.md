@@ -45,11 +45,11 @@ kicad-cli sch erc --exit-code-violations --severity-all
   0 violations
 
 kicad-cli pcb drc --severity-all
-  1 known warning: MOD2 library footprint mismatch
+  3 known footprint/library warnings: MOD2, U3 and L2
   140 expected unconnected/ratsnest items because the board is not routed
 ```
 
-The MOD2 warning is tracked because the E22 footprint is a local JLC/LCSC release candidate for a factory-installed module. It must be cleared by KiCad footprint update/save behavior or explicitly accepted through JLCPCB DFM/PCBA review before fabrication release.
+The known footprint warnings are tracked because MOD2 is a local JLC/LCSC release candidate for a factory-installed E22 module and U3/L2 are local release-candidate power footprints whose board instances are rotated for the accepted boost topology. These must be cleared by KiCad footprint update/save behavior or explicitly accepted through JLCPCB DFM/PCBA review before fabrication release.
 
 `BOOST_EN` remains intentionally unrouted until the TPS61088 local fanout and R405 placement are reviewed. A generated trial route was rejected because it crowded the exposed ground pad and solder-mask openings.
 
@@ -69,7 +69,7 @@ The MOD2 warning is tracked because the E22 footprint is a local JLC/LCSC releas
 4. XIAO socket orientation still needs physical USB-C, antenna and header-engagement review.
 
 5. Power-stage placement still needs refinement before routing.
-   The current passive locations are staging anchors for ratsnest review, not final optimized high-di/dt loop placement.
+   U3/L2 are now rotated into the preferred topology, but the current support-passive locations are still staging anchors for ratsnest review, not final optimized high-di/dt loop placement.
 
 ## Authoritative Documents
 
