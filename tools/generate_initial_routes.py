@@ -431,6 +431,13 @@ SEGMENTS = [
         "points": [(30.43, 89.00), (34.38, 89.00)],
     },
     {
+        "name": "bq-regn-r200-c215-local-link",
+        "net": "BQ_REGN",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(28.78, 89.00), (28.78, 87.10), (39.85, 87.10), (39.85, 85.00)],
+    },
+    {
         "name": "uv-divider-local",
         "net": "UV_NODE",
         "layer": "F.Cu",
