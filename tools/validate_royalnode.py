@@ -90,6 +90,7 @@ def check_symbols() -> None:
         "RN_XT30PW_M",
         "RN_SMA_EDGE",
         "RN_JST_PH_2",
+        "RN_TWO_PIN_POWER_PART",
     ]
     for name in required_symbols:
         if f'(symbol "{name}"' not in sym:
@@ -207,6 +208,47 @@ def check_capture_seed(seed_rows: list[dict[str, str]]) -> None:
             fail(f"NC row lacks explicit no-connect/floating note: {row}")
 
 
+def check_generated_schematic() -> None:
+    generator = read("tools/generate_kicad_capture.py")
+    for needle in ["SCHEMATIC_CAPTURE_SEED_REV_A.csv", "RN_TWO_PIN_POWER_PART", "CAPTURED_ORDER"]:
+        if needle not in generator:
+            fail(f"KiCad capture generator missing {needle!r}")
+
+    schematic = read("hardware/kicad/RoyalNode/RoyalNode.kicad_sch")
+    required_refs = [
+        "MOD1",
+        "MOD2",
+        "U1",
+        "U2",
+        "U3",
+        "U4",
+        "Q1",
+        "Q2",
+        "Q3",
+        "J1",
+        "J2",
+        "J3",
+        "J4",
+        "J5",
+        "F1",
+        "L1",
+        "L2",
+    ]
+    for ref in required_refs:
+        if f'(property "Reference" "{ref}"' not in schematic:
+            fail(f"generated schematic missing reference {ref}")
+    for net in ["E22_TXEN_DIO2", "RF_915", "5V_RADIO", "SOLAR_RAW", "BAT_RAW", "BQ_SW1", "BQ_SW2", "BOOST_SW"]:
+        if f'(global_label "{net}"' not in schematic:
+            fail(f"generated schematic missing net label {net}")
+    if 'Generated from SCHEMATIC_CAPTURE_SEED_REV_A.csv' not in schematic:
+        fail("schematic title block no longer records the capture seed")
+
+    status = read("docs/KICAD_CAPTURE_STATUS_REV_A.md")
+    for needle in ["K1a", "36 messages", "K1b", "Do not add test points"]:
+        if needle not in status:
+            fail(f"KiCad capture status missing {needle!r}")
+
+
 def main() -> None:
     core_rows = check_csv("bom/REV_A_LOCKED_CORE_BOM.csv")
     passive_rows = check_csv("bom/REV_A_LOCKED_PASSIVES.csv")
@@ -226,6 +268,7 @@ def main() -> None:
     check_e22_manual_draft_footprint()
     check_e22_assembler_crosscheck()
     check_capture_seed(seed_rows)
+    check_generated_schematic()
 
     print("RoyalNode validation passed")
     print(f"  core BOM rows: {len(core_rows)}")
