@@ -361,6 +361,13 @@ SEGMENTS = [
         "points": [(80.63, 62.10), (80.63, 63.37)],
     },
     {
+        "name": "solar-protected-q1-to-q2",
+        "net": "SOLAR_PROTECTED",
+        "layer": "F.Cu",
+        "width": 0.80,
+        "points": [(80.63, 57.91), (80.63, 62.10)],
+    },
+    {
         "name": "q3-usb-vbus-raw-drain-local",
         "net": "USB_VBUS_RAW",
         "layer": "F.Cu",
