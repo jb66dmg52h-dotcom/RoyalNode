@@ -564,6 +564,13 @@ SEGMENTS = [
         "points": [(68.00, 76.60), (66.85, 76.60)],
     },
     {
+        "name": "bq-sdrv-c218-local",
+        "net": "BQ_SDRV",
+        "layer": "F.Cu",
+        "width": 0.15,
+        "points": [(66.86, 73.40), (66.42, 73.40), (66.42, 70.80)],
+    },
+    {
         "name": "bq-regn-r200-c215-local-link",
         "net": "BQ_REGN",
         "layer": "F.Cu",
