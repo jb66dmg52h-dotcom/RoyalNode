@@ -96,6 +96,8 @@ The generated PCB scaffold is now net-aware. The placement generator reads `SCHE
 
 Generated footprint UUIDs are now normalized from each reference designator. This keeps generated PCB output reviewable across repeated placement/routing runs instead of producing fresh random UUID churn from KiCad library footprints.
 
+The project now includes `make full-check`, which runs the repository validator, KiCad ERC, KiCad DRC and an explicit report checker for the expected Rev A state.
+
 ## Initial Routed Nets
 
 The PCB now has a small generated-routing pass from:

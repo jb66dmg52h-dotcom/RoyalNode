@@ -27,6 +27,14 @@ Current architecture:
 
 ## Current Checks
 
+Preferred local verification command:
+
+```text
+make full-check
+```
+
+This runs the repository validator, KiCad ERC, KiCad DRC and the report gate that confirms only the expected Rev A warning/unrouted state is present.
+
 Expected command state:
 
 ```text

@@ -4,7 +4,7 @@ SCH := $(PROJECT_DIR)/RoyalNode.kicad_sch
 PCB := $(PROJECT_DIR)/RoyalNode.kicad_pcb
 FAB_DIR := hardware/fabrication
 
-.PHONY: validate generate-capture generate-placement generate-routes erc drc kicad-checks status
+.PHONY: validate generate-capture generate-placement generate-routes erc drc check-reports kicad-checks full-check status
 
 generate-capture:
 	python3 tools/generate_kicad_capture.py
@@ -24,7 +24,12 @@ erc:
 drc:
 	$(KICAD_CLI) pcb drc --refill-zones --save-board --output $(FAB_DIR)/RoyalNode_drc.rpt $(PCB)
 
+check-reports:
+	python3 tools/check_kicad_reports.py
+
 kicad-checks: erc drc
+
+full-check: validate erc drc check-reports
 
 status:
 	git status --short --branch
