@@ -151,6 +151,27 @@ SEGMENTS = [
         "points": [(35.99, 93.00), (39.98, 93.00)],
     },
     {
+        "name": "bq-stat-r207-fanout",
+        "net": "BQ_STAT",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(41.62, 93.00), (42.60, 93.00)],
+    },
+    {
+        "name": "bq-stat-backbone",
+        "net": "BQ_STAT",
+        "layer": "B.Cu",
+        "width": 0.20,
+        "points": [(42.60, 93.00), (62.40, 93.00), (62.40, 73.40)],
+    },
+    {
+        "name": "bq-stat-u1-entry",
+        "net": "BQ_STAT",
+        "layer": "F.Cu",
+        "width": 0.15,
+        "points": [(62.40, 73.40), (63.10, 73.40)],
+    },
+    {
         "name": "e22-nrst-fanout",
         "net": "E22_NRST",
         "layer": "F.Cu",
@@ -294,6 +315,8 @@ VIAS = [
     {"name": "i2c-pullup-scl-via", "net": "I2C_SCL", "at": (87.60, 34.60)},
     {"name": "bq-sda-via", "net": "I2C_SDA", "at": (67.20, 78.80)},
     {"name": "bq-scl-via", "net": "I2C_SCL", "at": (64.80, 80.60)},
+    {"name": "bq-stat-r207-via", "net": "BQ_STAT", "at": (42.60, 93.00)},
+    {"name": "bq-stat-u1-via", "net": "BQ_STAT", "at": (62.40, 73.40)},
     {"name": "e22-nrst-via", "net": "E22_NRST", "at": (54.60, 61.62)},
     {"name": "e22-dio1-via", "net": "E22_DIO1", "at": (55.20, 66.70)},
     {"name": "e22-busy-via", "net": "E22_BUSY", "at": (55.80, 64.16)},
@@ -477,7 +500,7 @@ def main() -> None:
         raise SystemExit("PCB file does not end with a closing S-expression")
     body = text[:-1].rstrip()
     PCB.write_text(f"{body}\n{generated_blocks()}\n)\n", encoding="utf-8")
-    print("Generated initial routes, E22 control/SPI, J6 I2C, charge LED link and L2 ground reference plane")
+    print("Generated initial routes, E22 control/SPI, J6 I2C, charge LED/STAT links and L2 ground reference plane")
 
 
 if __name__ == "__main__":
