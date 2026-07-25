@@ -697,6 +697,20 @@ SEGMENTS = [
         "points": [(80.63, 52.20), (80.63, 54.10)],
     },
     {
+        "name": "solar-fused-u4-fanout",
+        "net": "SOLAR_FUSED",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(72.86, 49.03), (71.80, 49.03)],
+    },
+    {
+        "name": "solar-fused-u4-to-backbone",
+        "net": "SOLAR_FUSED",
+        "layer": "B.Cu",
+        "width": 0.30,
+        "points": [(71.80, 49.03), (71.80, 47.80), (80.63, 47.80), (80.63, 52.20)],
+    },
+    {
         "name": "solar-fused-divider-r100-fanout",
         "net": "SOLAR_FUSED",
         "layer": "F.Cu",
@@ -1011,6 +1025,7 @@ VIAS = [
     {"name": "bq-vbus-q3-via", "net": "BQ_VBUS", "at": (83.50, 73.91)},
     {"name": "solar-fused-fuse-via", "net": "SOLAR_FUSED", "at": (89.60, 54.00)},
     {"name": "solar-fused-q1-via", "net": "SOLAR_FUSED", "at": (80.63, 52.20)},
+    {"name": "solar-fused-u4-via-b", "net": "SOLAR_FUSED", "at": (71.80, 49.03)},
     {"name": "solar-fused-divider-r100-via", "net": "SOLAR_FUSED", "at": (21.18, 39.00)},
     {"name": "solar-fused-divider-r103-via", "net": "SOLAR_FUSED", "at": (25.98, 43.70)},
     {"name": "bq-stat-r207-via", "net": "BQ_STAT", "at": (42.60, 93.00)},
