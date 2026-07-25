@@ -110,6 +110,8 @@ Only stable, low-current nets are routed in this first pass:
 
 The J6 routes use short top-layer fanouts, vias, then bottom-layer traces to the XIAO socket pads. This keeps them away from the unresolved RF launch and avoids treating the staged power passives as final placement.
 
+The same generated pass now adds the `L2_GND_REFERENCE` zone on `In1.Cu`, tied to `GND`, inset 0.5 mm from the current 85 x 75 mm board outline. This implements the intended continuous Layer-2 ground reference for the scaffold. Additional ground stitching vias are still a future routing task.
+
 The RF path, high-current power rails, ground pours, BQ25798/TPS61088 switch nodes and final power-loop routes remain unrouted until their placement and footprint review gates are settled.
 
 ## Net-Class Policy
@@ -180,7 +182,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-177 expected unrouted ratsnest items
+174 expected unrouted ratsnest items
 0 footprint errors
 1 warning: MOD2 library footprint mismatch
 ```

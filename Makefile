@@ -22,7 +22,7 @@ erc:
 	$(KICAD_CLI) sch erc --output $(FAB_DIR)/RoyalNode_erc.rpt $(SCH)
 
 drc:
-	$(KICAD_CLI) pcb drc --output $(FAB_DIR)/RoyalNode_drc.rpt $(PCB)
+	$(KICAD_CLI) pcb drc --refill-zones --save-board --output $(FAB_DIR)/RoyalNode_drc.rpt $(PCB)
 
 kicad-checks: erc drc
 

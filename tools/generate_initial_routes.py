@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Generate the first low-risk RoyalNode PCB routes.
 
-This intentionally routes only stable, low-current nets. It does not route RF,
-high-current power rails, switching loops or ground pours.
+This intentionally routes only stable, low-current nets and adds the intended
+Layer-2 ground reference plane. It does not route RF, high-current power rails
+or switching loops.
 """
 
 from __future__ import annotations
@@ -96,9 +97,11 @@ VIAS = [
     {"name": "j6-scl-via", "net": "I2C_SCL", "at": (93.88, 20.75)},
 ]
 
-
 def stable_uuid(*parts: str) -> str:
     return str(uuid.uuid5(NAMESPACE, "::".join(parts)))
+
+
+GROUND_ZONE_UUID = stable_uuid("zone", "l2-ground-reference")
 
 
 def generated_uuids() -> set[str]:
@@ -109,19 +112,40 @@ def generated_uuids() -> set[str]:
             ids.add(stable_uuid("segment", str(route["name"]), str(index)))
     for via in VIAS:
         ids.add(stable_uuid("via", str(via["name"])))
+    ids.add(GROUND_ZONE_UUID)
     return ids
 
 
 def remove_generated_routes(text: str) -> str:
     ids = generated_uuids()
-    for kind in ["segment", "via"]:
-        pattern = re.compile(rf'\n  \({kind}\b(?:(?!\n  \((?:segment|via)\b).)*?\(uuid "([^"]+)"\).*?\)', re.S)
-
-        def keep_or_remove(match: re.Match[str]) -> str:
-            return "" if match.group(1) in ids else match.group(0)
-
-        text = pattern.sub(keep_or_remove, text)
-    return text
+    result: list[str] = []
+    idx = 0
+    pattern = re.compile(r"\n  \((segment|via|zone)\b")
+    while True:
+        match = pattern.search(text, idx)
+        if not match:
+            result.append(text[idx:])
+            break
+        start = match.start()
+        result.append(text[idx:start])
+        depth = 0
+        end = start + 1
+        while end < len(text):
+            char = text[end]
+            if char == "(":
+                depth += 1
+            elif char == ")":
+                depth -= 1
+                if depth == 0:
+                    end += 1
+                    break
+            end += 1
+        block = text[start:end]
+        uuid_match = re.search(r'\(uuid "([^"]+)"\)', block)
+        if not uuid_match or uuid_match.group(1) not in ids:
+            result.append(block)
+        idx = end
+    return "".join(result)
 
 
 def segment_block(name: str, index: int, net: str, layer: str, width: float, start: tuple[float, float], end: tuple[float, float]) -> str:
@@ -152,6 +176,33 @@ def via_block(name: str, net: str, at: tuple[float, float]) -> str:
     )
 
 
+def ground_zone_block() -> str:
+    return (
+        f'  (zone\n'
+        f'    (net 1)\n'
+        f'    (net_name "GND")\n'
+        f'    (layer "In1.Cu")\n'
+        f'    (uuid "{GROUND_ZONE_UUID}")\n'
+        f'    (name "L2_GND_REFERENCE")\n'
+        f'    (hatch edge 0.50)\n'
+        f'    (connect_pads\n'
+        f'      (clearance 0.15)\n'
+        f'    )\n'
+        f'    (min_thickness 0.20)\n'
+        f'    (filled_areas_thickness no)\n'
+        f'    (fill\n'
+        f'      (thermal_gap 0.50)\n'
+        f'      (thermal_bridge_width 0.50)\n'
+        f'    )\n'
+        f'    (polygon\n'
+        f'      (pts\n'
+        f'        (xy 20.50 20.50) (xy 104.50 20.50) (xy 104.50 94.50) (xy 20.50 94.50)\n'
+        f'      )\n'
+        f'    )\n'
+        f'  )'
+    )
+
+
 def generated_blocks() -> str:
     blocks: list[str] = []
     for route in SEGMENTS:
@@ -170,6 +221,7 @@ def generated_blocks() -> str:
             )
     for via in VIAS:
         blocks.append(via_block(str(via["name"]), str(via["net"]), via["at"]))  # type: ignore[arg-type]
+    blocks.append(ground_zone_block())
     return "\n".join(blocks)
 
 
@@ -179,7 +231,7 @@ def main() -> None:
         raise SystemExit("PCB file does not end with a closing S-expression")
     body = text[:-1].rstrip()
     PCB.write_text(f"{body}\n{generated_blocks()}\n)\n", encoding="utf-8")
-    print("Generated initial routes: E22_TXEN_DIO2 and J6 3V3/GND/I2C")
+    print("Generated initial routes and L2 ground reference plane")
 
 
 if __name__ == "__main__":

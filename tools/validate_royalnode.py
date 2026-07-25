@@ -332,17 +332,14 @@ def check_generated_pcb_placement() -> None:
         if needle not in pcb:
             fail(f"PCB scaffold missing board planning graphic {needle!r}")
 
-    for needle in [
-        '(net 1 "GND")',
-        '(net 5 "5V_RADIO")',
-        '(net 6 "RF_915")',
-        '(net 7 "SOLAR_RAW")',
-        '(pinfunction "ANT")',
-        '(pinfunction "PLUS")',
-        '(pinfunction "SW")',
-    ]:
+    for net_name in ["GND", "5V_RADIO", "RF_915", "SOLAR_RAW"]:
+        if not re.search(rf'\(net\s+"{re.escape(net_name)}"\)', pcb):
+            fail(f"PCB scaffold missing generated net annotation {net_name!r}")
+
+    for pinfunction in ["ANT", "PLUS", "SW"]:
+        needle = f'(pinfunction "{pinfunction}")'
         if needle not in pcb:
-            fail(f"PCB scaffold missing generated net/pin annotation {needle!r}")
+            fail(f"PCB scaffold missing generated pin annotation {needle!r}")
 
     status = read("docs/PCB_PLACEMENT_STATUS_REV_A.md")
     for needle in [
@@ -416,24 +413,26 @@ def check_net_classes() -> None:
 
 def check_initial_routes() -> None:
     route_generator = read("tools/generate_initial_routes.py")
-    for needle in ["E22_TXEN_DIO2", "3V3", "GND", "I2C_SDA", "I2C_SCL", "j6-3v3-backbone", "j6-gnd-backbone", "j6-sda-backbone", "j6-scl-backbone"]:
+    for needle in ["E22_TXEN_DIO2", "3V3", "GND", "I2C_SDA", "I2C_SCL", "j6-3v3-backbone", "j6-gnd-backbone", "j6-sda-backbone", "j6-scl-backbone", "L2_GND_REFERENCE"]:
         if needle not in route_generator:
             fail(f"initial route generator missing {needle!r}")
 
     makefile = read("Makefile")
     if "generate-routes" not in makefile:
         fail("Makefile missing generate-routes target")
+    if "--refill-zones" not in makefile or "--save-board" not in makefile:
+        fail("Makefile DRC target must refill and save zones")
 
     pcb = read("hardware/kicad/RoyalNode/RoyalNode.kicad_pcb")
-    for net in ['(net 1)', '(net 2)', '(net 44)', '(net 45)', '(net 46)']:
-        if net not in pcb:
-            fail(f"PCB missing generated initial route for {net}")
-    for needle in ['(layer "B.Cu")', '(via', '(start 30.35 59.08)', '(end 30.35 61.62)']:
+    for net_name in ["GND", "3V3", "E22_TXEN_DIO2", "I2C_SDA", "I2C_SCL"]:
+        if not re.search(rf'\(net\s+"{re.escape(net_name)}"\)', pcb):
+            fail(f"PCB missing generated initial route for net {net_name!r}")
+    for needle in ['(layer "B.Cu")', '(via', '(start 30.35 59.08)', '(end 30.35 61.62)', '(layer "In1.Cu")', '(name "L2_GND_REFERENCE")']:
         if needle not in pcb:
             fail(f"PCB missing expected initial route geometry {needle!r}")
 
     status = read("docs/PCB_PLACEMENT_STATUS_REV_A.md")
-    for needle in ["Initial Routed Nets", "E22_TXEN_DIO2", "I2C_SDA", "I2C_SCL"]:
+    for needle in ["Initial Routed Nets", "E22_TXEN_DIO2", "I2C_SDA", "I2C_SCL", "L2_GND_REFERENCE"]:
         if needle not in status:
             fail(f"PCB placement status missing initial-route note {needle!r}")
 
