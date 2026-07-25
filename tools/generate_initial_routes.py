@@ -483,6 +483,7 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("segment", "boost-en-local-pulldown", "0"),
     stable_uuid("segment", "boost-en-pulldown-ground", "0"),
     stable_uuid("segment", "u3-boost-en-pulldown-local", "0"),
+    stable_uuid("segment", "bq-ts-u1-to-r200-local", "0"),
     stable_uuid("segment", "u1-regn-ilim-local", "0"),
     stable_uuid("segment", "u1-regn-ilim-local", "1"),
     stable_uuid("segment", "u1-regn-ilim-local", "2"),

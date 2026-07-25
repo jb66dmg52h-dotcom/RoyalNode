@@ -153,6 +153,8 @@ Two additional R405 relocation trials were rejected on 2026-07-25. A left-of-U3 
 
 `BQ_REGN` to `ILIM_HIZ` also remains unrouted after trial routes crossed the existing BQ25798 I2C fanouts or crowded the BQ25798 inductor/switch-node area. Treat this as a BQ25798 local-fanout placement task, not a long generated trace task.
 
+An additional 2026-07-25 trial that moved C215/R200/R201 around the BQ25798 right side was rejected. It reduced the ratsnest temporarily, but caused `BQ_TS`/`BQ_REGN` shorts and U1/C215/R200/R201 courtyard violations. The failed `bq-ts-u1-to-r200-local` generated segment has been retired in `tools/generate_initial_routes.py`.
+
 The local `GND` link between the protection-divider ground pads also remains unrouted. Trial routes either clipped the neighboring `OV_NODE`/`BOOST_EN` pads or conflicted with the existing `OV_NODE` divider route. Revisit this after the protection divider and R405 placement are adjusted.
 
 ## Net-Class Policy
