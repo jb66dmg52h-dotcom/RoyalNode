@@ -4,7 +4,7 @@ Generated from `hardware/fabrication/RoyalNode_drc.rpt`.
 
 This file is a layout planning aid, not a manufacturing release note. Counts are KiCad ratsnest-pair counts, so a net with several components can appear multiple times.
 
-Total unrouted pairs: 53
+Total unrouted pairs: 52
 
 | Net | Ratsnest pairs | Layout note |
 |---|---:|---|
@@ -16,7 +16,6 @@ Total unrouted pairs: 53
 | `SOLAR_PROTECTED` | 3 | Route with protected solar path after Q1/Q2/U1 placement review. |
 | `3V3` | 2 |  |
 | `BOOST_EN` | 2 | Hold for TPS61088/R405 local fanout placement pass. |
-| `BQ_PMID` | 2 | Route as local charger power copper after capacitor placement review. |
 | `BQ_REGN` | 2 | Hold for BQ25798 local fanout and inductor-area placement pass. |
 | `BQ_SW1` | 2 | Switch node; keep compact and route only after BQ25798 power-loop placement. |
 | `BQ_SW2` | 2 | Switch node; keep compact and route only after BQ25798 power-loop placement. |
@@ -31,6 +30,7 @@ Total unrouted pairs: 53
 | `BQ_ACDRV2` | 1 |  |
 | `BQ_BTST1` | 1 |  |
 | `BQ_BTST2` | 1 |  |
+| `BQ_PMID` | 1 | Route as local charger power copper after capacitor placement review. |
 | `BQ_SDRV` | 1 |  |
 | `BQ_TS` | 1 |  |
 | `LTC_SHDN` | 1 |  |
