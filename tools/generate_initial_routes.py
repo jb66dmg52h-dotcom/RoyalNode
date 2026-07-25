@@ -445,6 +445,13 @@ SEGMENTS = [
         "points": [(34.23, 24.50), (34.23, 22.50), (39.83, 22.50), (39.83, 24.50)],
     },
     {
+        "name": "boost-output-r400-sense-to-cap-bus",
+        "net": "5V_RADIO",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(39.83, 24.50), (39.83, 26.60), (40.48, 26.60), (40.48, 29.00)],
+    },
+    {
         "name": "charge-led-k-local",
         "net": "CHG_LED_K",
         "layer": "F.Cu",
