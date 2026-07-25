@@ -30,8 +30,8 @@ R_TPS_FB_BOTTOM,1,56.0 kOhm 0.1%,Yageo,RP0603BRD0756KL,TPS61088 feedback bottom 
 R_TPS_FSW,1,330 kOhm,Viking Tech,ARG03FTC3303,TPS61088 frequency resistor,0603,JLCPCB C217968,locked
 R_TPS_ILIM,1,100 kOhm,Yageo,RC0603FR-07100KL,TPS61088 current-limit resistor,0603,JLCPCB C14675,locked
 R_TPS_COMP,1,20.0 kOhm,Vishay,CRCW060320K0FKEA,TPS61088 compensation resistor,0603,JLCPCB C844923,locked
-C_TPS_COMP,1,4.7 nF,TBD,TBD,TPS61088 compensation capacitor,0603,Footprint fixed by schematic capture; select stocked C0G/X7R part during sourcing,locked_value
-C_TPS_SS,1,47 nF,TBD,TBD,TPS61088 soft-start capacitor,0603,Footprint fixed by schematic capture; select stocked X7R part during sourcing,locked_value
-C_TPS_VCC,1,2.2 uF,TBD,TBD,TPS61088 VCC bypass,0805,Footprint fixed by schematic capture; select stocked X7R part during sourcing,locked_value
-C_TPS_BOOT,1,100 nF,TBD,TBD,TPS61088 BOOT capacitor,0603,Footprint fixed by schematic capture; select stocked X7R part during sourcing,locked_value
+C_TPS_COMP,1,4.7 nF 50 V X7R,FH (Guangdong Fenghua Advanced Tech),0603B472K500NT,TPS61088 compensation capacitor,0603,JLCPCB C53987,locked
+C_TPS_SS,1,47 nF 50 V X7R,Samsung Electro-Mechanics,CL10B473KB8NNNC,TPS61088 soft-start capacitor,0603,JLCPCB C1622,locked
+C_TPS_VCC,1,2.2 uF 25 V X7R,Tdk,C2012X7R1E225K125AB,TPS61088 VCC bypass,0805,JLCPCB C2170308,locked
+C_TPS_BOOT,1,100 nF 50 V X7R,Yageo,CC0603KRX7R9BB104,TPS61088 BOOT capacitor,0603,JLCPCB C14663,locked
 R_TPS_EN_PD,1,100 kOhm,Yageo,RC0603FR-07100KL,TPS61088 EN pulldown,0603,JLCPCB C14675,locked

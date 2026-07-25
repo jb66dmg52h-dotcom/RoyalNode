@@ -129,7 +129,7 @@ def write_draft_jlc_bom() -> None:
                 "Designator": designators,
                 "Qty": str(len(seed_rows)),
                 "Comment": locked["Description"],
-                "Value": seed_rows[0]["Value"],
+                "Value": locked["Value"],
                 "Footprint": footprint,
                 "Manufacturer": locked["Manufacturer"],
                 "Manufacturer Part Number": locked["Manufacturer Part Number"],
