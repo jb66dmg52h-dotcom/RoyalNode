@@ -91,6 +91,8 @@ hardware/kicad/RoyalNode/lib_footprints/RoyalNode.pretty/J5_SMA_MOLEX_732511150_
 
 The imported footprint is kept as a release-candidate source artifact only. It is not placed on the board because its `Edge.Cuts` launch geometry must be reviewed against the official Molex sales drawing and RoyalNode's final controlled-impedance stack-up.
 
+2026-07-25 recheck: the official Molex product page for `732511150` confirms the selected connector class, 1.60 mm board-thickness recommendation, 18 GHz frequency rating and 50 ohm impedance, but the released layout remains blocked until the sales drawing/recommended launch geometry is checked.
+
 Footprint release requirements:
 
 - Use the Molex sales drawing, not a generic SMA edge footprint.

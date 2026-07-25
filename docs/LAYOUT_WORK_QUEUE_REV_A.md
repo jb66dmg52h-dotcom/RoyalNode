@@ -80,5 +80,6 @@ These should avoid switch-node copper and RF launch copper.
 
 - Do not add test points, current shunts, probe loops, or bench-only measurement links.
 - Do not route `RF_915` until the SMA footprint and stack-up are final.
+- The 2026-07-25 Molex product-page recheck keeps `732511150` selected, but does not release the footprint. The sales drawing/recommended launch geometry is still required.
 - Do not route `BOOST_EN` until the TPS61088/R405 fanout placement is fixed.
 - Do not force ground traces where a pour/stitching plan is required.

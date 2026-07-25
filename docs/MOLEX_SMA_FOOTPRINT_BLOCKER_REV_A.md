@@ -20,7 +20,7 @@ Official product page:
 https://www.molex.com/en-us/products/part-detail/732511150
 ```
 
-The official page confirms:
+Rechecked on 2026-07-25. The official page confirms:
 
 - Part number: `732511150`
 - Category: RF / Coaxial Connectors
@@ -31,8 +31,11 @@ The official page confirms:
 - Reverse polarity: no
 - Frequency: 18 GHz
 - Impedance: 50 ohms
+- Voltage rating: 500 Vrms at sea level
 
 These facts are sufficient to keep the component class and BOM selection, but not sufficient to create the PCB launch.
+
+The page also reports limited catalog information for this part, so RoyalNode must still use the official sales drawing for released copper geometry rather than deriving pad dimensions from the product page alone.
 
 ## Required Drawing
 
@@ -58,6 +61,28 @@ https://www.molex.com/pdm_docs/sd/732511150_sd.pdf
 
 No release footprint was created from these failed fetches.
 
+## 2026-07-25 Web Recheck
+
+The official Molex product page was reachable from the Codex web tool and still supports the selected component class:
+
+- `732511150`
+- standard, non-reverse-polarity SMA jack
+- edge-mount PCB connector
+- 1.60 mm recommended PCB thickness
+- 18 GHz, 50 ohm RF rating
+
+However, the reachable page did not expose a usable recommended PCB-layout drawing in the accessible text. The imported JLC/LCSC footprint remains a comparison artifact only:
+
+```text
+hardware/kicad/RoyalNode/lib_footprints/RoyalNode.pretty/J5_SMA_MOLEX_732511150_C841205_IMPORT_RC.kicad_mod
+```
+
+The placed board footprint remains the draft envelope:
+
+```text
+hardware/kicad/RoyalNode/lib_footprints/RoyalNode.pretty/J5_SMA_0732511150_DRAFT_ENVELOPE.kicad_mod
+```
+
 ## Release Requirements
 
 Before J5 can be released:
@@ -74,4 +99,3 @@ Before J5 can be released:
 ## Policy
 
 Do not use SnapMagic, distributor preview images, mirrored PDFs, or a generic SMA edge footprint for the released Rev A RF launch unless a human explicitly accepts that risk in a design-review note.
-
