@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import csv
+import json
 import re
 import sys
 from pathlib import Path
@@ -358,6 +359,61 @@ def check_generated_pcb_placement() -> None:
             fail(f"PCB placement status missing {needle!r}")
 
 
+def check_net_classes() -> None:
+    project = json.loads(read("hardware/kicad/RoyalNode/RoyalNode.kicad_pro"))
+    net_settings = project.get("net_settings", {})
+    classes = {item.get("name"): item for item in net_settings.get("classes", [])}
+    expected_classes = {
+        "Default": {"track_width": 0.2, "clearance": 0.15},
+        "HighCurrentPower": {"track_width": 1.5, "clearance": 0.15},
+        "RF_50OHM": {"track_width": 0.5, "clearance": 0.25},
+        "SwitchNode": {"track_width": 0.8, "clearance": 0.15},
+        "SensitiveSense": {"track_width": 0.2, "clearance": 0.15},
+    }
+    for name, expected_values in expected_classes.items():
+        if name not in classes:
+            fail(f"missing KiCad net class {name}")
+        for key, expected in expected_values.items():
+            actual = classes[name].get(key)
+            if actual != expected:
+                fail(f"net class {name} expected {key}={expected}, found {actual}")
+
+    patterns = {
+        (item.get("netclass"), item.get("pattern"))
+        for item in net_settings.get("netclass_patterns", [])
+    }
+    expected_patterns = {
+        ("HighCurrentPower", "BAT*"),
+        ("HighCurrentPower", "SOLAR*"),
+        ("HighCurrentPower", "BQ_VBUS"),
+        ("HighCurrentPower", "BQ_SYS"),
+        ("HighCurrentPower", "BQ_PMID"),
+        ("HighCurrentPower", "5V_RADIO"),
+        ("RF_50OHM", "RF_915"),
+        ("SwitchNode", "BQ_SW*"),
+        ("SwitchNode", "BOOST_SW"),
+        ("SensitiveSense", "BATP_KELVIN"),
+        ("SensitiveSense", "BQ_TS"),
+        ("SensitiveSense", "BOOST_FB"),
+        ("SensitiveSense", "BOOST_COMP*"),
+        ("SensitiveSense", "UV_NODE"),
+        ("SensitiveSense", "OV_NODE"),
+    }
+    missing = sorted(expected_patterns - patterns)
+    if missing:
+        fail(f"missing KiCad netclass patterns: {missing}")
+
+    status = read("docs/PCB_PLACEMENT_STATUS_REV_A.md")
+    for needle in ["HighCurrentPower", "SwitchNode", "SensitiveSense", "RF_50OHM", "1.5 mm"]:
+        if needle not in status:
+            fail(f"PCB placement status missing net-class note {needle!r}")
+
+    net_class_doc = read("docs/PCB_NET_CLASSES_REV_A.md")
+    for needle in ["HighCurrentPower", "SwitchNode", "SensitiveSense", "RF_50OHM", "JLC04161H-3313"]:
+        if needle not in net_class_doc:
+            fail(f"PCB net-class doc missing {needle!r}")
+
+
 def check_generated_schematic_footprints() -> None:
     schematic = read("hardware/kicad/RoyalNode/RoyalNode.kicad_sch")
     required_footprints = {
@@ -518,6 +574,7 @@ def main() -> None:
     check_generated_schematic()
     check_generated_schematic_footprints()
     check_generated_pcb_placement()
+    check_net_classes()
 
     print("RoyalNode validation passed")
     print(f"  core BOM rows: {len(core_rows)}")

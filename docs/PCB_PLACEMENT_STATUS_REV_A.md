@@ -92,6 +92,20 @@ The first power-stage placement cluster now exists:
 
 The generated PCB scaffold is now net-aware. The placement generator reads `SCHEMATIC_CAPTURE_SEED_REV_A.csv` and `PASSIVE_CAPTURE_SEED_REV_A.csv`, creates the board net table, and annotates generated footprint pads with their net names and pin functions. This produces a useful ratsnest for placement and future routing review.
 
+## Net-Class Policy
+
+The KiCad project now defines Rev A routing classes in `hardware/kicad/RoyalNode/RoyalNode.kicad_pro` and documents them in `docs/PCB_NET_CLASSES_REV_A.md`.
+
+Current classes:
+
+- `Default`: 0.20 mm track, 0.15 mm clearance for MCU logic and ordinary control signals.
+- `HighCurrentPower`: 1.5 mm track, 0.15 mm clearance for `BAT*`, `SOLAR*`, `BQ_VBUS`, `BQ_SYS`, `BQ_PMID` and `5V_RADIO`.
+- `RF_50OHM`: visually distinct placeholder class for `RF_915`; final width/gap must come from the JLC04161H-3313 stack-up and SMA launch review.
+- `SwitchNode`: 0.80 mm track, 0.15 mm clearance for `BQ_SW*` and `BOOST_SW`.
+- `SensitiveSense`: 0.20 mm track, 0.15 mm clearance for `BATP_KELVIN`, `BQ_TS`, `BOOST_FB`, `BOOST_COMP*`, `UV_NODE` and `OV_NODE`.
+
+These classes are routing guardrails. High-current rails should still become short, wide pours where practical, switching-node copper must remain compact, and extra spacing is handled by placement/routing discipline rather than package-breaking blanket clearances.
+
 ## Known Blockers
 
 ### E22 Factory Footprint
