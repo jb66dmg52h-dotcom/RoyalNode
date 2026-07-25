@@ -99,6 +99,7 @@ Good fit for Rev A if the design uses standard assembly or a mixed strategy.
 - Standard PCBA supports single- or double-sided SMT/THT and fine-pitch parts.
 - Controlled impedance is available on multilayer boards.
 - XIAO, XT30 and SMA may be hand-installed or consigned if not machine-friendly/in-library.
+- E22-900M33S / MOD2 is planned as a factory-installed PCBA item using JLCPCB/LCSC part `C22399506`, not as a loose or hand-installed post-delivery module.
 
 Recommended JLC strategy:
 
@@ -117,7 +118,7 @@ Also a good fit, especially when consigned or mixed-source parts are needed.
 
 ## Recommended Rev A manufacturing route
 
-Use a 4-layer impedance-controlled PCB with ENIG. Order the first Rev A boards as an engineering-validation build with all fine-pitch/QFN and small SMD parts factory assembled. Use the JLCPCB/LCSC `C22399506` EasyEDA footprint path for the E22 because no loose physical module is available before fabrication; perform the physical E22 fit check as first-article inspection after the first board or module arrives.
+Use a 4-layer impedance-controlled PCB with ENIG. Order the first Rev A boards as an engineering-validation build with all fine-pitch/QFN, small SMD parts, and the E22/MOD2 factory assembled. Use the JLCPCB/LCSC `C22399506` EasyEDA footprint path for the E22 because no loose physical module is available before fabrication; perform the physical E22 fit check as first-article inspection after the assembled board arrives.
 
 ## Parts not ready to purchase
 

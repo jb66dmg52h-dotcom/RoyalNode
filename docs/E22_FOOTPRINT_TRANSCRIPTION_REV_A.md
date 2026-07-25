@@ -10,7 +10,7 @@ hardware/kicad/RoyalNode/lib_footprints/RoyalNode.pretty/MOD2_E22_900M33S_EBYTE_
 
 This footprint is **not released**. It is a manufacturer-manual draft used as one side of the Rev A footprint audit.
 
-Because no physical E22-900M33S module is available before the first board order, physical module verification is no longer a pre-order blocker. The pre-order gate is now the assembler-footprint cross-check in:
+Because no loose physical E22-900M33S module is available before the first board order, physical module verification is no longer a pre-order blocker. MOD2 is intended to be factory-installed during PCBA, so the pre-order gate is now the assembler-footprint cross-check in:
 
 ```text
 docs/E22_ASSEMBLER_FOOTPRINT_CROSSCHECK_REV_A.md
@@ -149,4 +149,4 @@ The manual table confirms:
 - [x] Import the exact JLC/LCSC `C22399506` EasyEDA footprint for comparison.
 - [x] Document the JLC/EasyEDA larger-pad land pattern and origin difference.
 - [ ] Confirm paste/mask behavior with the PCB assembler during DFM/PCBA review.
-- [ ] Run first-article physical inspection after the first Rev A board or module arrives.
+- [ ] Run first-article physical inspection after the first factory-assembled Rev A board arrives.

@@ -39,7 +39,7 @@ Footprint release requirements:
 - Confirm body size, castellated pad count, pad pitch, pin-1 orientation, ANT pin location, and keepout guidance.
 - Pin 21 must align with the RF GCPW launch toward J5.
 - Cross-check against the exact JLCPCB/LCSC PCBA part `C22399506`.
-- Use JLCPCB DFM/PCBA review as the pre-order assembler check because no physical module is available before Rev A fabrication.
+- Use JLCPCB DFM/PCBA review as the pre-order assembler check because no loose physical module is available before Rev A fabrication and MOD2 is planned as a factory-installed part.
 
 Transcription status:
 
@@ -50,7 +50,7 @@ docs/E22_ASSEMBLER_FOOTPRINT_CROSSCHECK_REV_A.md
 hardware/kicad/RoyalNode/lib_footprints/RoyalNode.pretty/MOD2_E22_900M33S_JLC_C22399506_IMPORT_RC.kicad_mod
 ```
 
-The physical module check is deferred to Rev A first-article inspection. It is not a pre-order blocker.
+The physical module check is deferred to Rev A first-article inspection of the factory-assembled PCB. It is not a pre-order blocker.
 
 ### J5 — Molex 0732511150 / 732511150
 

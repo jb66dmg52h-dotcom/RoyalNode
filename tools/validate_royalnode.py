@@ -170,7 +170,8 @@ def check_e22_assembler_crosscheck() -> None:
         "EasyEDA",
         "1.50 x 2.20 mm",
         "first article",
-        "physical E22-900M33S module is available before the board order",
+        "factory-installed",
+        "first Rev A PCB",
     ]
     for needle in required:
         if needle not in crosscheck:

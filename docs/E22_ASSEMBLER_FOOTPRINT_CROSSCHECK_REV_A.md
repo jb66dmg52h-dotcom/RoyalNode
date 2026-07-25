@@ -2,13 +2,13 @@
 
 ## Decision
 
-RoyalNode Rev A will not require a physical E22-900M33S module before the first board order. The user will not have the module until the board is produced, so the release gate is changed to a controlled remote verification path:
+RoyalNode Rev A will not require a loose physical E22-900M33S module before the first board order. MOD2 is intended to be installed on the PCB by the manufacturing/PCBA facility before the user receives the board, so the release gate is changed to a controlled remote verification path:
 
 1. Transcribe the EBYTE manufacturer drawing.
 2. Import the exact JLCPCB/LCSC EasyEDA footprint for `C22399506`.
 3. Compare pin count, pitch, body class, pin 21 ANT location, and RF-ground adjacency.
 4. Use JLCPCB DFM/PCBA review before order submission.
-5. Inspect the first assembled board or first received module as the physical first article.
+5. Inspect the first factory-assembled Rev A PCB as the physical first article.
 
 This does not make the footprint risk disappear. It moves the physical-fit check from a pre-order blocker to a documented Rev A risk accepted for the first build.
 
@@ -114,12 +114,13 @@ The JLC/EasyEDA import uses larger pads than the manual transcription. For Rev A
 
 ## Rev A Footprint Policy
 
-Use the imported JLC/EasyEDA footprint as the preferred starting point for JLCPCB PCBA, with these constraints:
+Use the imported JLC/EasyEDA footprint as the preferred starting point for factory-installed JLCPCB PCBA, with these constraints:
 
 - Keep the footprint marked as a release candidate until schematic symbols and placement are complete.
 - Do not hand-edit pad geometry without recording the reason in this document.
 - Place pin 21 toward the SMA edge.
 - Connect pins 20 and 22 to the RF ground structure with very short paths.
+- Include MOD2/E22-900M33S as an assembled BOM/CPL item, not as a hand-installed or loose post-delivery part.
 - Submit the Rev A design through JLCPCB DFM and PCBA review before ordering.
 - Record any JLC footprint/placement feedback before approving the order.
 
@@ -127,10 +128,7 @@ If JLCPCB rejects or modifies the module footprint during DFM/PCBA review, their
 
 ## First-Article Check
 
-Because no physical E22-900M33S module is available before the board order, the first physical check happens after either:
-
-- JLCPCB assembles MOD2 on the first Rev A board, or
-- a separately ordered E22-900M33S module arrives.
+Because no loose physical E22-900M33S module is available before the board order, the first physical check happens after the manufacturer installs MOD2 on the first Rev A PCB.
 
 First-article inspection must verify:
 
@@ -150,5 +148,5 @@ Proceeding without a pre-order physical module carries real footprint risk. Rev 
 - JLCPCB/LCSC list the exact part `C22399506`.
 - The exact part has a JLC/EasyEDA footprint available.
 - The key electrical/RF pin identities match the manual audit.
+- MOD2 is planned as a factory-installed PCBA item, so assembler DFM/PCBA review is part of the order path.
 - The first order is an engineering-validation build, not production.
-
