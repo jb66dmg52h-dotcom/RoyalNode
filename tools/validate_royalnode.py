@@ -255,6 +255,7 @@ def check_power_rc_footprints() -> None:
         ("L1_COILCRAFT_XAL7070_222MEC_RC.kicad_mod", ["XAL7070-222MEC", "NOT_RELEASED_RELEASE_CANDIDATE"], 2),
         ("L2_COILCRAFT_XAL7030_222MEC_RC.kicad_mod", ["XAL7030-222MEC", "NOT_RELEASED_RELEASE_CANDIDATE"], 2),
         ("F1_LITTELFUSE_483_1206_RC.kicad_mod", ["Littelfuse 483", "NOT_RELEASED_RELEASE_CANDIDATE"], 2),
+        ("C503_PANASONIC_10SVPC330M_8X6P9_RC.kicad_mod", ["Panasonic 10SVPC330M", "pad 1 positive", "NOT_RELEASED_RELEASE_CANDIDATE"], 2),
     ]
     for filename, needles, expected_pad_count in checks:
         path = fp_dir / filename
@@ -387,7 +388,7 @@ def check_passive_footprint_seed(passive_rows: list[dict[str, str]]) -> None:
         "C400": "Capacitor_SMD:C_1210_3225Metric",
         "C405": "Capacitor_SMD:C_0805_2012Metric",
         "C406": "Capacitor_SMD:C_0603_1608Metric",
-        "C503": "",
+        "C503": "RoyalNode:C503_PANASONIC_10SVPC330M_8X6P9_RC",
         "TH1": "",
     }
     by_ref = {row["Reference"]: row for row in passive_rows}

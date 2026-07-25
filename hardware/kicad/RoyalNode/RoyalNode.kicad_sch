@@ -14849,7 +14849,7 @@
         )
       )
     )
-    (property "Footprint" ""
+    (property "Footprint" "RoyalNode:C503_PANASONIC_10SVPC330M_8X6P9_RC"
       (at 436.88 81.28 0)
       (effects
         (font

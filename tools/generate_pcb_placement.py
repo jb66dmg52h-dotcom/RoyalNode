@@ -362,7 +362,7 @@ def passive_position(index: int, group: str) -> tuple[float, float, float]:
 def passive_group(ref: str) -> str:
     if ref in {"R100", "R101", "R102", "R103"}:
         return "protection"
-    if ref.startswith("C4") or ref.startswith("R4") or ref in {"C500", "C501", "C502"}:
+    if ref.startswith("C4") or ref.startswith("R4") or ref in {"C500", "C501", "C502", "C503"}:
         return "boost"
     return "charger"
 
@@ -373,6 +373,7 @@ PASSIVE_POSITION_OVERRIDES = {
     "C500": (58.0, 91.0, 0.0),
     "C501": (64.0, 91.0, 0.0),
     "C502": (70.0, 91.0, 0.0),
+    "C503": (93.0, 46.0, 0.0),
 }
 
 
@@ -404,6 +405,8 @@ def passive_placements() -> list[dict[str, object]]:
 def standard_footprint_path(item: dict[str, object]) -> Path:
     library = str(item.get("library", ""))
     filename = str(item["file"])
+    if library == "RoyalNode":
+        return FP_DIR / filename
     if library:
         return KICAD_FP_ROOT / f"{library}.pretty" / filename
     return FP_DIR / filename

@@ -204,7 +204,9 @@ Because they are not carrier-board contacts, their geometry does not need to be 
 ## Passives
 
 - 0402, 0603, 1206, 1210 footprints may use verified KiCad standard metric/imperial land patterns where they match component datasheets and JLC assembly rules.
-- The Panasonic 10SVPC330M polymer capacitor requires its manufacturer-specific SMD can footprint and polarity marking.
+- The Panasonic 10SVPC330M polymer capacitor uses project-local release-candidate footprint `C503_PANASONIC_10SVPC330M_8X6P9_RC`, copied from KiCad `CP_Elec_8x6.9`.
+- C503 pad 1 is positive and connects to `5V_RADIO`; pad 2 connects to GND.
+- C503 polarity and the 8 x 6.9 mm can land pattern must be checked against Panasonic/JLC assembly data before release.
 - Coilcraft XAL7030 and XAL7070 inductors require their exact Coilcraft recommended land patterns and body courtyards.
 
 ## Footprint release checklist

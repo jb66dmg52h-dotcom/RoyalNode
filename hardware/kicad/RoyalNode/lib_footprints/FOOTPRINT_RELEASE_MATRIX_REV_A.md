@@ -42,7 +42,7 @@ docs/FOOTPRINT_SOURCE_LINKS_REV_A.md
 | F1 | Littelfuse 0483002.DR, 483 series 1206 chip fuse | Low | `conditional_release_candidate` | Project-local copy of KiCad 1206 fuse footprint; verify against Littelfuse 483 package drawing |
 | L_BQ | Coilcraft XAL7070-222MEC | Medium | `conditional_release_candidate` | Project-local KiCad Coilcraft XAL7070 footprint; confirm against Coilcraft recommended land pattern |
 | L_BOOST | Coilcraft XAL7030-222MEC | Medium | `conditional_release_candidate` | Project-local KiCad Coilcraft XAL7030-222 footprint; confirm against Coilcraft recommended land pattern |
-| C_BULK | Panasonic 10SVPC330M | Medium | `not_started` | Use polarized SMD polymer footprint with clear polarity marking |
+| C_BULK | Panasonic 10SVPC330M | Medium | `conditional_release_candidate` | Project-local copy of KiCad `CP_Elec_8x6.9`; verify Panasonic package drawing and pad-1 positive polarity |
 | Passives | 0402/0603/1206/1210 R/C | Low | `not_started` | Standard KiCad/JLC-compatible metric footprints acceptable after value/package review |
 
 ## First Footprint Work Order

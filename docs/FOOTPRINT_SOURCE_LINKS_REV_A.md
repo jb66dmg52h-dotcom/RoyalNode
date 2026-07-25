@@ -114,6 +114,22 @@ Release requirement:
 - Confirm the fuse current rating and interrupt behavior against the selected solar panel `Isc` and the upstream wiring.
 - Current project footprint: `F1_LITTELFUSE_483_1206_RC`.
 
+### C503 — Panasonic 10SVPC330M
+
+Required source:
+
+```text
+Panasonic 10SVPC330M package drawing / SP-Cap datasheet
+JLCPCB/LCSC assembly reference: C347574
+```
+
+Release requirement:
+
+- Confirm body diameter/height and land pattern for the 8 x 6.9 mm SMD polymer can package.
+- Confirm pad 1 is the positive terminal in the KiCad footprint and in the Panasonic/JLC assembly data.
+- Maintain visible polarity marking in F.Fab and silkscreen.
+- Current project footprint: `C503_PANASONIC_10SVPC330M_8X6P9_RC`.
+
 ### U1 — TI BQ25798RQMR
 
 Required source:
