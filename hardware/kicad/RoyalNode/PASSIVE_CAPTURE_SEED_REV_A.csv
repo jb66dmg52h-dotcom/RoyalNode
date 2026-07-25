@@ -1,8 +1,8 @@
 Reference,Source Group,Value,Pin 1 Net,Pin 2 Net,Footprint,Notes
-R100,LTC_UVOV_R3,1.78 MOhm 1%,SOLAR_FUSED,UV_NODE,Resistor_SMD:R_0603_1608Metric,LTC4365 UV/OV divider top resistor for 6 V panel class
-R101,LTC_UVOV_R2,180 kOhm 0.1%,UV_NODE,OV_NODE,Resistor_SMD:R_0603_1608Metric,LTC4365 UV/OV divider middle resistor for 6 V panel class
-R102,LTC_UVOV_R1,40.2 kOhm 0.1%,OV_NODE,GND,Resistor_SMD:R_0603_1608Metric,LTC4365 UV/OV divider bottom resistor
-R103,LTC_SHDN_PULLUP,100 kOhm,SOLAR_FUSED,LTC_SHDN,Resistor_SMD:R_0603_1608Metric,LTC4365 SHDN pullup branch to VIN
+R100,R_LTC_UVOV_R3,1.78 MOhm 1%,SOLAR_FUSED,UV_NODE,Resistor_SMD:R_0603_1608Metric,LTC4365 UV/OV divider top resistor for 6 V panel class
+R101,R_LTC_UVOV_R2,180 kOhm 0.1%,UV_NODE,OV_NODE,Resistor_SMD:R_0603_1608Metric,LTC4365 UV/OV divider middle resistor for 6 V panel class
+R102,R_LTC_UVOV_R1,40.2 kOhm 0.1%,OV_NODE,GND,Resistor_SMD:R_0603_1608Metric,LTC4365 UV/OV divider bottom resistor
+R103,R_LTC_SHDN_PULLUP,100 kOhm,SOLAR_FUSED,LTC_SHDN,Resistor_SMD:R_0603_1608Metric,LTC4365 SHDN pullup branch to VIN
 C200,C_BQ_VBUS,10 uF 50 V,BQ_VBUS,GND,Capacitor_SMD:C_1206_3216Metric,BQ25798 VBUS bulk capacitor 1
 C201,C_BQ_VBUS,10 uF 50 V,BQ_VBUS,GND,Capacitor_SMD:C_1206_3216Metric,BQ25798 VBUS bulk capacitor 2
 C202,C_BQ_PMID,10 uF 50 V,BQ_PMID,GND,Capacitor_SMD:C_1206_3216Metric,BQ25798 PMID capacitor 1

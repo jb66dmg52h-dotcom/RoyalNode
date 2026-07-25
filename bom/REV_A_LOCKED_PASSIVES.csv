@@ -10,6 +10,7 @@ C_SDRV,1,1 nF 50 V C0G,Tdk,C1005C0G1H102J050BA,BQ25798 SDRV capacitor,0402,JLCPC
 R_LTC_UVOV_R3,1,1.78 MOhm 1%,TBD,TBD,LTC4365 UV/OV divider top resistor for 6 V solar panel class,0603,Select stocked 1% or better part during sourcing,locked_candidate_value
 R_LTC_UVOV_R2,1,180 kOhm 0.1%,TBD,TBD,LTC4365 UV/OV divider middle resistor for 6 V solar panel class,0603,Select stocked 0.1% or better part during sourcing,locked_candidate_value
 R_LTC_UVOV_R1,1,40.2 kOhm 0.1%,TBD,TBD,LTC4365 UV/OV divider bottom resistor,0603,Select stocked 0.1% or better part during sourcing,locked_candidate_value
+R_LTC_SHDN_PULLUP,1,100 kOhm,Yageo,RC0603FR-07100KL,LTC4365 SHDN pullup branch to VIN,0603,JLCPCB C14675,locked
 C_TPS_VIN,2,22 uF 16 V X7R,Murata,GRM31CZ71C226ME15L,TPS61088 VIN capacitors,1206,JLCPCB C909845,locked_common_part
 C_E22_22U,2,22 uF 16 V X7R,Murata,GRM31CZ71C226ME15L,E22 local 5 V rail ceramic capacitors,1206,JLCPCB C909845,locked_common_part
 C_TPS_VOUT,2,47 uF 10 V X5R,Tdk,C3225X5R1A476MT000E,TPS61088 VOUT capacitors,1210,JLCPCB C76680,locked

@@ -605,6 +605,41 @@ def check_passive_footprint_seed(passive_rows: list[dict[str, str]]) -> None:
             fail(f"passive seed {ref} expected footprint {footprint!r}, found {actual!r}")
 
 
+def check_passive_seed_locked_groups(
+    passive_seed_rows: list[dict[str, str]],
+    locked_passive_rows: list[dict[str, str]],
+    core_rows: list[dict[str, str]],
+) -> None:
+    """Ensure generated passive source groups stay quoteable.
+
+    Core parts such as D1 can appear in the passive capture seed because they
+    are two-terminal schematic items, but all non-core source groups must map
+    directly to a locked passive BOM row. The draft JLC BOM exporter groups by
+    this field, so silent drift here would drop parts from the quote package.
+    """
+    locked_by_group = {row["Reference"]: row for row in locked_passive_rows}
+    core_refs = {row["Reference"] for row in core_rows}
+    used_counts: dict[str, int] = {}
+
+    for row in passive_seed_rows:
+        ref = row["Reference"]
+        group = row["Source Group"]
+        if ref in core_refs:
+            continue
+        if group not in locked_by_group:
+            fail(f"passive seed {ref} uses source group {group!r}, which is missing from locked passive BOM")
+        used_counts[group] = used_counts.get(group, 0) + 1
+
+    unused = sorted(set(locked_by_group) - set(used_counts))
+    if unused:
+        fail(f"locked passive BOM groups not used by passive capture seed: {', '.join(unused)}")
+
+    for group, count in sorted(used_counts.items()):
+        locked_quantity = int(locked_by_group[group]["Quantity"])
+        if locked_quantity != count:
+            fail(f"locked passive group {group} quantity {locked_quantity} does not match seed count {count}")
+
+
 def check_capture_seed(seed_rows: list[dict[str, str]]) -> None:
     required_nets = {
         "GND",
@@ -712,6 +747,7 @@ def main() -> None:
     check_power_rc_footprints()
     check_capture_seed(seed_rows)
     check_passive_footprint_seed(capture_passive_rows)
+    check_passive_seed_locked_groups(capture_passive_rows, locked_passive_rows, core_rows)
     check_generated_schematic()
     check_generated_schematic_footprints()
     check_generated_pcb_placement()
