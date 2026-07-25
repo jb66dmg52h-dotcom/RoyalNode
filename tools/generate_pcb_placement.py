@@ -230,21 +230,24 @@ def net_table(net_ids: dict[str, int]) -> str:
 
 
 def replace_net_table(text: str, net_ids: dict[str, int]) -> str:
-    text = re.sub(r'\n  \(net \d+ "[^"]*"\)', "", text)
-    marker = "\n\n  (gr_rect"
-    if marker not in text:
-        raise SystemExit("could not find insertion point for PCB net table")
-    return text.replace(marker, f"\n{net_table(net_ids)}{marker}", 1)
+    text = re.sub(r'\n[ \t]*\(net \d+ "[^"]*"\)', "", text)
+    markers = ["\n\n  (gr_rect", "\n\t(gr_rect", "\n\t(footprint", "\n\t(segment"]
+    for marker in markers:
+        if marker in text:
+            return text.replace(marker, f"\n{net_table(net_ids)}{marker}", 1)
+    raise SystemExit("could not find insertion point for PCB net table")
 
 
 def remove_generated_placements(text: str) -> str:
     result: list[str] = []
     idx = 0
+    pattern = re.compile(r"\n[ \t]*\(footprint\b")
     while True:
-        start = text.find('\n  (footprint ', idx)
-        if start == -1:
+        match = pattern.search(text, idx)
+        if not match:
             result.append(text[idx:])
             break
+        start = match.start()
         result.append(text[idx:start])
         depth = 0
         end = start + 1
@@ -378,6 +381,8 @@ def passive_group(ref: str) -> str:
 PASSIVE_POSITION_OVERRIDES = {
     "R404": (26.8, 47.0, 0.0),
     "R405": (22.0, 47.0, 0.0),
+    "R205": (85.8, 33.0, 0.0),
+    "R206": (85.8, 35.6, 0.0),
     "C500": (58.0, 91.0, 0.0),
     "C501": (64.0, 91.0, 0.0),
     "C502": (70.0, 91.0, 0.0),

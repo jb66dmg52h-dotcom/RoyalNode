@@ -21,6 +21,10 @@ def read(path: str) -> str:
     return (ROOT / path).read_text(encoding="utf-8")
 
 
+def has_pcb_net_annotation(pcb: str, net_name: str) -> bool:
+    return bool(re.search(rf'\(net(?:\s+\d+)?\s+"{re.escape(net_name)}"\)', pcb))
+
+
 def check_csv(path: str) -> list[dict[str, str]]:
     with (ROOT / path).open(newline="", encoding="utf-8") as handle:
         rows = [row for row in csv.reader(handle) if any(cell.strip() for cell in row)]
@@ -333,7 +337,7 @@ def check_generated_pcb_placement() -> None:
             fail(f"PCB scaffold missing board planning graphic {needle!r}")
 
     for net_name in ["GND", "5V_RADIO", "RF_915", "SOLAR_RAW"]:
-        if not re.search(rf'\(net\s+"{re.escape(net_name)}"\)', pcb):
+        if not has_pcb_net_annotation(pcb, net_name):
             fail(f"PCB scaffold missing generated net annotation {net_name!r}")
 
     for pinfunction in ["ANT", "PLUS", "SW"]:
@@ -426,6 +430,11 @@ def check_initial_routes() -> None:
         "j6-gnd-backbone",
         "j6-sda-backbone",
         "j6-scl-backbone",
+        "i2c-pullup-3v3-link",
+        "i2c-pullup-sda-backbone",
+        "i2c-pullup-scl-backbone",
+        "bq-sda-backbone",
+        "bq-scl-backbone",
         "e22-nrst-backbone",
         "e22-dio1-backbone",
         "e22-busy-backbone",
@@ -463,7 +472,7 @@ def check_initial_routes() -> None:
         "SPI_MISO",
         "SPI_MOSI",
     ]:
-        if not re.search(rf'\(net\s+"{re.escape(net_name)}"\)', pcb):
+        if not has_pcb_net_annotation(pcb, net_name):
             fail(f"PCB missing generated initial route for net {net_name!r}")
     for needle in ['(layer "B.Cu")', '(layer "In2.Cu")', '(via', '(start 30.35 59.08)', '(end 30.35 61.62)', '(layer "In1.Cu")', '(name "L2_GND_REFERENCE")']:
         if needle not in pcb:

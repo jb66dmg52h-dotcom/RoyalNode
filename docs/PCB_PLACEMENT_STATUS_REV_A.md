@@ -83,6 +83,8 @@ F1 is now placed as a Littelfuse 483-series 1206 release-candidate footprint imm
 
 C503 is now placed as a Panasonic 10SVPC330M 8 x 6.9 mm polymer-can release-candidate footprint at 93.0, 46.0 mm. This is a scaffold location that clears DRC; final routing should still pull the 5 V radio bulk capacitance as close as practical to the E22 VCC entry without violating the RF corridor or module courtyard.
 
+R205 and R206, the I2C pullups, are now moved out of the generic lower passive staging grid and placed next to the XIAO/J6 bus corridor. This keeps the optional BME680 connector, XIAO I2C pins and BQ25798 I2C pins on one short logic bus instead of forcing long pullup stubs across the lower power area.
+
 The first power-stage placement cluster now exists:
 
 - BQ25798 plus XAL7070 inductor in the lower middle, between the input connectors and battery/SYS region.
@@ -115,8 +117,10 @@ Only stable, low-current nets are routed in this first pass:
 - `GND`: J6 optional BME680/environmental connector to the XIAO ground pin.
 - `I2C_SDA`: J6 optional BME680/environmental connector to the XIAO D4/SDA pin.
 - `I2C_SCL`: J6 optional BME680/environmental connector to the XIAO D5/SCL pin.
+- `I2C_SDA`: BQ25798 SDA and R205 pullup into the same XIAO/J6 I2C bus.
+- `I2C_SCL`: BQ25798 SCL and R206 pullup into the same XIAO/J6 I2C bus.
 
-The J6 routes use short top-layer fanouts and vias, then a mix of `In2.Cu` and bottom-layer tracks into the XIAO socket pads. The I2C pair is split across bottom and inner signal layers near the XIAO to avoid the existing RXEN/control corridor. The E22 control routes use short top-layer fanouts, vias, then `In2.Cu` tracks. The E22 SPI routes use left-side fanouts and a bottom-layer stepped bus to avoid the current boost-stage region. This keeps them away from the unresolved RF launch and avoids treating the staged power passives as final placement.
+The J6 routes use short top-layer fanouts and vias, then a mix of `In2.Cu` and bottom-layer tracks into the XIAO socket pads. The I2C pair is split across bottom and inner signal layers near the XIAO to avoid the existing RXEN/control corridor. The BQ25798 I2C pins use short local fanouts before joining the same bus, and the pullups sit next to the XIAO/J6 side of the bus. The E22 control routes use short top-layer fanouts, vias, then `In2.Cu` tracks. The E22 SPI routes use left-side fanouts and a bottom-layer stepped bus to avoid the current boost-stage region. This keeps them away from the unresolved RF launch and avoids treating the staged power passives as final placement.
 
 The same generated pass now adds the `L2_GND_REFERENCE` zone on `In1.Cu`, tied to `GND`, inset 0.5 mm from the current 85 x 75 mm board outline. This implements the intended continuous Layer-2 ground reference for the scaffold. Additional ground stitching vias are still a future routing task.
 
@@ -190,7 +194,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-166 expected unrouted ratsnest items
+160 expected unrouted ratsnest items
 0 footprint errors
 1 warning: MOD2 library footprint mismatch
 ```
