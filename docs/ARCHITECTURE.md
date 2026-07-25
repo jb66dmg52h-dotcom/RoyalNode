@@ -8,7 +8,7 @@
   XT30, fuse, reverse protection,
   TVS and input filtering
           |
-  BQ24650 1S solar MPPT buck charger
+  BQ25798 1S solar/USB charger
           |
   1S 15 Ah protected Li-ion battery
           |
@@ -28,11 +28,11 @@
 
 ### Solar and charger subsystem
 
-The previous BQ25798 buck-boost multi-cell charger is removed. RoyalNode now uses a one-cell charger architecture.
+RoyalNode uses a one-cell charger architecture around the BQ25798RQMR charger and power-path controller.
 
-The preferred charger is BQ24650 configured for one Li-ion cell. It is a standalone synchronous buck charger controller with programmable solar input-voltage regulation, supports one to six cells, accepts 5 V to 28 V input and can control charge currents well above RoyalNode's requirement.
+The locked Rev A charger is BQ25798RQMR configured for one Li-ion cell. It provides the charger, power-path behavior, I2C configuration, charger telemetry and input-source handling used by the current KiCad schematic.
 
-For a 6 V nominal panel, the final selected panel must maintain enough voltage above the battery and converter losses during charging. The MPPT input-voltage setpoint, charge-current resistor, external MOSFETs and inductor must be calculated from the actual panel maximum-power voltage rather than the printed nominal voltage alone.
+For a 6 V nominal panel, firmware and charger configuration must be validated against the actual panel maximum-power voltage/current rather than the printed nominal voltage alone.
 
 Initial charging target:
 
@@ -76,11 +76,11 @@ No current-shunt footprints, dedicated test pads or measurement links are includ
 
 The Seeed XIAO nRF52840 remains socketed on Rev A. It handles the SPI radio interface, boost enable and radio sequencing, battery telemetry, optional environmental telemetry, fault logging and the MeshCore hardware abstraction layer.
 
-The XIAO must not use its onboard battery charger. The custom BQ24650 charger is the only battery-charging path. Programming uses the XIAO USB-C port; recovery uses SWD pads or Tag-Connect.
+The XIAO must not use its onboard battery charger as the system charger. The BQ25798 charger path is the controlled battery-charging path. Programming uses the XIAO USB-C port; recovery uses SWD pads or Tag-Connect.
 
 ### Battery telemetry
 
-MAX17048 is the preferred single-cell fuel gauge because it is intended for one Li-ion cell and does not require a current-sense resistor. A protected ADC divider remains an alternate implementation if MeshCore integration is simpler.
+Rev A omits a dedicated MAX17048 fuel gauge. Battery voltage and charger state are read from the BQ25798 over I2C. Firmware may later add an ADC cross-check if needed, but it is not part of the current KiCad capture.
 
 ### Radio and RF subsystem
 
@@ -113,11 +113,11 @@ The board-mounted SMA is connected to EBYTE ANT pin 21 through a short 50-ohm co
 
 ### Removed or replaced
 
-- BQ25798 multi-cell buck-boost charger: removed
+- 2S charger configuration: replaced by 1S BQ25798 configuration
 - 2S 15 Ah battery pack: replaced by protected 1S 15 Ah pack
 - 2S BMS and balancing function: replaced by 1S protection circuit
 - any 2S voltage-divider values: recalculated for 1S
-- any 2S fuel-gauge choice: standardized on MAX17048
+- any 2S fuel-gauge choice: removed from Rev A
 - 2S low-voltage firmware thresholds: replaced by 1S thresholds
 
 ### Retained
@@ -133,16 +133,15 @@ The board-mounted SMA is connected to EBYTE ANT pin 21 through a short 50-ohm co
 
 ### Recalculation required during schematic capture
 
-- BQ24650 MPPT divider
-- BQ24650 battery-voltage divider for 4.20 V
-- charge-current sense resistor
-- charger external MOSFET ratings and gate behavior
-- charger inductor current and saturation rating
+- BQ25798 1S charger configuration
+- BQ25798 input-current and charge-current limits
+- BQ25798 input-selector MOSFET ratings and gate behavior
+- BQ25798 inductor current and saturation rating
 - TPS61088 inductor, current limit, compensation and thermal design
 - battery fuse rating
 - 1S protection MOSFET resistance and trip threshold
 - low-battery firmware thresholds
-- battery telemetry divider if MAX17048 is not used
+- BQ25798 telemetry integration in firmware
 
 ## Connector architecture
 
@@ -160,13 +159,13 @@ Rev A is deployment-focused. It omits bench-only test points and current shunts.
 ## Current open decisions
 
 1. Select exact 6 V / 20 W panel and confirm its Vmp and Voc.
-2. Complete BQ24650 charger calculations and component selection.
+2. Complete BQ25798 charger configuration and component review.
 3. Complete TPS61088 1S-to-5 V power-stage calculations.
 4. Select exact protected 1S 15 Ah battery pack and NTC specification.
 5. Select hardware radio-rail over-voltage protection.
 6. Verify exact E22 footprint, antenna-path selection and RF pin mapping.
 7. Implement MeshCore driver changes required for the external PA and RF switch.
-8. Confirm MAX17048 or ADC telemetry integration.
+8. Confirm BQ25798 battery/charger telemetry integration.
 9. Confirm BME680 support in the selected MeshCore repeater build.
 10. Finalize enclosure, vent and cable-gland selections.
 11. Finalize legal transmit-power configuration for Canadian deployment.

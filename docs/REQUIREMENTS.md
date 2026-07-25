@@ -24,8 +24,8 @@ RoyalNode Rev A is an engineering-validation platform for a rugged, solar-powere
 - Cell balancing is not required for a 1S pack.
 - The battery connection must be fused at the pack interface.
 - Battery pack continuous discharge capability shall be at least 5 A, with higher transient capability preferred.
-- Charging shall use a true solar MPPT charger suitable for a 6 V panel and one Li-ion cell.
-- Preferred charger controller: BQ24650 configured for 1S Li-ion operation.
+- Charging shall use a solar-compatible charger and power-path controller suitable for a 6 V panel and one Li-ion cell.
+- Locked Rev A charger/controller: BQ25798RQMR configured for 1S Li-ion operation.
 - Charging must be inhibited below the cell manufacturer's allowed temperature using a battery-mounted NTC.
 - Radio rail: regulated 5.0 V, 3 A continuous design target, with short transient margin above 3 A.
 - Preferred radio boost converter: TPS61088.
@@ -62,8 +62,8 @@ Only the following telemetry categories are approved for Rev A:
 1. **Battery voltage / state of charge**
    - Required.
    - Reported through MeshCore base telemetry.
-   - Preferred gauge: MAX17048 for a single Li-ion cell.
-   - A protected ADC divider may be used if firmware support is simpler and sufficiently accurate.
+   - Preferred Rev A source: BQ25798 battery-voltage and charger telemetry over I2C.
+   - A dedicated MAX17048 fuel-gauge footprint is omitted from Rev A.
 
 2. **MCU temperature**
    - Required where supported by the XIAO nRF52840 board definition.
