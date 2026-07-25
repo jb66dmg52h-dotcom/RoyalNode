@@ -170,6 +170,7 @@ KiCad rule:
 - Series: 483 thin-film chip fuse
 - Function: solar input fuse
 - Locked candidate value: 5 A
+- Current official-page characteristics checked on 2026-07-25: 65 V rating, 50 A interrupt current, 0.027 ohm nominal resistance, -55 C to +125 C operating temperature
 - Package target: 1206 / 3216 metric chip fuse
 - Project-local release-candidate footprint: `F1_LITTELFUSE_483_1206_RC`
 

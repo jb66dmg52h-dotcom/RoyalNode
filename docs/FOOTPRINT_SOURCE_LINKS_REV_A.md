@@ -109,6 +109,14 @@ Primary product family:
 https://www.littelfuse.com/products/fuses-overcurrent-protection/fuses/surface-mount-fuses/thin-film-chip-fuses/483
 ```
 
+Specific candidate product page:
+
+```text
+https://www.littelfuse.com/products/fuses-overcurrent-protection/fuses/surface-mount-fuses/thin-film-chip-fuses/483/0483005-dr
+```
+
+2026-07-25 recheck: Littelfuse's official product page and 483-series datasheet identify `0483005.DR` as a 5 A, 1206, surface-mount, fast-acting 483-series fuse. The page also lists 65 V rating, 50 A interrupt current, 0.027 ohm nominal resistance and -55 C to +125 C operating temperature. These facts support the 6 V / 20 W solar-input current target, but the exact selected panel `Isc`, thermal derating and time-current coordination must still be reviewed before fabrication release.
+
 Release requirement:
 
 - Confirm the exact `0483005.DR` ordering code belongs to the Littelfuse 483 series 1206 chip-fuse package.
