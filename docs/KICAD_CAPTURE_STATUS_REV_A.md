@@ -47,7 +47,7 @@ The passive capture seed now assigns standard KiCad footprints to low-risk suppo
 - high-current/energy ceramic capacitors: `Capacitor_SMD:C_1210_3225Metric`
 - charge LED: `LED_SMD:LED_0603_1608Metric`
 
-Unassigned footprints remain deliberate for `J5` and `TH1` because those require final mechanical, package, or external-harness decisions. `J3` and `J4` now use the same JST-GH 2-pin release-candidate footprint, `F1` uses a Littelfuse 483-series 1206 release-candidate footprint, and `C503` uses a Panasonic 10SVPC330M 8 x 6.9 mm polymer-can release-candidate footprint.
+Unassigned footprints remain deliberate for `J5` because the SMA launch still requires final mechanical/RF review. `TH1` is intentionally off-board as the battery-mounted 103AT-2 thermistor. `J3` and `J4` use the same JST-GH 2-pin release-candidate footprint, `F1` uses a Littelfuse 483-series 1206 release-candidate footprint, and `C503` uses a Panasonic 10SVPC330M 8 x 6.9 mm polymer-can release-candidate footprint.
 
 ## What Is Captured
 
@@ -90,7 +90,7 @@ Current ERC result after generation:
 Next milestone `K1e`:
 
 1. Replace generic two-pin passive placeholders with resistor, capacitor, LED, thermistor, fuse, and inductor-specific project symbols where useful.
-2. Resolve remaining unassigned mechanical footprints: SMA launch and thermistor/harness body.
+2. Resolve the remaining unassigned PCB footprint: SMA launch.
 3. Start schematic-to-board synchronization after footprint status is clear.
 4. Move from label-heavy generated capture toward sheet-level grouping if the flat root sheet becomes hard to review.
 

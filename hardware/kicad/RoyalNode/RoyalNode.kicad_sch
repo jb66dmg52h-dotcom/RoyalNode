@@ -14952,7 +14952,7 @@
     (unit 1)
     (exclude_from_sim no)
     (in_bom yes)
-    (on_board yes)
+    (on_board no)
     (dnp no)
     (uuid "0c053fec-43f8-549d-843b-53c7bffa5b33")
     (property "Reference" "TH1"

@@ -357,7 +357,19 @@ def main() -> None:
         ref = row["Reference"]
         value = row["Value"]
         x, y = passive_position(index)
-        body.append(placed_symbol(ref, PASSIVE_SYMBOL, value, x, y, ["1", "2"], footprint=row.get("Footprint", "")))
+        is_off_board = ref in {"TH1"}
+        body.append(
+            placed_symbol(
+                ref,
+                PASSIVE_SYMBOL,
+                value,
+                x,
+                y,
+                ["1", "2"],
+                footprint=row.get("Footprint", ""),
+                on_board=not is_off_board,
+            )
+        )
         for pin, net in [("1", row["Pin 1 Net"]), ("2", row["Pin 2 Net"])]:
             pin_x, pin_y, _ = passive_pins[pin]
             lx, ly, angle = label_endpoint(x, y, pin_x, pin_y)

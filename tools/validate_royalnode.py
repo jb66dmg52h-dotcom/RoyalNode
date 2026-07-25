@@ -472,6 +472,8 @@ def check_generated_schematic() -> None:
             fail(f"generated schematic missing net label {net}")
     if 'Generated from SCHEMATIC_CAPTURE_SEED_REV_A.csv' not in schematic:
         fail("schematic title block no longer records the capture seed")
+    if not re.search(r'\(on_board no\).*?\(property "Reference" "TH1"', schematic, re.S):
+        fail("TH1 must remain an off-board battery-mounted thermistor with on_board no")
 
     status = read("docs/KICAD_CAPTURE_STATUS_REV_A.md")
     for needle in ["K1d", "Footprint Assignment Status", "0 messages", "52 support passive", "6 ERC-only power flags", "Do not add test points"]:
