@@ -43,6 +43,8 @@ kicad-cli pcb drc --severity-all
 
 The MOD2 warning is tracked because the E22 footprint is a local JLC/LCSC release candidate for a factory-installed module. It must be cleared by KiCad footprint update/save behavior or explicitly accepted through JLCPCB DFM/PCBA review before fabrication release.
 
+`BOOST_EN` remains intentionally unrouted until the TPS61088 local fanout and R405 placement are reviewed. A generated trial route was rejected because it crowded the exposed ground pad and solder-mask openings.
+
 ## Active Blockers
 
 1. SMA launch is not released.

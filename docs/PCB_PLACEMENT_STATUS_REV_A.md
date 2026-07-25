@@ -126,6 +126,8 @@ The same generated pass now adds the `L2_GND_REFERENCE` zone on `In1.Cu`, tied t
 
 The RF path, high-current power rails, ground pours, BQ25798/TPS61088 switch nodes and final power-loop routes remain unrouted until their placement and footprint review gates are settled.
 
+`BOOST_EN` also remains unrouted after a trial route showed the current TPS61088/R405 placement needs a proper local fanout pass around the TPS61088 exposed ground pad and mask openings. Do not route this net as a casual long generated trace; adjust the boost-control passive placement and then fan out the EN pin cleanly.
+
 ## Net-Class Policy
 
 The KiCad project now defines Rev A routing classes in `hardware/kicad/RoyalNode/RoyalNode.kicad_pro` and documents them in `docs/PCB_NET_CLASSES_REV_A.md`.
