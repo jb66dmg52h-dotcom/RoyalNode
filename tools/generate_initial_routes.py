@@ -382,6 +382,20 @@ SEGMENTS = [
         "points": [(50.53, 81.00), (50.53, 83.40)],
     },
     {
+        "name": "boost-input-c400-c401-local-bus",
+        "net": "BQ_SYS",
+        "layer": "F.Cu",
+        "width": 0.40,
+        "points": [(23.03, 24.50), (23.03, 22.50), (28.63, 22.50), (28.63, 24.50)],
+    },
+    {
+        "name": "boost-output-c402-c403-local-bus",
+        "net": "5V_RADIO",
+        "layer": "F.Cu",
+        "width": 0.40,
+        "points": [(34.23, 24.50), (34.23, 22.50), (39.83, 22.50), (39.83, 24.50)],
+    },
+    {
         "name": "charge-led-k-local",
         "net": "CHG_LED_K",
         "layer": "F.Cu",
