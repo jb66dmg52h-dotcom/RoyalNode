@@ -79,7 +79,7 @@ These should avoid switch-node copper and RF launch copper.
 ## Hold Items
 
 - Do not add test points, current shunts, probe loops, or bench-only measurement links.
-- Do not route `RF_915` until the SMA footprint and stack-up are final.
+- Do not route `RF_915` until the SMA footprint and stack-up are final per `docs/RF_STACKUP_PLAN_REV_A.md`.
 - The 2026-07-25 Molex product-page recheck keeps `732511150` selected, but does not release the footprint. The sales drawing/recommended launch geometry is still required.
 - Do not route `BOOST_EN` until the TPS61088/R405 fanout placement is fixed.
 - Two R405 relocation trials near the TPS61088 EN pin were rejected: one collided with the E22 SPI pad/courtyard corridor and one collided with the E22_NSS route/via corridor. Treat `BOOST_EN` as a placement-corridor problem, not as a single missing short segment.

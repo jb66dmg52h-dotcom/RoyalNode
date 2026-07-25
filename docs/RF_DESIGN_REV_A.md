@@ -46,6 +46,7 @@ The ANT-to-SMA path contains no series resistor, no pi matching/tuning network a
 - Trace width and coplanar gap are calculated from JLCPCB's JLC04161H-3313 production parameters, including dielectric thickness, dielectric constant and finished copper thickness.
 - Do not substitute a generic online microstrip dimension.
 - Fabrication drawing shall call out controlled impedance and JLCPCB's stated production tolerance.
+- The stack-up source data and RF release checklist are tracked in `docs/RF_STACKUP_PLAN_REV_A.md`.
 
 ## Routing rules
 
@@ -104,3 +105,5 @@ Before PCB routing is considered final:
 3. Generate the 50-ohm GCPW width/gap using JLCPCB's current impedance calculator/production parameters.
 4. Confirm the connector launch geometry against the connector manufacturer's recommended footprint.
 5. Apply the RF keepout and via-fence rules above.
+
+`RF_915` remains intentionally unrouted until the RF stack-up plan's open release items are closed.
