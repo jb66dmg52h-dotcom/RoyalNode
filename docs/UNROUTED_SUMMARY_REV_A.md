@@ -4,7 +4,7 @@ Generated from `hardware/fabrication/RoyalNode_drc.rpt`.
 
 This file is a layout planning aid, not a manufacturing release note. Counts are KiCad ratsnest-pair counts, so a net with several components can appear multiple times.
 
-Total unrouted pairs: 45
+Total unrouted pairs: 44
 
 | Net | Ratsnest pairs | Layout note |
 |---|---:|---|
@@ -18,7 +18,6 @@ Total unrouted pairs: 45
 | `BQ_SW1` | 2 | Switch node; keep compact and route only after BQ25798 power-loop placement. |
 | `BQ_SW2` | 2 | Switch node; keep compact and route only after BQ25798 power-loop placement. |
 | `USB_VBUS_RAW` | 2 |  |
-| `3V3` | 1 |  |
 | `BATP_KELVIN` | 1 |  |
 | `BOOST_COMP` | 1 |  |
 | `BOOST_FB` | 1 |  |
