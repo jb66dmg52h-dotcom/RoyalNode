@@ -7,7 +7,6 @@ This report tracks ordering friction only. It does not change the electrical des
 | Area | Ref/group | Value/part | Missing | Notes |
 |---|---|---|---|---|
 | core | F1 | 5 A solar input fuse | status locked_candidate | Located immediately after solar XT30 positive; verify time-current behavior against selected 6 V / 20 W panel Isc |
-| core | D1 | Low-current red charge LED | manufacturer, MPN, status selected_class | Driven by BQ25798 STAT sink path |
 | passive | R_LTC_UVOV_R3 | 1.78 MOhm 1% | manufacturer, MPN, status locked_candidate_value | Select stocked 1% or better part during sourcing |
 | passive | R_LTC_UVOV_R2 | 180 kOhm 0.1% | manufacturer, MPN, status locked_candidate_value | Select stocked 0.1% or better part during sourcing |
 | passive | R_LTC_UVOV_R1 | 40.2 kOhm 0.1% | manufacturer, MPN, status locked_candidate_value | Select stocked 0.1% or better part during sourcing |

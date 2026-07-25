@@ -44,6 +44,12 @@ The NTC is mandatory for the production assembly. There is no fixed TS bypass, s
 | Battery NTC cable housing | JST GHR-02V-S | Mating 2-pin JST-GH housing; exact crimp terminal must be selected/verified before harness release |
 | RF output | Molex 0732511150 / 732511150 | Standard-polarity 50-ohm SMA female edge mount for 1.60 mm PCB; JLCPCB C841205 |
 
+## Indicator LED
+
+| Function | Locked part | Notes |
+|---|---|---|
+| Charge/status LED | Hubei KENTO Elec KT-0603R | Red 0603 SMT LED, JLCPCB C2286, driven from the BQ25798 STAT sink path through R207 |
+
 The previous mixed low-current connector plan is removed from Rev A. J3 and J4 now use the same JST-GH 2-pin family so internal low-current harnesses share one latch style, pitch and crimp ecosystem. The NTC connector is a charge-safety input rather than deployed MeshCore telemetry.
 
 Board-side XT30 gender is deliberately male. The mating battery and solar harnesses use female XT30 connectors so energized harness contacts are recessed rather than exposed male bullets. Both board XT30s must be distinctly silkscreened BATTERY and SOLAR because the connectors are mechanically identical.

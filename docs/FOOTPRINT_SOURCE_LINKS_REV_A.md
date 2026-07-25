@@ -222,6 +222,25 @@ JLCPCB identifies `C53202181` as a LXWCONN 254PM-1x7P-V 1x7, 2.54 mm through-hol
 
 RoyalNode uses a composite MOD1 footprint containing two socket strips on 17.78 mm row spacing so the single XIAO schematic symbol maps to one board footprint.
 
+### D1 — Charge LED
+
+Selected part:
+
+```text
+Hubei KENTO Elec KT-0603R
+JLCPCB/LCSC C2286
+0603 red SMT LED
+```
+
+Source pages:
+
+```text
+https://jlcpcb.com/partdetail/C2286
+https://www.lcsc.com/product-detail/C2286.html
+```
+
+JLCPCB lists C2286 as an SMT assembly part for Economic and Standard PCBA, with 0603 package and red 1.8 V to 2.4 V LED description. LCSC lists the same KT-0603R part in a 1.6 mm x 0.8 mm x 0.6 mm 0603 package.
+
 Release requirement:
 
 - Confirm physical XIAO nRF52840 orientation.

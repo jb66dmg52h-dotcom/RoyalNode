@@ -12732,7 +12732,7 @@
         )
       )
     )
-    (property "Value" "Red 0603 LED"
+    (property "Value" "KT-0603R red LED"
       (at 386.08 120.52 0)
       (effects
         (font

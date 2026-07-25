@@ -18,4 +18,4 @@ J5,1,Molex,0732511150,50 ohm standard-polarity SMA female edge launch,1.60 mm PC
 J6,1,JST,SM04B-GHS-TB(LF)(SN),Optional BME680/environmental I2C connector,4-pin 1.25 mm SMT JST-GH,Pinout 3V3/GND/SDA/SCL; MeshCore-supported environmental telemetry only,optional
 F1,1,Littelfuse,0483005.DR,5 A solar input fuse,SMD 483-series 1206 fuse,Located immediately after solar XT30 positive; verify time-current behavior against selected 6 V / 20 W panel Isc,locked_candidate
 TH1,1,Semitec,103AT-2,10 kOhm battery-mounted NTC,Thermistor on battery harness,Required for production; no TS bypass network,locked
-D1,1,TBD,TBD,Low-current red charge LED,SMD LED,Driven by BQ25798 STAT sink path,selected_class
+D1,1,Hubei KENTO Elec,KT-0603R,Low-current red charge LED,0603 SMD LED,JLCPCB C2286; driven by BQ25798 STAT sink path,locked
