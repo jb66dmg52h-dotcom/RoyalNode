@@ -17243,6 +17243,22 @@
 		(uuid "623ef23e-4479-524f-8ca6-33bdadf85241")
 	)
 	(segment
+		(start 57.35 54.25)
+		(end 57.35 54.75)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "BOOST_SW")
+		(uuid "9e6f7b83-34cc-538f-8579-e8856cd83993")
+	)
+	(segment
+		(start 57.35 55.25)
+		(end 57.35 55.75)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "BOOST_SW")
+		(uuid "e68655bf-6419-5ac7-9d8e-19c7a0dd118b")
+	)
+	(segment
 		(start 82.4 49.65)
 		(end 82.4 50.3)
 		(width 0.2)

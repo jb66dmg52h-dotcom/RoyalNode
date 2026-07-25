@@ -39,6 +39,20 @@ SEGMENTS = [
         "points": [(60.65, 54.75), (60.65, 55.75)],
     },
     {
+        "name": "u3-boost-sw-upper-local",
+        "net": "BOOST_SW",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(57.35, 54.25), (57.35, 54.75)],
+    },
+    {
+        "name": "u3-boost-sw-lower-local",
+        "net": "BOOST_SW",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(57.35, 55.25), (57.35, 55.75)],
+    },
+    {
         "name": "j6-3v3-fanout",
         "net": "3V3",
         "layer": "F.Cu",
@@ -631,7 +645,7 @@ def main() -> None:
         raise SystemExit("PCB file does not end with a closing S-expression")
     body = text[:-1].rstrip()
     PCB.write_text(f"{body}\n{generated_blocks()}\n)\n", encoding="utf-8")
-    print("Generated initial routes, E22 control/SPI/VCC, TPS61088 local output, J6 I2C, charge LED/STAT, temp/UV/OV-divider, U1/U2/Q-gate/MOSFET-drain local links and L2 ground reference plane")
+    print("Generated initial routes, E22 control/SPI/VCC, TPS61088 local output/SW pins, J6 I2C, charge LED/STAT, temp/UV/OV-divider, U1/U2/Q-gate/MOSFET-drain local links and L2 ground reference plane")
 
 
 if __name__ == "__main__":
