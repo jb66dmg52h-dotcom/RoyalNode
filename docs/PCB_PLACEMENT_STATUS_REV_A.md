@@ -109,7 +109,7 @@ tools/generate_initial_routes.py
 Only stable local/control nets are routed in this first pass:
 
 - `E22_TXEN_DIO2`: short local top-layer link between E22 DIO2 and TXEN.
-- `5V_RADIO`: short local E22 VCC pad tie and TPS61088 output-pin tie only; the main radio supply pour remains unrouted.
+- `5V_RADIO`: short local E22 VCC pad tie, TPS61088 output-pin tie and bottom radio bulk-capacitor bus are routed; the main radio supply pour remains unrouted.
 - `E22_NRST`: E22 reset to XIAO D0 through a short fanout, via and Layer-3 route.
 - `E22_DIO1`: E22 interrupt to XIAO D1 through a short fanout, via and Layer-3 route.
 - `E22_BUSY`: E22 busy signal to XIAO D2 through a short fanout, via and Layer-3 route.
@@ -230,7 +230,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-72 expected unrouted ratsnest items
+68 expected unrouted ratsnest items
 0 footprint errors
 3 known footprint/library warnings: MOD2, U3 and L2
 ```
