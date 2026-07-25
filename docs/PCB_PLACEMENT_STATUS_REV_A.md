@@ -38,10 +38,10 @@ The board remains a placement scaffold, not a routed PCB and not a fabrication r
 | Reference | Footprint | Position | Rotation | Status |
 |---|---|---:|---:|---|
 | `MOD2` | `MOD2_E22_900M33S_JLC_C22399506_RC` | 42.0, 54.0 mm | 180 deg | Release-candidate factory PCBA footprint |
-| `MOD1` | `MOD1_XIAO_NRF52840_DRAFT_ENVELOPE` | 71.5, 34.0 mm | 0 deg | Draft envelope only |
+| `MOD1` | `MOD1_XIAO_NRF52840_SOCKET_C53202181_RC` | 71.5, 34.0 mm | 0 deg | Composite XIAO socket release candidate |
 | `J5` | `J5_SMA_0732511150_DRAFT_ENVELOPE` | 90.0, 41.3 mm | 0 deg | Draft envelope only |
-| `J1` | `J_POWER_XT30PW_M_DRAFT_ENVELOPE` | 83.0, 62.0 mm | 0 deg | Draft envelope only |
-| `J2` | `J_POWER_XT30PW_M_DRAFT_ENVELOPE` | 83.0, 78.0 mm | 0 deg | Draft envelope only |
+| `J1` | `J_POWER_XT30PW_M_C431092_RC` | 83.0, 62.0 mm | 0 deg | Imported XT30 release candidate |
+| `J2` | `J_POWER_XT30PW_M_C431092_RC` | 83.0, 76.5 mm | 0 deg | Imported XT30 release candidate |
 
 ## Placement Intent
 
@@ -51,9 +51,9 @@ The E22 module is placed on the left side of the board and rotated so pin 21 fac
 E22 pin 21 ANT -> short 50 ohm GCPW -> edge-launch SMA
 ```
 
-The XIAO envelope is placed in the upper-right area with USB-C edge access still to be verified against the final socket/mechanical decision.
+The XIAO composite socket footprint is placed in the upper-right area with USB-C edge access still to be verified against the final module orientation. The composite footprint uses two LXWCONN `254PM-1x7P-V` socket strips from JLC/LCSC part `C53202181`.
 
-The XT30 solar and battery connectors are placed on the right/lower-right side of the board to keep high-current wiring away from the RF launch as much as possible within the 75 x 65 mm outline.
+The XT30 solar and battery connectors are placed on the right/lower-right side of the board to keep high-current wiring away from the RF launch as much as possible within the 75 x 65 mm outline. Both use imported JLC/LCSC `C431092` EasyEDA geometry for AMASS `XT30PW-M30.G.Y`.
 
 ## Known Blockers
 
@@ -79,11 +79,24 @@ The board footprint text and library footprint text are identical after normaliz
 
 ### SMA Footprint
 
-The SMA connector remains an envelope only. The final electrical footprint must wait for the official Molex sales drawing or a different verified edge-launch SMA part with a complete land pattern.
+The SMA connector remains an envelope only on the board. A JLC/LCSC import release-candidate footprint now exists in the project library:
+
+```text
+J5_SMA_MOLEX_732511150_C841205_IMPORT_RC
+```
+
+It is not placed because the imported footprint includes `Edge.Cuts` geometry and the final RF launch must be reviewed against the official Molex sales drawing and the board stack-up.
 
 ### XIAO and XT30 Footprints
 
-The XIAO and XT30 footprints currently represent placement envelopes only. Final footprints must include pads, connector polarity, courtyard, mechanical keepout, and assembly notes before routing.
+The XIAO and XT30 footprints have advanced from envelope-only to release-candidate geometry.
+
+Remaining checks:
+
+- XIAO orientation versus USB-C access, antenna clearance, and socket engagement.
+- XT30 polarity versus the physical connector molding.
+- XT30 mating plug clearance and enclosure edge access.
+- JLC wave-solder assembly constraints for both connector classes.
 
 ## Current Check State
 
@@ -106,7 +119,7 @@ PCB DRC:
 Next milestone `P1b`:
 
 1. Select final XIAO socket/land pattern.
-2. Select final XT30 board connector footprint and confirm polarity.
+2. Confirm XT30 polarity and mating-plug clearance.
 3. Select or unblock the edge-launch SMA land pattern.
 4. Replace draft envelopes with electrical footprints where verified.
 5. Add schematic-linked footprints and start net-aware synchronization.

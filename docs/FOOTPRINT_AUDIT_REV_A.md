@@ -149,10 +149,12 @@ KiCad rule:
 - Board side: male XT30PW-M
 - Orientation: right-angle PCB mount
 - Both connectors use the same part.
+- JLC/LCSC import source: `C431092`, `XT30PW-M30.G.Y`
+- Local release-candidate footprint: `J_POWER_XT30PW_M_C431092_RC`
 
 KiCad rule:
 
-- Use AMASS mechanical/CAD dimensions for XT30PW-M.
+- Use the imported JLC/LCSC geometry as the current release candidate, with final polarity and mating-clearance review before release.
 - Add mechanical courtyard for the connector body and mating plug insertion/removal.
 - Silkscreen must unambiguously read `BATTERY` and `SOLAR` because the connectors are mechanically interchangeable but electrically very different.
 - Pin polarity must be checked against the physical connector molding before Gerber release.
@@ -163,10 +165,12 @@ KiCad rule:
 - 1x7, 2.54 mm pitch female sockets
 - two rows spaced to match the Seeed XIAO 14-pin DIP geometry
 - XIAO module body: 21 mm x 17.8 mm
+- JLC/LCSC import source: `C53202181`
+- Local composite release-candidate footprint: `MOD1_XIAO_NRF52840_SOCKET_C53202181_RC`
 
 KiCad rule:
 
-- Use two separate 1x7 footprints or one project-local combined XIAO socket footprint only after the row spacing is taken from Seeed's official XIAO mechanical/KiCad files.
+- Use the project-local combined XIAO socket footprint so the single MOD1 schematic symbol maps to one PCB footprint.
 - Do not add carrier pads under the XIAO underside battery pads: battery power is through the separate JST harness, not through carrier pogo/SMD pads.
 - Maintain access to the XIAO USB-C connector and reset button.
 
@@ -201,12 +205,12 @@ Before PCB placement begins, each non-generic footprint must have:
 
 ## Current footprint audit status
 
-Package families and major mechanical constraints are now identified. The remaining manual transcription work before PCB placement is concentrated in:
+Package families and major mechanical constraints are now identified. The remaining manual transcription/review work before release routing is concentrated in:
 
-1. E22 castellated-pad centers/dimensions from EBYTE mechanical drawing.
-2. XT30PW-M exact manufacturer land pattern and polarity orientation.
-3. XIAO socket row spacing/engagement against Seeed mechanical files.
+1. E22 JLC/LCSC footprint warning resolution or explicit manufacturing-review acceptance.
+2. XT30PW-M polarity and mating-plug clearance.
+3. XIAO socket orientation, USB-C clearance, antenna clearance, and socket engagement.
 4. Molex SMA exact launch geometry.
-5. Final comparison of imported TI/ADI/Infineon CAD footprints against the package drawings above.
+5. TI/ADI/Infineon/Coilcraft power-stage footprints against package drawings.
 
 These are footprint-construction tasks, not unresolved electrical architecture.

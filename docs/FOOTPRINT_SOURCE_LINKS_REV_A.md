@@ -82,6 +82,15 @@ Current blocker:
 docs/MOLEX_SMA_FOOTPRINT_BLOCKER_REV_A.md
 ```
 
+JLC/LCSC assembly/import reference:
+
+```text
+C841205
+hardware/kicad/RoyalNode/lib_footprints/RoyalNode.pretty/J5_SMA_MOLEX_732511150_C841205_IMPORT_RC.kicad_mod
+```
+
+The imported footprint is kept as a release-candidate source artifact only. It is not placed on the board because its `Edge.Cuts` launch geometry must be reviewed against the official Molex sales drawing and RoyalNode's final controlled-impedance stack-up.
+
 Footprint release requirements:
 
 - Use the Molex sales drawing, not a generic SMA edge footprint.
@@ -140,10 +149,44 @@ Required source:
 AMASS XT30PW-M manufacturer drawing or trusted factory CAD from assembly supplier
 ```
 
+Current JLC/LCSC import reference:
+
+```text
+C431092
+MPN: XT30PW-M30.G.Y
+hardware/kicad/RoyalNode/lib_footprints/RoyalNode.pretty/J_POWER_XT30PW_M_C431092_RC.kicad_mod
+```
+
+JLC/LCSC identify `C431092` as a Changzhou Amass Elec XT30PW-M30.G.Y male right-angle connector with 2 pins, 15 A rated current, 500 VDC rated voltage, 1.2 milliohm contact resistance, 16/18/20 AWG recommended wire gauge, and wave-solder PCBA support.
+
 Release requirement:
 
 - Confirm pin polarity against the physical connector molding before Gerber release.
 - Include mating plug clearance and clear `SOLAR` / `BATTERY` silkscreen.
+
+RoyalNode's local release-candidate footprint moves imported decorative body art to `F.Fab` while preserving the imported electrical pad geometry. This keeps KiCad DRC focused on copper and assembly geometry rather than JLC library silkscreen art.
+
+### MOD1 — XIAO socket strips
+
+Current JLC/LCSC import reference:
+
+```text
+C53202181
+MPN: LXWCONN 254PM-1x7P-V
+hardware/kicad/RoyalNode/lib_footprints/RoyalNode.pretty/MOD1_XIAO_SOCKET_1X7_C53202181_RC.kicad_mod
+hardware/kicad/RoyalNode/lib_footprints/RoyalNode.pretty/MOD1_XIAO_NRF52840_SOCKET_C53202181_RC.kicad_mod
+```
+
+JLCPCB identifies `C53202181` as a LXWCONN 254PM-1x7P-V 1x7, 2.54 mm through-hole female header with wave-solder PCBA support.
+
+RoyalNode uses a composite MOD1 footprint containing two socket strips on 17.78 mm row spacing so the single XIAO schematic symbol maps to one board footprint.
+
+Release requirement:
+
+- Confirm physical XIAO nRF52840 orientation.
+- Confirm USB-C edge access.
+- Confirm BLE antenna clearance.
+- Confirm socket engagement height with the selected XIAO header pins.
 
 ### J3 — JST B2B-PH-SM4-TB(LF)(SN)
 

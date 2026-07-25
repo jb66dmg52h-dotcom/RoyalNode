@@ -27,11 +27,11 @@ PLACEMENTS = [
     },
     {
         "ref": "MOD1",
-        "value": "XIAO nRF52840 envelope",
-        "file": "MOD1_XIAO_NRF52840_DRAFT_ENVELOPE.kicad_mod",
-        "library_name": "MOD1_XIAO_NRF52840_DRAFT_ENVELOPE",
+        "value": "XIAO nRF52840 socket C53202181 RC",
+        "file": "MOD1_XIAO_NRF52840_SOCKET_C53202181_RC.kicad_mod",
+        "library_name": "MOD1_XIAO_NRF52840_SOCKET_C53202181_RC",
         "at": (71.5, 34.0, 0),
-        "note": "DRAFT envelope only; socket footprint remains pending.",
+        "note": "Composite footprint for two LXWCONN 1x7 socket strips.",
     },
     {
         "ref": "J5",
@@ -43,22 +43,28 @@ PLACEMENTS = [
     },
     {
         "ref": "J1",
-        "value": "XT30 solar envelope",
-        "file": "J_POWER_XT30PW_M_DRAFT_ENVELOPE.kicad_mod",
-        "library_name": "J_POWER_XT30PW_M_DRAFT_ENVELOPE",
+        "value": "XT30PW-M C431092 RC",
+        "file": "J_POWER_XT30PW_M_C431092_RC.kicad_mod",
+        "library_name": "J_POWER_XT30PW_M_C431092_RC",
         "at": (83.0, 62.0, 0),
-        "note": "DRAFT envelope only; polarity and land pattern pending.",
+        "note": "Imported JLC/EasyEDA footprint; polarity still requires review.",
     },
     {
         "ref": "J2",
-        "value": "XT30 battery envelope",
-        "file": "J_POWER_XT30PW_M_DRAFT_ENVELOPE.kicad_mod",
-        "library_name": "J_POWER_XT30PW_M_DRAFT_ENVELOPE",
-        "at": (83.0, 78.0, 0),
-        "note": "DRAFT envelope only; polarity and land pattern pending.",
+        "value": "XT30PW-M C431092 RC",
+        "file": "J_POWER_XT30PW_M_C431092_RC.kicad_mod",
+        "library_name": "J_POWER_XT30PW_M_C431092_RC",
+        "at": (83.0, 76.5, 0),
+        "note": "Imported JLC/EasyEDA footprint; polarity still requires review.",
     },
 ]
 GENERATED_LIBRARY_NAMES = {str(item["library_name"]) for item in PLACEMENTS}
+GENERATED_LIBRARY_NAMES.update(
+    {
+        "MOD1_XIAO_NRF52840_DRAFT_ENVELOPE",
+        "J_POWER_XT30PW_M_DRAFT_ENVELOPE",
+    }
+)
 
 
 def stable_uuid(*parts: str) -> str:
@@ -108,9 +114,12 @@ def footprint_block(item: dict[str, object]) -> str:
     text = text.replace('(property "Reference" "J5"', f'(property "Reference" "{ref}"', 1)
     text = text.replace('(property "Reference" "MOD1"', f'(property "Reference" "{ref}"', 1)
     text = text.replace('(property "Reference" "MOD2"', f'(property "Reference" "{ref}"', 1)
+    text = text.replace('(property "Reference" "REF**"', f'(property "Reference" "{ref}"', 1)
     text = text.replace('(property "Value" "E22-900M33S C22399506 RC"', f'(property "Value" "{value}"', 1)
+    text = text.replace('(property "Value" "XIAO nRF52840 socket C53202181 RC"', f'(property "Value" "{value}"', 1)
     text = text.replace('(property "Value" "XIAO nRF52840 DRAFT ENVELOPE"', f'(property "Value" "{value}"', 1)
     text = text.replace('(property "Value" "SMA EDGE DRAFT ENVELOPE"', f'(property "Value" "{value}"', 1)
+    text = text.replace('(property "Value" "XT30PW-M C431092 RC"', f'(property "Value" "{value}"', 1)
     text = text.replace('(property "Value" "XT30PW-M DRAFT ENVELOPE"', f'(property "Value" "{value}"', 1)
 
     lines = text.splitlines()

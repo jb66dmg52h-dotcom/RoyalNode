@@ -33,12 +33,12 @@ docs/FOOTPRINT_SOURCE_LINKS_REV_A.md
 | U3 | TPS61088RHLR, TI RHL0020A VQFN-20 + EP pad 21 | High | `not_started` | Exposed pad must be pad 21; thermal via concept required |
 | U4 | LTC4365ITS8-1, ADI TS8 TSOT-23-8 | Medium | `not_started` | Use ADI TS8 recommended pad layout |
 | Q1-Q3 | ISA170170N04LMDS, Infineon PG-DSO-8 | Medium | `not_started` | Confirm duplicated drain/source pin mapping and consistent orientation |
-| MOD1 | Seeed XIAO nRF52840 socket assembly | Medium | `draft_envelope_only` | Verify XIAO row spacing and socket engagement before release |
+| MOD1 | Seeed XIAO nRF52840 socket assembly | Medium | `conditional_release_candidate` | Composite footprint uses two JLC/LCSC `C53202181` 1x7 socket strips; verify XIAO orientation, row spacing, and socket engagement before release |
 | MOD2 | EBYTE E22-900M33S castellated module | High | `conditional_release_candidate` | Factory-installed PCBA item using EBYTE manual plus exact JLC/LCSC `C22399506` EasyEDA footprint cross-check; physical check deferred to assembled-board first article |
-| J1/J2 | AMASS XT30PW-M right-angle male | Medium | `draft_envelope_only` | Confirm polarity from physical connector and add mating-plug clearance |
+| J1/J2 | AMASS XT30PW-M right-angle male | Medium | `conditional_release_candidate` | Imported JLC/LCSC `C431092` EasyEDA geometry; confirm polarity from physical connector and add mating-plug clearance |
 | J3 | JST B2B-PH-SM4-TB(LF)(SN) | Low | `not_started` | Use JST official/verified KiCad PH-SM4-TB 2-pin footprint |
 | J4 | CJT A2012WV-S-2P | Low | `not_started` | Use manufacturer/JLC footprint and pin-1 marker |
-| J5 | Molex 0732511150 SMA edge launch | High | `draft_envelope_only` | Use Molex launch for 1.60 mm PCB and merge with final GCPW stack-up |
+| J5 | Molex 0732511150 SMA edge launch | High | `draft_envelope_only` | JLC/LCSC `C841205` import exists but is not placed; use Molex launch for 1.60 mm PCB and merge with final GCPW stack-up |
 | L_BQ | Coilcraft XAL7070-222MEC | Medium | `not_started` | Use Coilcraft recommended land pattern and body courtyard |
 | L_BOOST | Coilcraft XAL7030-222MEC | Medium | `not_started` | Use Coilcraft recommended land pattern and body courtyard |
 | C_BULK | Panasonic 10SVPC330M | Medium | `not_started` | Use polarized SMD polymer footprint with clear polarity marking |
@@ -50,7 +50,7 @@ docs/FOOTPRINT_SOURCE_LINKS_REV_A.md
 2. Molex 0732511150 SMA edge-launch footprint.
 3. TPS61088 footprint and boost-inductor footprint.
 4. BQ25798 HOTROD footprint and charger-inductor footprint.
-5. XT30 connector footprints.
-6. XIAO socket footprint/placement.
+5. Promote or reject the imported SMA footprint after RF/mechanical review.
+6. Verify XIAO and XT30 first-article mechanical fit.
 
 This order lets the board outline and high-risk RF/power placement stabilize before low-risk passives are assigned.
