@@ -127,10 +127,10 @@ J1,XT30PW-M,1,PLUS,SOLAR_RAW,Solar connector positive
 J1,XT30PW-M,2,MINUS,GND,Solar connector negative
 J2,XT30PW-M,1,PLUS,BAT_RAW,Battery connector positive
 J2,XT30PW-M,2,MINUS,GND,Battery connector negative
-J3,JST B2B-PH-SM4-TB,1,PIN1,XIAO_BAT_ISO,XIAO underside BAT harness positive
-J3,JST B2B-PH-SM4-TB,2,PIN2,GND,XIAO underside GND harness negative
-J4,CJT A2012WV-S-2P,1,PIN1,NTC_SENSE,Battery-mounted NTC terminal
-J4,CJT A2012WV-S-2P,2,PIN2,GND,Battery-mounted NTC return
+J3,JST-GH SM02B-GHS-TB,1,PIN1,XIAO_BAT_ISO,XIAO underside BAT harness positive
+J3,JST-GH SM02B-GHS-TB,2,PIN2,GND,XIAO underside GND harness negative
+J4,JST-GH SM02B-GHS-TB,1,PIN1,NTC_SENSE,Battery-mounted NTC terminal
+J4,JST-GH SM02B-GHS-TB,2,PIN2,GND,Battery-mounted NTC return
 J5,Molex 0732511150 SMA,1,CENTER,RF_915,SMA center contact
 J5,Molex 0732511150 SMA,2,SHIELD,GND,SMA ground
 J5,Molex 0732511150 SMA,3,SHIELD,GND,SMA ground

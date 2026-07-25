@@ -80,7 +80,7 @@ Source basis: TI LM66100 Rev. A.
 | 3 | CE | **VOUT** for always-on reverse-current blocking |
 | 4 | NC | NC |
 | 5 | ST | **GND** because status is unused |
-| 6 | VOUT | XIAO_BAT_ISO -> JST-PH -> XIAO BAT |
+| 6 | VOUT | XIAO_BAT_ISO -> JST-GH -> XIAO BAT |
 
 ### Mandatory correction
 

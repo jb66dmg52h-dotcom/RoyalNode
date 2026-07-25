@@ -15,7 +15,7 @@ The 2Watt Project is a solar-powered 915 MHz LoRa repeater carrier built around 
 - Battery-mounted Semitec 103AT-2 NTC connected to BQ25798 TS network
 - TPS61088 5 V boost rail for the E22
 - Battery voltage and charger telemetry read directly from the BQ25798
-- XIAO powered through its underside BAT and GND pads using a two-wire JST-PH lead
+- XIAO powered through its underside BAT and GND pads using a two-wire JST-GH lead
 - LM66100 ideal diode between the main battery/system node and the XIAO BAT lead
 - USB-C firmware updates through the XIAO
 - USB-C battery charging through the BQ25798

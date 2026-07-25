@@ -35,7 +35,7 @@ The older `docs/PRELIMINARY_BOM_KICAD_AND_SOURCING.md` is not authoritative for 
 | `RoyalNode:RN_ISA170170N04LMDS` | Q | Infineon dual N-MOSFET pin audit |
 | `RoyalNode:RN_XT30PW_M` | J | AMASS XT30PW-M power connector class |
 | `RoyalNode:RN_SMA_EDGE` | J | Molex 0732511150 edge-launch SMA class |
-| `RoyalNode:RN_JST_PH_2` | J | Two-pin low-current connector class for XIAO power harness or NTC |
+| `RoyalNode:RN_JST_GH_2` | J | Two-pin JST-GH low-current connector class for XIAO power harness or NTC |
 
 ## Important Pin Decisions Captured
 

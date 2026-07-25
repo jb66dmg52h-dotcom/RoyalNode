@@ -68,7 +68,7 @@ BQ25798 SYS
 
 Protected battery/system node
   -> LM66100 ideal diode
-  -> board-mounted 2-pin JST-PH
+  -> board-mounted 2-pin JST-GH
   -> short two-wire harness
   -> XIAO BAT and GND underside pads
 ```
@@ -118,7 +118,7 @@ All eleven exposed XIAO GPIO pins are allocated.
 
 ### XIAO power connector
 
-- 2-pin JST-PH, 2.0 mm pitch
+- 2-pin JST-GH, 1.25 mm pitch
 - Pin 1: protected 1S supply after LM66100
 - Pin 2: GND
 - XIAO-side wires solder directly to underside BAT and GND pads

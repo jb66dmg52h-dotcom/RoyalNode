@@ -188,30 +188,21 @@ Release requirement:
 - Confirm BLE antenna clearance.
 - Confirm socket engagement height with the selected XIAO header pins.
 
-### J3 — JST B2B-PH-SM4-TB(LF)(SN)
+### J3/J4 — JST-GH SM02B-GHS-TB(LF)(SN)
 
 Required source:
 
 ```text
-JST B2B-PH-SM4-TB(LF)(SN) drawing
-```
-
-Release requirement:
-
-- Use the official JST pad layout or a KiCad standard footprint checked against it.
-
-### J4 — CJT A2012WV-S-2P
-
-Required source:
-
-```text
-CJT A2012WV-S-2P manufacturer/JLC assembly footprint data
+JST GH series SM02B-GHS-TB(LF)(SN) drawing
+KiCad Connector_JST footprint: JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal
 ```
 
 Release requirement:
 
 - Pin 1 marker required.
-- Mate must be CJT A2012H-2P housing with verified crimp terminal before harness release.
+- Mate must be JST GHR-02V-S housing with verified crimp terminal before harness release.
+- J3 carries only the XIAO underside BAT/GND internal harness.
+- J4 carries only the battery-mounted 103AT-2 NTC safety harness.
 
 ## Footprint Policy
 

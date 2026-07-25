@@ -63,6 +63,22 @@ PLACEMENTS = [
         "note": "Imported JLC/EasyEDA footprint; polarity still requires review.",
     },
     {
+        "ref": "J3",
+        "value": "JST-GH XIAO BAT HARNESS",
+        "file": "J_LOW_JST_GH_SM02B_GHS_TB_RC.kicad_mod",
+        "library_name": "J_LOW_JST_GH_SM02B_GHS_TB_RC",
+        "at": (92.0, 34.0, 0),
+        "note": "Internal two-wire XIAO underside BAT/GND harness; JST-GH family.",
+    },
+    {
+        "ref": "J4",
+        "value": "JST-GH BATTERY NTC",
+        "file": "J_LOW_JST_GH_SM02B_GHS_TB_RC.kicad_mod",
+        "library_name": "J_LOW_JST_GH_SM02B_GHS_TB_RC",
+        "at": (84.5, 88.5, 0),
+        "note": "Internal battery-mounted NTC safety harness; JST-GH family.",
+    },
+    {
         "ref": "U1",
         "value": "BQ25798 RQM0029A RC",
         "file": "U1_BQ25798_RQM0029A_RC.kicad_mod",
@@ -296,6 +312,7 @@ def footprint_block(item: dict[str, object]) -> str:
 
     if text.startswith("(module "):
         raise SystemExit(f"{item['file']} is legacy module syntax; use a KiCad-10-native footprint")
+    text = re.sub(r'\n[ \t]*\(tags "[^"]*"\)', "", text)
     text = text.replace(f'(footprint "{library_name}"', f'(footprint "RoyalNode:{library_name}"', 1)
     text = text.replace(f'(property "Reference" "{library_name.split("_")[0] if "_" in library_name else ref}"', f'(property "Reference" "{ref}"', 1)
     text = text.replace('(property "Reference" "J?"', f'(property "Reference" "{ref}"', 1)
@@ -389,6 +406,7 @@ def passive_footprint_block(item: dict[str, object]) -> str:
     if not path.exists():
         raise SystemExit(f"missing passive footprint source {path}")
     text = path.read_text(encoding="utf-8").strip()
+    text = re.sub(r'\n[ \t]*\(tags "[^"]*"\)', "", text)
     library = str(item["library"])
     library_name = str(item["library_name"])
     ref = str(item["ref"])

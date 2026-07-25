@@ -47,7 +47,7 @@ The passive capture seed now assigns standard KiCad footprints to low-risk suppo
 - high-current/energy ceramic capacitors: `Capacitor_SMD:C_1210_3225Metric`
 - charge LED: `LED_SMD:LED_0603_1608Metric`
 
-Unassigned footprints remain deliberate for `J5`, `F1`, `C503`, `TH1`, `J3`, and `J4` because those require final mechanical, connector, or external-harness decisions.
+Unassigned footprints remain deliberate for `J5`, `F1`, `C503`, and `TH1` because those require final mechanical, package, or external-harness decisions. `J3` and `J4` now use the same JST-GH 2-pin release-candidate footprint.
 
 ## What Is Captured
 

@@ -2675,7 +2675,7 @@
         )
     )
   )
-  (symbol "RN_JST_PH_2"
+  (symbol "RN_JST_GH_2"
     (pin_numbers hide)
     (pin_names
       (offset 0.762)
@@ -2691,7 +2691,7 @@
           )
         )
       )
-      (property "Value" "JST/CJT 2-pin"
+      (property "Value" "JST-GH 2-pin"
         (at 0 -10.16 0)
         (effects
           (font
@@ -2717,7 +2717,7 @@
         (hide yes)
         )
       )
-      (property "Description" "Two-pin low-current board connector for XIAO battery harness or NTC."
+      (property "Description" "Two-pin JST-GH low-current board connector for internal XIAO battery harness, battery NTC, or approved low-current internal service use."
         (at 0 0 0)
         (effects
           (font
@@ -2726,7 +2726,7 @@
         (hide yes)
         )
       )
-    (symbol "RN_JST_PH_2_0_1"
+    (symbol "RN_JST_GH_2_0_1"
       (rectangle
         (start -7.62 6.35)
         (end 7.62 -6.35)
@@ -2739,7 +2739,7 @@
         )
       )
     )
-    (symbol "RN_JST_PH_2_1_1"
+    (symbol "RN_JST_GH_2_1_1"
         (pin passive line
           (at -11.43 3.8099999999999996 0)
           (length 3.81)

@@ -48,7 +48,10 @@ RoyalNode Rev A is an engineering-validation platform for a rugged, solar-powere
 
 - All JST-style connectors shall use the JST-GH family, 1.25 mm pitch.
 - Do not mix JST-PH, JST-XH, JST-SH or JST-ZH families on the board.
-- Use JST-GH only for MeshCore-supported environmental telemetry modules.
+- Use JST-GH for all low-current removable harnesses.
+- J3 is allowed as an internal XIAO underside BAT/GND power harness.
+- J4 is allowed as the required battery-mounted NTC charge-safety harness.
+- The only optional deployed telemetry connector is the MeshCore-supported environmental I2C module connector.
 - No fan, generic analog sensor, general-purpose UART, or six-pin debug/programming JST connector shall be fitted.
 - Programming shall use the XIAO USB-C connector.
 - Recovery/debug shall use a compact Tag-Connect or exposed SWD pad footprint.
@@ -115,7 +118,7 @@ The following shall not be included as deployed telemetry sensors unless future 
 - Socketed XIAO nRF52840 on Rev A.
 - Serviceable EBYTE radio module.
 - XT30 battery and solar connectors.
-- No low-current connector except the optional 4-pin JST-GH environmental-sensor port.
+- No low-current connector except the internal JST-GH XIAO power harness, internal JST-GH battery-NTC safety harness and optional 4-pin JST-GH environmental-sensor port.
 - Solar wiring sized for approximately 3.3 A continuous current with low voltage drop.
 - Battery wiring sized for at least 5 A continuous capability.
 - PCB-mounted edge-launch SMA connected to EBYTE ANT pin 21 through a short 50-ohm controlled-impedance path.

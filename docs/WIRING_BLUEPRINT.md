@@ -12,7 +12,7 @@
 - Board-mounted XT30 for battery
 - Battery-mounted Semitec 103AT-2 NTC through a dedicated two-wire temperature connector
 - Board-edge 50-ohm SMA female connector
-- Socketed XIAO with a separate two-wire JST-PH power lead
+- Socketed XIAO with a separate two-wire JST-GH power lead
 
 Rev A intentionally has no dedicated fuel-gauge IC. Battery and charger telemetry come from the BQ25798.
 
@@ -50,8 +50,8 @@ Power path:
 ```text
 Protected battery/system node
   -> LM66100DCKR ideal diode
-  -> JST B2B-PH-SM4-TB(LF)(SN)
-  -> PHR-2 cable housing
+  -> JST-GH SM02B-GHS-TB(LF)(SN)
+  -> GHR-02V-S cable housing
   -> short flexible two-wire harness
   -> XIAO BAT and GND underside pads
 ```
@@ -92,7 +92,7 @@ BQ25798 SYS
 
 Protected battery/system node
   -> LM66100
-  -> 2-pin JST-PH
+  -> 2-pin JST-GH
   -> XIAO BAT and GND
 ```
 

@@ -43,7 +43,9 @@ def check_no_stale_design_terms() -> None:
     stale_terms = {
         "MAX17048": "Rev A removed the dedicated fuel gauge",
         "SWD service": "Rev A removed the SWD connector",
-        "Molex 5037630291": "Rev A NTC connector is CJT A2012WV-S-2P",
+        "Molex 5037630291": "Rev A NTC connector is JST-GH SM02B-GHS-TB",
+        "JST-PH": "Rev A standardized low-current JST connectors on JST-GH",
+        "CJT A2012": "Rev A standardized the battery NTC connector on JST-GH",
         "JST-PH 4-pin": "Rev A has no 4-pin debug/programming JST harness",
         "GPS": "Rev A removed GPS",
         "display": "Rev A removed display hardware",
@@ -90,7 +92,7 @@ def check_symbols() -> None:
         "RN_ISA170170N04LMDS",
         "RN_XT30PW_M",
         "RN_SMA_EDGE",
-        "RN_JST_PH_2",
+        "RN_JST_GH_2",
         "RN_TWO_PIN_POWER_PART",
         "RN_PWR_FLAG",
     ]
@@ -210,6 +212,11 @@ def check_connector_rc_footprints() -> None:
             4,
         ),
         (
+            fp_dir / "J_LOW_JST_GH_SM02B_GHS_TB_RC.kicad_mod",
+            ["J_LOW_JST_GH_SM02B_GHS_TB_RC", "SM02B-GHS-TB", "NOT_RELEASED_RELEASE_CANDIDATE"],
+            4,
+        ),
+        (
             fp_dir / "MOD1_XIAO_SOCKET_1X7_C53202181_RC.kicad_mod",
             ["MOD1_XIAO_SOCKET_1X7_C53202181_RC", "C53202181", "NOT_RELEASED_RELEASE_CANDIDATE"],
             7,
@@ -268,6 +275,7 @@ def check_generated_pcb_placement() -> None:
         "MOD1_XIAO_NRF52840_SOCKET_C53202181_RC.kicad_mod",
         "J5_SMA_0732511150_DRAFT_ENVELOPE.kicad_mod",
         "J_POWER_XT30PW_M_C431092_RC.kicad_mod",
+        "J_LOW_JST_GH_SM02B_GHS_TB_RC.kicad_mod",
         "U1_BQ25798_RQM0029A_RC.kicad_mod",
         "U3_TPS61088_RHL0020A_THERMALVIAS_RC.kicad_mod",
         "Q_POWER_INFINEON_PG_DSO_8_27_RC.kicad_mod",
@@ -284,6 +292,8 @@ def check_generated_pcb_placement() -> None:
         "J5": "RoyalNode:J5_SMA_0732511150_DRAFT_ENVELOPE",
         "J1": "RoyalNode:J_POWER_XT30PW_M_C431092_RC",
         "J2": "RoyalNode:J_POWER_XT30PW_M_C431092_RC",
+        "J3": "RoyalNode:J_LOW_JST_GH_SM02B_GHS_TB_RC",
+        "J4": "RoyalNode:J_LOW_JST_GH_SM02B_GHS_TB_RC",
         "U1": "RoyalNode:U1_BQ25798_RQM0029A_RC",
         "L1": "RoyalNode:L1_COILCRAFT_XAL7070_222MEC_RC",
         "U3": "RoyalNode:U3_TPS61088_RHL0020A_THERMALVIAS_RC",
@@ -350,6 +360,8 @@ def check_generated_schematic_footprints() -> None:
         "Q3": "RoyalNode:Q_POWER_INFINEON_PG_DSO_8_27_RC",
         "J1": "RoyalNode:J_POWER_XT30PW_M_C431092_RC",
         "J2": "RoyalNode:J_POWER_XT30PW_M_C431092_RC",
+        "J3": "RoyalNode:J_LOW_JST_GH_SM02B_GHS_TB_RC",
+        "J4": "RoyalNode:J_LOW_JST_GH_SM02B_GHS_TB_RC",
         "L1": "RoyalNode:L1_COILCRAFT_XAL7070_222MEC_RC",
         "L2": "RoyalNode:L2_COILCRAFT_XAL7030_222MEC_RC",
     }

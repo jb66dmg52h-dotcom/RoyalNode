@@ -126,22 +126,23 @@ KiCad rule:
 - Board edge position is part of the footprint/mechanical definition.
 - The final RF center-pad transition must be merged with JLCPCB's controlled-impedance GCPW geometry, not simply continued at arbitrary width under the connector.
 
-## J_NTC — CJT A2012WV-S-2P
+## J3/J4 — JST-GH SM02B-GHS-TB(LF)(SN)
 
-- Manufacturer: CJT
-- Series: A2012
-- 2 circuits
-- 2.00 mm pitch
-- vertical SMT
-- current rating: 3 A
-- operating range: -40 to +105 C
-- JLCPCB assembly part: C273186
-- Mating cable housing: CJT A2012H-2P
+- Manufacturer: JST
+- Series: GH
+- Circuits: 2
+- Pitch: 1.25 mm
+- Orientation: horizontal SMT
+- Project-local release-candidate footprint: `J_LOW_JST_GH_SM02B_GHS_TB_RC`
+- Source geometry: KiCad `Connector_JST:JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal`
+- Mating cable housing target: JST `GHR-02V-S`, with final crimp terminal selected during harness release
 
 KiCad rule:
 
-- Use CJT/JLC manufacturer-recommended pad layout for A2012WV-S-2P.
-- Pin 1 silkscreen marker is mandatory because pin 1 is `NTC_SENSE` and pin 2 is GND in the RoyalNode assembly drawing.
+- Use the same JST-GH 2-pin footprint for J3 and J4 so RoyalNode keeps one low-current connector family.
+- Pin 1 silkscreen marker is mandatory because J3 pin 1 is `XIAO_BAT_ISO` and J4 pin 1 is `NTC_SENSE`.
+- J3 is an internal two-wire XIAO underside BAT/GND harness, not a user-accessory port.
+- J4 is a required battery charge-temperature safety input, not deployed MeshCore telemetry.
 
 ## J_BAT / J_SOLAR — AMASS XT30PW-M
 
@@ -180,8 +181,8 @@ Seeed's current XIAO nRF52840 schematic names the dedicated battery-pad nets `BA
 
 RoyalNode uses these only as manually soldered harness endpoints:
 
-- JST positive -> XIAO `BAT0`
-- JST negative -> XIAO `GND0`
+- JST-GH positive -> XIAO `BAT0`
+- JST-GH negative -> XIAO `GND0`
 
 Because they are not carrier-board contacts, their geometry does not need to be duplicated in the RoyalNode PCB footprint. Their physical location matters only for wire exit/strain relief and XIAO removal clearance.
 

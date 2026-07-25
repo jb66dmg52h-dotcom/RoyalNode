@@ -25,7 +25,7 @@ BQ25798 SYS
 
 PROTECTED BATTERY/SYSTEM NODE
   -> LM66100 ideal diode
-  -> 2-pin JST-PH
+  -> 2-pin JST-GH
   -> XIAO BAT and GND underside pads
 ```
 
@@ -81,7 +81,7 @@ USB-C is assigned to BQ25798 port 2 (`VAC2` / `ACDRV2`).
 - TS is not bypassed in normal operation
 - Charge policy target: suspend below 0 C and at/above 45 C for generic 4.2 V 1S Li-ion/LiPo packs
 - No bench-test jumper, simulated-temperature divider or alternate TS bypass network
-- temperature connector: Molex 5037630291 board header + 5037640201 cable housing + 5037650098 contacts
+- temperature connector: JST-GH SM02B-GHS-TB board header + GHR-02V-S cable housing
 
 ### Locked BQ25798 supporting parts
 
@@ -125,8 +125,8 @@ The carrier does not drive the XIAO 5V/VBUS pin.
 - pin 3 CE: **connect to VOUT** for always-on reverse-current blocking
 - pin 4 NC: no connection
 - pin 5 ST: **connect to GND** because status is unused
-- pin 6 VOUT: board-mounted JST B2B-PH-SM4-TB(LF)(SN) positive pin
-- cable housing: JST PHR-2
+- pin 6 VOUT: board-mounted JST-GH SM02B-GHS-TB(LF)(SN) positive pin
+- cable housing: JST GHR-02V-S
 - wire 1: positive to XIAO BAT underside pad
 - wire 2: ground to XIAO GND underside pad
 - 1 uF input capacitor

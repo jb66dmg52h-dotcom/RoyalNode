@@ -38,13 +38,13 @@ The NTC is mandatory for the production assembly. There is no fixed TS bypass, s
 | XIAO socket, left | LXWCONN 254PM-1x7P-V | 1x7, 2.54 mm, vertical female, 8.5 mm body, gold contact, -40 to +105 C; JLC C53202181 |
 | XIAO socket, right | LXWCONN 254PM-1x7P-V | Same part as left socket |
 | XIAO mating headers | 1x7, 2.54 mm male pin headers on XIAO | Header pin length must be verified against socket engagement before assembly release |
-| XIAO power receptacle | JST B2B-PH-SM4-TB(LF)(SN) | 2-pin, 2.0 mm, board-mounted SMT |
-| XIAO cable housing | JST PHR-2 | Two-wire removable lead |
-| Battery NTC PCB header | CJT A2012WV-S-2P | 2-pin, 2.0 mm, vertical SMT, -40 to +105 C, 3 A; JLCPCB C273186; stocked assembly part |
-| Battery NTC cable housing | CJT A2012H-2P | Mating 2-pin A2012-series housing; exact terminal must be selected/verified before harness release |
+| XIAO power receptacle | JST SM02B-GHS-TB(LF)(SN) | 2-pin, 1.25 mm, board-mounted SMT JST-GH |
+| XIAO cable housing | JST GHR-02V-S | Two-wire removable lead |
+| Battery NTC PCB header | JST SM02B-GHS-TB(LF)(SN) | 2-pin, 1.25 mm, board-mounted SMT JST-GH |
+| Battery NTC cable housing | JST GHR-02V-S | Mating 2-pin JST-GH housing; exact crimp terminal must be selected/verified before harness release |
 | RF output | Molex 0732511150 / 732511150 | Standard-polarity 50-ohm SMA female edge mount for 1.60 mm PCB; JLCPCB C841205 |
 
-The previous Molex Pico-Lock 5037630291 NTC connector family is removed from Rev A because JLC stock was poor. The CJT A2012 series is electrically far more capable than required for the thermistor signal and, importantly for a Canadian outdoor repeater, the PCB header is specified for -40 to +105 C rather than the -25 C lower limit of common JST PH/XH alternatives. JLCPCB listed thousands of A2012WV-S-2P headers in stock when selected. The header datasheet specifies mating with CJT A2012-series housings.
+The previous mixed low-current connector plan is removed from Rev A. J3 and J4 now use the same JST-GH 2-pin family so internal low-current harnesses share one latch style, pitch and crimp ecosystem. The NTC connector is a charge-safety input rather than deployed MeshCore telemetry.
 
 Board-side XT30 gender is deliberately male. The mating battery and solar harnesses use female XT30 connectors so energized harness contacts are recessed rather than exposed male bullets. Both board XT30s must be distinctly silkscreened BATTERY and SOLAR because the connectors are mechanically identical.
 

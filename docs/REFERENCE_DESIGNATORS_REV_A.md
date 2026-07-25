@@ -36,8 +36,8 @@ Use this file for new KiCad work.
 |---|---|---|
 | J1 | AMASS XT30PW-M | Solar input |
 | J2 | AMASS XT30PW-M | Battery input |
-| J3 | JST B2B-PH-SM4-TB(LF)(SN) | XIAO battery harness output |
-| J4 | CJT A2012WV-S-2P | Battery NTC input |
+| J3 | JST-GH SM02B-GHS-TB(LF)(SN) | XIAO battery harness output |
+| J4 | JST-GH SM02B-GHS-TB(LF)(SN) | Battery NTC input |
 | J5 | Molex 0732511150 | Edge-launch SMA RF output |
 
 ## Magnetics
@@ -68,4 +68,3 @@ Use these blocks during schematic capture:
 | R600-C699 | XIAO/module interface |
 
 Do not create reference designators for test points, shunts, or bench-only configuration links; Rev A intentionally excludes them.
-

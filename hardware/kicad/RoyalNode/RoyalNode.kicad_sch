@@ -1276,7 +1276,7 @@
         )
     )
   )
-  (symbol "RoyalNode:RN_JST_PH_2"
+  (symbol "RoyalNode:RN_JST_GH_2"
     (pin_numbers hide)
     (pin_names
       (offset 0.762)
@@ -1292,7 +1292,7 @@
           )
         )
       )
-      (property "Value" "JST/CJT 2-pin"
+      (property "Value" "JST-GH 2-pin"
         (at 0 -10.16 0)
         (effects
           (font
@@ -1318,7 +1318,7 @@
         (hide yes)
         )
       )
-      (property "Description" "Two-pin low-current board connector for XIAO battery harness or NTC."
+      (property "Description" "Two-pin JST-GH low-current board connector for internal XIAO battery harness, battery NTC, or approved low-current internal service use."
         (at 0 0 0)
         (effects
           (font
@@ -1327,7 +1327,7 @@
         (hide yes)
         )
       )
-    (symbol "RN_JST_PH_2_0_1"
+    (symbol "RN_JST_GH_2_0_1"
       (rectangle
         (start -7.62 6.35)
         (end 7.62 -6.35)
@@ -1340,7 +1340,7 @@
         )
       )
     )
-    (symbol "RN_JST_PH_2_1_1"
+    (symbol "RN_JST_GH_2_1_1"
         (pin passive line
           (at -11.43 3.8099999999999996 0)
           (length 3.81)
@@ -7888,7 +7888,7 @@
     )
   )
   (symbol
-    (lib_id "RoyalNode:RN_JST_PH_2")
+    (lib_id "RoyalNode:RN_JST_GH_2")
     (at 149.86 204.47 0)
     (unit 1)
     (exclude_from_sim no)
@@ -7904,7 +7904,7 @@
         )
       )
     )
-    (property "Value" "XIAO BAT HARNESS"
+    (property "Value" "JST-GH XIAO BAT HARNESS"
       (at 149.86 228.47 0)
       (effects
         (font
@@ -7912,7 +7912,7 @@
         )
       )
     )
-    (property "Footprint" ""
+    (property "Footprint" "RoyalNode:J_LOW_JST_GH_SM02B_GHS_TB_RC"
       (at 149.86 204.47 0)
       (effects
         (font
@@ -8010,7 +8010,7 @@
     )
   )
   (symbol
-    (lib_id "RoyalNode:RN_JST_PH_2")
+    (lib_id "RoyalNode:RN_JST_GH_2")
     (at 149.86 233.68 0)
     (unit 1)
     (exclude_from_sim no)
@@ -8026,7 +8026,7 @@
         )
       )
     )
-    (property "Value" "BATTERY NTC"
+    (property "Value" "JST-GH BATTERY NTC"
       (at 149.86 257.68 0)
       (effects
         (font
@@ -8034,7 +8034,7 @@
         )
       )
     )
-    (property "Footprint" ""
+    (property "Footprint" "RoyalNode:J_LOW_JST_GH_SM02B_GHS_TB_RC"
       (at 149.86 233.68 0)
       (effects
         (font

@@ -12,8 +12,8 @@ L1,1,Coilcraft,XAL7070-222MEC,2.2 uH charger inductor,Shielded molded inductor,U
 L2,1,Coilcraft,XAL7030-222MEC,2.2 uH boost inductor,Shielded molded inductor,Use Coilcraft recommended land pattern,locked
 J1,1,AMASS,XT30PW-M,Solar input power connector,Right-angle PCB male XT30,Silkscreen SOLAR; mating harness uses female XT30,locked
 J2,1,AMASS,XT30PW-M,Battery input power connector,Right-angle PCB male XT30,Silkscreen BATTERY; mating harness uses female XT30,locked
-J3,1,JST,B2B-PH-SM4-TB(LF)(SN),XIAO battery harness connector,2-pin 2.0 mm SMT JST-PH,Wires to XIAO underside BAT/GND pads,locked
-J4,1,CJT,A2012WV-S-2P,Battery NTC connector,2-pin 2.0 mm vertical SMT,Pin 1 NTC_SENSE; pin 2 GND; mates with A2012H-2P,locked
+J3,1,JST,SM02B-GHS-TB(LF)(SN),XIAO battery harness connector,2-pin 1.25 mm SMT JST-GH,Wires to XIAO underside BAT/GND pads,locked
+J4,1,JST,SM02B-GHS-TB(LF)(SN),Battery NTC connector,2-pin 1.25 mm SMT JST-GH,Pin 1 NTC_SENSE; pin 2 GND; battery harness uses GHR-02V-S housing,locked
 J5,1,Molex,0732511150,50 ohm standard-polarity SMA female edge launch,1.60 mm PCB edge mount,Use exact Molex launch; merge with final 50 ohm GCPW geometry,locked
 F1,1,Littelfuse,0483002.DR,2 A solar input fuse,SMD fuse,Located immediately after solar XT30 positive,locked
 TH1,1,Semitec,103AT-2,10 kOhm battery-mounted NTC,Thermistor on battery harness,Required for production; no TS bypass network,locked
