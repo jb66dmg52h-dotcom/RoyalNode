@@ -39,6 +39,16 @@ The generated schematic now assigns project-local release-candidate footprints t
 
 The SMA footprint remains intentionally unassigned in the schematic because the board still uses a draft placement envelope while the RF launch is reviewed. Low-risk passives remain generic two-terminal schematic placeholders until passive package assignments are generated.
 
+The passive capture seed now assigns standard KiCad footprints to low-risk support passives:
+
+- resistors: `Resistor_SMD:R_0603_1608Metric`
+- small capacitors: `Capacitor_SMD:C_0603_1608Metric`
+- medium ceramic capacitors: `Capacitor_SMD:C_0805_2012Metric` and `Capacitor_SMD:C_1206_3216Metric`
+- high-current/energy ceramic capacitors: `Capacitor_SMD:C_1210_3225Metric`
+- charge LED: `LED_SMD:LED_0603_1608Metric`
+
+Unassigned footprints remain deliberate for `J5`, `F1`, `C503`, `TH1`, `J3`, and `J4` because those require final mechanical, connector, or external-harness decisions.
+
 ## What Is Captured
 
 - XIAO nRF52840 socket interface
@@ -79,8 +89,8 @@ Current ERC result after generation:
 
 Next milestone `K1e`:
 
-1. Assign package-specific footprints to support passives.
-2. Replace generic two-pin passive placeholders with resistor, capacitor, LED, thermistor, fuse, and inductor-specific project symbols where useful.
+1. Replace generic two-pin passive placeholders with resistor, capacitor, LED, thermistor, fuse, and inductor-specific project symbols where useful.
+2. Resolve remaining unassigned mechanical footprints: SMA launch, fuse, bulk polymer, XIAO battery harness, and NTC connector.
 3. Start schematic-to-board synchronization after footprint status is clear.
 4. Move from label-heavy generated capture toward sheet-level grouping if the flat root sheet becomes hard to review.
 

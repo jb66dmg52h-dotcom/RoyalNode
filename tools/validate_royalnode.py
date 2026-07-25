@@ -350,6 +350,27 @@ def check_generated_schematic_footprints() -> None:
             fail(f"schematic symbol {ref} missing footprint assignment {footprint}")
 
 
+def check_passive_footprint_seed(passive_rows: list[dict[str, str]]) -> None:
+    required = {
+        "R100": "Resistor_SMD:R_0603_1608Metric",
+        "R405": "Resistor_SMD:R_0603_1608Metric",
+        "D1": "LED_SMD:LED_0603_1608Metric",
+        "C200": "Capacitor_SMD:C_1206_3216Metric",
+        "C400": "Capacitor_SMD:C_1210_3225Metric",
+        "C405": "Capacitor_SMD:C_0805_2012Metric",
+        "C406": "Capacitor_SMD:C_0603_1608Metric",
+        "C503": "",
+        "TH1": "",
+    }
+    by_ref = {row["Reference"]: row for row in passive_rows}
+    if "Footprint" not in passive_rows[0]:
+        fail("passive capture seed missing Footprint column")
+    for ref, footprint in required.items():
+        actual = by_ref.get(ref, {}).get("Footprint")
+        if actual != footprint:
+            fail(f"passive seed {ref} expected footprint {footprint!r}, found {actual!r}")
+
+
 def check_capture_seed(seed_rows: list[dict[str, str]]) -> None:
     required_nets = {
         "GND",
@@ -424,22 +445,23 @@ def check_generated_schematic() -> None:
         fail("schematic title block no longer records the capture seed")
 
     status = read("docs/KICAD_CAPTURE_STATUS_REV_A.md")
-    for needle in ["K1c", "0 messages", "52 support passive", "6 ERC-only power flags", "Do not add test points"]:
+    for needle in ["K1d", "Footprint Assignment Status", "0 messages", "52 support passive", "6 ERC-only power flags", "Do not add test points"]:
         if needle not in status:
             fail(f"KiCad capture status missing {needle!r}")
 
 
 def main() -> None:
     core_rows = check_csv("bom/REV_A_LOCKED_CORE_BOM.csv")
-    passive_rows = check_csv("bom/REV_A_LOCKED_PASSIVES.csv")
+    locked_passive_rows = check_csv("bom/REV_A_LOCKED_PASSIVES.csv")
     seed_rows = check_csv("hardware/kicad/RoyalNode/SCHEMATIC_CAPTURE_SEED_REV_A.csv")
+    capture_passive_rows = check_csv("hardware/kicad/RoyalNode/PASSIVE_CAPTURE_SEED_REV_A.csv")
 
     check_required_refs(
         core_rows,
         {"MOD1", "MOD2", "U1", "U2", "U3", "U4", "Q1", "Q2", "Q3", "J1", "J2", "J3", "J4", "J5", "L1", "L2", "F1", "TH1", "D1"},
         "bom/REV_A_LOCKED_CORE_BOM.csv",
     )
-    if len(passive_rows) < 25:
+    if len(locked_passive_rows) < 25:
         fail("locked passive BOM has unexpectedly few rows")
     check_no_stale_design_terms()
     check_symbols()
@@ -451,14 +473,16 @@ def main() -> None:
     check_connector_rc_footprints()
     check_power_rc_footprints()
     check_capture_seed(seed_rows)
+    check_passive_footprint_seed(capture_passive_rows)
     check_generated_schematic()
     check_generated_schematic_footprints()
     check_generated_pcb_placement()
 
     print("RoyalNode validation passed")
     print(f"  core BOM rows: {len(core_rows)}")
-    print(f"  passive BOM rows: {len(passive_rows)}")
+    print(f"  passive BOM rows: {len(locked_passive_rows)}")
     print(f"  schematic capture seed rows: {len(seed_rows)}")
+    print(f"  passive capture seed rows: {len(capture_passive_rows)}")
 
 
 if __name__ == "__main__":
