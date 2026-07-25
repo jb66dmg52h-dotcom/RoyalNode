@@ -25,6 +25,13 @@ SEGMENTS = [
         "points": [(30.35, 59.08), (30.35, 61.62)],
     },
     {
+        "name": "e22-vcc-local",
+        "net": "5V_RADIO",
+        "layer": "F.Cu",
+        "width": 0.80,
+        "points": [(30.35, 64.16), (30.35, 66.70)],
+    },
+    {
         "name": "j6-3v3-fanout",
         "net": "3V3",
         "layer": "F.Cu",
@@ -617,7 +624,7 @@ def main() -> None:
         raise SystemExit("PCB file does not end with a closing S-expression")
     body = text[:-1].rstrip()
     PCB.write_text(f"{body}\n{generated_blocks()}\n)\n", encoding="utf-8")
-    print("Generated initial routes, E22 control/SPI, J6 I2C, charge LED/STAT, temp/UV/OV-divider, U1/U2/Q-gate/MOSFET-drain local links and L2 ground reference plane")
+    print("Generated initial routes, E22 control/SPI/VCC, J6 I2C, charge LED/STAT, temp/UV/OV-divider, U1/U2/Q-gate/MOSFET-drain local links and L2 ground reference plane")
 
 
 if __name__ == "__main__":
