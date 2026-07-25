@@ -1299,6 +1299,13 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("via", "boost-ilim-r403-via"),
     stable_uuid("segment", "boost-ss-c407-local", "1"),
     stable_uuid("segment", "boost-vcc-c405-local", "0"),
+    stable_uuid("segment", "q1-solar-protected-left-fanout", "0"),
+    stable_uuid("segment", "q1-solar-protected-bottom-bridge", "0"),
+    stable_uuid("segment", "q1-solar-protected-bottom-bridge", "1"),
+    stable_uuid("segment", "q1-solar-protected-bottom-bridge", "2"),
+    stable_uuid("segment", "q1-solar-protected-right-entry", "0"),
+    stable_uuid("via", "q1-solar-protected-left-via"),
+    stable_uuid("via", "q1-solar-protected-right-via"),
 }
 
 
