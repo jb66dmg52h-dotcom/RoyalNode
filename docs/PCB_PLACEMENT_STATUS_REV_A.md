@@ -94,6 +94,8 @@ The first power-stage placement cluster now exists:
 
 The generated PCB scaffold is now net-aware. The placement generator reads `SCHEMATIC_CAPTURE_SEED_REV_A.csv` and `PASSIVE_CAPTURE_SEED_REV_A.csv`, creates the board net table, and annotates generated footprint pads with their net names and pin functions. This produces a useful ratsnest for placement and future routing review.
 
+Generated footprint UUIDs are now normalized from each reference designator. This keeps generated PCB output reviewable across repeated placement/routing runs instead of producing fresh random UUID churn from KiCad library footprints.
+
 ## Initial Routed Nets
 
 The PCB now has a small generated-routing pass from:

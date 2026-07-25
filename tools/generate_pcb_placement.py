@@ -185,6 +185,18 @@ def quote(text: str) -> str:
     return text.replace("\\", "\\\\").replace('"', '\\"')
 
 
+def normalize_generated_uuids(text: str, ref: str) -> str:
+    index = 0
+
+    def replace_uuid(_: re.Match[str]) -> str:
+        nonlocal index
+        value = stable_uuid("generated-footprint", ref, str(index))
+        index += 1
+        return f'(uuid "{value}")'
+
+    return re.sub(r'\(uuid "[^"]+"\)', replace_uuid, text)
+
+
 def load_seed_nets() -> tuple[dict[str, int], dict[str, dict[str, tuple[str, str]]]]:
     rows = list(csv.DictReader(SEED.open(newline="", encoding="utf-8")))
     passive_rows = list(csv.DictReader(PASSIVE_SEED.open(newline="", encoding="utf-8")))
@@ -349,7 +361,7 @@ def footprint_block(item: dict[str, object]) -> str:
     lines = text.splitlines()
     lines.insert(4, f'  (at {x:.2f} {y:.2f} {rot})')
     lines.insert(5, f'  (uuid "{stable_uuid(ref, library_name)}")')
-    return "\n".join("  " + line if line else line for line in lines)
+    return normalize_generated_uuids("\n".join("  " + line if line else line for line in lines), ref)
 
 
 def passive_position(index: int, group: str) -> tuple[float, float, float]:
@@ -454,7 +466,7 @@ def passive_footprint_block(item: dict[str, object]) -> str:
     lines = text.splitlines()
     lines.insert(4, f'  (at {x:.2f} {y:.2f} {rot})')
     lines.insert(5, f'  (uuid "{stable_uuid(ref, library, library_name)}")')
-    return "\n".join("  " + line if line else line for line in lines)
+    return normalize_generated_uuids("\n".join("  " + line if line else line for line in lines), ref)
 
 
 def main() -> None:
