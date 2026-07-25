@@ -3613,7 +3613,7 @@
   	(version 20260206)
   	(generator "kicad-footprint-generator")
   	(layer "F.Cu")
-    (at 92.00 34.00 0)
+    (at 92.00 36.50 0)
     (uuid "ad54a082-01cc-5435-bf0a-9511d44699f3")
   	(descr "NOT_RELEASED_RELEASE_CANDIDATE JST GH SM02B-GHS-TB 2-pin horizontal connector copied from KiCad Connector_JST; verify against JST drawing and assembly source before release")
   	(property "Reference" "J3"
@@ -4284,6 +4284,365 @@
   	)
   	(embedded_fonts no)
   	(model "${KICAD10_3DMODEL_DIR}/Connector_JST.3dshapes/JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal.step"
+  		(offset
+  			(xyz 0 0 0)
+  		)
+  		(scale
+  			(xyz 1 1 1)
+  		)
+  		(rotate
+  			(xyz 0 0 0)
+  		)
+  	)
+  )
+  (footprint "RoyalNode:J_LOW_JST_GH_SM04B_GHS_TB_RC"
+  	(version 20260206)
+  	(generator "kicad-footprint-generator")
+  	(layer "F.Cu")
+    (at 92.00 27.00 0)
+    (uuid "0fbebd8c-9e9a-5a18-a696-6ae288de62e8")
+  	(descr "NOT_RELEASED_RELEASE_CANDIDATE JST GH SM04B-GHS-TB 4-pin horizontal connector copied from KiCad Connector_JST; verify against JST drawing and assembly source before release")
+  	(property "Reference" "J6"
+  		(at 0 -3.9 0)
+  		(layer "F.SilkS")
+  		(effects
+  			(font
+  				(size 1 1)
+  				(thickness 0.15)
+  			)
+  		)
+  	)
+  	(property "Value" "J_LOW_JST_GH_SM04B_GHS_TB_RC"
+  		(at 0 3.9 0)
+  		(layer "F.Fab")
+  		(effects
+  			(font
+  				(size 1 1)
+  				(thickness 0.15)
+  			)
+  		)
+  	)
+  	(property "KiLib_Generator" "connector/SMD_single_row_plus_mounting_pad"
+  		(at 0 0 0)
+  		(layer "F.SilkS")
+  		(hide yes)
+  		(effects
+  			(font
+  				(size 1 1)
+  				(thickness 0.15)
+  			)
+  		)
+  	)
+  	(attr smd)
+  	(duplicate_pad_numbers_are_jumpers no)
+  	(fp_line
+  		(start -4.235 -1.71)
+  		(end -2.435 -1.71)
+  		(stroke
+  			(width 0.12)
+  			(type solid)
+  		)
+  		(layer "F.SilkS")
+  	)
+  	(fp_line
+  		(start -4.235 -0.26)
+  		(end -4.235 -1.71)
+  		(stroke
+  			(width 0.12)
+  			(type solid)
+  		)
+  		(layer "F.SilkS")
+  	)
+  	(fp_line
+  		(start -2.965 2.56)
+  		(end 2.965 2.56)
+  		(stroke
+  			(width 0.12)
+  			(type solid)
+  		)
+  		(layer "F.SilkS")
+  	)
+  	(fp_line
+  		(start -2.435 -1.71)
+  		(end -2.435 -2.7)
+  		(stroke
+  			(width 0.12)
+  			(type solid)
+  		)
+  		(layer "F.SilkS")
+  	)
+  	(fp_line
+  		(start 4.235 -1.71)
+  		(end 2.435 -1.71)
+  		(stroke
+  			(width 0.12)
+  			(type solid)
+  		)
+  		(layer "F.SilkS")
+  	)
+  	(fp_line
+  		(start 4.235 -0.26)
+  		(end 4.235 -1.71)
+  		(stroke
+  			(width 0.12)
+  			(type solid)
+  		)
+  		(layer "F.SilkS")
+  	)
+  	(fp_line
+  		(start -4.73 -0.5)
+  		(end -4.63 -0.5)
+  		(stroke
+  			(width 0.05)
+  			(type solid)
+  		)
+  		(layer "F.CrtYd")
+  	)
+  	(fp_line
+  		(start -4.73 3.2)
+  		(end -4.73 -0.5)
+  		(stroke
+  			(width 0.05)
+  			(type solid)
+  		)
+  		(layer "F.CrtYd")
+  	)
+  	(fp_line
+  		(start -4.63 -2.1)
+  		(end -2.68 -2.1)
+  		(stroke
+  			(width 0.05)
+  			(type solid)
+  		)
+  		(layer "F.CrtYd")
+  	)
+  	(fp_line
+  		(start -4.63 -0.5)
+  		(end -4.63 -2.1)
+  		(stroke
+  			(width 0.05)
+  			(type solid)
+  		)
+  		(layer "F.CrtYd")
+  	)
+  	(fp_line
+  		(start -2.72 2.95)
+  		(end -2.72 3.2)
+  		(stroke
+  			(width 0.05)
+  			(type solid)
+  		)
+  		(layer "F.CrtYd")
+  	)
+  	(fp_line
+  		(start -2.72 3.2)
+  		(end -4.73 3.2)
+  		(stroke
+  			(width 0.05)
+  			(type solid)
+  		)
+  		(layer "F.CrtYd")
+  	)
+  	(fp_line
+  		(start -2.68 -3.2)
+  		(end 2.68 -3.2)
+  		(stroke
+  			(width 0.05)
+  			(type solid)
+  		)
+  		(layer "F.CrtYd")
+  	)
+  	(fp_line
+  		(start -2.68 -2.1)
+  		(end -2.68 -3.2)
+  		(stroke
+  			(width 0.05)
+  			(type solid)
+  		)
+  		(layer "F.CrtYd")
+  	)
+  	(fp_line
+  		(start 2.68 -3.2)
+  		(end 2.68 -2.1)
+  		(stroke
+  			(width 0.05)
+  			(type solid)
+  		)
+  		(layer "F.CrtYd")
+  	)
+  	(fp_line
+  		(start 2.68 -2.1)
+  		(end 4.63 -2.1)
+  		(stroke
+  			(width 0.05)
+  			(type solid)
+  		)
+  		(layer "F.CrtYd")
+  	)
+  	(fp_line
+  		(start 2.72 2.95)
+  		(end -2.72 2.95)
+  		(stroke
+  			(width 0.05)
+  			(type solid)
+  		)
+  		(layer "F.CrtYd")
+  	)
+  	(fp_line
+  		(start 2.72 3.2)
+  		(end 2.72 2.95)
+  		(stroke
+  			(width 0.05)
+  			(type solid)
+  		)
+  		(layer "F.CrtYd")
+  	)
+  	(fp_line
+  		(start 4.63 -2.1)
+  		(end 4.63 -0.5)
+  		(stroke
+  			(width 0.05)
+  			(type solid)
+  		)
+  		(layer "F.CrtYd")
+  	)
+  	(fp_line
+  		(start 4.63 -0.5)
+  		(end 4.73 -0.5)
+  		(stroke
+  			(width 0.05)
+  			(type solid)
+  		)
+  		(layer "F.CrtYd")
+  	)
+  	(fp_line
+  		(start 4.73 -0.5)
+  		(end 4.73 3.2)
+  		(stroke
+  			(width 0.05)
+  			(type solid)
+  		)
+  		(layer "F.CrtYd")
+  	)
+  	(fp_line
+  		(start 4.73 3.2)
+  		(end 2.72 3.2)
+  		(stroke
+  			(width 0.05)
+  			(type solid)
+  		)
+  		(layer "F.CrtYd")
+  	)
+  	(fp_line
+  		(start -4.125 -1.6)
+  		(end -4.125 2.45)
+  		(stroke
+  			(width 0.1)
+  			(type solid)
+  		)
+  		(layer "F.Fab")
+  	)
+  	(fp_line
+  		(start -4.125 -1.6)
+  		(end 4.125 -1.6)
+  		(stroke
+  			(width 0.1)
+  			(type solid)
+  		)
+  		(layer "F.Fab")
+  	)
+  	(fp_line
+  		(start -4.125 2.45)
+  		(end 4.125 2.45)
+  		(stroke
+  			(width 0.1)
+  			(type solid)
+  		)
+  		(layer "F.Fab")
+  	)
+  	(fp_line
+  		(start -2.375 -1.6)
+  		(end -1.875 -0.892893)
+  		(stroke
+  			(width 0.1)
+  			(type solid)
+  		)
+  		(layer "F.Fab")
+  	)
+  	(fp_line
+  		(start -1.875 -0.892893)
+  		(end -1.375 -1.6)
+  		(stroke
+  			(width 0.1)
+  			(type solid)
+  		)
+  		(layer "F.Fab")
+  	)
+  	(fp_line
+  		(start 4.125 -1.6)
+  		(end 4.125 2.45)
+  		(stroke
+  			(width 0.1)
+  			(type solid)
+  		)
+  		(layer "F.Fab")
+  	)
+  	(fp_text user "${REFERENCE}"
+  		(at 0 0 0)
+  		(layer "F.Fab")
+  		(effects
+  			(font
+  				(size 1 1)
+  				(thickness 0.15)
+  			)
+  		)
+  	)
+  	(pad "1" smd roundrect
+  		(at -1.875 -1.85)
+  		(size 0.6 1.7)
+  		(layers "F.Cu" "F.Mask" "F.Paste")
+  		(roundrect_rratio 0.25)
+  	
+		(net 2 "3V3")
+		(pinfunction "3V3"))
+  	(pad "2" smd roundrect
+  		(at -0.625 -1.85)
+  		(size 0.6 1.7)
+  		(layers "F.Cu" "F.Mask" "F.Paste")
+  		(roundrect_rratio 0.25)
+  	
+		(net 1 "GND")
+		(pinfunction "GND"))
+  	(pad "3" smd roundrect
+  		(at 0.625 -1.85)
+  		(size 0.6 1.7)
+  		(layers "F.Cu" "F.Mask" "F.Paste")
+  		(roundrect_rratio 0.25)
+  	
+		(net 46 "I2C_SDA")
+		(pinfunction "SDA"))
+  	(pad "4" smd roundrect
+  		(at 1.875 -1.85)
+  		(size 0.6 1.7)
+  		(layers "F.Cu" "F.Mask" "F.Paste")
+  		(roundrect_rratio 0.25)
+  	
+		(net 45 "I2C_SCL")
+		(pinfunction "SCL"))
+  	(pad "MP" smd roundrect
+  		(at -3.725 1.35)
+  		(size 1 2.7)
+  		(layers "F.Cu" "F.Mask" "F.Paste")
+  		(roundrect_rratio 0.25)
+  	)
+  	(pad "MP" smd roundrect
+  		(at 3.725 1.35)
+  		(size 1 2.7)
+  		(layers "F.Cu" "F.Mask" "F.Paste")
+  		(roundrect_rratio 0.25)
+  	)
+  	(embedded_fonts no)
+  	(model "${KICAD10_3DMODEL_DIR}/Connector_JST.3dshapes/JST_GH_SM04B-GHS-TB_1x04-1MP_P1.25mm_Horizontal.step"
   		(offset
   			(xyz 0 0 0)
   		)

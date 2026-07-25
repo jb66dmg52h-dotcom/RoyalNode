@@ -37,7 +37,7 @@ The board remains a placement scaffold, not a routed PCB and not a fabrication r
 
 The generated board currently contains:
 
-- 17 major module, connector, power IC, FET, fuse, and inductor anchors.
+- 18 major module, connector, power IC, FET, fuse, and inductor anchors.
 - 51 staged support-passive anchors from `PASSIVE_CAPTURE_SEED_REV_A.csv`.
 
 The passive anchors are staging placements for footprint/net review, not final routed power-loop placement.
@@ -49,8 +49,9 @@ The passive anchors are staging placements for footprint/net review, not final r
 | `J5` | `J5_SMA_0732511150_DRAFT_ENVELOPE` | 100.0, 41.3 mm | 0 deg | Draft envelope only |
 | `J1` | `J_POWER_XT30PW_M_C431092_RC` | 93.0, 62.0 mm | 0 deg | Imported XT30 release candidate |
 | `J2` | `J_POWER_XT30PW_M_C431092_RC` | 93.0, 78.0 mm | 0 deg | Imported XT30 release candidate |
-| `J3` | `J_LOW_JST_GH_SM02B_GHS_TB_RC` | 92.0, 34.0 mm | 0 deg | XIAO BAT/GND internal harness release candidate |
+| `J3` | `J_LOW_JST_GH_SM02B_GHS_TB_RC` | 92.0, 36.5 mm | 0 deg | XIAO BAT/GND internal harness release candidate |
 | `J4` | `J_LOW_JST_GH_SM02B_GHS_TB_RC` | 84.5, 88.5 mm | 0 deg | Battery NTC internal harness release candidate |
+| `J6` | `J_LOW_JST_GH_SM04B_GHS_TB_RC` | 92.0, 27.0 mm | 0 deg | Optional BME680/environmental I2C connector release candidate |
 | `U1` | `U1_BQ25798_RQM0029A_RC` | 65.0, 75.0 mm | 0 deg | Charger/controller release candidate |
 | `L1` | `L1_COILCRAFT_XAL7070_222MEC_RC` | 65.0, 84.0 mm | 0 deg | Charger inductor release candidate |
 | `U3` | `U3_TPS61088_RHL0020A_THERMALVIAS_RC` | 59.0, 55.0 mm | 0 deg | Radio boost converter release candidate |
@@ -75,6 +76,8 @@ The XIAO composite socket footprint is placed in the upper-right area with USB-C
 The XT30 solar and battery connectors are placed on the right/lower-right side of the board to keep high-current wiring away from the RF launch as much as possible within the 85 x 75 mm outline. Both use imported JLC/LCSC `C431092` EasyEDA geometry for AMASS `XT30PW-M30.G.Y`.
 
 J3 and J4 are now placed as 2-pin JST-GH release-candidate connectors. J3 is the internal XIAO underside BAT/GND lead after the LM66100 isolation path. J4 is the battery-mounted NTC safety lead for the BQ25798 TS network. Neither is a general accessory or deployed telemetry port.
+
+J6 is now placed as a 4-pin JST-GH release-candidate connector for the optional MeshCore-supported environmental I2C module only. Its pinout is 3V3, GND, SDA and SCL.
 
 F1 is now placed as a Littelfuse 483-series 1206 release-candidate footprint immediately after the solar XT30 positive path and before the protected solar-input path.
 
@@ -143,7 +146,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-178 expected unrouted ratsnest items
+182 expected unrouted ratsnest items
 0 footprint errors
 1 warning: MOD2 library footprint mismatch
 ```

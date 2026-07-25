@@ -39,6 +39,7 @@ Use this file for new KiCad work.
 | J3 | JST-GH SM02B-GHS-TB(LF)(SN) | XIAO battery harness output |
 | J4 | JST-GH SM02B-GHS-TB(LF)(SN) | Battery NTC input |
 | J5 | Molex 0732511150 | Edge-launch SMA RF output |
+| J6 | JST-GH SM04B-GHS-TB(LF)(SN) | Optional BME680/environmental I2C input |
 
 ## Magnetics
 

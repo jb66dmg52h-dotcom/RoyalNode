@@ -16,7 +16,7 @@ hardware/kicad/RoyalNode/lib_symbols/RoyalNode.kicad_sym
 The generated schematic places these references:
 
 ```text
-MOD1, MOD2, U1, U2, U3, U4, Q1, Q2, Q3, J1, J2, J3, J4, J5, F1, L1, L2
+MOD1, MOD2, U1, U2, U3, U4, Q1, Q2, Q3, J1, J2, J3, J4, J5, J6, F1, L1, L2
 ```
 
 It also places 52 support passive references from `PASSIVE_CAPTURE_SEED_REV_A.csv` and 6 ERC-only power flags.
@@ -47,7 +47,7 @@ The passive capture seed now assigns standard KiCad footprints to low-risk suppo
 - high-current/energy ceramic capacitors: `Capacitor_SMD:C_1210_3225Metric`
 - charge LED: `LED_SMD:LED_0603_1608Metric`
 
-Unassigned footprints remain deliberate for `J5` because the SMA launch still requires final mechanical/RF review. `TH1` is intentionally off-board as the battery-mounted 103AT-2 thermistor. `J3` and `J4` use the same JST-GH 2-pin release-candidate footprint, `F1` uses a Littelfuse 483-series 1206 release-candidate footprint, and `C503` uses a Panasonic 10SVPC330M 8 x 6.9 mm polymer-can release-candidate footprint.
+Unassigned footprints remain deliberate for `J5` because the SMA launch still requires final mechanical/RF review. `TH1` is intentionally off-board as the battery-mounted 103AT-2 thermistor. `J3` and `J4` use the same JST-GH 2-pin release-candidate footprint, `J6` uses the JST-GH 4-pin release-candidate footprint for optional BME680/environmental I2C telemetry, `F1` uses a Littelfuse 483-series 1206 release-candidate footprint, and `C503` uses a Panasonic 10SVPC330M 8 x 6.9 mm polymer-can release-candidate footprint.
 
 ## What Is Captured
 

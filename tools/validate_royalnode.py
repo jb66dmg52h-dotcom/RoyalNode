@@ -93,6 +93,7 @@ def check_symbols() -> None:
         "RN_XT30PW_M",
         "RN_SMA_EDGE",
         "RN_JST_GH_2",
+        "RN_JST_GH_4",
         "RN_TWO_PIN_POWER_PART",
         "RN_PWR_FLAG",
     ]
@@ -217,6 +218,11 @@ def check_connector_rc_footprints() -> None:
             4,
         ),
         (
+            fp_dir / "J_LOW_JST_GH_SM04B_GHS_TB_RC.kicad_mod",
+            ["J_LOW_JST_GH_SM04B_GHS_TB_RC", "SM04B-GHS-TB", "NOT_RELEASED_RELEASE_CANDIDATE"],
+            6,
+        ),
+        (
             fp_dir / "MOD1_XIAO_SOCKET_1X7_C53202181_RC.kicad_mod",
             ["MOD1_XIAO_SOCKET_1X7_C53202181_RC", "C53202181", "NOT_RELEASED_RELEASE_CANDIDATE"],
             7,
@@ -278,6 +284,7 @@ def check_generated_pcb_placement() -> None:
         "J5_SMA_0732511150_DRAFT_ENVELOPE.kicad_mod",
         "J_POWER_XT30PW_M_C431092_RC.kicad_mod",
         "J_LOW_JST_GH_SM02B_GHS_TB_RC.kicad_mod",
+        "J_LOW_JST_GH_SM04B_GHS_TB_RC.kicad_mod",
         "U1_BQ25798_RQM0029A_RC.kicad_mod",
         "U3_TPS61088_RHL0020A_THERMALVIAS_RC.kicad_mod",
         "Q_POWER_INFINEON_PG_DSO_8_27_RC.kicad_mod",
@@ -297,6 +304,7 @@ def check_generated_pcb_placement() -> None:
         "J2": "RoyalNode:J_POWER_XT30PW_M_C431092_RC",
         "J3": "RoyalNode:J_LOW_JST_GH_SM02B_GHS_TB_RC",
         "J4": "RoyalNode:J_LOW_JST_GH_SM02B_GHS_TB_RC",
+        "J6": "RoyalNode:J_LOW_JST_GH_SM04B_GHS_TB_RC",
         "U1": "RoyalNode:U1_BQ25798_RQM0029A_RC",
         "L1": "RoyalNode:L1_COILCRAFT_XAL7070_222MEC_RC",
         "U3": "RoyalNode:U3_TPS61088_RHL0020A_THERMALVIAS_RC",
@@ -366,6 +374,7 @@ def check_generated_schematic_footprints() -> None:
         "J2": "RoyalNode:J_POWER_XT30PW_M_C431092_RC",
         "J3": "RoyalNode:J_LOW_JST_GH_SM02B_GHS_TB_RC",
         "J4": "RoyalNode:J_LOW_JST_GH_SM02B_GHS_TB_RC",
+        "J6": "RoyalNode:J_LOW_JST_GH_SM04B_GHS_TB_RC",
         "F1": "RoyalNode:F1_LITTELFUSE_483_1206_RC",
         "L1": "RoyalNode:L1_COILCRAFT_XAL7070_222MEC_RC",
         "L2": "RoyalNode:L2_COILCRAFT_XAL7030_222MEC_RC",
@@ -451,6 +460,7 @@ def check_generated_schematic() -> None:
         "J3",
         "J4",
         "J5",
+        "J6",
         "F1",
         "L1",
         "L2",
@@ -489,7 +499,7 @@ def main() -> None:
 
     check_required_refs(
         core_rows,
-        {"MOD1", "MOD2", "U1", "U2", "U3", "U4", "Q1", "Q2", "Q3", "J1", "J2", "J3", "J4", "J5", "L1", "L2", "F1", "TH1", "D1"},
+        {"MOD1", "MOD2", "U1", "U2", "U3", "U4", "Q1", "Q2", "Q3", "J1", "J2", "J3", "J4", "J5", "J6", "L1", "L2", "F1", "TH1", "D1"},
         "bom/REV_A_LOCKED_CORE_BOM.csv",
     )
     if len(locked_passive_rows) < 25:

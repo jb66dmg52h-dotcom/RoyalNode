@@ -136,6 +136,10 @@ J5,Molex 0732511150 SMA,2,SHIELD,GND,SMA ground
 J5,Molex 0732511150 SMA,3,SHIELD,GND,SMA ground
 J5,Molex 0732511150 SMA,4,SHIELD,GND,SMA ground
 J5,Molex 0732511150 SMA,5,SHIELD,GND,SMA ground
+J6,JST-GH SM04B-GHS-TB,1,3V3,3V3,Optional BME680/environmental I2C power
+J6,JST-GH SM04B-GHS-TB,2,GND,GND,Optional BME680/environmental I2C ground
+J6,JST-GH SM04B-GHS-TB,3,SDA,I2C_SDA,Optional BME680/environmental I2C data
+J6,JST-GH SM04B-GHS-TB,4,SCL,I2C_SCL,Optional BME680/environmental I2C clock
 L1,Coilcraft XAL7070-222MEC,1,Terminal 1,BQ_SW1,Charger inductor terminal
 L1,Coilcraft XAL7070-222MEC,2,Terminal 2,BQ_SW2,Charger inductor terminal
 L2,Coilcraft XAL7030-222MEC,1,Terminal 1,BQ_SYS,Boost inductor input side

@@ -67,7 +67,7 @@ PLACEMENTS = [
         "value": "JST-GH XIAO BAT HARNESS",
         "file": "J_LOW_JST_GH_SM02B_GHS_TB_RC.kicad_mod",
         "library_name": "J_LOW_JST_GH_SM02B_GHS_TB_RC",
-        "at": (92.0, 34.0, 0),
+        "at": (92.0, 36.5, 0),
         "note": "Internal two-wire XIAO underside BAT/GND harness; JST-GH family.",
     },
     {
@@ -77,6 +77,14 @@ PLACEMENTS = [
         "library_name": "J_LOW_JST_GH_SM02B_GHS_TB_RC",
         "at": (84.5, 88.5, 0),
         "note": "Internal battery-mounted NTC safety harness; JST-GH family.",
+    },
+    {
+        "ref": "J6",
+        "value": "JST-GH BME680 I2C",
+        "file": "J_LOW_JST_GH_SM04B_GHS_TB_RC.kicad_mod",
+        "library_name": "J_LOW_JST_GH_SM04B_GHS_TB_RC",
+        "at": (92.0, 27.0, 0),
+        "note": "Optional MeshCore-supported environmental I2C port; JST-GH family.",
     },
     {
         "ref": "U1",

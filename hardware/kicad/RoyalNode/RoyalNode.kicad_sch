@@ -1379,6 +1379,145 @@
         )
     )
   )
+  (symbol "RoyalNode:RN_JST_GH_4"
+    (pin_numbers hide)
+    (pin_names
+      (offset 0.762)
+    )
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+      (property "Reference" "J"
+        (at 0 12.70 0)
+        (effects
+          (font
+            (size 1.27 1.27)
+          )
+        )
+      )
+      (property "Value" "JST-GH 4-pin"
+        (at 0 -12.70 0)
+        (effects
+          (font
+            (size 1.27 1.27)
+          )
+        )
+      )
+      (property "Footprint" ""
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27)
+          )
+        (hide yes)
+        )
+      )
+      (property "Datasheet" "~"
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27)
+          )
+        (hide yes)
+        )
+      )
+      (property "Description" "Four-pin JST-GH I2C connector for optional MeshCore-supported environmental telemetry module."
+        (at 0 0 0)
+        (effects
+          (font
+            (size 1.27 1.27)
+          )
+        (hide yes)
+        )
+      )
+    (symbol "RN_JST_GH_4_0_1"
+      (rectangle
+        (start -7.62 7.62)
+        (end 7.62 -7.62)
+        (stroke
+          (width 0.254)
+          (type default)
+        )
+        (fill
+          (type background)
+        )
+      )
+    )
+    (symbol "RN_JST_GH_4_1_1"
+        (pin passive line
+          (at -11.43 5.08 0)
+          (length 3.81)
+          (name "3V3"
+            (effects
+              (font
+                (size 1.0 1.0)
+              )
+            )
+          )
+          (number "1"
+            (effects
+              (font
+                (size 1.0 1.0)
+              )
+            )
+          )
+        )
+        (pin passive line
+          (at -11.43 2.54 0)
+          (length 3.81)
+          (name "GND"
+            (effects
+              (font
+                (size 1.0 1.0)
+              )
+            )
+          )
+          (number "2"
+            (effects
+              (font
+                (size 1.0 1.0)
+              )
+            )
+          )
+        )
+        (pin passive line
+          (at 11.43 2.54 180)
+          (length 3.81)
+          (name "SDA"
+            (effects
+              (font
+                (size 1.0 1.0)
+              )
+            )
+          )
+          (number "3"
+            (effects
+              (font
+                (size 1.0 1.0)
+              )
+            )
+          )
+        )
+        (pin passive line
+          (at 11.43 5.08 180)
+          (length 3.81)
+          (name "SCL"
+            (effects
+              (font
+                (size 1.0 1.0)
+              )
+            )
+          )
+          (number "4"
+            (effects
+              (font
+                (size 1.0 1.0)
+              )
+            )
+          )
+        )
+    )
+  )
   (symbol "RoyalNode:RN_LM66100DCKR"
     (pin_numbers hide)
     (pin_names
@@ -8350,6 +8489,198 @@
     (uuid "9350aa82-f083-5640-9d49-199f3568864d")
     (property "Intersheetrefs" "${INTERSHEET_REFS}"
       (at 77.47 270.51 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_JST_GH_4")
+    (at 149.86 266.70 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "1bada810-46a1-59ed-8e46-c4ebad1ec2cf")
+    (property "Reference" "J6"
+      (at 149.86 242.70 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "JST-GH BME680 I2C"
+      (at 149.86 290.70 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" "RoyalNode:J_LOW_JST_GH_SM04B_GHS_TB_RC"
+      (at 149.86 266.70 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 149.86 266.70 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "24e6cb1a-c0e2-58cd-a257-10492639b574")
+    )
+    (pin "2"
+      (uuid "44528aec-6b30-561b-be1b-0266a07a16a5")
+    )
+    (pin "3"
+      (uuid "6e8f5764-6ed1-5ded-a26f-421078a7b36e")
+    )
+    (pin "4"
+      (uuid "18a6df8a-9a6b-5243-bbb5-6cab5952b99a")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/f3a7c64e-a7ea-5080-8843-d780f2c7a141"
+          (reference "J6")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 138.43 261.62)
+      (xy 130.81 261.62)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "77488fa1-2df3-5bf4-a013-de35576c76b9")
+  )
+  (global_label "3V3"
+    (shape bidirectional)
+    (at 130.81 261.62 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "74d8a0b3-1669-59f3-91e2-9bd74f57eec7")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 130.81 261.62 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 138.43 264.16)
+      (xy 130.81 264.16)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "b05d5df4-3a3f-51a7-af8a-ee2b3bc00e59")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 130.81 264.16 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "1f05aab9-8f58-5f31-ad50-070eeecbfded")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 130.81 264.16 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 161.29 264.16)
+      (xy 168.91 264.16)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "f9ff03ec-577e-54e3-9863-b60c8048990a")
+  )
+  (global_label "I2C_SDA"
+    (shape bidirectional)
+    (at 168.91 264.16 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "908f5f5d-c514-5ef7-870e-1d6ee8b5dcfb")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 168.91 264.16 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 161.29 261.62)
+      (xy 168.91 261.62)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "072cc68d-882e-5e11-a3b4-76d6f553641e")
+  )
+  (global_label "I2C_SCL"
+    (shape bidirectional)
+    (at 168.91 261.62 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "914ce283-a903-55eb-ab30-1b22aeb1363b")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 168.91 261.62 0)
       (effects
         (font
           (size 1.27 1.27)

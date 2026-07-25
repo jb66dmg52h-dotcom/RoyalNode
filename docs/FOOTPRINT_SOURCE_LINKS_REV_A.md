@@ -219,13 +219,15 @@ Release requirement:
 - Confirm BLE antenna clearance.
 - Confirm socket engagement height with the selected XIAO header pins.
 
-### J3/J4 — JST-GH SM02B-GHS-TB(LF)(SN)
+### J3/J4/J6 — JST-GH Connectors
 
 Required source:
 
 ```text
 JST GH series SM02B-GHS-TB(LF)(SN) drawing
+JST GH series SM04B-GHS-TB(LF)(SN) drawing
 KiCad Connector_JST footprint: JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal
+KiCad Connector_JST footprint: JST_GH_SM04B-GHS-TB_1x04-1MP_P1.25mm_Horizontal
 ```
 
 Release requirement:
@@ -234,6 +236,7 @@ Release requirement:
 - Mate must be JST GHR-02V-S housing with verified crimp terminal before harness release.
 - J3 carries only the XIAO underside BAT/GND internal harness.
 - J4 carries only the battery-mounted 103AT-2 NTC safety harness.
+- J6 carries only the optional MeshCore-supported environmental I2C interface: 3V3, GND, SDA and SCL.
 
 ## Footprint Policy
 

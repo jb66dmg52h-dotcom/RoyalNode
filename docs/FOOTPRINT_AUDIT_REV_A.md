@@ -126,23 +126,27 @@ KiCad rule:
 - Board edge position is part of the footprint/mechanical definition.
 - The final RF center-pad transition must be merged with JLCPCB's controlled-impedance GCPW geometry, not simply continued at arbitrary width under the connector.
 
-## J3/J4 — JST-GH SM02B-GHS-TB(LF)(SN)
+## J3/J4/J6 — JST-GH Low-Current Connectors
 
 - Manufacturer: JST
 - Series: GH
-- Circuits: 2
+- Circuits: 2 for J3/J4; 4 for J6
 - Pitch: 1.25 mm
 - Orientation: horizontal SMT
 - Project-local release-candidate footprint: `J_LOW_JST_GH_SM02B_GHS_TB_RC`
+- Project-local release-candidate footprint: `J_LOW_JST_GH_SM04B_GHS_TB_RC`
 - Source geometry: KiCad `Connector_JST:JST_GH_SM02B-GHS-TB_1x02-1MP_P1.25mm_Horizontal`
+- Source geometry: KiCad `Connector_JST:JST_GH_SM04B-GHS-TB_1x04-1MP_P1.25mm_Horizontal`
 - Mating cable housing target: JST `GHR-02V-S`, with final crimp terminal selected during harness release
+- J6 mating cable housing target: JST `GHR-04V-S`, with final crimp terminal selected during harness release
 
 KiCad rule:
 
-- Use the same JST-GH 2-pin footprint for J3 and J4 so RoyalNode keeps one low-current connector family.
+- Use the JST-GH family for J3, J4 and J6 so RoyalNode keeps one low-current connector family.
 - Pin 1 silkscreen marker is mandatory because J3 pin 1 is `XIAO_BAT_ISO` and J4 pin 1 is `NTC_SENSE`.
 - J3 is an internal two-wire XIAO underside BAT/GND harness, not a user-accessory port.
 - J4 is a required battery charge-temperature safety input, not deployed MeshCore telemetry.
+- J6 is limited to the optional MeshCore-supported BME680/environmental I2C interface: `3V3`, `GND`, `I2C_SDA` and `I2C_SCL`.
 
 ## J_BAT / J_SOLAR — AMASS XT30PW-M
 
