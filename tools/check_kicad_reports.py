@@ -11,7 +11,7 @@ ERC = ROOT / "hardware/fabrication/RoyalNode_erc.rpt"
 DRC = ROOT / "hardware/fabrication/RoyalNode_drc.rpt"
 
 EXPECTED_DRC_TAGS = ["lib_footprint_mismatch"]
-EXPECTED_UNCONNECTED = 153
+EXPECTED_UNCONNECTED = 150
 
 
 def fail(message: str) -> None:
