@@ -17083,6 +17083,14 @@
 		(uuid "4cdf8439-4fe1-5426-82e1-5eb69de515c9")
 	)
 	(segment
+		(start 60.65 54.75)
+		(end 60.65 55.75)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "5V_RADIO")
+		(uuid "6f171a5b-6183-5e5b-b5d7-a8877798a1d4")
+	)
+	(segment
 		(start 66 76.9)
 		(end 66 77.8)
 		(width 0.15)
