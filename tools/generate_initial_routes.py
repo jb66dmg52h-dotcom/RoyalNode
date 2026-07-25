@@ -382,6 +382,13 @@ SEGMENTS = [
         "points": [(50.53, 81.00), (50.53, 83.40)],
     },
     {
+        "name": "bat-raw-r202-to-cap-bus-branch",
+        "net": "BAT_RAW",
+        "layer": "F.Cu",
+        "width": 0.25,
+        "points": [(39.98, 89.00), (39.98, 88.00), (43.80, 88.00), (43.80, 83.40), (44.93, 83.40)],
+    },
+    {
         "name": "boost-input-c400-c401-local-bus",
         "net": "BQ_SYS",
         "layer": "F.Cu",
