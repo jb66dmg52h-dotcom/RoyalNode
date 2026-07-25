@@ -53,6 +53,8 @@ The MOD2 warning is tracked because the E22 footprint is a local JLC/LCSC releas
 
 `BOOST_EN` remains intentionally unrouted until the TPS61088 local fanout and R405 placement are reviewed. A generated trial route was rejected because it crowded the exposed ground pad and solder-mask openings.
 
+`BQ_REGN`/`ILIM_HIZ` and the protection-divider `GND` local link are also intentionally unrouted until their local placement/fanout is improved. Generated trial routes were rejected and retired because they crossed I2C/OV routes or crowded adjacent pads.
+
 ## Active Blockers
 
 1. SMA launch is not released.

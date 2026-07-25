@@ -147,6 +147,10 @@ The RF path, high-current power rails, ground pours, BQ25798/TPS61088 switch nod
 
 `BOOST_EN` also remains unrouted after a trial route showed the current TPS61088/R405 placement needs a proper local fanout pass around the TPS61088 exposed ground pad and mask openings. Do not route this net as a casual long generated trace; adjust the boost-control passive placement and then fan out the EN pin cleanly.
 
+`BQ_REGN` to `ILIM_HIZ` also remains unrouted after trial routes crossed the existing BQ25798 I2C fanouts or crowded the BQ25798 inductor/switch-node area. Treat this as a BQ25798 local-fanout placement task, not a long generated trace task.
+
+The local `GND` link between the protection-divider ground pads also remains unrouted. Trial routes either clipped the neighboring `OV_NODE`/`BOOST_EN` pads or conflicted with the existing `OV_NODE` divider route. Revisit this after the protection divider and R405 placement are adjusted.
+
 ## Net-Class Policy
 
 The KiCad project now defines Rev A routing classes in `hardware/kicad/RoyalNode/RoyalNode.kicad_pro` and documents them in `docs/PCB_NET_CLASSES_REV_A.md`.
