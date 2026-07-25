@@ -172,6 +172,13 @@ SEGMENTS = [
         "points": [(62.40, 73.40), (63.10, 73.40)],
     },
     {
+        "name": "bq-ts-divider-local",
+        "net": "BQ_TS",
+        "layer": "F.Cu",
+        "width": 0.20,
+        "points": [(30.43, 89.00), (34.38, 89.00)],
+    },
+    {
         "name": "e22-nrst-fanout",
         "net": "E22_NRST",
         "layer": "F.Cu",
@@ -500,7 +507,7 @@ def main() -> None:
         raise SystemExit("PCB file does not end with a closing S-expression")
     body = text[:-1].rstrip()
     PCB.write_text(f"{body}\n{generated_blocks()}\n)\n", encoding="utf-8")
-    print("Generated initial routes, E22 control/SPI, J6 I2C, charge LED/STAT links and L2 ground reference plane")
+    print("Generated initial routes, E22 control/SPI, J6 I2C, charge LED/STAT, temp-divider links and L2 ground reference plane")
 
 
 if __name__ == "__main__":

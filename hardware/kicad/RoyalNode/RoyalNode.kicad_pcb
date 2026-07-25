@@ -17546,6 +17546,14 @@
 		(net "E22_TXEN_DIO2")
 		(uuid "cf9dfb72-bceb-5237-a5d2-9a8c73347392")
 	)
+	(segment
+		(start 30.43 89)
+		(end 34.38 89)
+		(width 0.2)
+		(layer "F.Cu")
+		(net "BQ_TS")
+		(uuid "d2626e23-15e5-5dc5-8121-042ac9392bb5")
+	)
 	(zone
 		(net "GND")
 		(layer "In1.Cu")
