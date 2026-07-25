@@ -4,7 +4,7 @@ SCH := $(PROJECT_DIR)/RoyalNode.kicad_sch
 PCB := $(PROJECT_DIR)/RoyalNode.kicad_pcb
 FAB_DIR := hardware/fabrication
 
-.PHONY: validate generate-capture generate-placement generate-routes erc drc check-reports summarize-unrouted summarize-sourcing export-draft-quote kicad-checks full-check layout-status status
+.PHONY: validate generate-capture generate-placement generate-routes generate-board erc drc check-reports summarize-unrouted summarize-sourcing export-draft-quote kicad-checks full-check layout-status status
 
 generate-capture:
 	python3 tools/generate_kicad_capture.py
@@ -14,6 +14,8 @@ generate-placement:
 
 generate-routes:
 	python3 tools/generate_initial_routes.py
+
+generate-board: generate-placement generate-routes
 
 validate:
 	python3 tools/validate_royalnode.py

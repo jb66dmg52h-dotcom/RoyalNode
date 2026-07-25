@@ -508,8 +508,8 @@ def check_initial_routes() -> None:
             fail(f"initial route generator missing {needle!r}")
 
     makefile = read("Makefile")
-    if "generate-routes" not in makefile:
-        fail("Makefile missing generate-routes target")
+    if "generate-routes" not in makefile or "generate-board: generate-placement generate-routes" not in makefile:
+        fail("Makefile missing sequential generate-routes/generate-board target")
     if "--refill-zones" not in makefile or "--save-board" not in makefile:
         fail("Makefile DRC target must refill and save zones")
 

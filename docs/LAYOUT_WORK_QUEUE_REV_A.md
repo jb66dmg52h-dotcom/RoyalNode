@@ -4,6 +4,14 @@ RoyalNode Rev A now has a clean generated-routing checkpoint with 90 expected un
 
 Use this sequence rather than routing random ratsnest lines.
 
+Regenerate the PCB scaffold with:
+
+```text
+make generate-board
+```
+
+Do not run placement and route generation in parallel; both commands rewrite `RoyalNode.kicad_pcb`.
+
 ## Current Gate
 
 ```text
