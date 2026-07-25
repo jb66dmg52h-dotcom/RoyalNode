@@ -133,6 +133,9 @@ Only stable, low-current nets are routed in this first pass:
 - `SOLAR_PROT_GATE`: short local Q1 gate pin tie only; source/drain power pads remain unrouted.
 - `BQ_ACDRV1`: short local Q2 gate pin tie only; source/drain power pads remain unrouted.
 - `BQ_ACDRV2`: short local Q3 gate pin tie only; source/drain power pads remain unrouted.
+- `SOLAR_FUSED`: short wide local Q1 adjacent-drain pad tie only; external/source path remains unrouted.
+- `SOLAR_PROTECTED`: short wide local Q2 adjacent-drain pad tie only; external/source path remains unrouted.
+- `USB_VBUS_RAW`: short wide local Q3 adjacent-drain pad tie only; external/source path remains unrouted.
 - `BQ_VBUS`: short local U1 duplicate VBUS pin tie only; rail fanout remains unrouted.
 - `BAT_RAW`: short local U1 duplicate BAT pin tie only; rail fanout remains unrouted.
 
@@ -212,7 +215,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-148 expected unrouted ratsnest items
+145 expected unrouted ratsnest items
 0 footprint errors
 1 warning: MOD2 library footprint mismatch
 ```

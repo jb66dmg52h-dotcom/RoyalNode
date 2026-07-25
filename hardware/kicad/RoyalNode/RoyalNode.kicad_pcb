@@ -17219,6 +17219,14 @@
 		(uuid "9126a8e1-5681-55a5-9a18-94bab7c74bba")
 	)
 	(segment
+		(start 80.63 70.1)
+		(end 80.63 71.37)
+		(width 0.6)
+		(layer "F.Cu")
+		(net "USB_VBUS_RAW")
+		(uuid "623ef23e-4479-524f-8ca6-33bdadf85241")
+	)
+	(segment
 		(start 82.4 49.65)
 		(end 82.4 50.3)
 		(width 0.2)
@@ -17297,6 +17305,14 @@
 		(layer "F.Cu")
 		(net "OV_NODE")
 		(uuid "b99e1b4f-774b-5dc7-8a88-03274b83eb60")
+	)
+	(segment
+		(start 80.63 54.1)
+		(end 80.63 55.37)
+		(width 0.6)
+		(layer "F.Cu")
+		(net "SOLAR_FUSED")
+		(uuid "7460ee66-a887-5047-b9f8-b491936da0dc")
 	)
 	(segment
 		(start 53.65 61.62)
@@ -17673,6 +17689,14 @@
 		(layer "F.Cu")
 		(net "E22_TXEN_DIO2")
 		(uuid "cf9dfb72-bceb-5237-a5d2-9a8c73347392")
+	)
+	(segment
+		(start 80.63 62.1)
+		(end 80.63 63.37)
+		(width 0.6)
+		(layer "F.Cu")
+		(net "SOLAR_PROTECTED")
+		(uuid "0993b266-a339-502c-840b-3c8fc7a6d8a4")
 	)
 	(segment
 		(start 75.38 63.37)

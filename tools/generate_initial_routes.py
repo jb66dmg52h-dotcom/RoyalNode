@@ -228,6 +228,27 @@ SEGMENTS = [
         "points": [(75.38, 71.37), (74.20, 71.37), (74.20, 73.91), (75.38, 73.91)],
     },
     {
+        "name": "q1-solar-fused-drain-local",
+        "net": "SOLAR_FUSED",
+        "layer": "F.Cu",
+        "width": 0.60,
+        "points": [(80.63, 54.10), (80.63, 55.37)],
+    },
+    {
+        "name": "q2-solar-protected-drain-local",
+        "net": "SOLAR_PROTECTED",
+        "layer": "F.Cu",
+        "width": 0.60,
+        "points": [(80.63, 62.10), (80.63, 63.37)],
+    },
+    {
+        "name": "q3-usb-vbus-raw-drain-local",
+        "net": "USB_VBUS_RAW",
+        "layer": "F.Cu",
+        "width": 0.60,
+        "points": [(80.63, 70.10), (80.63, 71.37)],
+    },
+    {
         "name": "u1-bq-vbus-local",
         "net": "BQ_VBUS",
         "layer": "F.Cu",
@@ -587,7 +608,7 @@ def main() -> None:
         raise SystemExit("PCB file does not end with a closing S-expression")
     body = text[:-1].rstrip()
     PCB.write_text(f"{body}\n{generated_blocks()}\n)\n", encoding="utf-8")
-    print("Generated initial routes, E22 control/SPI, J6 I2C, charge LED/STAT, temp/UV/OV-divider, U1/U2/Q-gate local links and L2 ground reference plane")
+    print("Generated initial routes, E22 control/SPI, J6 I2C, charge LED/STAT, temp/UV/OV-divider, U1/U2/Q-gate/MOSFET-drain local links and L2 ground reference plane")
 
 
 if __name__ == "__main__":

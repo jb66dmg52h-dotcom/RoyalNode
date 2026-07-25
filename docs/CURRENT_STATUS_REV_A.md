@@ -46,7 +46,7 @@ kicad-cli sch erc --exit-code-violations --severity-all
 
 kicad-cli pcb drc --severity-all
   1 known warning: MOD2 library footprint mismatch
-  148 expected unconnected/ratsnest items because the board is not routed
+  145 expected unconnected/ratsnest items because the board is not routed
 ```
 
 The MOD2 warning is tracked because the E22 footprint is a local JLC/LCSC release candidate for a factory-installed module. It must be cleared by KiCad footprint update/save behavior or explicitly accepted through JLCPCB DFM/PCBA review before fabrication release.
