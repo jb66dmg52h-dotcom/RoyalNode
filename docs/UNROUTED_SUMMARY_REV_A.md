@@ -4,7 +4,7 @@ Generated from `hardware/fabrication/RoyalNode_drc.rpt`.
 
 This file is a layout planning aid, not a manufacturing release note. Counts are KiCad ratsnest-pair counts, so a net with several components can appear multiple times.
 
-Total unrouted pairs: 57
+Total unrouted pairs: 56
 
 | Net | Ratsnest pairs | Layout note |
 |---|---:|---|
@@ -23,7 +23,6 @@ Total unrouted pairs: 57
 | `USB_VBUS_RAW` | 2 |  |
 | `BATP_KELVIN` | 1 |  |
 | `BOOST_COMP` | 1 |  |
-| `BOOST_COMP_RC` | 1 |  |
 | `BOOST_FB` | 1 |  |
 | `BOOST_ILIM` | 1 |  |
 | `BOOST_SS` | 1 |  |
