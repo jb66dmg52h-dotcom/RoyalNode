@@ -277,6 +277,27 @@ SEGMENTS = [
         "points": [(33.73, 75.00), (39.33, 75.00), (44.93, 75.00)],
     },
     {
+        "name": "bq-vbus-cap-bank-bus",
+        "net": "BQ_VBUS",
+        "layer": "F.Cu",
+        "width": 0.60,
+        "points": [(22.53, 75.00), (28.13, 75.00)],
+    },
+    {
+        "name": "bq-vbus-c200-stub",
+        "net": "BQ_VBUS",
+        "layer": "F.Cu",
+        "width": 0.60,
+        "points": [(22.53, 77.00), (22.53, 75.00)],
+    },
+    {
+        "name": "bq-vbus-c201-stub",
+        "net": "BQ_VBUS",
+        "layer": "F.Cu",
+        "width": 0.60,
+        "points": [(28.13, 77.00), (28.13, 75.00)],
+    },
+    {
         "name": "bq-pmid-c202-stub",
         "net": "BQ_PMID",
         "layer": "F.Cu",
