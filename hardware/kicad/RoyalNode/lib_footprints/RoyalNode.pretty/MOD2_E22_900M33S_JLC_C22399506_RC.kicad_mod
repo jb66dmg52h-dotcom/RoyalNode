@@ -1,0 +1,189 @@
+(footprint "MOD2_E22_900M33S_JLC_C22399506_RC"
+  (version 20260206)
+  (generator "royalnode")
+  (layer "F.Cu")
+  (descr "NOT_RELEASED_RELEASE_CANDIDATE KiCad-10-native footprint using JLC/LCSC C22399506 EasyEDA pad geometry for E22-900M33S")
+  (tags "RoyalNode NOT_RELEASED_RELEASE_CANDIDATE E22-900M33S C22399506 JLC EasyEDA KiCad10")
+  (property "Reference" "MOD2"
+    (at 0 -21.5 0)
+    (layer "F.SilkS")
+    (effects
+      (font
+        (size 1 1)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "Value" "E22-900M33S C22399506 RC"
+    (at 0 21.5 0)
+    (layer "F.Fab")
+    (effects
+      (font
+        (size 1 1)
+        (thickness 0.15)
+      )
+    )
+  )
+  (property "LCSC Part" "C22399506"
+    (at 0 0 0)
+    (layer "F.Fab")
+    (hide yes)
+    (effects
+      (font
+        (size 1 1)
+        (thickness 0.15)
+      )
+    )
+  )
+  (attr smd)
+  (fp_rect
+    (start -12 -17.82)
+    (end 12 20.68)
+    (stroke
+      (width 0.1)
+      (type solid)
+    )
+    (fill no)
+    (layer "F.Fab")
+  )
+  (fp_rect
+    (start -12.5 -18.32)
+    (end 12.5 21.18)
+    (stroke
+      (width 0.05)
+      (type solid)
+    )
+    (fill no)
+    (layer "F.CrtYd")
+  )
+  (fp_text user "NOT_RELEASED_RELEASE_CANDIDATE - C22399506"
+    (at 0 0 0)
+    (layer "Cmts.User")
+    (effects
+      (font
+        (size 0.9 0.9)
+        (thickness 0.13)
+      )
+    )
+  )
+  (fp_text user "ANT pin 21"
+    (at -13.5 12.7 90)
+    (layer "F.SilkS")
+    (effects
+      (font
+        (size 0.8 0.8)
+        (thickness 0.12)
+      )
+    )
+  )
+  (pad "1" smd rect
+    (at 11.65 15.22 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "2" smd rect
+    (at 11.65 12.68 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "3" smd rect
+    (at 11.65 10.14 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "4" smd rect
+    (at 11.65 2.54 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "5" smd rect
+    (at 11.65 0 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "6" smd rect
+    (at 11.65 -2.54 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "7" smd rect
+    (at 11.65 -5.08 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "8" smd rect
+    (at 11.65 -7.62 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "9" smd rect
+    (at 11.65 -10.16 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "10" smd rect
+    (at 11.65 -12.7 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "11" smd rect
+    (at 11.65 -15.24 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "12" smd rect
+    (at -11.65 -15.24 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "13" smd rect
+    (at -11.65 -12.7 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "14" smd rect
+    (at -11.65 -10.16 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "15" smd rect
+    (at -11.65 -7.62 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "16" smd rect
+    (at -11.65 -5.08 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "17" smd rect
+    (at -11.65 -2.54 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "18" smd rect
+    (at -11.65 0 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "19" smd rect
+    (at -11.65 2.54 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "20" smd rect
+    (at -11.65 10.16 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "21" smd rect
+    (at -11.65 12.7 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+  (pad "22" smd rect
+    (at -11.65 15.24 90)
+    (size 1.5 2.2)
+    (layers "F.Cu" "F.Paste" "F.Mask")
+  )
+)

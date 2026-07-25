@@ -4,7 +4,13 @@ SCH := $(PROJECT_DIR)/RoyalNode.kicad_sch
 PCB := $(PROJECT_DIR)/RoyalNode.kicad_pcb
 FAB_DIR := hardware/fabrication
 
-.PHONY: validate erc drc kicad-checks status
+.PHONY: validate generate-capture generate-placement erc drc kicad-checks status
+
+generate-capture:
+	python3 tools/generate_kicad_capture.py
+
+generate-placement:
+	python3 tools/generate_pcb_placement.py
 
 validate:
 	python3 tools/validate_royalnode.py
@@ -19,4 +25,3 @@ kicad-checks: erc drc
 
 status:
 	git status --short --branch
-

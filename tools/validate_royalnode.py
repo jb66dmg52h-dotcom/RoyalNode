@@ -56,6 +56,7 @@ def check_no_stale_design_terms() -> None:
         "docs/FOOTPRINT_SOURCE_LINKS_REV_A.md",
         "docs/MOLEX_SMA_FOOTPRINT_BLOCKER_REV_A.md",
         "docs/E22_ASSEMBLER_FOOTPRINT_CROSSCHECK_REV_A.md",
+        "docs/PCB_PLACEMENT_STATUS_REV_A.md",
         "docs/REFERENCE_DESIGNATORS_REV_A.md",
         "hardware/kicad/RoyalNode/SCHEMATIC_CAPTURE_SEED_REV_A.csv",
         "bom/REV_A_LOCKED_CORE_BOM.csv",
@@ -180,6 +181,75 @@ def check_e22_assembler_crosscheck() -> None:
             fail(f"E22 assembler cross-check missing {needle!r}")
 
 
+def check_e22_native_rc_footprint() -> None:
+    fp_path = ROOT / "hardware/kicad/RoyalNode/lib_footprints/RoyalNode.pretty/MOD2_E22_900M33S_JLC_C22399506_RC.kicad_mod"
+    if not fp_path.exists():
+        fail("missing KiCad-10-native E22 C22399506 release-candidate footprint")
+    text = fp_path.read_text(encoding="utf-8")
+    for needle in [
+        "MOD2_E22_900M33S_JLC_C22399506_RC",
+        "NOT_RELEASED_RELEASE_CANDIDATE",
+        "C22399506",
+        "ANT pin 21",
+    ]:
+        if needle not in text:
+            fail(f"E22 native release-candidate footprint missing {needle!r}")
+    pad_count = len(re.findall(r"^\s*\(pad\s+\"?\d+\"?\s+smd\s+rect", text, re.M))
+    if pad_count != 22:
+        fail(f"E22 native release-candidate footprint should have 22 pads, found {pad_count}")
+    if not re.search(r"^\s*\(pad\s+\"?21\"?\s+smd\s+rect", text, re.M):
+        fail("E22 native release-candidate footprint missing ANT pad 21")
+
+
+def check_generated_pcb_placement() -> None:
+    generator = read("tools/generate_pcb_placement.py")
+    required_generator_terms = [
+        "MOD2_E22_900M33S_JLC_C22399506_RC.kicad_mod",
+        "MOD1_XIAO_NRF52840_DRAFT_ENVELOPE.kicad_mod",
+        "J5_SMA_0732511150_DRAFT_ENVELOPE.kicad_mod",
+        "J_POWER_XT30PW_M_DRAFT_ENVELOPE.kicad_mod",
+        "factory-installed PCBA item",
+    ]
+    for needle in required_generator_terms:
+        if needle not in generator:
+            fail(f"PCB placement generator missing {needle!r}")
+
+    pcb = read("hardware/kicad/RoyalNode/RoyalNode.kicad_pcb")
+    required_placements = {
+        "MOD2": "RoyalNode:MOD2_E22_900M33S_JLC_C22399506_RC",
+        "MOD1": "RoyalNode:MOD1_XIAO_NRF52840_DRAFT_ENVELOPE",
+        "J5": "RoyalNode:J5_SMA_0732511150_DRAFT_ENVELOPE",
+        "J1": "RoyalNode:J_POWER_XT30PW_M_DRAFT_ENVELOPE",
+        "J2": "RoyalNode:J_POWER_XT30PW_M_DRAFT_ENVELOPE",
+    }
+    for ref, footprint in required_placements.items():
+        if f'(footprint "{footprint}"' not in pcb:
+            fail(f"PCB missing generated footprint {footprint}")
+        if f'(property "Reference" "{ref}"' not in pcb:
+            fail(f"PCB missing generated placement reference {ref}")
+
+    for needle in [
+        'gr_text "50 ohm RF corridor',
+        'gr_text "E22-900M33S\\nmodule zone"',
+        'gr_text "XIAO',
+        'gr_text "XT30',
+    ]:
+        if needle not in pcb:
+            fail(f"PCB scaffold missing board planning graphic {needle!r}")
+
+    status = read("docs/PCB_PLACEMENT_STATUS_REV_A.md")
+    for needle in [
+        "P1a",
+        "75 mm x 65 mm",
+        "MOD2_E22_900M33S_JLC_C22399506_RC",
+        "factory PCBA footprint",
+        "lib_footprint_mismatch on MOD2",
+        "Do not add test points",
+    ]:
+        if needle not in status:
+            fail(f"PCB placement status missing {needle!r}")
+
+
 def check_capture_seed(seed_rows: list[dict[str, str]]) -> None:
     required_nets = {
         "GND",
@@ -277,8 +347,10 @@ def main() -> None:
     check_draft_envelope_footprints()
     check_e22_manual_draft_footprint()
     check_e22_assembler_crosscheck()
+    check_e22_native_rc_footprint()
     check_capture_seed(seed_rows)
     check_generated_schematic()
+    check_generated_pcb_placement()
 
     print("RoyalNode validation passed")
     print(f"  core BOM rows: {len(core_rows)}")
