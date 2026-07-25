@@ -17,6 +17,8 @@ KICAD_DIR = ROOT / "hardware/kicad/RoyalNode"
 PCB = KICAD_DIR / "RoyalNode.kicad_pcb"
 FP_DIR = KICAD_DIR / "lib_footprints/RoyalNode.pretty"
 SEED = KICAD_DIR / "SCHEMATIC_CAPTURE_SEED_REV_A.csv"
+PASSIVE_SEED = KICAD_DIR / "PASSIVE_CAPTURE_SEED_REV_A.csv"
+KICAD_FP_ROOT = Path("/Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints")
 NAMESPACE = uuid.UUID("72281bec-369e-4e5b-a74d-54cf1dc496b3")
 
 PLACEMENTS = [
@@ -140,6 +142,7 @@ GENERATED_LIBRARY_NAMES.update(
         "J_POWER_XT30PW_M_DRAFT_ENVELOPE",
     }
 )
+GENERATED_REFS = {str(item["ref"]) for item in PLACEMENTS}
 
 
 def stable_uuid(*parts: str) -> str:
@@ -152,6 +155,7 @@ def quote(text: str) -> str:
 
 def load_seed_nets() -> tuple[dict[str, int], dict[str, dict[str, tuple[str, str]]]]:
     rows = list(csv.DictReader(SEED.open(newline="", encoding="utf-8")))
+    passive_rows = list(csv.DictReader(PASSIVE_SEED.open(newline="", encoding="utf-8")))
     pin_nets: dict[str, dict[str, tuple[str, str]]] = {}
     nets: set[str] = set()
     for row in rows:
@@ -162,6 +166,12 @@ def load_seed_nets() -> tuple[dict[str, int], dict[str, dict[str, tuple[str, str
         pin_nets.setdefault(ref, {})[pin] = (net, pin_name)
         if net != "NC":
             nets.add(net)
+    for row in passive_rows:
+        ref = row["Reference"]
+        for pin, net in [("1", row["Pin 1 Net"]), ("2", row["Pin 2 Net"])]:
+            pin_nets.setdefault(ref, {})[pin] = (net, f"Terminal {pin}")
+            if net != "NC":
+                nets.add(net)
 
     priority = [
         "GND",
@@ -217,7 +227,9 @@ def remove_generated_placements(text: str) -> str:
                     break
             end += 1
         block = text[start:end]
-        if not any(f'(footprint "RoyalNode:{name}"' in block for name in GENERATED_LIBRARY_NAMES):
+        has_generated_library = any(f'(footprint "RoyalNode:{name}"' in block for name in GENERATED_LIBRARY_NAMES)
+        has_generated_ref = any(f'(property "Reference" "{ref}"' in block for ref in GENERATED_REFS)
+        if not (has_generated_library or has_generated_ref):
             result.append(block)
         idx = end
     return "".join(result)
@@ -304,20 +316,125 @@ def footprint_block(item: dict[str, object]) -> str:
     return "\n".join("  " + line if line else line for line in lines)
 
 
+def passive_position(index: int, group: str) -> tuple[float, float, float]:
+    if group in {"boost", "radio"}:
+        columns = 6
+        base_x, base_y = 24.5, 24.5
+        pitch_x, pitch_y = 5.6, 4.5
+    elif group == "protection":
+        columns = 2
+        base_x, base_y = 22.0, 38.0
+        pitch_x, pitch_y = 4.8, 4.8
+    else:
+        columns = 6
+        base_x, base_y = 24.0, 77.0
+        pitch_x, pitch_y = 5.6, 4.0
+    column = index % columns
+    row = index // columns
+    return base_x + column * pitch_x, base_y + row * pitch_y, 0.0
+
+
+def passive_group(ref: str) -> str:
+    if ref in {"R100", "R101", "R102", "R103"}:
+        return "protection"
+    if ref.startswith("C4") or ref.startswith("R4") or ref in {"C500", "C501", "C502"}:
+        return "boost"
+    return "charger"
+
+
+PASSIVE_POSITION_OVERRIDES = {
+    "R404": (26.8, 47.0, 0.0),
+    "R405": (22.0, 47.0, 0.0),
+    "C500": (58.0, 91.0, 0.0),
+    "C501": (64.0, 91.0, 0.0),
+    "C502": (70.0, 91.0, 0.0),
+}
+
+
+def passive_placements() -> list[dict[str, object]]:
+    counters = {"charger": 0, "boost": 0, "protection": 0}
+    items: list[dict[str, object]] = []
+    for row in csv.DictReader(PASSIVE_SEED.open(newline="", encoding="utf-8")):
+        footprint = row.get("Footprint", "")
+        if not footprint:
+            continue
+        library, name = footprint.split(":", 1)
+        group = passive_group(row["Reference"])
+        at = PASSIVE_POSITION_OVERRIDES.get(row["Reference"], passive_position(counters[group], group))
+        counters[group] += 1
+        items.append(
+            {
+                "ref": row["Reference"],
+                "value": row["Value"],
+                "file": f"{name}.kicad_mod",
+                "library_name": name,
+                "library": library,
+                "at": at,
+                "note": f"Generated {group} passive staging placement from passive capture seed.",
+            }
+        )
+    return items
+
+
+def standard_footprint_path(item: dict[str, object]) -> Path:
+    library = str(item.get("library", ""))
+    filename = str(item["file"])
+    if library:
+        return KICAD_FP_ROOT / f"{library}.pretty" / filename
+    return FP_DIR / filename
+
+
+def passive_footprint_block(item: dict[str, object]) -> str:
+    path = standard_footprint_path(item)
+    if not path.exists():
+        raise SystemExit(f"missing passive footprint source {path}")
+    text = path.read_text(encoding="utf-8").strip()
+    library = str(item["library"])
+    library_name = str(item["library_name"])
+    ref = str(item["ref"])
+    value = str(item["value"])
+    x, y, rot = item["at"]  # type: ignore[misc]
+    text = text.replace(f'(footprint "{library_name}"', f'(footprint "{library}:{library_name}"', 1)
+    text = text.replace('(property "Reference" "REF**"', f'(property "Reference" "{ref}"', 1)
+    text = text.replace(f'(property "Value" "{library_name}"', f'(property "Value" "{value}"', 1)
+    text = re.sub(
+        r'(\(property "Reference" "[^"]+"\n\s+\(at [^\n]+\)\n\s+\(layer "F\.SilkS"\))',
+        r"\1\n\t\t(hide yes)",
+        text,
+        count=1,
+    )
+    text = re.sub(
+        r'(\(property "Value" "[^"]+"\n\s+\(at [^\n]+\)\n\s+\(layer "F\.Fab"\))',
+        r"\1\n\t\t(hide yes)",
+        text,
+        count=1,
+    )
+    lines = text.splitlines()
+    lines.insert(4, f'  (at {x:.2f} {y:.2f} {rot})')
+    lines.insert(5, f'  (uuid "{stable_uuid(ref, library, library_name)}")')
+    return "\n".join("  " + line if line else line for line in lines)
+
+
 def main() -> None:
     net_ids, pin_nets = load_seed_nets()
+    generated_items = PLACEMENTS + passive_placements()
+    GENERATED_REFS.update(str(item["ref"]) for item in generated_items)
     pcb_text = PCB.read_text(encoding="utf-8")
     pcb_text = replace_net_table(pcb_text, net_ids)
     pcb_text = remove_generated_placements(pcb_text).rstrip()
     if not pcb_text.endswith(")"):
         raise SystemExit("PCB file does not end with a closing S-expression")
     body = pcb_text[:-1].rstrip()
-    generated = "\n".join(
-        annotate_footprint_pads(footprint_block(item), str(item["ref"]), net_ids, pin_nets)
-        for item in PLACEMENTS
-    )
+    generated_blocks: list[str] = []
+    for item in generated_items:
+        if str(item.get("library", "")):
+            block = passive_footprint_block(item)
+        else:
+            block = footprint_block(item)
+        generated_blocks.append(annotate_footprint_pads(block, str(item["ref"]), net_ids, pin_nets))
+    generated = "\n".join(generated_blocks)
     PCB.write_text(f"{body}\n{generated}\n)\n", encoding="utf-8")
-    print(f"Placed {len(PLACEMENTS)} generated PCB footprint anchors")
+    print(f"Placed {len(generated_items)} generated PCB footprint anchors")
 
 
 if __name__ == "__main__":
