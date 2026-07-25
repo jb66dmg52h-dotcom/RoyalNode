@@ -127,6 +127,14 @@ PLACEMENTS = [
         "note": "Solar UV/OV protection controller placement candidate.",
     },
     {
+        "ref": "F1",
+        "value": "Littelfuse 0483002.DR 1206 RC",
+        "file": "F1_LITTELFUSE_483_1206_RC.kicad_mod",
+        "library_name": "F1_LITTELFUSE_483_1206_RC",
+        "at": (87.0, 54.0, 0),
+        "note": "Solar input fuse placement candidate immediately after solar XT30.",
+    },
+    {
         "ref": "Q1",
         "value": "Infineon PG-DSO-8-27 thermal vias RC",
         "file": "Q_POWER_INFINEON_PG_DSO_8_27_RC.kicad_mod",

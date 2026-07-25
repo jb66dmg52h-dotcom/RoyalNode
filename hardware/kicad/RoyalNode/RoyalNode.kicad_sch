@@ -8383,7 +8383,7 @@
         )
       )
     )
-    (property "Footprint" ""
+    (property "Footprint" "RoyalNode:F1_LITTELFUSE_483_1206_RC"
       (at 55.88 184.15 0)
       (effects
         (font

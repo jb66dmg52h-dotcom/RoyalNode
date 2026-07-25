@@ -254,6 +254,7 @@ def check_power_rc_footprints() -> None:
         ("Q_POWER_INFINEON_PG_DSO_8_27_RC.kicad_mod", ["Infineon", "PG-DSO-8-27", "NOT_RELEASED_RELEASE_CANDIDATE"], 23),
         ("L1_COILCRAFT_XAL7070_222MEC_RC.kicad_mod", ["XAL7070-222MEC", "NOT_RELEASED_RELEASE_CANDIDATE"], 2),
         ("L2_COILCRAFT_XAL7030_222MEC_RC.kicad_mod", ["XAL7030-222MEC", "NOT_RELEASED_RELEASE_CANDIDATE"], 2),
+        ("F1_LITTELFUSE_483_1206_RC.kicad_mod", ["Littelfuse 483", "NOT_RELEASED_RELEASE_CANDIDATE"], 2),
     ]
     for filename, needles, expected_pad_count in checks:
         path = fp_dir / filename
@@ -279,6 +280,7 @@ def check_generated_pcb_placement() -> None:
         "U1_BQ25798_RQM0029A_RC.kicad_mod",
         "U3_TPS61088_RHL0020A_THERMALVIAS_RC.kicad_mod",
         "Q_POWER_INFINEON_PG_DSO_8_27_RC.kicad_mod",
+        "F1_LITTELFUSE_483_1206_RC.kicad_mod",
         "factory-installed PCBA item",
     ]
     for needle in required_generator_terms:
@@ -300,6 +302,7 @@ def check_generated_pcb_placement() -> None:
         "L2": "RoyalNode:L2_COILCRAFT_XAL7030_222MEC_RC",
         "U2": "RoyalNode:U2_LM66100_DCK0006A_SC70_6_RC",
         "U4": "RoyalNode:U4_LTC4365_TSOT23_8_RC",
+        "F1": "RoyalNode:F1_LITTELFUSE_483_1206_RC",
         "Q1": "RoyalNode:Q_POWER_INFINEON_PG_DSO_8_27_RC",
         "Q2": "RoyalNode:Q_POWER_INFINEON_PG_DSO_8_27_RC",
         "Q3": "RoyalNode:Q_POWER_INFINEON_PG_DSO_8_27_RC",
@@ -362,6 +365,7 @@ def check_generated_schematic_footprints() -> None:
         "J2": "RoyalNode:J_POWER_XT30PW_M_C431092_RC",
         "J3": "RoyalNode:J_LOW_JST_GH_SM02B_GHS_TB_RC",
         "J4": "RoyalNode:J_LOW_JST_GH_SM02B_GHS_TB_RC",
+        "F1": "RoyalNode:F1_LITTELFUSE_483_1206_RC",
         "L1": "RoyalNode:L1_COILCRAFT_XAL7070_222MEC_RC",
         "L2": "RoyalNode:L2_COILCRAFT_XAL7030_222MEC_RC",
     }

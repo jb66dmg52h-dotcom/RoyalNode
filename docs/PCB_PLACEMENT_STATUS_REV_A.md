@@ -37,7 +37,7 @@ The board remains a placement scaffold, not a routed PCB and not a fabrication r
 
 The generated board currently contains:
 
-- 16 major module, connector, power IC, FET, and inductor anchors.
+- 17 major module, connector, power IC, FET, fuse, and inductor anchors.
 - 50 staged support-passive anchors from `PASSIVE_CAPTURE_SEED_REV_A.csv`.
 
 The passive anchors are staging placements for footprint/net review, not final routed power-loop placement.
@@ -57,6 +57,7 @@ The passive anchors are staging placements for footprint/net review, not final r
 | `L2` | `L2_COILCRAFT_XAL7030_222MEC_RC` | 66.5, 55.0 mm | 0 deg | Boost inductor release candidate |
 | `U2` | `U2_LM66100_DCK0006A_SC70_6_RC` | 84.0, 49.0 mm | 0 deg | XIAO ideal-diode release candidate |
 | `U4` | `U4_LTC4365_TSOT23_8_RC` | 74.0, 50.0 mm | 0 deg | Solar protection controller release candidate |
+| `F1` | `F1_LITTELFUSE_483_1206_RC` | 87.0, 54.0 mm | 0 deg | Solar input fuse release candidate |
 | `Q1` | `Q_POWER_INFINEON_PG_DSO_8_27_RC` | 78.0, 56.0 mm | 0 deg | Solar protection FET release candidate |
 | `Q2` | `Q_POWER_INFINEON_PG_DSO_8_27_RC` | 78.0, 64.0 mm | 0 deg | BQ solar input selector FET release candidate |
 | `Q3` | `Q_POWER_INFINEON_PG_DSO_8_27_RC` | 78.0, 72.0 mm | 0 deg | BQ USB input selector FET release candidate |
@@ -74,6 +75,8 @@ The XIAO composite socket footprint is placed in the upper-right area with USB-C
 The XT30 solar and battery connectors are placed on the right/lower-right side of the board to keep high-current wiring away from the RF launch as much as possible within the 85 x 75 mm outline. Both use imported JLC/LCSC `C431092` EasyEDA geometry for AMASS `XT30PW-M30.G.Y`.
 
 J3 and J4 are now placed as 2-pin JST-GH release-candidate connectors. J3 is the internal XIAO underside BAT/GND lead after the LM66100 isolation path. J4 is the battery-mounted NTC safety lead for the BQ25798 TS network. Neither is a general accessory or deployed telemetry port.
+
+F1 is now placed as a Littelfuse 483-series 1206 release-candidate footprint immediately after the solar XT30 positive path and before the protected solar-input path.
 
 The first power-stage placement cluster now exists:
 
@@ -138,7 +141,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-174 expected unrouted ratsnest items
+176 expected unrouted ratsnest items
 0 footprint errors
 1 warning: MOD2 library footprint mismatch
 ```
