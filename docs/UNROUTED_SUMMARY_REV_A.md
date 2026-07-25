@@ -4,7 +4,7 @@ Generated from `hardware/fabrication/RoyalNode_drc.rpt`.
 
 This file is a layout planning aid, not a manufacturing release note. Counts are KiCad ratsnest-pair counts, so a net with several components can appear multiple times.
 
-Total unrouted pairs: 93
+Total unrouted pairs: 91
 
 | Net | Ratsnest pairs | Layout note |
 |---|---:|---|
@@ -35,8 +35,6 @@ Total unrouted pairs: 93
 | `BQ_ACDRV2` | 1 |  |
 | `BQ_BTST1` | 1 |  |
 | `BQ_BTST2` | 1 |  |
-| `BQ_INT` | 1 |  |
-| `BQ_PROG` | 1 |  |
 | `BQ_SDRV` | 1 |  |
 | `BQ_SOLAR_SELECTOR_COMMON` | 1 |  |
 | `BQ_TS` | 1 |  |

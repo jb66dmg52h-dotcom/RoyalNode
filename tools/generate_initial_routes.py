@@ -144,6 +144,20 @@ SEGMENTS = [
         "points": [(64.80, 80.60), (64.80, 42.80)],
     },
     {
+        "name": "bq-prog-local-route",
+        "net": "BQ_PROG",
+        "layer": "F.Cu",
+        "width": 0.15,
+        "points": [(66.90, 75.00), (68.80, 75.00), (68.80, 76.00), (69.68, 76.00)],
+    },
+    {
+        "name": "bq-int-local-route",
+        "net": "BQ_INT",
+        "layer": "F.Cu",
+        "width": 0.15,
+        "points": [(66.90, 74.60), (71.33, 74.60), (71.33, 73.20)],
+    },
+    {
         "name": "charge-led-k-local",
         "net": "CHG_LED_K",
         "layer": "F.Cu",
