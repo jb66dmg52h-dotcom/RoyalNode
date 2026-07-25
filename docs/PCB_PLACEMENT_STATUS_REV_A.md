@@ -21,14 +21,14 @@ hardware/kicad/RoyalNode/RoyalNode.kicad_pcb
 The Rev A planning outline is:
 
 ```text
-75 mm x 65 mm
+85 mm x 75 mm
 ```
 
 Current edge rectangle:
 
 ```text
 start: 20 mm, 20 mm
-end:   95 mm, 85 mm
+end:   105 mm, 95 mm
 ```
 
 The board remains a placement scaffold, not a routed PCB and not a fabrication release.
@@ -39,9 +39,18 @@ The board remains a placement scaffold, not a routed PCB and not a fabrication r
 |---|---|---:|---:|---|
 | `MOD2` | `MOD2_E22_900M33S_JLC_C22399506_RC` | 42.0, 54.0 mm | 180 deg | Release-candidate factory PCBA footprint |
 | `MOD1` | `MOD1_XIAO_NRF52840_SOCKET_C53202181_RC` | 71.5, 34.0 mm | 0 deg | Composite XIAO socket release candidate |
-| `J5` | `J5_SMA_0732511150_DRAFT_ENVELOPE` | 90.0, 41.3 mm | 0 deg | Draft envelope only |
-| `J1` | `J_POWER_XT30PW_M_C431092_RC` | 83.0, 62.0 mm | 0 deg | Imported XT30 release candidate |
-| `J2` | `J_POWER_XT30PW_M_C431092_RC` | 83.0, 76.5 mm | 0 deg | Imported XT30 release candidate |
+| `J5` | `J5_SMA_0732511150_DRAFT_ENVELOPE` | 100.0, 41.3 mm | 0 deg | Draft envelope only |
+| `J1` | `J_POWER_XT30PW_M_C431092_RC` | 93.0, 62.0 mm | 0 deg | Imported XT30 release candidate |
+| `J2` | `J_POWER_XT30PW_M_C431092_RC` | 93.0, 78.0 mm | 0 deg | Imported XT30 release candidate |
+| `U1` | `U1_BQ25798_RQM0029A_RC` | 65.0, 75.0 mm | 0 deg | Charger/controller release candidate |
+| `L1` | `L1_COILCRAFT_XAL7070_222MEC_RC` | 65.0, 84.0 mm | 0 deg | Charger inductor release candidate |
+| `U3` | `U3_TPS61088_RHL0020A_THERMALVIAS_RC` | 59.0, 55.0 mm | 0 deg | Radio boost converter release candidate |
+| `L2` | `L2_COILCRAFT_XAL7030_222MEC_RC` | 66.5, 55.0 mm | 0 deg | Boost inductor release candidate |
+| `U2` | `U2_LM66100_DCK0006A_SC70_6_RC` | 84.0, 49.0 mm | 0 deg | XIAO ideal-diode release candidate |
+| `U4` | `U4_LTC4365_TSOT23_8_RC` | 74.0, 50.0 mm | 0 deg | Solar protection controller release candidate |
+| `Q1` | `Q_POWER_INFINEON_PG_DSO_8_27_RC` | 78.0, 56.0 mm | 0 deg | Solar protection FET release candidate |
+| `Q2` | `Q_POWER_INFINEON_PG_DSO_8_27_RC` | 78.0, 64.0 mm | 0 deg | BQ solar input selector FET release candidate |
+| `Q3` | `Q_POWER_INFINEON_PG_DSO_8_27_RC` | 78.0, 72.0 mm | 0 deg | BQ USB input selector FET release candidate |
 
 ## Placement Intent
 
@@ -53,7 +62,14 @@ E22 pin 21 ANT -> short 50 ohm GCPW -> edge-launch SMA
 
 The XIAO composite socket footprint is placed in the upper-right area with USB-C edge access still to be verified against the final module orientation. The composite footprint uses two LXWCONN `254PM-1x7P-V` socket strips from JLC/LCSC part `C53202181`.
 
-The XT30 solar and battery connectors are placed on the right/lower-right side of the board to keep high-current wiring away from the RF launch as much as possible within the 75 x 65 mm outline. Both use imported JLC/LCSC `C431092` EasyEDA geometry for AMASS `XT30PW-M30.G.Y`.
+The XT30 solar and battery connectors are placed on the right/lower-right side of the board to keep high-current wiring away from the RF launch as much as possible within the 85 x 75 mm outline. Both use imported JLC/LCSC `C431092` EasyEDA geometry for AMASS `XT30PW-M30.G.Y`.
+
+The first power-stage placement cluster now exists:
+
+- BQ25798 plus XAL7070 inductor in the lower middle, between the input connectors and battery/SYS region.
+- TPS61088 plus XAL7030 inductor immediately right of the E22 module, away from the RF corridor and close enough for a short 5 V radio rail.
+- LTC4365 and ISA170170N04LMDS FETs between the input connectors and charger region.
+- LM66100 near the XIAO side of the board for the XIAO battery-feed isolation path.
 
 ## Known Blockers
 
@@ -121,7 +137,7 @@ Next milestone `P1b`:
 1. Select final XIAO socket/land pattern.
 2. Confirm XT30 polarity and mating-plug clearance.
 3. Select or unblock the edge-launch SMA land pattern.
-4. Replace draft envelopes with electrical footprints where verified.
+4. Confirm the power-stage placement against thermal, current-loop, and connector-clearance constraints.
 5. Add schematic-linked footprints and start net-aware synchronization.
 6. Route only after the final RF, power, and connector footprints are selected.
 

@@ -237,6 +237,30 @@ def check_connector_rc_footprints() -> None:
             fail(f"{path.relative_to(ROOT)} expected {expected_pad_count} pads, found {pad_count}")
 
 
+def check_power_rc_footprints() -> None:
+    fp_dir = ROOT / "hardware/kicad/RoyalNode/lib_footprints/RoyalNode.pretty"
+    checks = [
+        ("U1_BQ25798_RQM0029A_RC.kicad_mod", ["BQ25798", "RQM0029A", "NOT_RELEASED_RELEASE_CANDIDATE"], 29),
+        ("U3_TPS61088_RHL0020A_THERMALVIAS_RC.kicad_mod", ["TPS61088", "RHL", "NOT_RELEASED_RELEASE_CANDIDATE"], 41),
+        ("U2_LM66100_DCK0006A_SC70_6_RC.kicad_mod", ["LM66100", "NOT_RELEASED_RELEASE_CANDIDATE"], 6),
+        ("U4_LTC4365_TSOT23_8_RC.kicad_mod", ["LTC4365", "NOT_RELEASED_RELEASE_CANDIDATE"], 8),
+        ("Q_POWER_INFINEON_PG_DSO_8_27_RC.kicad_mod", ["Infineon", "PG-DSO-8-27", "NOT_RELEASED_RELEASE_CANDIDATE"], 23),
+        ("L1_COILCRAFT_XAL7070_222MEC_RC.kicad_mod", ["XAL7070-222MEC", "NOT_RELEASED_RELEASE_CANDIDATE"], 2),
+        ("L2_COILCRAFT_XAL7030_222MEC_RC.kicad_mod", ["XAL7030-222MEC", "NOT_RELEASED_RELEASE_CANDIDATE"], 2),
+    ]
+    for filename, needles, expected_pad_count in checks:
+        path = fp_dir / filename
+        if not path.exists():
+            fail(f"missing release-candidate power footprint {path.relative_to(ROOT)}")
+        text = path.read_text(encoding="utf-8")
+        for needle in needles:
+            if needle not in text:
+                fail(f"{path.relative_to(ROOT)} missing {needle!r}")
+        pad_count = len(re.findall(r"^\s*\(pad\s+\"", text, re.M))
+        if pad_count != expected_pad_count:
+            fail(f"{path.relative_to(ROOT)} expected {expected_pad_count} pads, found {pad_count}")
+
+
 def check_generated_pcb_placement() -> None:
     generator = read("tools/generate_pcb_placement.py")
     required_generator_terms = [
@@ -244,6 +268,9 @@ def check_generated_pcb_placement() -> None:
         "MOD1_XIAO_NRF52840_SOCKET_C53202181_RC.kicad_mod",
         "J5_SMA_0732511150_DRAFT_ENVELOPE.kicad_mod",
         "J_POWER_XT30PW_M_C431092_RC.kicad_mod",
+        "U1_BQ25798_RQM0029A_RC.kicad_mod",
+        "U3_TPS61088_RHL0020A_THERMALVIAS_RC.kicad_mod",
+        "Q_POWER_INFINEON_PG_DSO_8_27_RC.kicad_mod",
         "factory-installed PCBA item",
     ]
     for needle in required_generator_terms:
@@ -257,6 +284,15 @@ def check_generated_pcb_placement() -> None:
         "J5": "RoyalNode:J5_SMA_0732511150_DRAFT_ENVELOPE",
         "J1": "RoyalNode:J_POWER_XT30PW_M_C431092_RC",
         "J2": "RoyalNode:J_POWER_XT30PW_M_C431092_RC",
+        "U1": "RoyalNode:U1_BQ25798_RQM0029A_RC",
+        "L1": "RoyalNode:L1_COILCRAFT_XAL7070_222MEC_RC",
+        "U3": "RoyalNode:U3_TPS61088_RHL0020A_THERMALVIAS_RC",
+        "L2": "RoyalNode:L2_COILCRAFT_XAL7030_222MEC_RC",
+        "U2": "RoyalNode:U2_LM66100_DCK0006A_SC70_6_RC",
+        "U4": "RoyalNode:U4_LTC4365_TSOT23_8_RC",
+        "Q1": "RoyalNode:Q_POWER_INFINEON_PG_DSO_8_27_RC",
+        "Q2": "RoyalNode:Q_POWER_INFINEON_PG_DSO_8_27_RC",
+        "Q3": "RoyalNode:Q_POWER_INFINEON_PG_DSO_8_27_RC",
     }
     for ref, footprint in required_placements.items():
         if f'(footprint "{footprint}"' not in pcb:
@@ -276,7 +312,7 @@ def check_generated_pcb_placement() -> None:
     status = read("docs/PCB_PLACEMENT_STATUS_REV_A.md")
     for needle in [
         "P1a",
-        "75 mm x 65 mm",
+        "85 mm x 75 mm",
         "MOD2_E22_900M33S_JLC_C22399506_RC",
         "J_POWER_XT30PW_M_C431092_RC",
         "MOD1_XIAO_NRF52840_SOCKET_C53202181_RC",
@@ -387,6 +423,7 @@ def main() -> None:
     check_e22_assembler_crosscheck()
     check_e22_native_rc_footprint()
     check_connector_rc_footprints()
+    check_power_rc_footprints()
     check_capture_seed(seed_rows)
     check_generated_schematic()
     check_generated_pcb_placement()

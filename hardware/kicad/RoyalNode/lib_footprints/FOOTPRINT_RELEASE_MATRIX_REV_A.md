@@ -28,19 +28,19 @@ docs/FOOTPRINT_SOURCE_LINKS_REV_A.md
 
 | Ref | Part / footprint target | Risk | State | Release requirement |
 |---|---|---|---|---|
-| U1 | BQ25798RQMR, TI RQM0029A HOTROD VQFN-HR | High | `not_started` | Use TI CAD or manually transcribe RQM0029A land pattern; generic QFN is not allowed |
-| U2 | LM66100DCKR, TI DCK0006A SC-70-6 | Medium | `not_started` | Standard SC-70-6 acceptable only after DCK0006A pad check |
-| U3 | TPS61088RHLR, TI RHL0020A VQFN-20 + EP pad 21 | High | `not_started` | Exposed pad must be pad 21; thermal via concept required |
-| U4 | LTC4365ITS8-1, ADI TS8 TSOT-23-8 | Medium | `not_started` | Use ADI TS8 recommended pad layout |
-| Q1-Q3 | ISA170170N04LMDS, Infineon PG-DSO-8 | Medium | `not_started` | Confirm duplicated drain/source pin mapping and consistent orientation |
+| U1 | BQ25798RQMR, TI RQM0029A HOTROD VQFN-HR | High | `conditional_release_candidate` | Project-local copy of KiCad `Texas_RQM0029A`; verify against TI package drawing and JLC assembly before release |
+| U2 | LM66100DCKR, TI DCK0006A SC-70-6 | Medium | `conditional_release_candidate` | Project-local SC-70-6 copy; verify against TI DCK0006A package drawing |
+| U3 | TPS61088RHLR, TI RHL0020A VQFN-20 + EP pad 21 | High | `conditional_release_candidate` | Project-local copy of KiCad `Texas_VQFN-RHL-20_ThermalVias`; confirm exposed pad/via/paste strategy |
+| U4 | LTC4365ITS8-1, ADI TS8 TSOT-23-8 | Medium | `conditional_release_candidate` | Project-local TSOT-23-8 copy; verify against ADI TS8 package drawing |
+| Q1-Q3 | ISA170170N04LMDS, Infineon PG-DSO-8 | Medium | `conditional_release_candidate` | Project-local Infineon PG-DSO-8-27 thermal-via footprint; confirm duplicated drain/source pin mapping and orientation |
 | MOD1 | Seeed XIAO nRF52840 socket assembly | Medium | `conditional_release_candidate` | Composite footprint uses two JLC/LCSC `C53202181` 1x7 socket strips; verify XIAO orientation, row spacing, and socket engagement before release |
 | MOD2 | EBYTE E22-900M33S castellated module | High | `conditional_release_candidate` | Factory-installed PCBA item using EBYTE manual plus exact JLC/LCSC `C22399506` EasyEDA footprint cross-check; physical check deferred to assembled-board first article |
 | J1/J2 | AMASS XT30PW-M right-angle male | Medium | `conditional_release_candidate` | Imported JLC/LCSC `C431092` EasyEDA geometry; confirm polarity from physical connector and add mating-plug clearance |
 | J3 | JST B2B-PH-SM4-TB(LF)(SN) | Low | `not_started` | Use JST official/verified KiCad PH-SM4-TB 2-pin footprint |
 | J4 | CJT A2012WV-S-2P | Low | `not_started` | Use manufacturer/JLC footprint and pin-1 marker |
 | J5 | Molex 0732511150 SMA edge launch | High | `draft_envelope_only` | JLC/LCSC `C841205` import exists but is not placed; use Molex launch for 1.60 mm PCB and merge with final GCPW stack-up |
-| L_BQ | Coilcraft XAL7070-222MEC | Medium | `not_started` | Use Coilcraft recommended land pattern and body courtyard |
-| L_BOOST | Coilcraft XAL7030-222MEC | Medium | `not_started` | Use Coilcraft recommended land pattern and body courtyard |
+| L_BQ | Coilcraft XAL7070-222MEC | Medium | `conditional_release_candidate` | Project-local KiCad Coilcraft XAL7070 footprint; confirm against Coilcraft recommended land pattern |
+| L_BOOST | Coilcraft XAL7030-222MEC | Medium | `conditional_release_candidate` | Project-local KiCad Coilcraft XAL7030-222 footprint; confirm against Coilcraft recommended land pattern |
 | C_BULK | Panasonic 10SVPC330M | Medium | `not_started` | Use polarized SMD polymer footprint with clear polarity marking |
 | Passives | 0402/0603/1206/1210 R/C | Low | `not_started` | Standard KiCad/JLC-compatible metric footprints acceptable after value/package review |
 
