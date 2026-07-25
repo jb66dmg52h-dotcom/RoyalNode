@@ -16891,6 +16891,14 @@
 		(uuid "2ca8278b-b68d-556c-98b9-46d5dfcf19ee")
 	)
 	(segment
+		(start 66.9 73.8)
+		(end 66.9 74.2)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "BAT_RAW")
+		(uuid "a8d013ab-219d-5be0-9697-4881d8575954")
+	)
+	(segment
 		(start 80.39 33.54)
 		(end 84.98 33)
 		(width 0.2)
@@ -17177,6 +17185,14 @@
 		(layer "B.Cu")
 		(net "I2C_SDA")
 		(uuid "d6e350b7-2a51-50b9-9c9f-78bf6a3c6e66")
+	)
+	(segment
+		(start 63.1 73.8)
+		(end 63.1 74.2)
+		(width 0.15)
+		(layer "F.Cu")
+		(net "BQ_VBUS")
+		(uuid "3722224f-231a-5e32-8e85-34857eebcd4e")
 	)
 	(segment
 		(start 74.2 73.91)

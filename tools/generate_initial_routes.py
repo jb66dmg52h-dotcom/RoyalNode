@@ -228,6 +228,20 @@ SEGMENTS = [
         "points": [(75.38, 71.37), (74.20, 71.37), (74.20, 73.91), (75.38, 73.91)],
     },
     {
+        "name": "u1-bq-vbus-local",
+        "net": "BQ_VBUS",
+        "layer": "F.Cu",
+        "width": 0.15,
+        "points": [(63.10, 73.80), (63.10, 74.20)],
+    },
+    {
+        "name": "u1-bat-raw-local",
+        "net": "BAT_RAW",
+        "layer": "F.Cu",
+        "width": 0.15,
+        "points": [(66.90, 73.80), (66.90, 74.20)],
+    },
+    {
         "name": "e22-nrst-fanout",
         "net": "E22_NRST",
         "layer": "F.Cu",
@@ -556,7 +570,7 @@ def main() -> None:
         raise SystemExit("PCB file does not end with a closing S-expression")
     body = text[:-1].rstrip()
     PCB.write_text(f"{body}\n{generated_blocks()}\n)\n", encoding="utf-8")
-    print("Generated initial routes, E22 control/SPI, J6 I2C, charge LED/STAT, temp/UV/OV-divider, U2/Q-gate local links and L2 ground reference plane")
+    print("Generated initial routes, E22 control/SPI, J6 I2C, charge LED/STAT, temp/UV/OV-divider, U1/U2/Q-gate local links and L2 ground reference plane")
 
 
 if __name__ == "__main__":
