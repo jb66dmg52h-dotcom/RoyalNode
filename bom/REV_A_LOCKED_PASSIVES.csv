@@ -17,19 +17,19 @@ C_TPS_VIN_HF,1,100 nF 50 V X7R,Tdk,CGA2B3X7R1H104K050BD,TPS61088 VIN high-freque
 C_E22_1U,1,1 uF 16 V X7R,Murata,GCM188R71C105KA64D,E22 local bypass,0603,JLCPCB C161212,locked
 C_E22_HF,TBD,100 nF 16 V X7R,Murata,GCJ188R71C104KA01D,E22 local high-frequency bypass,0603,JLCPCB C710619,locked_common_part
 C_E22_BULK,1,330 uF 10 V polymer,Panasonic,10SVPC330M,E22 local bulk capacitor,SMD polymer can 8 x 6.9 mm,JLCPCB C347574,locked
-R_TS_UPPER,1,5.23 kOhm 1%,TBD,TBD,BQ25798 REGN-to-TS resistor,TBD,Part package selected during schematic capture,locked_value
-R_TS_LOWER,1,30.1 kOhm 1%,TBD,TBD,BQ25798 TS-to-NTC node resistor,TBD,Part package selected during schematic capture,locked_value
-R_BATP,1,100 Ohm,TBD,TBD,BQ25798 BATP Kelvin series resistor,TBD,Part package selected during schematic capture,locked_value
-R_PROG,1,4.70 kOhm 1%,TBD,TBD,BQ25798 PROG resistor,TBD,Part package selected during schematic capture,locked_value
-R_INT_PULLUP,1,10 kOhm,TBD,TBD,BQ25798 INT pullup to 3V3,TBD,Not routed to MCU,locked_value
-R_I2C_PULLUP,2,10 kOhm,TBD,TBD,BQ25798 SDA/SCL pullups to 3V3,TBD,Part package selected during schematic capture,locked_value
-R_TPS_FB_TOP,1,176 kOhm 0.1%,TBD,TBD,TPS61088 feedback top resistor,TBD,VOUT-to-FB,locked_value
-R_TPS_FB_BOTTOM,1,56.0 kOhm 0.1%,TBD,TBD,TPS61088 feedback bottom resistor,TBD,FB-to-AGND,locked_value
-R_TPS_FSW,1,330 kOhm,TBD,TBD,TPS61088 frequency resistor,TBD,FSW-to-SW,locked_value
-R_TPS_ILIM,1,100 kOhm,TBD,TBD,TPS61088 current-limit resistor,TBD,ILIM-to-AGND,locked_value
-R_TPS_COMP,1,20.0 kOhm,TBD,TBD,TPS61088 compensation resistor,TBD,COMP network,locked_value
-C_TPS_COMP,1,4.7 nF,TBD,TBD,TPS61088 compensation capacitor,TBD,COMP network,locked_value
-C_TPS_SS,1,47 nF,TBD,TBD,TPS61088 soft-start capacitor,TBD,SS-to-AGND,locked_value
-C_TPS_VCC,1,2.2 uF,TBD,TBD,TPS61088 VCC bypass,TBD,VCC-to-AGND,locked_value
-C_TPS_BOOT,1,100 nF,TBD,TBD,TPS61088 BOOT capacitor,TBD,BOOT-to-SW,locked_value
-R_TPS_EN_PD,1,100 kOhm,TBD,TBD,TPS61088 EN pulldown,TBD,Keeps radio boost off during MCU startup,locked_value
+R_TS_UPPER,1,5.23 kOhm 1%,TBD,TBD,BQ25798 REGN-to-TS resistor,0603,Footprint fixed by schematic capture; select stocked 1% part during sourcing,locked_value
+R_TS_LOWER,1,30.1 kOhm 1%,TBD,TBD,BQ25798 TS-to-NTC node resistor,0603,Footprint fixed by schematic capture; select stocked 1% part during sourcing,locked_value
+R_BATP,1,100 Ohm,TBD,TBD,BQ25798 BATP Kelvin series resistor,0603,Footprint fixed by schematic capture; select stocked part during sourcing,locked_value
+R_PROG,1,4.70 kOhm 1%,TBD,TBD,BQ25798 PROG resistor,0603,Footprint fixed by schematic capture; select stocked 1% part during sourcing,locked_value
+R_INT_PULLUP,1,10 kOhm,TBD,TBD,BQ25798 INT pullup to 3V3,0603,Footprint fixed by schematic capture; not routed to MCU,locked_value
+R_I2C_PULLUP,2,10 kOhm,TBD,TBD,BQ25798 SDA/SCL pullups to 3V3,0603,Footprint fixed by schematic capture; select stocked part during sourcing,locked_value
+R_TPS_FB_TOP,1,176 kOhm 0.1%,TBD,TBD,TPS61088 feedback top resistor,0603,Footprint fixed by schematic capture; select stocked 0.1% part during sourcing,locked_value
+R_TPS_FB_BOTTOM,1,56.0 kOhm 0.1%,TBD,TBD,TPS61088 feedback bottom resistor,0603,Footprint fixed by schematic capture; select stocked 0.1% part during sourcing,locked_value
+R_TPS_FSW,1,330 kOhm,TBD,TBD,TPS61088 frequency resistor,0603,Footprint fixed by schematic capture; select stocked part during sourcing,locked_value
+R_TPS_ILIM,1,100 kOhm,TBD,TBD,TPS61088 current-limit resistor,0603,Footprint fixed by schematic capture; select stocked part during sourcing,locked_value
+R_TPS_COMP,1,20.0 kOhm,TBD,TBD,TPS61088 compensation resistor,0603,Footprint fixed by schematic capture; select stocked part during sourcing,locked_value
+C_TPS_COMP,1,4.7 nF,TBD,TBD,TPS61088 compensation capacitor,0603,Footprint fixed by schematic capture; select stocked C0G/X7R part during sourcing,locked_value
+C_TPS_SS,1,47 nF,TBD,TBD,TPS61088 soft-start capacitor,0603,Footprint fixed by schematic capture; select stocked X7R part during sourcing,locked_value
+C_TPS_VCC,1,2.2 uF,TBD,TBD,TPS61088 VCC bypass,0805,Footprint fixed by schematic capture; select stocked X7R part during sourcing,locked_value
+C_TPS_BOOT,1,100 nF,TBD,TBD,TPS61088 BOOT capacitor,0603,Footprint fixed by schematic capture; select stocked X7R part during sourcing,locked_value
+R_TPS_EN_PD,1,100 kOhm,TBD,TBD,TPS61088 EN pulldown,0603,Footprint fixed by schematic capture; select stocked part during sourcing,locked_value
