@@ -81,6 +81,13 @@ SEGMENTS = [
         "points": [(67.20, 41.40), (86.62, 41.40)],
     },
     {
+        "name": "i2c-sda-xiao-entry",
+        "net": "I2C_SDA",
+        "layer": "B.Cu",
+        "width": 0.20,
+        "points": [(67.20, 41.40), (62.61, 33.54)],
+    },
+    {
         "name": "i2c-pullup-scl-fanout",
         "net": "I2C_SCL",
         "layer": "F.Cu",
@@ -100,6 +107,13 @@ SEGMENTS = [
         "layer": "In2.Cu",
         "width": 0.20,
         "points": [(64.80, 42.80), (87.60, 42.80)],
+    },
+    {
+        "name": "i2c-scl-xiao-entry",
+        "net": "I2C_SCL",
+        "layer": "In2.Cu",
+        "width": 0.20,
+        "points": [(64.80, 42.80), (64.80, 36.08), (62.61, 36.08)],
     },
     {
         "name": "bq-sda-fanout",
@@ -436,6 +450,7 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("segment", "j6-scl-backbone", "1"),
     stable_uuid("segment", "j6-scl-backbone", "2"),
     stable_uuid("segment", "j6-scl-backbone", "3"),
+    stable_uuid("segment", "i2c-scl-xiao-entry", "2"),
     stable_uuid("segment", "boost-en-u3-via-fanout", "0"),
     stable_uuid("segment", "boost-en-u3-via-fanout", "1"),
     stable_uuid("segment", "boost-en-u3-via-fanout", "2"),
