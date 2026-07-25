@@ -15283,10 +15283,10 @@
     (unit 1)
     (exclude_from_sim no)
     (in_bom yes)
-    (on_board no)
+    (on_board yes)
     (dnp no)
-    (uuid "0c053fec-43f8-549d-843b-53c7bffa5b33")
-    (property "Reference" "TH1"
+    (uuid "a6a91a3f-f8d2-50ca-8fa2-937fed56380d")
+    (property "Reference" "C504"
       (at 436.88 64.90 0)
       (effects
         (font
@@ -15294,7 +15294,7 @@
         )
       )
     )
-    (property "Value" "10 kOhm NTC"
+    (property "Value" "100 nF 16 V"
       (at 436.88 112.90 0)
       (effects
         (font
@@ -15302,7 +15302,7 @@
         )
       )
     )
-    (property "Footprint" ""
+    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
       (at 436.88 88.90 0)
       (effects
         (font
@@ -15313,6 +15313,250 @@
     )
     (property "Datasheet" "~"
       (at 436.88 88.90 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "4671b791-b56a-502f-b056-d4cdf0b3d446")
+    )
+    (pin "2"
+      (uuid "029219dd-066d-5683-b2da-056f04edd565")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/56bbf6bf-e8ee-572f-b29e-8187d12bd5fa"
+          (reference "C504")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 425.45 88.90)
+      (xy 417.83 88.90)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "76dbf4de-9c76-580f-935d-d19dbc00bf89")
+  )
+  (global_label "5V_RADIO"
+    (shape bidirectional)
+    (at 417.83 88.90 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "ec05829c-cc0c-534f-9537-6daebb266190")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 417.83 88.90 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 448.31 88.90)
+      (xy 455.93 88.90)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "8b1f8d37-e0d6-59b0-96d2-fda998654c00")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 455.93 88.90 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "e45181dd-b7b0-57ca-aac0-db7bac6cbd61")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 455.93 88.90 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 436.88 96.52 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board yes)
+    (dnp no)
+    (uuid "652ac54c-4493-5fd4-824a-4801d8ce9573")
+    (property "Reference" "C505"
+      (at 436.88 72.52 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "100 nF 16 V"
+      (at 436.88 120.52 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+      (at 436.88 96.52 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 436.88 96.52 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (pin "1"
+      (uuid "b8ce3823-699a-5bf6-a98c-2eefce89de73")
+    )
+    (pin "2"
+      (uuid "4c3b3e28-cd54-5a3d-8c15-5b54d4354ebe")
+    )
+    (instances
+      (project "RoyalNode"
+        (path "/f51db70b-8f1d-51f2-a3eb-b6a995a3532a"
+          (reference "C505")
+          (unit 1)
+        )
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 425.45 96.52)
+      (xy 417.83 96.52)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "19f92e5a-5298-54e0-bd42-a9c78a55543f")
+  )
+  (global_label "5V_RADIO"
+    (shape bidirectional)
+    (at 417.83 96.52 180)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "5a1794e6-a732-595e-9dc4-0b099f47346c")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 417.83 96.52 180)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (wire
+    (pts
+      (xy 448.31 96.52)
+      (xy 455.93 96.52)
+    )
+    (stroke
+      (width 0)
+      (type default)
+    )
+    (uuid "f1b7cfb7-3754-56c8-b34b-103ae7162452")
+  )
+  (global_label "GND"
+    (shape bidirectional)
+    (at 455.93 96.52 0)
+    (fields_autoplaced yes)
+    (effects
+      (font
+        (size 1.27 1.27)
+      )
+      (justify left)
+    )
+    (uuid "1a17ed95-4c4b-54f5-8b05-d97825a0c24c")
+    (property "Intersheetrefs" "${INTERSHEET_REFS}"
+      (at 455.93 96.52 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+  )
+  (symbol
+    (lib_id "RoyalNode:RN_TWO_PIN_POWER_PART")
+    (at 436.88 104.14 0)
+    (unit 1)
+    (exclude_from_sim no)
+    (in_bom yes)
+    (on_board no)
+    (dnp no)
+    (uuid "0c053fec-43f8-549d-843b-53c7bffa5b33")
+    (property "Reference" "TH1"
+      (at 436.88 80.14 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Value" "10 kOhm NTC"
+      (at 436.88 128.14 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+      )
+    )
+    (property "Footprint" ""
+      (at 436.88 104.14 0)
+      (effects
+        (font
+          (size 1.27 1.27)
+        )
+        (hide yes)
+      )
+    )
+    (property "Datasheet" "~"
+      (at 436.88 104.14 0)
       (effects
         (font
           (size 1.27 1.27)
@@ -15337,8 +15581,8 @@
   )
   (wire
     (pts
-      (xy 425.45 88.90)
-      (xy 417.83 88.90)
+      (xy 425.45 104.14)
+      (xy 417.83 104.14)
     )
     (stroke
       (width 0)
@@ -15348,7 +15592,7 @@
   )
   (global_label "NTC_SENSE"
     (shape bidirectional)
-    (at 417.83 88.90 180)
+    (at 417.83 104.14 180)
     (fields_autoplaced yes)
     (effects
       (font
@@ -15358,7 +15602,7 @@
     )
     (uuid "2dc49a4e-6f8f-530b-8d3c-7079663046cf")
     (property "Intersheetrefs" "${INTERSHEET_REFS}"
-      (at 417.83 88.90 180)
+      (at 417.83 104.14 180)
       (effects
         (font
           (size 1.27 1.27)
@@ -15369,8 +15613,8 @@
   )
   (wire
     (pts
-      (xy 448.31 88.90)
-      (xy 455.93 88.90)
+      (xy 448.31 104.14)
+      (xy 455.93 104.14)
     )
     (stroke
       (width 0)
@@ -15380,7 +15624,7 @@
   )
   (global_label "GND"
     (shape bidirectional)
-    (at 455.93 88.90 0)
+    (at 455.93 104.14 0)
     (fields_autoplaced yes)
     (effects
       (font
@@ -15390,7 +15634,7 @@
     )
     (uuid "eacf2670-a9d8-567f-b579-d58010d070fe")
     (property "Intersheetrefs" "${INTERSHEET_REFS}"
-      (at 455.93 88.90 0)
+      (at 455.93 104.14 0)
       (effects
         (font
           (size 1.27 1.27)

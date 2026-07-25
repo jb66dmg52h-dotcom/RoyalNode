@@ -682,7 +682,7 @@ def check_generated_schematic() -> None:
         fail("TH1 must remain an off-board battery-mounted thermistor with on_board no")
 
     status = read("docs/KICAD_CAPTURE_STATUS_REV_A.md")
-    for needle in ["K1d", "Footprint Assignment Status", "0 messages", "52 support passive", "6 ERC-only power flags", "Do not add test points"]:
+    for needle in ["K1d", "Footprint Assignment Status", "0 messages", "54 support passive", "6 ERC-only power flags", "Do not add test points"]:
         if needle not in status:
             fail(f"KiCad capture status missing {needle!r}")
 

@@ -38,7 +38,7 @@ The board remains a placement scaffold, not a routed PCB and not a fabrication r
 The generated board currently contains:
 
 - 18 major module, connector, power IC, FET, fuse, and inductor anchors.
-- 51 staged support-passive anchors from `PASSIVE_CAPTURE_SEED_REV_A.csv`.
+- 53 staged support-passive anchors from `PASSIVE_CAPTURE_SEED_REV_A.csv`.
 
 The passive anchors are staging placements for footprint/net review, not final routed power-loop placement.
 
@@ -229,7 +229,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-140 expected unrouted ratsnest items
+144 expected unrouted ratsnest items
 0 footprint errors
 3 known footprint/library warnings: MOD2, U3 and L2
 ```

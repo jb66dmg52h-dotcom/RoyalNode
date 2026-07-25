@@ -386,7 +386,7 @@ def passive_position(index: int, group: str) -> tuple[float, float, float]:
 def passive_group(ref: str) -> str:
     if ref in {"R100", "R101", "R102", "R103"}:
         return "protection"
-    if ref.startswith("C4") or ref.startswith("R4") or ref in {"C500", "C501", "C502", "C503"}:
+    if ref.startswith("C4") or ref.startswith("R4") or ref.startswith("C5"):
         return "boost"
     return "charger"
 
@@ -400,6 +400,8 @@ PASSIVE_POSITION_OVERRIDES = {
     "C501": (64.0, 91.0, 0.0),
     "C502": (70.0, 91.0, 0.0),
     "C503": (93.0, 46.0, 0.0),
+    "C504": (76.0, 91.0, 0.0),
+    "C505": (76.0, 86.0, 0.0),
 }
 
 

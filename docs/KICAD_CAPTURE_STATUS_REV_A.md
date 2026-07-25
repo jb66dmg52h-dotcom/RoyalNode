@@ -19,7 +19,7 @@ The generated schematic places these references:
 MOD1, MOD2, U1, U2, U3, U4, Q1, Q2, Q3, J1, J2, J3, J4, J5, J6, F1, L1, L2
 ```
 
-It also places 52 support passive references from `PASSIVE_CAPTURE_SEED_REV_A.csv` and 6 ERC-only power flags.
+It also places 54 support passive references from `PASSIVE_CAPTURE_SEED_REV_A.csv` and 6 ERC-only power flags.
 
 The capture uses deterministic UUIDs and embedded RoyalNode symbol definitions so KiCad can parse and ERC-check it without relying on an external symbol cache.
 

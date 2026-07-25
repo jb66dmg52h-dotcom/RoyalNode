@@ -50,4 +50,6 @@ C500,C_E22_22U,22 uF 16 V,5V_RADIO,GND,Capacitor_SMD:C_1210_3225Metric,E22 local
 C501,C_E22_22U,22 uF 16 V,5V_RADIO,GND,Capacitor_SMD:C_1210_3225Metric,E22 local 5 V ceramic capacitor 2
 C502,C_E22_1U,1 uF 16 V,5V_RADIO,GND,Capacitor_SMD:C_0805_2012Metric,E22 local bypass
 C503,C_E22_BULK,330 uF 10 V polymer,5V_RADIO,GND,RoyalNode:C503_PANASONIC_10SVPC330M_8X6P9_RC,E22 local bulk capacitor
+C504,C_E22_HF,100 nF 16 V,5V_RADIO,GND,Capacitor_SMD:C_0603_1608Metric,E22 local high-frequency bypass 1
+C505,C_E22_HF,100 nF 16 V,5V_RADIO,GND,Capacitor_SMD:C_0603_1608Metric,E22 local high-frequency bypass 2
 TH1,TH1,10 kOhm NTC,NTC_SENSE,GND,,Battery-mounted NTC represented at board connector

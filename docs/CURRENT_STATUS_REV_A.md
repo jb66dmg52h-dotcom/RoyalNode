@@ -18,10 +18,10 @@ Current architecture:
 
 ## Implemented In KiCad
 
-- Generated root schematic with major active parts, connectors, inductors, fuse, off-board thermistor representation and 52 support passives.
+- Generated root schematic with major active parts, connectors, inductors, fuse, off-board thermistor representation and 54 support passives.
 - Project-local symbol library for the current Rev A major parts.
 - Project-local release-candidate footprints for E22, XIAO socket, BQ25798, TPS61088, LM66100, LTC4365, Infineon power MOSFETs, XT30, JST-GH, inductors, solar fuse and E22 bulk capacitor.
-- Net-aware PCB placement scaffold with 69 generated footprint anchors.
+- Net-aware PCB placement scaffold with 71 generated footprint anchors.
 - KiCad net classes for high-current power, switching nodes, RF and sensitive sense nets.
 - No dedicated test points, current shunts, probe loops or bench-only measurement links.
 
@@ -46,7 +46,7 @@ kicad-cli sch erc --exit-code-violations --severity-all
 
 kicad-cli pcb drc --severity-all
   3 known footprint/library warnings: MOD2, U3 and L2
-  140 expected unconnected/ratsnest items because the board is not routed
+  144 expected unconnected/ratsnest items because the board is not routed
 ```
 
 The known footprint warnings are tracked because MOD2 is a local JLC/LCSC release candidate for a factory-installed E22 module and U3/L2 are local release-candidate power footprints whose board instances are rotated for the accepted boost topology. These must be cleared by KiCad footprint update/save behavior or explicitly accepted through JLCPCB DFM/PCBA review before fabrication release.

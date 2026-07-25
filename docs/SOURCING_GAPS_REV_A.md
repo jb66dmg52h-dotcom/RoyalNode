@@ -10,7 +10,6 @@ This report tracks ordering friction only. It does not change the electrical des
 | passive | R_LTC_UVOV_R3 | 1.78 MOhm 1% | manufacturer, MPN, status locked_candidate_value | Select stocked 1% or better part during sourcing |
 | passive | R_LTC_UVOV_R2 | 180 kOhm 0.1% | manufacturer, MPN, status locked_candidate_value | Select stocked 0.1% or better part during sourcing |
 | passive | R_LTC_UVOV_R1 | 40.2 kOhm 0.1% | manufacturer, MPN, status locked_candidate_value | Select stocked 0.1% or better part during sourcing |
-| passive | C_E22_HF | 100 nF 16 V X7R | quantity | JLCPCB C710619 |
 | passive | C_TPS_COMP | 4.7 nF | manufacturer, MPN, status locked_value | Footprint fixed by schematic capture; select stocked C0G/X7R part during sourcing |
 | passive | C_TPS_SS | 47 nF | manufacturer, MPN, status locked_value | Footprint fixed by schematic capture; select stocked X7R part during sourcing |
 | passive | C_TPS_VCC | 2.2 uF | manufacturer, MPN, status locked_value | Footprint fixed by schematic capture; select stocked X7R part during sourcing |
