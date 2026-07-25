@@ -501,6 +501,7 @@ def check_initial_routes() -> None:
         "e22-miso-backbone",
         "e22-mosi-backbone",
         'net "{net}"',
+        "TOP_GND_FILL",
         "L2_GND_REFERENCE",
     ]:
         if needle not in route_generator:
@@ -530,7 +531,7 @@ def check_initial_routes() -> None:
     ]:
         if not has_pcb_net_annotation(pcb, net_name):
             fail(f"PCB missing generated initial route for net {net_name!r}")
-    for needle in ['(layer "B.Cu")', '(layer "In2.Cu")', '(via', '(start 30.35 59.08)', '(end 30.35 61.62)', '(layer "In1.Cu")', '(name "L2_GND_REFERENCE")']:
+    for needle in ['(layer "B.Cu")', '(layer "In2.Cu")', '(via', '(start 30.35 59.08)', '(end 30.35 61.62)', '(layer "F.Cu")', '(name "TOP_GND_FILL")', '(layer "In1.Cu")', '(name "L2_GND_REFERENCE")']:
         if needle not in pcb:
             fail(f"PCB missing expected initial route geometry {needle!r}")
 
@@ -548,6 +549,7 @@ def check_initial_routes() -> None:
         "SPI_MOSI",
         "I2C_SDA",
         "I2C_SCL",
+        "TOP_GND_FILL",
         "L2_GND_REFERENCE",
     ]:
         if needle not in status:

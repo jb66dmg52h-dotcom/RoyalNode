@@ -143,9 +143,9 @@ Only stable local/control nets are routed in this first pass:
 
 The J6 routes use short top-layer fanouts and vias, then a mix of `In2.Cu` and bottom-layer tracks into the XIAO socket pads. The I2C pair is split across bottom and inner signal layers near the XIAO to avoid the existing RXEN/control corridor. The BQ25798 I2C pins use short local fanouts before joining the same bus, and the pullups sit next to the XIAO/J6 side of the bus. The E22 control routes use short top-layer fanouts, vias, then `In2.Cu` tracks. The E22 SPI routes use left-side fanouts and a bottom-layer stepped bus to avoid the current boost-stage region. This keeps them away from the unresolved RF launch and avoids treating the staged power passives as final placement.
 
-The same generated pass now adds the `L2_GND_REFERENCE` zone on `In1.Cu`, tied to `GND`, inset 0.5 mm from the current 85 x 75 mm board outline. This implements the intended continuous Layer-2 ground reference for the scaffold. Additional ground stitching vias are still a future routing task.
+The same generated pass now adds `TOP_GND_FILL` on `F.Cu` and `L2_GND_REFERENCE` on `In1.Cu`, both tied to `GND` and inset 0.5 mm from the current 85 x 75 mm board outline. The top fill clears the broad passive/module ground ratsnest without creating shorts, while Layer 2 remains the intended continuous reference plane. A generated bottom pour trial was rejected because it created an isolated thermal island at the XIAO socket ground pad; bottom-side copper should be revisited only with a more deliberate via/stitching plan.
 
-The RF path, high-current power rails, ground pours, BQ25798/TPS61088 switch nodes and final power-loop routes remain unrouted until their placement and footprint review gates are settled.
+The RF path, high-current power rails, bottom-side ground copper, BQ25798/TPS61088 switch nodes and final power-loop routes remain unrouted until their placement and footprint review gates are settled.
 
 `BOOST_EN` also remains unrouted after a trial route showed the current TPS61088/R405 placement needs a proper local fanout pass around the TPS61088 exposed ground pad and mask openings. Do not route this net as a casual long generated trace; adjust the boost-control passive placement and then fan out the EN pin cleanly.
 
@@ -229,7 +229,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-144 expected unrouted ratsnest items
+90 expected unrouted ratsnest items
 0 footprint errors
 3 known footprint/library warnings: MOD2, U3 and L2
 ```

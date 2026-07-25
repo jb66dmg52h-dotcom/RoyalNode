@@ -2,8 +2,8 @@
 """Generate the first low-risk RoyalNode PCB routes.
 
 This intentionally routes only stable, low-current nets and adds the intended
-Layer-2 ground reference plane. It does not route RF, high-current power rails
-or switching loops.
+top and Layer-2 ground pours. It does not route RF, high-current power rails or
+switching loops.
 """
 
 from __future__ import annotations
@@ -453,8 +453,12 @@ def stable_uuid(*parts: str) -> str:
     return str(uuid.uuid5(NAMESPACE, "::".join(parts)))
 
 
-GROUND_ZONE_UUID = stable_uuid("zone", "l2-ground-reference")
+GROUND_ZONES = [
+    ("F.Cu", "TOP_GND_FILL", stable_uuid("zone", "top-ground-fill")),
+    ("In1.Cu", "L2_GND_REFERENCE", stable_uuid("zone", "l2-ground-reference")),
+]
 RETIRED_GENERATED_UUIDS = {
+    stable_uuid("zone", "bottom-ground-fill"),
     stable_uuid("segment", "e22-rxen-direct", "1"),
     stable_uuid("segment", "e22-rxen-direct", "2"),
     stable_uuid("segment", "j6-sda-fanout", "0"),
@@ -529,7 +533,7 @@ def generated_uuids() -> set[str]:
             ids.add(stable_uuid("segment", str(route["name"]), str(index)))
     for via in VIAS:
         ids.add(stable_uuid("via", str(via["name"])))
-    ids.add(GROUND_ZONE_UUID)
+    ids.update(uuid for _, _, uuid in GROUND_ZONES)
     ids.update(RETIRED_GENERATED_UUIDS)
     return ids
 
@@ -592,14 +596,14 @@ def via_block(name: str, net: str, at: tuple[float, float]) -> str:
     )
 
 
-def ground_zone_block() -> str:
+def ground_zone_block(layer: str, name: str, zone_uuid: str) -> str:
     return (
         f'  (zone\n'
         f'    (net 1)\n'
         f'    (net_name "GND")\n'
-        f'    (layer "In1.Cu")\n'
-        f'    (uuid "{GROUND_ZONE_UUID}")\n'
-        f'    (name "L2_GND_REFERENCE")\n'
+        f'    (layer "{layer}")\n'
+        f'    (uuid "{zone_uuid}")\n'
+        f'    (name "{name}")\n'
         f'    (hatch edge 0.50)\n'
         f'    (connect_pads\n'
         f'      (clearance 0.15)\n'
@@ -637,7 +641,8 @@ def generated_blocks() -> str:
             )
     for via in VIAS:
         blocks.append(via_block(str(via["name"]), str(via["net"]), via["at"]))  # type: ignore[arg-type]
-    blocks.append(ground_zone_block())
+    for layer, name, zone_uuid in GROUND_ZONES:
+        blocks.append(ground_zone_block(layer, name, zone_uuid))
     return "\n".join(blocks)
 
 
@@ -647,7 +652,7 @@ def main() -> None:
         raise SystemExit("PCB file does not end with a closing S-expression")
     body = text[:-1].rstrip()
     PCB.write_text(f"{body}\n{generated_blocks()}\n)\n", encoding="utf-8")
-    print("Generated initial routes, E22 control/SPI/VCC, TPS61088 local output/SW pins, J6 I2C, charge LED/STAT, temp/UV/OV-divider, U1/U2/Q-gate/MOSFET-drain local links and L2 ground reference plane")
+    print("Generated initial routes, E22 control/SPI/VCC, TPS61088 local output/SW pins, J6 I2C, charge LED/STAT, temp/UV/OV-divider, U1/U2/Q-gate/MOSFET-drain local links and top/L2 ground pours")
 
 
 if __name__ == "__main__":

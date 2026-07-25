@@ -343,7 +343,6 @@ def footprint_block(item: dict[str, object]) -> str:
 
     if text.startswith("(module "):
         raise SystemExit(f"{item['file']} is legacy module syntax; use a KiCad-10-native footprint")
-    text = re.sub(r'\n[ \t]*\(tags "[^"]*"\)', "", text)
     text = text.replace(f'(footprint "{library_name}"', f'(footprint "RoyalNode:{library_name}"', 1)
     text = text.replace(f'(property "Reference" "{library_name.split("_")[0] if "_" in library_name else ref}"', f'(property "Reference" "{ref}"', 1)
     text = text.replace('(property "Reference" "J?"', f'(property "Reference" "{ref}"', 1)
@@ -445,7 +444,6 @@ def passive_footprint_block(item: dict[str, object]) -> str:
     if not path.exists():
         raise SystemExit(f"missing passive footprint source {path}")
     text = path.read_text(encoding="utf-8").strip()
-    text = re.sub(r'\n[ \t]*\(tags "[^"]*"\)', "", text)
     library = str(item["library"])
     library_name = str(item["library_name"])
     ref = str(item["ref"])

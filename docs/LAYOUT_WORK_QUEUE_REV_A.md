@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 144 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 90 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -14,7 +14,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 3 known footprint/library warnings, `MOD2`, `U3` and `L2`
-- Unrouted: 144 ratsnest pairs
+- Unrouted: 90 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
@@ -28,12 +28,12 @@ Resolve these before routing more long traces:
 
 ## Pass 2: Ground System
 
-`GND` is the largest remaining unrouted group. Do not route it as skinny traces.
+`GND` is now handled by generated top copper and Layer-2 reference pours. Do not replace the remaining ground/fanout work with skinny traces.
 
 Planned work:
 
 - Add functional stitching vias near grounded IC pads and connector grounds.
-- Add local top/bottom ground copper where it does not break RF or switch-node discipline.
+- Extend or shape local ground copper where it does not break RF or switch-node discipline.
 - Keep Layer 2 as the uninterrupted ground reference.
 - Add E22 ground via stitching only after the RF/SMA launch decision is stable.
 
