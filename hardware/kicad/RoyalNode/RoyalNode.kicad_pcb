@@ -627,7 +627,7 @@
     (version 20260206)
     (generator "royalnode")
     (generator_version "1")
-    (at 71.50 34.00 0)
+    (at 71.50 31.00 0)
     (uuid "72b96981-4bfa-5fef-bba8-9570b5d1f9c7")
     (layer "F.Cu")
     (descr "NOT_RELEASED_RELEASE_CANDIDATE composite socket footprint for Seeed XIAO nRF52840 using two LXWCONN 254PM-1x7P-V C53202181 socket strips")

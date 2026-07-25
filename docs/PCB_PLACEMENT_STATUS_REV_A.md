@@ -45,7 +45,7 @@ The passive anchors are staging placements for footprint/net review, not final r
 | Reference | Footprint | Position | Rotation | Status |
 |---|---|---:|---:|---|
 | `MOD2` | `MOD2_E22_900M33S_JLC_C22399506_RC` | 42.0, 54.0 mm | 180 deg | Release-candidate factory PCBA footprint |
-| `MOD1` | `MOD1_XIAO_NRF52840_SOCKET_C53202181_RC` | 71.5, 34.0 mm | 0 deg | Composite XIAO socket release candidate |
+| `MOD1` | `MOD1_XIAO_NRF52840_SOCKET_C53202181_RC` | 71.5, 31.0 mm | 0 deg | Composite XIAO socket release candidate |
 | `J5` | `J5_SMA_0732511150_DRAFT_ENVELOPE` | 100.0, 41.3 mm | 0 deg | Draft envelope only |
 | `J1` | `J_POWER_XT30PW_M_C431092_RC` | 93.0, 62.0 mm | 0 deg | Imported XT30 release candidate |
 | `J2` | `J_POWER_XT30PW_M_C431092_RC` | 93.0, 78.0 mm | 0 deg | Imported XT30 release candidate |
@@ -71,7 +71,7 @@ The E22 module is placed on the left side of the board and rotated so pin 21 fac
 E22 pin 21 ANT -> short 50 ohm GCPW -> edge-launch SMA
 ```
 
-The XIAO composite socket footprint is placed in the upper-right area with USB-C edge access still to be verified against the final module orientation. The composite footprint uses two LXWCONN `254PM-1x7P-V` socket strips from JLC/LCSC part `C53202181`.
+The XIAO composite socket footprint is placed in the upper-right area with USB-C edge access still to be verified against the final module orientation. It has been shifted above the RF corridor so the lower XIAO socket pads no longer cross the provisional E22 ANT-to-SMA centerline. The composite footprint uses two LXWCONN `254PM-1x7P-V` socket strips from JLC/LCSC part `C53202181`.
 
 The XT30 solar and battery connectors are placed on the right/lower-right side of the board to keep high-current wiring away from the RF launch as much as possible within the 85 x 75 mm outline. Both use imported JLC/LCSC `C431092` EasyEDA geometry for AMASS `XT30PW-M30.G.Y`.
 

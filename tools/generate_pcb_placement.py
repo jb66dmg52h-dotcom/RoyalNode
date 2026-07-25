@@ -35,8 +35,8 @@ PLACEMENTS = [
         "value": "XIAO nRF52840 socket C53202181 RC",
         "file": "MOD1_XIAO_NRF52840_SOCKET_C53202181_RC.kicad_mod",
         "library_name": "MOD1_XIAO_NRF52840_SOCKET_C53202181_RC",
-        "at": (71.5, 34.0, 0),
-        "note": "Composite footprint for two LXWCONN 1x7 socket strips.",
+        "at": (71.5, 31.0, 0),
+        "note": "Composite footprint for two LXWCONN 1x7 socket strips; shifted above the RF corridor.",
     },
     {
         "ref": "J5",
