@@ -71,6 +71,8 @@ The first power-stage placement cluster now exists:
 - LTC4365 and ISA170170N04LMDS FETs between the input connectors and charger region.
 - LM66100 near the XIAO side of the board for the XIAO battery-feed isolation path.
 
+The generated PCB scaffold is now net-aware. The placement generator reads `SCHEMATIC_CAPTURE_SEED_REV_A.csv`, creates the board net table, and annotates generated footprint pads with their net names and pin functions. This produces a useful ratsnest for placement and future routing review.
+
 ## Known Blockers
 
 ### E22 Factory Footprint
@@ -125,7 +127,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-0 unconnected pads
+73 expected unrouted ratsnest items
 0 footprint errors
 1 warning: MOD2 library footprint mismatch
 ```
@@ -138,7 +140,7 @@ Next milestone `P1b`:
 2. Confirm XT30 polarity and mating-plug clearance.
 3. Select or unblock the edge-launch SMA land pattern.
 4. Confirm the power-stage placement against thermal, current-loop, and connector-clearance constraints.
-5. Add schematic-linked footprints and start net-aware synchronization.
+5. Use the generated ratsnest to refine placement before routing.
 6. Route only after the final RF, power, and connector footprints are selected.
 
 Do not add test points, current shunts, probe loops, or bench-only measurement links.

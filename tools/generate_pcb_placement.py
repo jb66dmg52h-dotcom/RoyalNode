@@ -7,6 +7,8 @@ nets and does not claim fabrication readiness for draft footprints.
 
 from __future__ import annotations
 
+import csv
+import re
 import uuid
 from pathlib import Path
 
@@ -14,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 KICAD_DIR = ROOT / "hardware/kicad/RoyalNode"
 PCB = KICAD_DIR / "RoyalNode.kicad_pcb"
 FP_DIR = KICAD_DIR / "lib_footprints/RoyalNode.pretty"
+SEED = KICAD_DIR / "SCHEMATIC_CAPTURE_SEED_REV_A.csv"
 NAMESPACE = uuid.UUID("72281bec-369e-4e5b-a74d-54cf1dc496b3")
 
 PLACEMENTS = [
@@ -143,6 +146,55 @@ def stable_uuid(*parts: str) -> str:
     return str(uuid.uuid5(NAMESPACE, "::".join(parts)))
 
 
+def quote(text: str) -> str:
+    return text.replace("\\", "\\\\").replace('"', '\\"')
+
+
+def load_seed_nets() -> tuple[dict[str, int], dict[str, dict[str, tuple[str, str]]]]:
+    rows = list(csv.DictReader(SEED.open(newline="", encoding="utf-8")))
+    pin_nets: dict[str, dict[str, tuple[str, str]]] = {}
+    nets: set[str] = set()
+    for row in rows:
+        ref = row["Reference"]
+        pin = row["Pin"]
+        net = row["Net"]
+        pin_name = row["Pin Name"]
+        pin_nets.setdefault(ref, {})[pin] = (net, pin_name)
+        if net != "NC":
+            nets.add(net)
+
+    priority = [
+        "GND",
+        "3V3",
+        "BAT_RAW",
+        "BQ_SYS",
+        "5V_RADIO",
+        "RF_915",
+        "SOLAR_RAW",
+        "SOLAR_FUSED",
+        "SOLAR_PROTECTED",
+        "USB_VBUS_RAW",
+    ]
+    ordered = [net for net in priority if net in nets]
+    ordered.extend(sorted(nets - set(ordered)))
+    return {net: index for index, net in enumerate(ordered, start=1)}, pin_nets
+
+
+def net_table(net_ids: dict[str, int]) -> str:
+    lines = ['  (net 0 "")']
+    for net, index in sorted(net_ids.items(), key=lambda item: item[1]):
+        lines.append(f'  (net {index} "{quote(net)}")')
+    return "\n".join(lines)
+
+
+def replace_net_table(text: str, net_ids: dict[str, int]) -> str:
+    text = re.sub(r'\n  \(net \d+ "[^"]*"\)', "", text)
+    marker = "\n\n  (gr_rect"
+    if marker not in text:
+        raise SystemExit("could not find insertion point for PCB net table")
+    return text.replace(marker, f"\n{net_table(net_ids)}{marker}", 1)
+
+
 def remove_generated_placements(text: str) -> str:
     result: list[str] = []
     idx = 0
@@ -167,6 +219,58 @@ def remove_generated_placements(text: str) -> str:
         block = text[start:end]
         if not any(f'(footprint "RoyalNode:{name}"' in block for name in GENERATED_LIBRARY_NAMES):
             result.append(block)
+        idx = end
+    return "".join(result)
+
+
+def annotate_pad_block(
+    block: str,
+    ref: str,
+    net_ids: dict[str, int],
+    pin_nets: dict[str, dict[str, tuple[str, str]]],
+) -> str:
+    pad_number = re.search(r'\(pad\s+"?([^"\s)]+)"?', block)
+    if not pad_number:
+        return block
+    pin = pad_number.group(1)
+    net, pin_name = pin_nets.get(ref, {}).get(pin, ("NC", ""))
+    block = re.sub(r'\n[ \t]*\((?:net|pinfunction|pintype)\s+[^\n]*\)', "", block)
+    if net == "NC":
+        return block
+    if net not in net_ids:
+        raise SystemExit(f"missing net id for {ref} pin {pin}: {net}")
+    insert = f'\n\t\t(net {net_ids[net]} "{quote(net)}")\n\t\t(pinfunction "{quote(pin_name)}")'
+    return block[:-1] + insert + block[-1:]
+
+
+def annotate_footprint_pads(
+    text: str,
+    ref: str,
+    net_ids: dict[str, int],
+    pin_nets: dict[str, dict[str, tuple[str, str]]],
+) -> str:
+    result: list[str] = []
+    idx = 0
+    while True:
+        match = re.search(r"^[ \t]*\(pad\s+", text[idx:], re.M)
+        if not match:
+            result.append(text[idx:])
+            break
+        start = idx + match.start()
+        result.append(text[idx:start])
+        depth = 0
+        end = start
+        while end < len(text):
+            char = text[end]
+            if char == "(":
+                depth += 1
+            elif char == ")":
+                depth -= 1
+                if depth == 0:
+                    end += 1
+                    break
+            end += 1
+        result.append(annotate_pad_block(text[start:end], ref, net_ids, pin_nets))
         idx = end
     return "".join(result)
 
@@ -201,12 +305,17 @@ def footprint_block(item: dict[str, object]) -> str:
 
 
 def main() -> None:
+    net_ids, pin_nets = load_seed_nets()
     pcb_text = PCB.read_text(encoding="utf-8")
+    pcb_text = replace_net_table(pcb_text, net_ids)
     pcb_text = remove_generated_placements(pcb_text).rstrip()
     if not pcb_text.endswith(")"):
         raise SystemExit("PCB file does not end with a closing S-expression")
     body = pcb_text[:-1].rstrip()
-    generated = "\n".join(footprint_block(item) for item in PLACEMENTS)
+    generated = "\n".join(
+        annotate_footprint_pads(footprint_block(item), str(item["ref"]), net_ids, pin_nets)
+        for item in PLACEMENTS
+    )
     PCB.write_text(f"{body}\n{generated}\n)\n", encoding="utf-8")
     print(f"Placed {len(PLACEMENTS)} generated PCB footprint anchors")
 

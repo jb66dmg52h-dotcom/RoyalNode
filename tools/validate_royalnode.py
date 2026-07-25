@@ -309,6 +309,18 @@ def check_generated_pcb_placement() -> None:
         if needle not in pcb:
             fail(f"PCB scaffold missing board planning graphic {needle!r}")
 
+    for needle in [
+        '(net 1 "GND")',
+        '(net 5 "5V_RADIO")',
+        '(net 6 "RF_915")',
+        '(net 7 "SOLAR_RAW")',
+        '(pinfunction "ANT")',
+        '(pinfunction "PLUS")',
+        '(pinfunction "SW")',
+    ]:
+        if needle not in pcb:
+            fail(f"PCB scaffold missing generated net/pin annotation {needle!r}")
+
     status = read("docs/PCB_PLACEMENT_STATUS_REV_A.md")
     for needle in [
         "P1a",
