@@ -361,6 +361,27 @@ SEGMENTS = [
         "points": [(34.43, 85.00), (34.43, 83.40)],
     },
     {
+        "name": "bat-raw-cap-bank-bus",
+        "net": "BAT_RAW",
+        "layer": "F.Cu",
+        "width": 0.60,
+        "points": [(44.93, 83.40), (50.53, 83.40)],
+    },
+    {
+        "name": "bat-raw-c210-stub",
+        "net": "BAT_RAW",
+        "layer": "F.Cu",
+        "width": 0.60,
+        "points": [(44.93, 81.00), (44.93, 83.40)],
+    },
+    {
+        "name": "bat-raw-c211-stub",
+        "net": "BAT_RAW",
+        "layer": "F.Cu",
+        "width": 0.60,
+        "points": [(50.53, 81.00), (50.53, 83.40)],
+    },
+    {
         "name": "charge-led-k-local",
         "net": "CHG_LED_K",
         "layer": "F.Cu",
