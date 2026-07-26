@@ -89,6 +89,8 @@ C217 is now staged beside the charger power stage and its local `BQ_SW2` side is
 
 A direct 2026-07-25 `BQ_SW2` U1-to-L1 top-layer span was rejected because it crossed the U1 `I2C_SCL`/ground pad row and the accepted SCL fanout. The remaining `BQ_SW2` power-loop connection needs a coordinated U1 escape, not a vertical trace through the lower pad row.
 
+A later 2026-07-25 `C217` move to the lower-right of U1 was rejected. It worsened the ratsnest count, overlapped the L1 courtyard, swapped the intended `BTST2`/`SW2` pad approach after rotation, and crossed/shorted the accepted `BQ_TS` via corridor. Keep `C217`, `BQ_TS`, `BQ_REGN` and the U1 right-side escape as one placement pass.
+
 A 2026-07-25 `BQ_PMID` U1-to-cap-bus bridge trial was rejected. The direct top-layer route crossed the accepted C216 `BQ_BTST1` escape and crowded U1 `BQ_STAT`; the bottom-layer via variant still violated clearance at the dense U1 lower pad row. Treat `BQ_PMID` as a U1 power-copper/fanout pass.
 
 A later 2026-07-25 `BQ_PMID` inner-layer retry after the BAT_RAW/BQ_STAT reroutes still failed. Centering the U1-side via crowded the accepted `BQ_SW1` escape, moving it left shorted into `BQ_STAT`, and shifting `BQ_SW1` right starved the U1 ground thermal while crowding `BQ_SW2`. Keep `BQ_PMID` blocked until the U1 lower-edge fanout is reworked as a group.
