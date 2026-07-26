@@ -99,6 +99,8 @@ A 2026-07-25 `BQ_PMID` U1-to-cap-bus bridge trial was rejected. The direct top-l
 
 A later 2026-07-25 `BQ_PMID` inner-layer retry after the BAT_RAW/BQ_STAT reroutes still failed. Centering the U1-side via crowded the accepted `BQ_SW1` escape, moving it left shorted into `BQ_STAT`, and shifting `BQ_SW1` right starved the U1 ground thermal while crowding `BQ_SW2`. Keep `BQ_PMID` blocked until the U1 lower-edge fanout is reworked as a group.
 
+A 2026-07-25 `BQ_PMID` bridge retry after the accepted `BQ_SYS` input-cap move still failed. It dropped the ratsnest count to 17, but the U1-side via/entry shorted or crowded `BQ_BTST1`, `BQ_STAT` and the accepted `BQ_SYS` spine. Keep `BQ_PMID` in the U1 lower-edge fanout refactor; do not use a one-off via beside the existing pad row.
+
 A 2026-07-25 long `UV_NODE` bottom-layer route was rejected. It collided with the fused-solar U4 via, crossed the accepted I2C/SPI corridors, and clipped the XIAO through-hole row. Treat the protection-divider sense nets as a U4/divider placement pass rather than long board-spanning traces.
 
 ## Pass 5: Remaining Sense And Control Nets
