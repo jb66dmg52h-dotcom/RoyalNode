@@ -1,0 +1,113 @@
+# U1 Right-Side Refactor Rev A
+
+This note captures the next charger-layout work package after the clean
+17-unrouted checkpoint.
+
+## Current Gate
+
+```text
+make layout-status
+  ERC: 0
+  DRC: 3 known footprint warnings only
+  Unrouted: 17 ratsnest pairs
+```
+
+Known allowed DRC warnings remain `MOD2`, `U3` and `L2` footprint/library
+warnings.
+
+## Accepted State To Preserve
+
+- `BQ_SW1` is routed from U1/C216 to L1 with a left-side wrap.
+- `BQ_SYS` has an accepted entry via at 65.80, 71.80 mm.
+- C216/`BQ_BTST1` is locally tied to U1 and the SW1 escape.
+- C218/`BQ_SDRV` is currently staged above the U1 right side.
+- R203/R204 provide local `BQ_PROG` and `BQ_INT` support at 70.5 mm x.
+
+## Blocked Nets In This Cluster
+
+- `BQ_SW2`
+- `BQ_BTST2`
+- `BATP_KELVIN`
+- `BQ_REGN`
+- nearby `BQ_PMID`, `BQ_VBUS`, `USB_VBUS_RAW` and `SOLAR_PROTECTED` entries
+
+## Exact Conflict Map
+
+The relevant U1 pad centers are:
+
+| Pad | Net | Center |
+|---:|---|---|
+| 16 | `BQ_TS` | 66.850, 76.600 |
+| 17 | `BQ_REGN` | 66.850, 76.200 |
+| 18 | `BATP_KELVIN` | 66.875, 75.800 |
+| 19 | `BQ_BTST2` | 66.862, 75.400 |
+| 20 | `BQ_PROG` | 66.900, 75.000 |
+| 21 | `BQ_INT` | 66.900, 74.600 |
+| 22 | `BAT_RAW` | 66.900, 74.200 |
+| 23 | `BAT_RAW` | 66.900, 73.800 |
+| 24 | `BQ_SDRV` | 66.862, 73.400 |
+| 25 | `BQ_SYS` | 65.900, 73.300 |
+| 26 | `BQ_SW2` | 65.450, 73.300 |
+
+Nearby routed or placed blockers:
+
+| Item | Net | Current role |
+|---|---|---|
+| C218 | `BQ_SDRV` | Blocks rightward/upward SW2/SYS experiments |
+| R203 | `BQ_PROG` | Blocks direct BTST2 top route |
+| R204 | `BQ_INT` / `3V3` | Its 3.3 V feed crosses the upper right-side corridor |
+| `BQ_TS` via | `BQ_TS` | Blocks lower BTST2 dogleg |
+| Q3 left pads | selector nets | Block right-side SW2 drop toward L1 |
+
+## Rejected Trials To Avoid
+
+- Do not move only L1 upward; it collides with the accepted TPS61088 input-cap
+  cluster and U1 support passives.
+- Do not route SW2 straight down or through the U1 pad row.
+- Do not shift the accepted SYS entry via rightward unless C218/SDRV is moved
+  first.
+- Do not route BTST2 directly through the R203/PROG corridor.
+- Do not place a BTST2 via beside U1 pads 18-20; hole clearance and existing
+  B.Cu/In1 corridors fail.
+
+## Refactor Goal
+
+Create a legal right-side escape corridor where:
+
+1. `BQ_SYS` keeps a short, quiet U1 entry.
+2. `BQ_SW2` leaves U1 without crossing SDRV, SYS, 3.3 V, Q3 or I2C.
+3. `BQ_BTST2` stays close to C217 and avoids PROG/TS.
+4. `BATP_KELVIN` remains a sense connection, not part of high-current BAT copper.
+5. Q3 selector pads remain serviceable and do not mask-bridge to switch-node copper.
+
+## Candidate Placement Strategy
+
+Try as a grouped pass only:
+
+- Move C218/`BQ_SDRV` away from the SW2/SYS escape lane while keeping it close to
+  U1 pad 24.
+- Move or reroute R204's 3.3 V feed so it does not cross the upper right-side
+  charger corridor.
+- Keep R203/`BQ_PROG` clear of the BTST2 path or move it below/right as part of
+  the same pass.
+- Re-evaluate whether C217 should stay at 72.8, 82.0 mm or rotate/shift after
+  SW2 has a legal exit.
+- Do not move Q3 casually; if Q3 moves, update the input-selector route group
+  and check XT30 connector clearance.
+
+## Acceptance Test
+
+Before accepting the pass:
+
+```text
+make generate-board
+make layout-status
+```
+
+The pass is accepted only if:
+
+- unconnected count decreases below 17, or a documented placement improvement is
+  achieved without increasing it;
+- ERC remains 0;
+- DRC contains only the known `MOD2`, `U3` and `L2` footprint warnings;
+- no test points, shunts or measurement links are added.

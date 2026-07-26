@@ -126,3 +126,6 @@ Refactor the BQ25798 power-stage placement:
 
 This should reduce several remaining unrouted items while improving the actual
 charger power-loop geometry.
+
+Detailed coordinates and trial constraints for this pass are tracked in
+`docs/U1_RIGHT_SIDE_REFACTOR_REV_A.md`.
