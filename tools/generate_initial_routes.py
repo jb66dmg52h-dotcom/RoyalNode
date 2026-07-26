@@ -1341,6 +1341,12 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("segment", "bq-pmid-u1-to-cap-bus-bottom", "2"),
     stable_uuid("via", "bq-pmid-u1-via"),
     stable_uuid("via", "bq-pmid-cap-bus-via"),
+    stable_uuid("segment", "uv-node-u4-fanout", "0"),
+    stable_uuid("segment", "uv-node-bottom-route", "0"),
+    stable_uuid("segment", "uv-node-bottom-route", "1"),
+    stable_uuid("segment", "uv-node-bottom-route", "2"),
+    stable_uuid("via", "uv-node-u4-via"),
+    stable_uuid("via", "uv-node-divider-via"),
 }
 
 

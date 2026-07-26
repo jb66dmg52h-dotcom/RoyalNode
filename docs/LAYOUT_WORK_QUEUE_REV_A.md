@@ -75,6 +75,8 @@ A 2026-07-25 C217 `BQ_BTST2`/local `BQ_SW2` trial was rejected. The proposed low
 
 A 2026-07-25 `BQ_PMID` U1-to-cap-bus bridge trial was rejected. The direct top-layer route crossed the accepted C216 `BQ_BTST1` escape and crowded U1 `BQ_STAT`; the bottom-layer via variant still violated clearance at the dense U1 lower pad row. Treat `BQ_PMID` as a U1 power-copper/fanout pass.
 
+A 2026-07-25 long `UV_NODE` bottom-layer route was rejected. It collided with the fused-solar U4 via, crossed the accepted I2C/SPI corridors, and clipped the XIAO through-hole row. Treat the protection-divider sense nets as a U4/divider placement pass rather than long board-spanning traces.
+
 ## Pass 5: Remaining Sense And Control Nets
 
 Route after nearby placement is stable:
