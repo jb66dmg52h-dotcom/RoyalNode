@@ -129,6 +129,12 @@ The temporary C217/R203 placement and orphaned PROG stub are retired. Keep the
 next BTST2 attempt as a broader right-side U1 refactor that includes TS, PROG,
 INT, SW2 and the nearby selector/service routes.
 
+A later 2026-07-26 `BQ_SW2` right-side spine from U1 pad 26 to the existing
+C217/L1 island was also rejected. The vertical corridor beside U1 shorts or
+mask-bridges against `BQ_SYS`, `BQ_TS`, `BQ_INT`, `BQ_PROG` and the accepted
+I2C fanout. Do not route SW2 down the U1 right pad row without first moving
+TS/PROG/INT/I2C support routing out of that channel.
+
 A 2026-07-25 trial moving L1 above U1 was rejected. The topology would shorten the switch nodes, but in the current floorplan it collides with the accepted TPS61088 `BQ_SYS` input-cap cluster, C216/C218 support passives and the accepted U1 `BQ_SYS`/`BQ_SDRV` escape routes. Do not move only L1 upward; the charger power stage needs a broader floorplan change with the boost input-cap cluster and U1 support passives considered together.
 
 A 2026-07-25 long `UV_NODE` bottom-layer route was rejected. It collided with the fused-solar U4 via, crossed the accepted I2C/SPI corridors, and clipped the XIAO through-hole row. Treat the protection-divider sense nets as a U4/divider placement pass rather than long board-spanning traces.
@@ -180,6 +186,13 @@ These should avoid switch-node copper and RF launch copper.
   placement was also rejected. The 0805 body still overlapped U3/R402
   courtyards, the ground pad shorted or crowded `BOOST_EN`/`BOOST_FSW`, and
   the top ground thermal was starved. The generated trial segment is retired.
+- A follow-up 2026-07-26 0603 C405 package trial briefly reduced the ratsnest
+  count to 10, but no checked placement produced a clean layout. The upper
+  pocket shorted/crowded the U3 ground pad and U3 courtyard; the lower pocket
+  starved U3 ground thermal relief and overlapped R403; moving R403 downward
+  hit the accepted `BOOST_COMP` and E22 `BUSY` corridors. Keep C405 as the
+  locked 0805 part until the whole TPS61088 EN/FSW/ILIM/VCC support cluster is
+  replanned.
 - A 2026-07-25 `BOOST_COMP` internal-layer route trial from U3 to R404 was rejected. The U3-side via and top fanout crowded `BOOST_FB`, while shifted variants collided with the accepted E22 `BUSY`/`DIO1`/`NRST` internal routing columns or required tracks below the 0.15 mm rule. This is superseded by the accepted 2026-07-26 grouped compensation placement.
 - A 2026-07-25 `USB_VBUS_RAW` right-edge service-route trial from MOD1 to Q3 was rejected on all tried layers. In1 crossed `BOOST_EN`; In2 crossed `BAT_RAW`, 3.3 V and I2C service routes; B.Cu crossed `XIAO_BAT_ISO`, `BQ_VBUS` and I2C. Keep `USB_VBUS_RAW` blocked until the right-edge service corridor is reworked or Q3/MOD1 placement changes.
 - 2026-07-25 `BOOST_COMP` R404/C408 relocation beside U3 was rejected. The left-of-U3 corridor collided with the E22 module's SPI_MOSI pad/via and MOD2 courtyard, while the tighter vertical placement shorted the compensation RC node into adjacent pads. Keep TPS61088 compensation as part of a full U3/MOD2 corridor pass.
