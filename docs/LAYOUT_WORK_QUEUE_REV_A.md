@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 18 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 17 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -157,7 +157,10 @@ These should avoid switch-node copper and RF launch copper.
 - A 2026-07-25 `BQ_BTST2` direct top route and a follow-up two-via escape trial were rejected. The top route shorted/crowded `BQ_PROG`; the via route crowded BATP/PROG pad clearance and crossed existing `I2C_SDA`, `BAT_RAW` and `BQ_TS` corridors. Keep `BQ_BTST2`, C217 and the U1 right-side support passives in the same placement pass.
 - A 2026-07-25 lower-edge `BATP_KELVIN` route trial was rejected because the U1-side via crowded neighboring BQ25798 pads and the bottom route crossed existing lower sense/I2C routing. Treat `BATP_KELVIN` as requiring a deliberate U1 escape and sense-routing pass, not a casual bottom-edge route.
 - A 2026-07-25 U4-side `UV_NODE`/`OV_NODE`/`LTC_SHDN` divider relocation trial was rejected because it crowded the LTC4365 pins, overlapped the L2 inductor courtyard and shorted the divider nodes into adjacent U4/L2 nets. Rework U4, L2 and the divider corridor together before pulling these protection passives closer.
-- A 2026-07-25 `R204` 3.3 V pullup-feed trial was rejected because the bottom route crossed the existing I2C spine and crowded the XIAO USB/5 V through-hole geometry. Treat remaining 3.3 V distribution as a logic-power spine pass, not a one-off long trace.
+- A 2026-07-26 `R204` 3.3 V pullup-feed reroute is accepted. It uses a short
+  local via into the existing `In2.Cu` 3.3 V spine and clears the top-side U1
+  right corridor. Earlier bottom-layer and `In1.Cu` attempts were rejected for
+  I2C/USB crowding or crossing `BQ_ACDRV1`.
 - A 2026-07-25 `BQ_VBUS` Q2/Q3 left-drain loop trial was rejected because top-layer loops around the MOSFET bodies shorted or crossed the adjacent `BQ_ACDRV1`/`BQ_ACDRV2` gate pads. Route the remaining FET drain joins with deliberate copper shapes or a revised FET placement, not a simple around-body trace.
 - A 2026-07-25 rectangular `BQ_VBUS` copper-zone trial around Q3 passed DRC but did not connect Q3 pad 3 to pad 5, so it was removed. The selector drain joins need shaped copper or MOSFET placement changes, not a broad rectangular fill.
 - A 2026-07-25 `SOLAR_PROTECTED` Q1 drain-join trial was rejected. The outside bottom bridge required a top-layer escape that crossed the accepted Q1 gate U-shape; moving the gate U-shape to the right shorted against Q1's no-net thermal/mechanical pad. Treat the Q1 protected-drain join as a FET-footprint/copper-shape pass.
