@@ -20,7 +20,9 @@ warnings.
 - `BQ_SW1` is routed from U1/C216 to L1 with a left-side wrap.
 - `BQ_SYS` has an accepted entry via at 65.80, 71.80 mm.
 - C216/`BQ_BTST1` is locally tied to U1 and the SW1 escape.
-- C218/`BQ_SDRV` is currently staged above the U1 right side.
+- C218/`BQ_SDRV` is now staged at 69.20, 71.20 mm, with a local top-layer
+  SDRV trace from U1 pad 24. This keeps SDRV close to U1 while clearing more
+  of the SW2/SYS escape lane than the earlier 67.20, 70.80 mm placement.
 - R203/R204 provide local `BQ_PROG` and `BQ_INT` support at 70.5 mm x.
 - R204's `3V3` feed now drops through a local via at 69.68, 72.80 mm and
   ties into the existing `In2.Cu` 3.3 V spine, leaving the top-side U1
@@ -56,7 +58,7 @@ Nearby routed or placed blockers:
 
 | Item | Net | Current role |
 |---|---|---|
-| C218 | `BQ_SDRV` | Blocks rightward/upward SW2/SYS experiments |
+| C218 | `BQ_SDRV` | Shifted right after R204 3.3 V reroute; preserve its local SDRV trace |
 | R203 | `BQ_PROG` | Blocks direct BTST2 top route |
 | R204 | `BQ_INT` / `3V3` | Local 3.3 V via clears the previous upper right-side top trace |
 | `BQ_TS` via | `BQ_TS` | Blocks lower BTST2 dogleg |
@@ -75,8 +77,9 @@ Nearby routed or placed blockers:
 - Do not move C218 upward into the TPS61088/BQ_SYS input-cap area. A trial at
   69.2, 68.0 mm shorted `BQ_SDRV` into C401/`BQ_SYS`, overlapped C401's
   courtyard and starved C218's ground thermal.
-- Do not move C218 to 69.2, 71.2 mm without rerouting R204 first. That trial
-  put the C218 ground pad under R204's 3.3 V feed.
+- The C218 move to 69.2, 71.2 mm is now accepted after rerouting R204's
+  3.3 V feed. Do not restore the earlier 67.2, 70.8 mm placement unless a
+  later SW2/BTST2 pass proves it necessary.
 - Do not route R204's 3.3 V feed on `In1.Cu` across x73.5 mm; that lane
   crosses the accepted `BQ_ACDRV1` route.
 
@@ -94,8 +97,6 @@ Create a legal right-side escape corridor where:
 
 Try as a grouped pass only:
 
-- Move C218/`BQ_SDRV` away from the SW2/SYS escape lane while keeping it close to
-  U1 pad 24.
 - Keep R203/`BQ_PROG` clear of the BTST2 path or move it below/right as part of
   the same pass.
 - Re-evaluate whether C217 should stay at 72.8, 82.0 mm or rotate/shift after
