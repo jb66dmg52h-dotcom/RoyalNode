@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 12 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 11 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 3 known footprint/library warnings, `MOD2`, `U3` and `L2`
-- Unrouted: 12 ratsnest pairs
+- Unrouted: 11 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
@@ -168,7 +168,7 @@ These should avoid switch-node copper and RF launch copper.
   BOOST_EN, BOOST_ILIM, FSW/R402, L2 or U3 ground thermal depending on
   orientation. Keep `BOOST_VCC` in the grouped TPS61088 EN/ILIM/FSW/support
   passive placement pass.
-- A 2026-07-25 `BOOST_COMP` internal-layer route trial from U3 to R404 was rejected. The U3-side via and top fanout crowded `BOOST_FB`, while shifted variants collided with the accepted E22 `BUSY`/`DIO1`/`NRST` internal routing columns or required tracks below the 0.15 mm rule. Keep `BOOST_COMP` blocked until the boost compensation placement or E22 control fanout is reworked as a group.
+- A 2026-07-25 `BOOST_COMP` internal-layer route trial from U3 to R404 was rejected. The U3-side via and top fanout crowded `BOOST_FB`, while shifted variants collided with the accepted E22 `BUSY`/`DIO1`/`NRST` internal routing columns or required tracks below the 0.15 mm rule. This is superseded by the accepted 2026-07-26 grouped compensation placement.
 - A 2026-07-25 `USB_VBUS_RAW` right-edge service-route trial from MOD1 to Q3 was rejected on all tried layers. In1 crossed `BOOST_EN`; In2 crossed `BAT_RAW`, 3.3 V and I2C service routes; B.Cu crossed `XIAO_BAT_ISO`, `BQ_VBUS` and I2C. Keep `USB_VBUS_RAW` blocked until the right-edge service corridor is reworked or Q3/MOD1 placement changes.
 - 2026-07-25 `BOOST_COMP` R404/C408 relocation beside U3 was rejected. The left-of-U3 corridor collided with the E22 module's SPI_MOSI pad/via and MOD2 courtyard, while the tighter vertical placement shorted the compensation RC node into adjacent pads. Keep TPS61088 compensation as part of a full U3/MOD2 corridor pass.
 - 2026-07-26 `BOOST_COMP` bottom-layer route from U3 to R404 was rejected. The U3-side via violated clearance to the accepted `BOOST_FB` via, and the R404 entry crossed the existing `BOOST_COMP_RC` route, shorting the compensation pin to the RC node. Do not retry this corridor unless `BOOST_FB` and the compensation RC placement are reworked together.
@@ -180,7 +180,8 @@ These should avoid switch-node copper and RF launch copper.
 - 2026-07-26 `BQ_REGN` ILIM_HIZ/U1-pin-17 top-layer bridge is accepted. The route ties U1 pin 17 to the accepted REGN pin-5 escape without adding vias, avoiding the TS via-hole conflict from the rejected right-side ILIM trial and reducing the ratsnest from 15 to 14.
 - A 2026-07-25 `BQ_SYS` U3-VIN-to-L2 input hop trial was rejected. It crossed the accepted BOOT branch and crowded the L2 BOOST_SW pad. Route this as a deliberate boost-input copper shape after the BOOT/VIN/passive strategy is reviewed.
 - A 2026-07-25 `USB_VBUS_RAW` XIAO-to-Q3 right-side route trial was rejected. The outside path hit the XT30/J1 no-net mechanical pad; the inward path crossed I2C, XIAO_BAT_ISO or fused-solar back-layer tracks. Revisit USB_VBUS_RAW with a deliberate layer-transition plan.
-- A 2026-07-26 `BOOST_COMP` perimeter-route trial after adding the larger mechanical outline was rejected. The R404-side via collided with R405/GND, the bottom route crossed the existing SPI_SCK bus, and the U3-side via crowded BOOST_FB/E22_BUSY. Keep `BOOST_COMP` blocked until the TPS61088 support-passive cluster is replanned locally.
+- A 2026-07-26 `BOOST_COMP` perimeter-route trial after adding the larger mechanical outline was rejected. The R404-side via collided with R405/GND, the bottom route crossed the existing SPI_SCK bus, and the U3-side via crowded BOOST_FB/E22_BUSY. This is superseded by the accepted 2026-07-26 grouped compensation placement.
+- A later 2026-07-26 grouped compensation pass is accepted. R404 is now staged below-right of U3 at 60.2, 62.8 mm, C408 is staged at 63.6, 62.8 mm, the `BOOST_FB` U3-side via is nudged to 56.60, 55.55 mm, and `BOOST_COMP`/`BOOST_COMP_RC` are routed locally on top copper. This reduces the ratsnest from 12 to 11 without adding DRC errors.
 - A 2026-07-26 top-edge `USB_VBUS_RAW` retry from MOD1 to Q3 reduced the
   ratsnest count but was rejected. The first horizontal exit crossed the 3.3 V
   pullup area; offset variants collided with the R204 3.3 V service spine,

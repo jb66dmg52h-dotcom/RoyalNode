@@ -169,6 +169,8 @@ A wider TPS61088 small-passive relocation trial was also rejected on 2026-07-25.
 
 The accepted 2026-07-25 boost topology rotation keeps U3 and L2 at the same centers but rotates both 180 degrees. This moves the TPS61088 VOUT pads to the E22 side and the BOOST_SW pads toward L2. KiCad DRC reports no new clearance, short, courtyard or solder-mask violations from this rotation.
 
+The 2026-07-26 grouped compensation pass moves R404 to 60.2, 62.8 mm and C408 to 63.6, 62.8 mm. `BOOST_COMP` and `BOOST_COMP_RC` now route locally on top copper, and the `BOOST_FB` U3-side via is nudged to 56.60, 55.55 mm to clear the COMP escape.
+
 `BQ_REGN` to `ILIM_HIZ` is now routed with the accepted local REGN bridge. Preserve this route during nearby BQ25798 support-passive and switch-node rework.
 
 An additional 2026-07-25 trial that moved C215/R200/R201 around the BQ25798 right side was rejected. It reduced the ratsnest temporarily, but caused `BQ_TS`/`BQ_REGN` shorts and U1/C215/R200/R201 courtyard violations. The failed `bq-ts-u1-to-r200-local` generated segment has been retired in `tools/generate_initial_routes.py`.
@@ -243,7 +245,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-12 expected unrouted ratsnest items
+11 expected unrouted ratsnest items
 0 footprint errors
 3 known footprint/library warnings: MOD2, U3 and L2
 ```
