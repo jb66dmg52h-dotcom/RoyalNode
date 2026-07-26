@@ -75,6 +75,8 @@ A direct 2026-07-25 `BQ_SW2` U1-to-L1 top-layer span was rejected because it cro
 
 A 2026-07-25 `BQ_PMID` U1-to-cap-bus bridge trial was rejected. The direct top-layer route crossed the accepted C216 `BQ_BTST1` escape and crowded U1 `BQ_STAT`; the bottom-layer via variant still violated clearance at the dense U1 lower pad row. Treat `BQ_PMID` as a U1 power-copper/fanout pass.
 
+A later 2026-07-25 `BQ_PMID` inner-layer retry after the BAT_RAW/BQ_STAT reroutes still failed. Centering the U1-side via crowded the accepted `BQ_SW1` escape, moving it left shorted into `BQ_STAT`, and shifting `BQ_SW1` right starved the U1 ground thermal while crowding `BQ_SW2`. Keep `BQ_PMID` blocked until the U1 lower-edge fanout is reworked as a group.
+
 A 2026-07-25 long `UV_NODE` bottom-layer route was rejected. It collided with the fused-solar U4 via, crossed the accepted I2C/SPI corridors, and clipped the XIAO through-hole row. Treat the protection-divider sense nets as a U4/divider placement pass rather than long board-spanning traces.
 
 ## Pass 5: Remaining Sense And Control Nets
