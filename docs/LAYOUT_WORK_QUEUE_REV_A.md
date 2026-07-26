@@ -85,6 +85,11 @@ and BAT_RAW inner trace, while the cap-bank side crossed `BQ_PMID` and the
 accepted `BQ_STAT` back-layer corridor. Keep VBUS in the same U1 lower-edge
 and capacitor-bank placement pass as PMID/STAT/REGN.
 
+A 2026-07-26 `BQ_VBUS` U1-to-Q3 In2.Cu bridge trial after the larger outline
+was rejected. The U1-side via and internal run shorted or crossed ACDRV2,
+BTST1, SYS, STAT and I2C corridors. Do not retry this as a direct U1-to-Q3
+internal bridge; it needs a grouped U1 lower-edge refactor.
+
 The 2026-07-25 `BQ_SYS` capacitor-bank-to-U1 entry is now routed with an internal-layer spine from the SYS capacitor island and a short top-layer entry into U1 pad 25. The accepted via was nudged left to clear the nearby `BQ_SDRV` route.
 
 The 2026-07-25 `BQ_SYS` L2-to-SYS-spine route is now routed with a short top-layer L2 fanout and a wider internal-layer branch into the accepted SYS spine. This leaves the U3 VIN/input-cap connection as the main remaining boost-input power-loop item.
@@ -167,6 +172,11 @@ These should avoid switch-node copper and RF launch copper.
 - A subsequent 2026-07-25 C405 offset-left retry was also rejected. It crowded the U3 exposed ground pad/thermal relief and collided with `BOOST_EN`, `BOOST_FSW`, R402 and the local solder-mask constraints. Do not keep searching the immediate U3 underside for C405; move the surrounding EN/FSW/ILIM support cluster or open a new bottom-side strategy.
 - A later 2026-07-25 `BOOST_VCC` direct route trial from U3 to C405 was rejected. The U3-side fanout shorted/crowded U3 ground and exposed-pad geometry, the internal route crossed `BOOST_EN`, and the C405-side via collided with the accepted SPI corridor. Keep `BOOST_VCC` blocked until U3 support-passive placement is reworked.
 - 2026-07-26 bottom-side C405/`BOOST_VCC` trial was rejected. Placing C405 below U3 created pad-orientation ambiguity, shorted/crowded U3 exposed ground and C405 ground geometry, starved the U3 ground thermal and introduced bottom-side text/footprint warnings. Do not use a bottom-side C405 exception at the current U3 location; solve BOOST_VCC with a broader U3 support-passive placement pass.
+- A 2026-07-26 C405 local-bypass placement trial below U3 after the larger
+  outline was rejected. Even with pad 1 aligned under U3 VCC, C405 crowded
+  BOOST_EN, BOOST_ILIM, FSW/R402, L2 or U3 ground thermal depending on
+  orientation. Keep `BOOST_VCC` in the grouped TPS61088 EN/ILIM/FSW/support
+  passive placement pass.
 - A 2026-07-25 `BOOST_COMP` internal-layer route trial from U3 to R404 was rejected. The U3-side via and top fanout crowded `BOOST_FB`, while shifted variants collided with the accepted E22 `BUSY`/`DIO1`/`NRST` internal routing columns or required tracks below the 0.15 mm rule. Keep `BOOST_COMP` blocked until the boost compensation placement or E22 control fanout is reworked as a group.
 - A 2026-07-25 `USB_VBUS_RAW` right-edge service-route trial from MOD1 to Q3 was rejected on all tried layers. In1 crossed `BOOST_EN`; In2 crossed `BAT_RAW`, 3.3 V and I2C service routes; B.Cu crossed `XIAO_BAT_ISO`, `BQ_VBUS` and I2C. Keep `USB_VBUS_RAW` blocked until the right-edge service corridor is reworked or Q3/MOD1 placement changes.
 - 2026-07-25 `BOOST_COMP` R404/C408 relocation beside U3 was rejected. The left-of-U3 corridor collided with the E22 module's SPI_MOSI pad/via and MOD2 courtyard, while the tighter vertical placement shorted the compensation RC node into adjacent pads. Keep TPS61088 compensation as part of a full U3/MOD2 corridor pass.
