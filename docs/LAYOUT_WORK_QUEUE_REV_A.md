@@ -204,6 +204,10 @@ These should avoid switch-node copper and RF launch copper.
   `BQ_USB_SELECTOR_COMMON`; a farther-right variant crossed the `BAT_RAW`
   trunk and crowded `BQ_VBUS`. Keep the remaining USB raw U1 connection in the
   lower-edge U1 fanout refactor.
+- A later 2026-07-26 top-layer Q3-to-U1 `USB_VBUS_RAW` service-corridor trial
+  was also rejected. The U1 exit crossed `BQ_REGN`, `BQ_ACDRV1`,
+  `BQ_ACDRV2`, I2C_SDA/SCL and the Q3-side `BQ_VBUS` via. The generated trial
+  segment is retired.
 - A BQ25798 right-side TS-divider relocation trial was rejected because it shorted `BQ_TS` to `BQ_REGN` and violated U1/capacitor courtyards. Treat `BQ_REGN`/`BQ_TS` as a compact HOTROD-package placement pass, not as a generic passive-grid cleanup.
 - A 2026-07-25 `BQ_PROG`/`BQ_INT` direct top-layer routing trial was rejected because it crossed the lower charger/passive staging area and caused shorts, solder-mask issues and thermal relief starvation. Route these only after the lower charger support passives are placed deliberately.
 - A 2026-07-25 `BQ_BTST2` direct top route and a follow-up two-via escape trial were rejected. The top route shorted/crowded `BQ_PROG`; the via route crowded BATP/PROG pad clearance and crossed existing `I2C_SDA`, `BAT_RAW` and `BQ_TS` corridors. Keep `BQ_BTST2`, C217 and the U1 right-side support passives in the same placement pass.
