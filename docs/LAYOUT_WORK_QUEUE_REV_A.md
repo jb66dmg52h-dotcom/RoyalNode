@@ -73,6 +73,8 @@ The 2026-07-25 `BQ_SYS` L2-to-SYS-spine route is now routed with a short top-lay
 
 The 2026-07-25 `BQ_SYS` U3 VIN-to-L2 spine branch is now routed with a compact top-layer U3 fanout and an In1 branch into the L2/SYS spine. Intermediate trials hit BOOST_EN, I2C/E22 internal routes, BOOT clearance and C407 ground thermal starvation; the accepted via lands lower/left enough to keep C407's ground thermal intact.
 
+A 2026-07-25 `BQ_SYS` boost-input-cap-to-U3 spine corridor trial was rejected. In1 crossed `BOOST_FB` and crowded `BOOST_EN`; In2 avoided those but crossed E22 reset/RXEN and the XIAO/I2C service corridor; B.Cu crossed `SPI_SCK`, I2C and the XIAO through-hole row with solder-mask issues. Keep the remaining boost-input connection as a placement/copper-pour pass rather than a long straight corridor.
+
 ## Pass 4: Switch Nodes
 
 Route only after BQ25798 and TPS61088 placement is compact:
