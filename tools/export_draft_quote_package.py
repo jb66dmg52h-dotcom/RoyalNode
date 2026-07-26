@@ -30,6 +30,9 @@ KICAD_CLI = Path(os.environ.get("KICAD_CLI", "/Applications/KiCad/KiCad.app/Cont
 CORE_BOM = ROOT / "bom/REV_A_LOCKED_CORE_BOM.csv"
 PASSIVE_BOM = ROOT / "bom/REV_A_LOCKED_PASSIVES.csv"
 PASSIVE_SEED = PROJECT_DIR / "PASSIVE_CAPTURE_SEED_REV_A.csv"
+ERC_REPORT = ROOT / "hardware/fabrication/RoyalNode_erc.rpt"
+DRC_REPORT = ROOT / "hardware/fabrication/RoyalNode_drc.rpt"
+UNROUTED_SUMMARY = ROOT / "docs/UNROUTED_SUMMARY_REV_A.md"
 
 
 def run(args: list[str]) -> None:
@@ -47,6 +50,13 @@ def zip_dir(source: Path, destination: Path) -> None:
 
 
 def write_blocker_note() -> None:
+    revision = subprocess.run(
+        ["git", "rev-parse", "--short", "HEAD"],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    ).stdout.strip() or "unknown"
     note = OUT / "READ_ME_NOT_FOR_FABRICATION.txt"
     note.write_text(
         "\n".join(
@@ -54,6 +64,7 @@ def write_blocker_note() -> None:
                 "RoyalNode Rev A draft quote package",
                 "",
                 f"Generated: {datetime.now(timezone.utc).isoformat()}",
+                f"Git revision: {revision}",
                 "",
                 "This package is for workflow validation and rough manufacturer quoting only.",
                 "Do not order boards from this package.",
@@ -65,6 +76,7 @@ def write_blocker_note() -> None:
                 "- High-current power rails and switching loops are not complete.",
                 "- Current KiCad DRC state includes 17 expected unconnected items.",
                 "- Current known footprint/library warnings are MOD2, U3 and L2.",
+                "- See reports/ for the ERC report, DRC report and unrouted summary.",
                 "",
                 "Use `make layout-status` for the current validation gate.",
                 "",
@@ -72,6 +84,17 @@ def write_blocker_note() -> None:
         ),
         encoding="utf-8",
     )
+
+
+def copy_validation_reports() -> None:
+    report_sources = [
+        (ERC_REPORT, REPORTS / ERC_REPORT.name),
+        (DRC_REPORT, REPORTS / DRC_REPORT.name),
+        (UNROUTED_SUMMARY, REPORTS / UNROUTED_SUMMARY.name),
+    ]
+    for source, destination in report_sources:
+        if source.exists():
+            shutil.copy2(source, destination)
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -241,6 +264,7 @@ def main() -> None:
         ]
     )
 
+    copy_validation_reports()
     write_draft_jlc_bom()
     write_blocker_note()
     zip_dir(GERBERS, OUT / "RoyalNode_RevA_Gerbers_DRAFT_NOT_FOR_FAB.zip")
