@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 24 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 23 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 3 known footprint/library warnings, `MOD2`, `U3` and `L2`
-- Unrouted: 24 ratsnest pairs
+- Unrouted: 23 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
@@ -58,6 +58,8 @@ Route as copper pours after placement review:
 These nets should not be completed as narrow generated traces.
 
 The 2026-07-25 `BQ_VBUS` Q2 and Q3 duplicate-drain islands are now joined with internal-layer bridges from each left D2 pad to the existing right-side `BQ_VBUS` backbone. An outside-left Q3 bridge trial was rejected because it crossed the accepted `BQ_ACDRV2` and `BQ_USB_SELECTOR_COMMON` routing corridors.
+
+The 2026-07-25 `SOLAR_PROTECTED` Q1 duplicate-drain island is now joined with an internal-layer bridge from the left protected-output pad to the existing protected-output spine. The first right-side via location was rejected for crowding `SOLAR_PROT_COMMON`; the accepted via lands lower on the protected-output spine to clear both `SOLAR_PROT_COMMON` and `BOOST_EN`.
 
 ## Pass 4: Switch Nodes
 
