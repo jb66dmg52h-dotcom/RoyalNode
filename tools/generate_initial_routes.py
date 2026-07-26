@@ -1822,6 +1822,7 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("segment", "batp-kelvin-r202-fanout-a", "0"),
     stable_uuid("via", "batp-kelvin-u1-via-a"),
     stable_uuid("via", "batp-kelvin-r202-via-a"),
+    stable_uuid("segment", "bq-btst2-c217-local-a", "0"),
     stable_uuid("segment", "usb-vbus-raw-xiao-to-q3-service-edge-c", "0"),
     stable_uuid("segment", "usb-vbus-raw-xiao-to-q3-service-edge-c", "1"),
     stable_uuid("segment", "usb-vbus-raw-xiao-to-q3-service-edge-c", "2"),
