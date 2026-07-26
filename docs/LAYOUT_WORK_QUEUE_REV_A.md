@@ -158,6 +158,11 @@ These should avoid switch-node copper and RF launch copper.
 - 2026-07-25 `BOOST_COMP` R404/C408 relocation beside U3 was rejected. The left-of-U3 corridor collided with the E22 module's SPI_MOSI pad/via and MOD2 courtyard, while the tighter vertical placement shorted the compensation RC node into adjacent pads. Keep TPS61088 compensation as part of a full U3/MOD2 corridor pass.
 - A 2026-07-25 `BQ_SYS` U3-VIN-to-L2 input hop trial was rejected. It crossed the accepted BOOT branch and crowded the L2 BOOST_SW pad. Route this as a deliberate boost-input copper shape after the BOOT/VIN/passive strategy is reviewed.
 - A 2026-07-25 `USB_VBUS_RAW` XIAO-to-Q3 right-side route trial was rejected. The outside path hit the XT30/J1 no-net mechanical pad; the inward path crossed I2C, XIAO_BAT_ISO or fused-solar back-layer tracks. Revisit USB_VBUS_RAW with a deliberate layer-transition plan.
+- A 2026-07-26 top-edge `USB_VBUS_RAW` retry from MOD1 to Q3 reduced the
+  ratsnest count but was rejected. The first horizontal exit crossed the 3.3 V
+  pullup area; offset variants collided with the R204 3.3 V service spine,
+  XT30/J1 mechanical PTHs or C503 ground/body clearance. Treat this as a
+  placement/corridor issue around MOD1/J1/C503, not a simple edge trace.
 - A BQ25798 right-side TS-divider relocation trial was rejected because it shorted `BQ_TS` to `BQ_REGN` and violated U1/capacitor courtyards. Treat `BQ_REGN`/`BQ_TS` as a compact HOTROD-package placement pass, not as a generic passive-grid cleanup.
 - A 2026-07-25 `BQ_PROG`/`BQ_INT` direct top-layer routing trial was rejected because it crossed the lower charger/passive staging area and caused shorts, solder-mask issues and thermal relief starvation. Route these only after the lower charger support passives are placed deliberately.
 - A 2026-07-25 `BQ_BTST2` direct top route and a follow-up two-via escape trial were rejected. The top route shorted/crowded `BQ_PROG`; the via route crowded BATP/PROG pad clearance and crossed existing `I2C_SDA`, `BAT_RAW` and `BQ_TS` corridors. Keep `BQ_BTST2`, C217 and the U1 right-side support passives in the same placement pass.
