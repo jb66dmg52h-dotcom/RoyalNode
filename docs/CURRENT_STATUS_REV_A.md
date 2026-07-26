@@ -46,7 +46,7 @@ kicad-cli sch erc --exit-code-violations --severity-all
 
 kicad-cli pcb drc --severity-all
   3 known footprint/library warnings: MOD2, U3 and L2
-  29 expected unconnected/ratsnest items because the board is not routed
+  28 expected unconnected/ratsnest items because the board is not routed
 ```
 
 The known footprint warnings are tracked because MOD2 is a local JLC/LCSC release candidate for a factory-installed E22 module and U3/L2 are local release-candidate power footprints whose board instances are rotated for the accepted boost topology. These must be cleared by KiCad footprint update/save behavior or explicitly accepted through JLCPCB DFM/PCBA review before fabrication release.
@@ -54,6 +54,8 @@ The known footprint warnings are tracked because MOD2 is a local JLC/LCSC releas
 J3 has been moved to the bottom service edge to clear the J6/SMA/C503 area. J6 has been moved to the top service edge and is currently an unrouted optional BME680/environmental connector until a clean serviceable fanout is added.
 
 `BOOST_EN` is now routed from the XIAO control pin to the TPS61088 enable pin and R405 pulldown. The accepted route uses the existing control corridor and keeps the local pulldown tied into the same enable net without adding measurement links.
+
+`BAT_RAW` is now routed from the battery XT30 pad to the LM66100/XIAO battery-isolation input through a wider inner-layer branch with a local U2 entry. The main battery rail to U1/capacitors and the BATP/R202 sense branch remain open.
 
 `BQ_REGN` and the protection-divider `GND` local link remain intentionally unrouted until their local placement/fanout is improved. Generated trial routes were rejected and retired because they crossed I2C/OV routes or crowded adjacent pads. `BOOST_ILIM`, `BOOST_SS`, `BQ_SDRV`, the C216 `BQ_BTST1`/local `BQ_SW1` bootstrap side, and the C217 local `BQ_SW2` bootstrap side are now locally routed after moving their support passives beside the relevant ICs. `BQ_BTST2` remains unrouted until the U1 right-side escape can be separated cleanly from `BQ_TS`.
 
