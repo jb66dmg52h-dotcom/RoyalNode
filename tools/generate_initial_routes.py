@@ -1390,6 +1390,7 @@ GROUND_ZONES = [
     ("In1.Cu", "L2_GND_REFERENCE", stable_uuid("zone", "l2-ground-reference")),
 ]
 RETIRED_GENERATED_UUIDS = {
+    "0b7b61b1-618b-5f4e-b2f7-e2ab289b7a29",
     stable_uuid("zone", "bottom-ground-fill"),
     stable_uuid("segment", "e22-rxen-direct", "1"),
     stable_uuid("segment", "e22-rxen-direct", "2"),
