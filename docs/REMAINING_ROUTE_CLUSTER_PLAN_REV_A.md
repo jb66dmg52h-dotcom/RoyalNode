@@ -1,7 +1,7 @@
 # RoyalNode Rev A Remaining Route Cluster Plan
 
 This file groups the remaining generated KiCad ratsnest items after the clean
-18-unrouted checkpoint. It is a layout planning aid, not a fabrication release.
+16-unrouted checkpoint. It is a layout planning aid, not a fabrication release.
 
 Current gate:
 
