@@ -1459,6 +1459,8 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("segment", "bq-pmid-u1-entry-d", "1"),
     stable_uuid("via", "bq-pmid-cap-to-u1-via-d"),
     stable_uuid("via", "bq-pmid-u1-entry-via-d"),
+    stable_uuid("segment", "bq-sw1-u1-to-l1-top-c", "0"),
+    stable_uuid("segment", "bq-sw1-u1-to-l1-top-c", "1"),
     stable_uuid("segment", "boost-fb-divider-local", "0"),
     stable_uuid("segment", "boost-fb-divider-local", "1"),
     stable_uuid("segment", "boost-fb-divider-local", "2"),
