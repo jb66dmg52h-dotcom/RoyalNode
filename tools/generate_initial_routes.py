@@ -1534,6 +1534,8 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("segment", "boost-vcc-c405-local-d", "1"),
     stable_uuid("segment", "boost-vcc-c405-local-d", "2"),
     stable_uuid("segment", "boost-vcc-u3-c405-local-a", "0"),
+    stable_uuid("segment", "boost-vcc-c405-local-g", "0"),
+    stable_uuid("segment", "boost-vcc-c405-local-g", "1"),
     stable_uuid("segment", "bq-btst2-u1-to-c217-d", "0"),
     stable_uuid("segment", "bq-btst2-u1-to-c217-d", "1"),
     stable_uuid("segment", "bq-btst2-u1-to-c217-d", "2"),

@@ -168,6 +168,10 @@ These should avoid switch-node copper and RF launch copper.
   BOOST_EN, BOOST_ILIM, FSW/R402, L2 or U3 ground thermal depending on
   orientation. Keep `BOOST_VCC` in the grouped TPS61088 EN/ILIM/FSW/support
   passive placement pass.
+- A later 2026-07-26 vertical C405 trial after the accepted compensation
+  placement was also rejected. The 0805 body still overlapped U3/R402
+  courtyards, the ground pad shorted or crowded `BOOST_EN`/`BOOST_FSW`, and
+  the top ground thermal was starved. The generated trial segment is retired.
 - A 2026-07-25 `BOOST_COMP` internal-layer route trial from U3 to R404 was rejected. The U3-side via and top fanout crowded `BOOST_FB`, while shifted variants collided with the accepted E22 `BUSY`/`DIO1`/`NRST` internal routing columns or required tracks below the 0.15 mm rule. This is superseded by the accepted 2026-07-26 grouped compensation placement.
 - A 2026-07-25 `USB_VBUS_RAW` right-edge service-route trial from MOD1 to Q3 was rejected on all tried layers. In1 crossed `BOOST_EN`; In2 crossed `BAT_RAW`, 3.3 V and I2C service routes; B.Cu crossed `XIAO_BAT_ISO`, `BQ_VBUS` and I2C. Keep `USB_VBUS_RAW` blocked until the right-edge service corridor is reworked or Q3/MOD1 placement changes.
 - 2026-07-25 `BOOST_COMP` R404/C408 relocation beside U3 was rejected. The left-of-U3 corridor collided with the E22 module's SPI_MOSI pad/via and MOD2 courtyard, while the tighter vertical placement shorted the compensation RC node into adjacent pads. Keep TPS61088 compensation as part of a full U3/MOD2 corridor pass.
