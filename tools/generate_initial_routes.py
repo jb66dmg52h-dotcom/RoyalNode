@@ -1026,6 +1026,20 @@ SEGMENTS = [
         "points": [(84.00, 23.38), (80.39, 23.38)],
     },
     {
+        "name": "boost-en-r405-fanout-b",
+        "net": "BOOST_EN",
+        "layer": "F.Cu",
+        "width": 0.15,
+        "points": [(21.18, 47.00), (21.18, 48.20)],
+    },
+    {
+        "name": "boost-en-r405-internal-route-b",
+        "net": "BOOST_EN",
+        "layer": "In1.Cu",
+        "width": 0.15,
+        "points": [(21.18, 48.20), (21.18, 28.00), (60.65, 28.00), (60.65, 58.50)],
+    },
+    {
         "name": "e22-nrst-fanout",
         "net": "E22_NRST",
         "layer": "F.Cu",
@@ -1210,6 +1224,7 @@ VIAS = [
     {"name": "boost-fb-r400-via-b", "net": "BOOST_FB", "at": (42.13, 30.00)},
     {"name": "boost-en-u3-via-b", "net": "BOOST_EN", "at": (60.65, 58.50)},
     {"name": "boost-en-xiao-via-b", "net": "BOOST_EN", "at": (84.00, 23.38)},
+    {"name": "boost-en-r405-via-b", "net": "BOOST_EN", "at": (21.18, 48.20)},
     {"name": "e22-nrst-via", "net": "E22_NRST", "at": (54.60, 61.62)},
     {"name": "e22-dio1-via", "net": "E22_DIO1", "at": (55.20, 66.70)},
     {"name": "e22-busy-via", "net": "E22_BUSY", "at": (55.80, 64.16)},

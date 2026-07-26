@@ -4,7 +4,7 @@ Generated from `hardware/fabrication/RoyalNode_drc.rpt`.
 
 This file is a layout planning aid, not a manufacturing release note. Counts are KiCad ratsnest-pair counts, so a net with several components can appear multiple times.
 
-Total unrouted pairs: 31
+Total unrouted pairs: 30
 
 | Net | Ratsnest pairs | Layout note |
 |---|---:|---|
@@ -18,7 +18,6 @@ Total unrouted pairs: 31
 | `USB_VBUS_RAW` | 2 |  |
 | `BATP_KELVIN` | 1 |  |
 | `BOOST_COMP` | 1 |  |
-| `BOOST_EN` | 1 | Hold for TPS61088/R405 local fanout placement pass. |
 | `BOOST_VCC` | 1 |  |
 | `BQ_BTST2` | 1 |  |
 | `BQ_PMID` | 1 | Route as local charger power copper after capacitor placement review. |

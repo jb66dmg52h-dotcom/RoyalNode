@@ -152,7 +152,7 @@ The same generated pass now adds `TOP_GND_FILL` on `F.Cu` and `L2_GND_REFERENCE`
 
 The RF path, high-current power rails, bottom-side ground copper, BQ25798/TPS61088 switch nodes and final power-loop routes remain unrouted until their placement and footprint review gates are settled.
 
-`BOOST_EN` also remains unrouted after a trial route showed the current TPS61088/R405 placement needs a proper local fanout pass around the TPS61088 exposed ground pad and mask openings. Do not route this net as a casual long generated trace; adjust the boost-control passive placement and then fan out the EN pin cleanly.
+`BOOST_EN` is now routed through the accepted control corridor from the XIAO control pin to the TPS61088 enable pin and R405 pulldown. Earlier rejected relocation trials remain documented because the accepted route avoided moving R405 into the crowded E22/TPS61088 corridor.
 
 Two additional R405 relocation trials were rejected on 2026-07-25. A left-of-U3 placement collided with the E22 SPI pad/courtyard corridor, and an above-U3 placement collided with the E22_NSS route/via corridor. The failed generated segment has been retired in `tools/generate_initial_routes.py`.
 
@@ -234,7 +234,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-31 expected unrouted ratsnest items
+30 expected unrouted ratsnest items
 0 footprint errors
 3 known footprint/library warnings: MOD2, U3 and L2
 ```

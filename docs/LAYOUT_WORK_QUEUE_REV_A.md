@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 31 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 30 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,18 +22,17 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 3 known footprint/library warnings, `MOD2`, `U3` and `L2`
-- Unrouted: 31 ratsnest pairs
+- Unrouted: 30 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
 Resolve these before routing more long traces:
 
 1. Finalize or replace the edge-launch SMA footprint and RF launch geometry.
-2. Rework the TPS61088/R405/BOOST_EN local fanout area.
-3. Rework BQ25798 `BQ_REGN`/`ILIM_HIZ` local fanout around the inductor and I2C exits.
-4. Rework the protection-divider ground escape around `OV_NODE` and `BOOST_EN`.
-5. Confirm XT30 connector polarity, board-edge access, and mating-plug clearance.
-6. Re-route J6 only after confirming the new top-edge service clearance remains acceptable.
+2. Rework BQ25798 `BQ_REGN`/`ILIM_HIZ` local fanout around the inductor and I2C exits.
+3. Rework the protection-divider ground escape around `OV_NODE` and the accepted control-routing corridor.
+4. Confirm XT30 connector polarity, board-edge access, and mating-plug clearance.
+5. Re-route J6 only after confirming the new top-edge service clearance remains acceptable.
 
 ## Pass 2: Ground System
 
@@ -99,8 +98,7 @@ These should avoid switch-node copper and RF launch copper.
 - Do not add test points, current shunts, probe loops, or bench-only measurement links.
 - Do not route `RF_915` until the SMA footprint and stack-up are final per `docs/RF_STACKUP_PLAN_REV_A.md`.
 - The 2026-07-25 Molex product-page recheck keeps `732511150` selected, but does not release the footprint. The sales drawing/recommended launch geometry is still required.
-- Do not route `BOOST_EN` until the TPS61088/R405 fanout placement is fixed.
-- Two R405 relocation trials near the TPS61088 EN pin were rejected: one collided with the E22 SPI pad/courtyard corridor and one collided with the E22_NSS route/via corridor. Treat `BOOST_EN` as a placement-corridor problem, not as a single missing short segment.
+- `BOOST_EN` is now routed through the accepted control corridor. Two earlier R405 relocation trials near the TPS61088 EN pin were rejected: one collided with the E22 SPI pad/courtyard corridor and one collided with the E22_NSS route/via corridor.
 - A TPS61088 small-passive relocation trial that moved C405/C406/C407/C408 and R400/R401/R402/R403/R404 into the immediate U3 top/left corridor was rejected on 2026-07-25. It shorted into the existing E22_NSS/SPI fanout, overlapped the E22 courtyard and collided with the L2 inductor courtyard. Treat the boost support network as requiring a U3/L2 placement shift or a bottom-side/local-via strategy, not a simple top-side shove toward the E22.
 - Two 2026-07-25 `BOOST_FB` divider-only relocation trials were rejected. A left/below-U3 placement collided with the E22 SPI/MISO edge and MOD2 courtyard; a lower/right-U3 placement shorted against TPS61088 ground/exposed-pad geometry and the `5V_RADIO` side of R400. Keep `BOOST_FB` blocked until the TPS61088 small-passive strategy is reworked as a group.
 - The accepted 2026-07-25 U3/L2 rotation puts TPS61088 VOUT toward the E22 5 V entry and BOOST_SW toward the XAL7030 inductor. Continue boost placement from this topology.
