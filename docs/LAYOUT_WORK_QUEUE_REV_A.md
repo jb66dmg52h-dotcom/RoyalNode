@@ -73,6 +73,8 @@ C216 is now relocated below U1 with `BQ_BTST1` and the local capacitor side of `
 
 A 2026-07-25 C217 `BQ_BTST2`/local `BQ_SW2` trial was rejected. The proposed lower-right placement collided with C218 ground, the accepted 3.3 V pullup path, and the existing `BQ_INT`/`BQ_PROG` fanout. Treat C217 as part of a coordinated right-side U1 fanout pass.
 
+A 2026-07-25 `BQ_PMID` U1-to-cap-bus bridge trial was rejected. The direct top-layer route crossed the accepted C216 `BQ_BTST1` escape and crowded U1 `BQ_STAT`; the bottom-layer via variant still violated clearance at the dense U1 lower pad row. Treat `BQ_PMID` as a U1 power-copper/fanout pass.
+
 ## Pass 5: Remaining Sense And Control Nets
 
 Route after nearby placement is stable:

@@ -1333,6 +1333,14 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("segment", "bq-sw2-c217-local", "0"),
     stable_uuid("segment", "bq-sw2-c217-local", "1"),
     stable_uuid("segment", "bq-sw2-c217-local", "2"),
+    stable_uuid("segment", "bq-pmid-u1-to-cap-bus-trial", "1"),
+    stable_uuid("segment", "bq-pmid-u1-to-cap-bus-trial", "2"),
+    stable_uuid("segment", "bq-pmid-u1-to-cap-bus-trial", "0"),
+    stable_uuid("segment", "bq-pmid-u1-to-cap-bus-bottom", "0"),
+    stable_uuid("segment", "bq-pmid-u1-to-cap-bus-bottom", "1"),
+    stable_uuid("segment", "bq-pmid-u1-to-cap-bus-bottom", "2"),
+    stable_uuid("via", "bq-pmid-u1-via"),
+    stable_uuid("via", "bq-pmid-cap-bus-via"),
 }
 
 
