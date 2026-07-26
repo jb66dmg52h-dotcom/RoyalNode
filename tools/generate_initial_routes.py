@@ -1444,6 +1444,8 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("segment", "5v-radio-e22-entry-c", "1"),
     stable_uuid("via", "5v-radio-u3-lower-via-c"),
     stable_uuid("via", "5v-radio-e22-entry-via-c"),
+    stable_uuid("segment", "boost-vcc-c405-local-e", "0"),
+    stable_uuid("segment", "boost-vcc-c405-local-e", "1"),
     stable_uuid("segment", "boost-fb-divider-local", "0"),
     stable_uuid("segment", "boost-fb-divider-local", "1"),
     stable_uuid("segment", "boost-fb-divider-local", "2"),
