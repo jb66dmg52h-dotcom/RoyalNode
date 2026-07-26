@@ -72,6 +72,10 @@ Nearby routed or placed blockers:
 - Do not shift the accepted SYS entry via rightward unless C218/SDRV is moved
   first.
 - Do not route BTST2 directly through the R203/PROG corridor.
+- A post-C218-move BTST2 dogleg trial still failed: the left pocket crowded
+  `BQ_TS`/I2C_SDA, and the right pocket shorted into the accepted
+  `BQ_PROG` local route. Move or reroute R203/`BQ_PROG` before retrying
+  `BQ_BTST2`.
 - Do not place a BTST2 via beside U1 pads 18-20; hole clearance and existing
   B.Cu/In1 corridors fail.
 - Do not move C218 upward into the TPS61088/BQ_SYS input-cap area. A trial at
