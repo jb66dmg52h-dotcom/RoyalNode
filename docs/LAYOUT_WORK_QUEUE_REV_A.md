@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 17 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 16 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 3 known footprint/library warnings, `MOD2`, `U3` and `L2`
-- Unrouted: 17 ratsnest pairs
+- Unrouted: 16 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
@@ -167,6 +167,10 @@ These should avoid switch-node copper and RF launch copper.
   It crossed accepted `BQ_VBUS`, `XIAO_BAT_ISO` and I2C_SDA service routes.
   Keep USB raw routing blocked until the right-edge service corridor is
   replanned.
+- After moving the right-edge 3.3 V service leg to `In2.Cu`, a 2026-07-26
+  top-edge `USB_VBUS_RAW` route from MOD1 5V to Q3 pads 7/8 is accepted. This
+  removes the MOD1-to-Q3 USB ratsnest item; the remaining `USB_VBUS_RAW` item
+  is the Q3-to-U1 sense/input connection.
 - A BQ25798 right-side TS-divider relocation trial was rejected because it shorted `BQ_TS` to `BQ_REGN` and violated U1/capacitor courtyards. Treat `BQ_REGN`/`BQ_TS` as a compact HOTROD-package placement pass, not as a generic passive-grid cleanup.
 - A 2026-07-25 `BQ_PROG`/`BQ_INT` direct top-layer routing trial was rejected because it crossed the lower charger/passive staging area and caused shorts, solder-mask issues and thermal relief starvation. Route these only after the lower charger support passives are placed deliberately.
 - A 2026-07-25 `BQ_BTST2` direct top route and a follow-up two-via escape trial were rejected. The top route shorted/crowded `BQ_PROG`; the via route crowded BATP/PROG pad clearance and crossed existing `I2C_SDA`, `BAT_RAW` and `BQ_TS` corridors. Keep `BQ_BTST2`, C217 and the U1 right-side support passives in the same placement pass.

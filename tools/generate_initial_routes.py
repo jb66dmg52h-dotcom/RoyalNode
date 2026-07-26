@@ -970,6 +970,13 @@ SEGMENTS = [
         "points": [(80.63, 70.10), (80.63, 71.37)],
     },
     {
+        "name": "usb-vbus-raw-mod1-to-q3-top-edge-f",
+        "net": "USB_VBUS_RAW",
+        "layer": "F.Cu",
+        "width": 0.40,
+        "points": [(80.39, 36.08), (80.39, 37.40), (103.20, 37.40), (103.20, 70.10), (80.63, 70.10)],
+    },
+    {
         "name": "q3-usb-selector-common-left-fanout-b",
         "net": "BQ_USB_SELECTOR_COMMON",
         "layer": "F.Cu",

@@ -9,7 +9,7 @@ This note captures the next charger-layout work package after the clean
 make layout-status
   ERC: 0
   DRC: 3 known footprint warnings only
-  Unrouted: 17 ratsnest pairs
+  Unrouted: 16 ratsnest pairs
 ```
 
 Known allowed DRC warnings remain `MOD2`, `U3` and `L2` footprint/library

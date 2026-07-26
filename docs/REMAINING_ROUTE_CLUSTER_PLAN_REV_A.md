@@ -9,7 +9,7 @@ Current gate:
 make layout-status
   ERC: 0
   DRC: 3 known footprint warnings only
-  Unrouted: 17 ratsnest pairs
+  Unrouted: 16 ratsnest pairs
 ```
 
 ## Cluster A: TPS61088 5 V Radio Boost Output
