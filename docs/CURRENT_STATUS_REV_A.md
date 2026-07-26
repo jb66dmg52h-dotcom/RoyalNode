@@ -46,7 +46,7 @@ kicad-cli sch erc --exit-code-violations --severity-all
 
 kicad-cli pcb drc --severity-all
   3 known footprint/library warnings: MOD2, U3 and L2
-  18 expected unconnected/ratsnest items because the board is not routed
+  17 expected unconnected/ratsnest items because the board is not routed
 ```
 
 The known footprint warnings are tracked because MOD2 is a local JLC/LCSC release candidate for a factory-installed E22 module and U3/L2 are local release-candidate power footprints whose board instances are rotated for the accepted boost topology. These must be cleared by KiCad footprint update/save behavior or explicitly accepted through JLCPCB DFM/PCBA review before fabrication release.
@@ -57,7 +57,7 @@ J3 has been moved to the bottom service edge to clear the J6/SMA/C503 area. J6 h
 
 `BAT_RAW` is now routed from the battery XT30 pad to the LM66100/XIAO battery-isolation input, the local battery capacitor island and the U1 BAT pins. `BATP_KELVIN` remains open as the separate battery sense branch.
 
-`BQ_REGN` and the protection-divider `GND` local link remain intentionally unrouted until their local placement/fanout is improved. Generated trial routes were rejected and retired because they crossed I2C/OV routes or crowded adjacent pads. `BOOST_ILIM`, `BOOST_SS`, `BQ_SDRV`, the C216 `BQ_BTST1`/local `BQ_SW1` bootstrap side, the C217 local `BQ_SW2` bootstrap side and the TPS61088 `BQ_SYS` input-cap cluster are now locally routed after moving their support passives beside the relevant ICs. `BQ_BTST2` remains unrouted until the U1 right-side escape can be separated cleanly from `BQ_TS`.
+`BQ_REGN` and the protection-divider `GND` local link remain intentionally unrouted until their local placement/fanout is improved. Generated trial routes were rejected and retired because they crossed I2C/OV routes or crowded adjacent pads. `BOOST_ILIM`, `BOOST_SS`, `BQ_SDRV`, the C216 `BQ_BTST1`/local `BQ_SW1` bootstrap side, the accepted `BQ_SW1` left-wrap to L1, the C217 local `BQ_SW2` bootstrap side and the TPS61088 `BQ_SYS` input-cap cluster are now locally routed after moving their support passives beside the relevant ICs. `BQ_SW2` and `BQ_BTST2` remain unrouted until the U1 right-side escape can be separated cleanly from `BQ_TS`, `BQ_PROG`, C218/`BQ_SDRV`, R204 and Q3.
 
 ## Active Blockers
 
@@ -90,6 +90,7 @@ Use these first:
 - `docs/UNROUTED_SUMMARY_REV_A.md`
 - `docs/LAYOUT_WORK_QUEUE_REV_A.md`
 - `docs/REMAINING_ROUTE_CLUSTER_PLAN_REV_A.md`
+- `docs/U1_RIGHT_SIDE_REFACTOR_REV_A.md`
 - `docs/PCB_NET_CLASSES_REV_A.md`
 
 Older conflict reviews and trace-path audits are retained as historical reasoning. Where they conflict with the files above, the current authoritative documents win.
