@@ -70,7 +70,7 @@ The current layout ties the adjacent TPS61088 switch pins into L2 with compact l
 
 C216 is now relocated below U1 with `BQ_BTST1` and the local capacitor side of `BQ_SW1` routed. The remaining `BQ_SW1` ratsnest item is the inductor/power-loop path, not the bootstrap-cap connection.
 
-C217 is now staged beside the charger power stage and its local `BQ_SW2` side is tied to L1. The companion `BQ_BTST2` escape remains blocked after a top-layer trial crossed/crowded `BQ_TS`; treat the remaining bootstrap work as a U1 right-side escape pass.
+C217 is now staged beside the charger power stage and its local `BQ_SW2` side is tied to L1. The companion `BQ_BTST2` escape remains blocked: a top-layer trial crossed/crowded `BQ_TS`, and a back-layer/via trial crowded the accepted `BQ_ACDRV1`, `BQ_TS` and `BQ_PROG` corridors. Treat the remaining bootstrap work as a U1 right-side escape pass.
 
 A 2026-07-25 `BQ_PMID` U1-to-cap-bus bridge trial was rejected. The direct top-layer route crossed the accepted C216 `BQ_BTST1` escape and crowded U1 `BQ_STAT`; the bottom-layer via variant still violated clearance at the dense U1 lower pad row. Treat `BQ_PMID` as a U1 power-copper/fanout pass.
 
