@@ -676,6 +676,13 @@ SEGMENTS = [
         "points": [(60.80, 76.00), (39.85, 76.00), (39.85, 85.00)],
     },
     {
+        "name": "bq-regn-ilim-top-bridge-b",
+        "net": "BQ_REGN",
+        "layer": "F.Cu",
+        "width": 0.15,
+        "points": [(66.85, 76.20), (65.85, 76.20), (65.85, 75.60), (63.80, 75.60), (63.80, 75.00), (63.10, 75.00)],
+    },
+    {
         "name": "uv-divider-local",
         "net": "UV_NODE",
         "layer": "F.Cu",

@@ -9,7 +9,7 @@ This note captures the next charger-layout work package after the clean
 make layout-status
   ERC: 0
   DRC: 3 known footprint warnings only
-  Unrouted: 15 ratsnest pairs
+  Unrouted: 14 ratsnest pairs
 ```
 
 Known allowed DRC warnings remain `MOD2`, `U3` and `L2` footprint/library
@@ -30,6 +30,9 @@ warnings.
 - `BQ_REGN` from C215/R200 to U1 pin 5 is now routed with a left-side U1
   jog and B.Cu return path. Preserve this route unless the REGN/TS/BATP
   support-passive group is fully replanned.
+- `BQ_REGN` ILIM_HIZ/U1 pin 17 is now tied to the pin-5 REGN escape with a
+  short top-layer bridge. Preserve this bridge unless the REGN/TS/BATP support
+  cluster is fully replanned.
 
 ## Blocked Nets In This Cluster
 
