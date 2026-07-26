@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 3 known footprint/library warnings, `MOD2`, `U3` and `L2`
-- Unrouted: 16 ratsnest pairs
+- Unrouted: 15 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
@@ -165,6 +165,7 @@ These should avoid switch-node copper and RF launch copper.
 - 2026-07-26 `BOOST_COMP` bottom-layer route from U3 to R404 was rejected. The U3-side via violated clearance to the accepted `BOOST_FB` via, and the R404 entry crossed the existing `BOOST_COMP_RC` route, shorting the compensation pin to the RC node. Do not retry this corridor unless `BOOST_FB` and the compensation RC placement are reworked together.
 - 2026-07-26 `BATP_KELVIN` right-side escape trials were rejected. The U1 escape via collided with nearby `BQ_REGN`, `I2C_SDA`, `BAT_RAW` and the accepted 3.3 V service corridor depending on layer and offset; B.Cu and In1/In2 long runs also crossed existing `BQ_SYS`, `BAT_RAW`, I2C or `BQ_TS` corridors. Keep BATP blocked until the U1 support-passive group and service routes are replanned together.
 - 2026-07-26 C217 near-U1 rotation trial was rejected. Pulling the BTST2/SW2 bootstrap cap into the U1 right-side gap shorted/crowded `BQ_SDRV`, `BAT_RAW`, `BQ_PROG`, R203/R204, Q3 and solder-mask rules, and increased the ratsnest count. C217 needs a broader U1-right-side refactor, not a simple local move into the existing support-passive gap.
+- 2026-07-26 `BQ_REGN` C215/R200 island-to-U1-pin-5 route is accepted. The route leaves U1 pin 5 with a short left-side jog to avoid unused U1 pad 6, then runs on B.Cu back to C215/R200. This reduces the ratsnest from 16 to 15 while leaving ILIM_HIZ/U1 pin 17 as the remaining `BQ_REGN` item.
 - A 2026-07-25 `BQ_SYS` U3-VIN-to-L2 input hop trial was rejected. It crossed the accepted BOOT branch and crowded the L2 BOOST_SW pad. Route this as a deliberate boost-input copper shape after the BOOT/VIN/passive strategy is reviewed.
 - A 2026-07-25 `USB_VBUS_RAW` XIAO-to-Q3 right-side route trial was rejected. The outside path hit the XT30/J1 no-net mechanical pad; the inward path crossed I2C, XIAO_BAT_ISO or fused-solar back-layer tracks. Revisit USB_VBUS_RAW with a deliberate layer-transition plan.
 - A 2026-07-26 top-edge `USB_VBUS_RAW` retry from MOD1 to Q3 reduced the

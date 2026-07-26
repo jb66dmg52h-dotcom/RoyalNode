@@ -1,7 +1,7 @@
 # RoyalNode Rev A Remaining Route Cluster Plan
 
 This file groups the remaining generated KiCad ratsnest items after the clean
-16-unrouted checkpoint. It is a layout planning aid, not a fabrication release.
+15-unrouted checkpoint. It is a layout planning aid, not a fabrication release.
 
 Current gate:
 
@@ -9,7 +9,7 @@ Current gate:
 make layout-status
   ERC: 0
   DRC: 3 known footprint warnings only
-  Unrouted: 16 ratsnest pairs
+  Unrouted: 15 ratsnest pairs
 ```
 
 ## Cluster A: TPS61088 5 V Radio Boost Output
@@ -79,7 +79,8 @@ Remaining nets:
 
 Current status:
 
-- `BQ_REGN` pin-to-pin bridge trials lowered the count but shorted/crowded `BAT_RAW`, `BQ_TS`, `BQ_BTST1` and I2C corridors.
+- `BQ_REGN` C215/R200 island-to-U1-pin-5 routing is now accepted; only the ILIM_HIZ/U1 pin-17 `BQ_REGN` item remains.
+- Earlier `BQ_REGN` pin-to-pin bridge trials lowered the count but shorted/crowded `BAT_RAW`, `BQ_TS`, `BQ_BTST1` and I2C corridors.
 - A top-layer REGN wrap also failed because the U1 perimeter is already occupied by ACDRV, I2C, TS and ground-thermal relief.
 - `BATP_KELVIN` route trials failed because the U1-side via conflicts with the same dense right-side U1 escape area.
 - R202 tight-local relocation at U1 was also rejected because the 0603 footprint overlaps/crowds the U1 right-side support-passive escape.

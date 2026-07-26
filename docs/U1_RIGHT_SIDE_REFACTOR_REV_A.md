@@ -9,7 +9,7 @@ This note captures the next charger-layout work package after the clean
 make layout-status
   ERC: 0
   DRC: 3 known footprint warnings only
-  Unrouted: 16 ratsnest pairs
+  Unrouted: 15 ratsnest pairs
 ```
 
 Known allowed DRC warnings remain `MOD2`, `U3` and `L2` footprint/library
@@ -27,6 +27,9 @@ warnings.
 - R204's `3V3` feed now drops through a local via at 69.68, 72.80 mm and
   ties into the existing `In2.Cu` 3.3 V spine, leaving the top-side U1
   right corridor clearer for `BQ_SW2`, `BQ_BTST2` and C218/`BQ_SDRV` work.
+- `BQ_REGN` from C215/R200 to U1 pin 5 is now routed with a left-side U1
+  jog and B.Cu return path. Preserve this route unless the REGN/TS/BATP
+  support-passive group is fully replanned.
 
 ## Blocked Nets In This Cluster
 
