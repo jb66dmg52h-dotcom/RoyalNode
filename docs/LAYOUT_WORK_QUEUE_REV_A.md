@@ -163,6 +163,10 @@ These should avoid switch-node copper and RF launch copper.
   pullup area; offset variants collided with the R204 3.3 V service spine,
   XT30/J1 mechanical PTHs or C503 ground/body clearance. Treat this as a
   placement/corridor issue around MOD1/J1/C503, not a simple edge trace.
+- A follow-up 2026-07-26 B.Cu edge route for `USB_VBUS_RAW` was also rejected.
+  It crossed accepted `BQ_VBUS`, `XIAO_BAT_ISO` and I2C_SDA service routes.
+  Keep USB raw routing blocked until the right-edge service corridor is
+  replanned.
 - A BQ25798 right-side TS-divider relocation trial was rejected because it shorted `BQ_TS` to `BQ_REGN` and violated U1/capacitor courtyards. Treat `BQ_REGN`/`BQ_TS` as a compact HOTROD-package placement pass, not as a generic passive-grid cleanup.
 - A 2026-07-25 `BQ_PROG`/`BQ_INT` direct top-layer routing trial was rejected because it crossed the lower charger/passive staging area and caused shorts, solder-mask issues and thermal relief starvation. Route these only after the lower charger support passives are placed deliberately.
 - A 2026-07-25 `BQ_BTST2` direct top route and a follow-up two-via escape trial were rejected. The top route shorted/crowded `BQ_PROG`; the via route crowded BATP/PROG pad clearance and crossed existing `I2C_SDA`, `BAT_RAW` and `BQ_TS` corridors. Keep `BQ_BTST2`, C217 and the U1 right-side support passives in the same placement pass.
