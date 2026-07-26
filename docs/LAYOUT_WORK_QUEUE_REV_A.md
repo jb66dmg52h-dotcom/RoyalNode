@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 21 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 20 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 3 known footprint/library warnings, `MOD2`, `U3` and `L2`
-- Unrouted: 21 ratsnest pairs
+- Unrouted: 20 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
@@ -68,6 +68,8 @@ A 2026-07-25 `SOLAR_PROTECTED` U1-entry trial from the Q1 protected-output spine
 A 2026-07-25 `BQ_VBUS` Q3-to-U1 bridge trial was rejected. The U1-side via/fanout crowded `BQ_STAT` and `BQ_BTST1`, while the back-layer route crossed accepted `BQ_STAT` and I2C paths. Keep the remaining `BQ_VBUS` U1 connection blocked until the U1 lower-left fanout is reworked as a group.
 
 The 2026-07-25 `BQ_SYS` capacitor-bank-to-U1 entry is now routed with an internal-layer spine from the SYS capacitor island and a short top-layer entry into U1 pad 25. The accepted via was nudged left to clear the nearby `BQ_SDRV` route.
+
+The 2026-07-25 `BQ_SYS` L2-to-SYS-spine route is now routed with a short top-layer L2 fanout and a wider internal-layer branch into the accepted SYS spine. This leaves the U3 VIN/input-cap connection as the main remaining boost-input power-loop item.
 
 ## Pass 4: Switch Nodes
 
