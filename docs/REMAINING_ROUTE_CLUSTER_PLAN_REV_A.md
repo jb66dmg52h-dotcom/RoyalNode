@@ -9,7 +9,7 @@ Current gate:
 make layout-status
   ERC: 0
   DRC: 3 known footprint warnings only
-  Unrouted: 18 ratsnest pairs
+  Unrouted: 17 ratsnest pairs
 ```
 
 ## Cluster A: TPS61088 5 V Radio Boost Output
@@ -44,7 +44,6 @@ Remaining nets:
 
 - `BQ_PMID`
 - `BQ_VBUS`
-- `BQ_SW1`
 - `BQ_SW2`
 - `BQ_BTST2`
 - `SOLAR_PROTECTED`
@@ -53,6 +52,7 @@ Remaining nets:
 Current status:
 
 - The existing L1 position leaves `BQ_SW1`/`BQ_SW2` too far below the U1 switch pins.
+- `BQ_SW1` is now routed with an accepted left-side wrap from U1/C216 to L1.
 - A trial moving only L1 above U1 was rejected because it collided with the accepted TPS61088 input-cap cluster and U1 support passives.
 - A direct `BQ_SW1` top route lowered the ratsnest count but failed badly by running down the U1 left pad row.
 - `BQ_PMID` bridge retries lower the count but short/crowd `BQ_STAT`, `BQ_BTST1` and the accepted `BQ_SYS` spine.

@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 3 known footprint/library warnings, `MOD2`, `U3` and `L2`
-- Unrouted: 18 ratsnest pairs
+- Unrouted: 17 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
@@ -133,6 +133,7 @@ These should avoid switch-node copper and RF launch copper.
 - A TPS61088 small-passive relocation trial that moved C405/C406/C407/C408 and R400/R401/R402/R403/R404 into the immediate U3 top/left corridor was rejected on 2026-07-25. It shorted into the existing E22_NSS/SPI fanout, overlapped the E22 courtyard and collided with the L2 inductor courtyard. Treat the boost support network as requiring a U3/L2 placement shift or a bottom-side/local-via strategy, not a simple top-side shove toward the E22.
 - Two 2026-07-25 `BOOST_FB` divider-only relocation trials were rejected. A left/below-U3 placement collided with the E22 SPI/MISO edge and MOD2 courtyard; a lower/right-U3 placement shorted against TPS61088 ground/exposed-pad geometry and the `5V_RADIO` side of R400. Keep `BOOST_FB` blocked until the TPS61088 small-passive strategy is reworked as a group.
 - The accepted 2026-07-25 U3/L2 rotation puts TPS61088 VOUT toward the E22 5 V entry and BOOST_SW toward the XAL7030 inductor. Continue boost placement from this topology.
+- A 2026-07-25 `BQ_SW1` left-wrap route from U1/C216 to L1 is accepted. It leaves the U1 top edge through the existing bootstrap corridor, wraps outside the left side of U1, and enters the L1 SW1 pad without new DRC violations.
 - A 2026-07-25 `5V_RADIO` U3-to-E22 internal-layer branch trial was rejected. The In1 shortcut crossed/crowded the accepted `SPI_SCK` via and `BOOST_FB` tracks, the U3 top fanout crowded a no-net U3 pad, and the via collided with the accepted E22 `DIO1`/`BUSY` internal routing columns. Keep the radio rail as a deliberate high-current copper corridor or pour after the boost/passive placement is reviewed, not as a long internal trace shortcut.
 - A later 2026-07-25 lower `5V_RADIO` corridor trial from U3 toward the E22 VCC pads was rejected. The E22-side entry shorted/crowded MOD2 GND pin 11, the lower corridor collided with accepted E22 `BUSY`/`RXEN` fanouts, and the U3-side via crowded `BOOST_FB`. The radio rail needs a deliberate E22/U3 power-copper placement pass, not a lower-layer shortcut.
 - A 2026-07-25 C503 radio-bulk-cap relocation trial was rejected. Placing the polymer can left of MOD2 electrically reduced the ratsnest, but the body could not clear both the board edge and the E22 module courtyard; moving it into the lower capacitor bank collided with J4/edge silk or left a dangling route and did not improve the accepted count. Keep C503 at the legal scaffold location until the radio bulk-cap bank is mechanically replanned.
