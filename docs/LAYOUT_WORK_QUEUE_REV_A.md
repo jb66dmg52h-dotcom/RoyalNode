@@ -95,6 +95,8 @@ A direct 2026-07-25 `BQ_SW2` U1-to-L1 top-layer span was rejected because it cro
 
 A later 2026-07-25 `C217` move to the lower-right of U1 was rejected. It worsened the ratsnest count, overlapped the L1 courtyard, swapped the intended `BTST2`/`SW2` pad approach after rotation, and crossed/shorted the accepted `BQ_TS` via corridor. Keep `C217`, `BQ_TS`, `BQ_REGN` and the U1 right-side escape as one placement pass.
 
+A later 2026-07-25 `BQ_SW2` trial that shifted the accepted `BQ_SYS` U1-entry via rightward was rejected. The SYS shift collided with `BQ_SDRV`, and the SW2 overpass/drop beside Q3 shorted or mask-bridged against the USB selector pads. Keep SW2 blocked until the SDRV/PROG/TS/Q3 service corridor is replanned as a group.
+
 A 2026-07-25 direct `BQ_SW1` U1-to-L1 top-layer route was rejected. It dropped the ratsnest count but ran down the U1 left pad row, shorting/crowding `BQ_STAT`, `BQ_VBUS`, `BQ_BTST1`, `BQ_REGN`, `USB_VBUS_RAW` and `SOLAR_PROTECTED` pads. Move/refactor the L1/U1 switch-node placement before retrying `BQ_SW1`/`BQ_SW2`.
 
 A 2026-07-25 trial moving L1 above U1 was rejected. The topology would shorten the switch nodes, but in the current floorplan it collides with the accepted TPS61088 `BQ_SYS` input-cap cluster, C216/C218 support passives and the accepted U1 `BQ_SYS`/`BQ_SDRV` escape routes. Do not move only L1 upward; the charger power stage needs a broader floorplan change with the boost input-cap cluster and U1 support passives considered together.
