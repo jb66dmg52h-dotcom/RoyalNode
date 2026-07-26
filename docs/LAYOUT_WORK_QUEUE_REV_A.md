@@ -171,6 +171,11 @@ These should avoid switch-node copper and RF launch copper.
   top-edge `USB_VBUS_RAW` route from MOD1 5V to Q3 pads 7/8 is accepted. This
   removes the MOD1-to-Q3 USB ratsnest item; the remaining `USB_VBUS_RAW` item
   is the Q3-to-U1 sense/input connection.
+- A 2026-07-26 Q3-to-U1 `USB_VBUS_RAW` bottom-layer sense-route trial was
+  rejected. Lower routing crossed I2C_SCL, `BQ_ACDRV2` and
+  `BQ_USB_SELECTOR_COMMON`; a farther-right variant crossed the `BAT_RAW`
+  trunk and crowded `BQ_VBUS`. Keep the remaining USB raw U1 connection in the
+  lower-edge U1 fanout refactor.
 - A BQ25798 right-side TS-divider relocation trial was rejected because it shorted `BQ_TS` to `BQ_REGN` and violated U1/capacitor courtyards. Treat `BQ_REGN`/`BQ_TS` as a compact HOTROD-package placement pass, not as a generic passive-grid cleanup.
 - A 2026-07-25 `BQ_PROG`/`BQ_INT` direct top-layer routing trial was rejected because it crossed the lower charger/passive staging area and caused shorts, solder-mask issues and thermal relief starvation. Route these only after the lower charger support passives are placed deliberately.
 - A 2026-07-25 `BQ_BTST2` direct top route and a follow-up two-via escape trial were rejected. The top route shorted/crowded `BQ_PROG`; the via route crowded BATP/PROG pad clearance and crossed existing `I2C_SDA`, `BAT_RAW` and `BQ_TS` corridors. Keep `BQ_BTST2`, C217 and the U1 right-side support passives in the same placement pass.
