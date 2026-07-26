@@ -67,6 +67,12 @@ A 2026-07-25 `SOLAR_PROTECTED` U1-entry trial from the Q1 protected-output spine
 
 A 2026-07-25 `BQ_VBUS` Q3-to-U1 bridge trial was rejected. The U1-side via/fanout crowded `BQ_STAT` and `BQ_BTST1`, while the back-layer route crossed accepted `BQ_STAT` and I2C paths. Keep the remaining `BQ_VBUS` U1 connection blocked until the U1 lower-left fanout is reworked as a group.
 
+A 2026-07-26 `BQ_VBUS` cap-bank-to-U1 inner-layer retry was rejected. The U1
+fanout shorted/crowded `BQ_STAT` and crossed `BQ_BTST1`; the cap-bank approach
+crossed the `BQ_PMID` via, crossed the accepted `BQ_SYS` spine and left a
+dangling inner segment. Rework the U1 lower-left pins and the VBUS/PMID cap
+bank together rather than drawing another direct bridge.
+
 The 2026-07-25 `BQ_SYS` capacitor-bank-to-U1 entry is now routed with an internal-layer spine from the SYS capacitor island and a short top-layer entry into U1 pad 25. The accepted via was nudged left to clear the nearby `BQ_SDRV` route.
 
 The 2026-07-25 `BQ_SYS` L2-to-SYS-spine route is now routed with a short top-layer L2 fanout and a wider internal-layer branch into the accepted SYS spine. This leaves the U3 VIN/input-cap connection as the main remaining boost-input power-loop item.
