@@ -79,6 +79,7 @@ Remaining nets:
 Current status:
 
 - `BQ_REGN` pin-to-pin bridge trials lowered the count but shorted/crowded `BAT_RAW`, `BQ_TS`, `BQ_BTST1` and I2C corridors.
+- A top-layer REGN wrap also failed because the U1 perimeter is already occupied by ACDRV, I2C, TS and ground-thermal relief.
 - `BATP_KELVIN` route trials failed because the U1-side via conflicts with the same dense right-side U1 escape area.
 - R202 tight-local relocation at U1 was also rejected because the 0603 footprint overlaps/crowds the U1 right-side support-passive escape.
 
