@@ -176,6 +176,9 @@ These should avoid switch-node copper and RF launch copper.
   local via into the existing `In2.Cu` 3.3 V spine and clears the top-side U1
   right corridor. Earlier bottom-layer and `In1.Cu` attempts were rejected for
   I2C/USB crowding or crossing `BQ_ACDRV1`.
+- The right-edge 3.3 V service leg has also been moved from top copper to
+  `In2.Cu`, rejoining the top 3.3 V service route near 90.4, 36.7 mm. This
+  removes the x102.4 top-layer 3.3 V spine that blocked USB edge-route trials.
 - A 2026-07-25 `BQ_VBUS` Q2/Q3 left-drain loop trial was rejected because top-layer loops around the MOSFET bodies shorted or crossed the adjacent `BQ_ACDRV1`/`BQ_ACDRV2` gate pads. Route the remaining FET drain joins with deliberate copper shapes or a revised FET placement, not a simple around-body trace.
 - A 2026-07-25 rectangular `BQ_VBUS` copper-zone trial around Q3 passed DRC but did not connect Q3 pad 3 to pad 5, so it was removed. The selector drain joins need shaped copper or MOSFET placement changes, not a broad rectangular fill.
 - A 2026-07-25 `SOLAR_PROTECTED` Q1 drain-join trial was rejected. The outside bottom bridge required a top-layer escape that crossed the accepted Q1 gate U-shape; moving the gate U-shape to the right shorted against Q1's no-net thermal/mechanical pad. Treat the Q1 protected-drain join as a FET-footprint/copper-shape pass.
