@@ -4,7 +4,7 @@ Generated from `hardware/fabrication/RoyalNode_drc.rpt`.
 
 This file is a layout planning aid, not a manufacturing release note. Counts are KiCad ratsnest-pair counts, so a net with several components can appear multiple times.
 
-Total unrouted pairs: 27
+Total unrouted pairs: 26
 
 | Net | Ratsnest pairs | Layout note |
 |---|---:|---|
@@ -15,7 +15,6 @@ Total unrouted pairs: 27
 | `BQ_REGN` | 2 | Hold for BQ25798 local fanout and inductor-area placement pass. |
 | `USB_VBUS_RAW` | 2 |  |
 | `BATP_KELVIN` | 1 |  |
-| `BAT_RAW` | 1 | Route as high-current battery path after XT30 and power-path review. |
 | `BOOST_COMP` | 1 |  |
 | `BOOST_VCC` | 1 |  |
 | `BQ_BTST2` | 1 |  |

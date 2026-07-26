@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 27 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 26 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 3 known footprint/library warnings, `MOD2`, `U3` and `L2`
-- Unrouted: 27 ratsnest pairs
+- Unrouted: 26 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
@@ -52,7 +52,6 @@ Route as copper pours after placement review:
 - `BQ_SYS`
 - `BQ_PMID`
 - `BQ_VBUS`
-- `BAT_RAW`
 - `SOLAR_FUSED`
 - `SOLAR_PROTECTED`
 

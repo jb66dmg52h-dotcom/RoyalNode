@@ -136,7 +136,7 @@ Only stable local/control nets are routed in this first pass:
 - `BQ_VBUS`: C200 and C201 are also tied with a same-side local capacitor bus; C212 and U1/FET cross-pads remain unrouted.
 - `BQ_PMID`: C202-C204 are now tied with a same-side local bus; C213 and U1-side PMID remain unrouted.
 - `BQ_SYS`: C206-C209 and C214 are now tied with a same-side local capacitor bus; U1, U3, L2 and upper boost input capacitors remain unrouted.
-- `BAT_RAW`: C210 and C211 are now tied with a same-side local capacitor bus, and J2 is routed to both U2 and that local battery capacitor island through wider inner/back-layer branches; the final U1 BAT escape and BATP/R202 sense branch remain unrouted.
+- `BAT_RAW`: C210/C211, J2, U2 and the U1 BAT pins are now tied through wider inner/back-layer branches; `BATP_KELVIN` remains a separate unrouted sense branch.
 - `BQ_SW2`: C217 has been moved beside the charger power stage and tied locally to L1; the U1-to-L1 switch-node span and `BQ_BTST2` escape remain unrouted.
 - `BQ_ACDRV1`: short local Q2 gate pin tie only; source/drain power pads remain unrouted.
 - `BQ_ACDRV2`: short local Q3 gate pin tie only; source/drain power pads remain unrouted.
@@ -144,7 +144,7 @@ Only stable local/control nets are routed in this first pass:
 - `SOLAR_PROTECTED`: Q1 protected output is now routed down into Q2 through a short wide top-layer path; U4 sensing and U1-side path remain unrouted.
 - `USB_VBUS_RAW`: short wide local Q3 adjacent-drain pad tie only; external/source path remains unrouted.
 - `BQ_VBUS`: short local U1 duplicate VBUS pin tie only; rail fanout remains unrouted.
-- `BAT_RAW`: short local U1 duplicate BAT pin tie only; rail fanout remains unrouted.
+- `BAT_RAW`: U1 duplicate BAT pins are tied into the accepted battery rail.
 - `BOOST_SW`: TPS61088 switch pins are now tied into L2 with compact local top-layer copper. C406 and R402 have been moved beside the boost stage and their BOOT/FSW switch-node branches are routed.
 
 The optional J6 environmental connector is intentionally left unrouted after the connector-access rework; its old generated fanout was retired because it created service-clearance and routing conflicts. The active I2C pair is split across bottom and inner signal layers near the XIAO to avoid the existing RXEN/control corridor. The BQ25798 I2C pins use short local fanouts before joining the same XIAO-side bus, and the pullups sit next to that bus. The E22 control routes use short top-layer fanouts, vias, then `In2.Cu` tracks. The E22 SPI routes use left-side fanouts and a bottom-layer stepped bus to avoid the current boost-stage region. This keeps them away from the unresolved RF launch and avoids treating the staged power passives as final placement.
@@ -235,7 +235,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-27 expected unrouted ratsnest items
+26 expected unrouted ratsnest items
 0 footprint errors
 3 known footprint/library warnings: MOD2, U3 and L2
 ```

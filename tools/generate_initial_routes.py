@@ -970,6 +970,20 @@ SEGMENTS = [
         "points": [(86.00, 82.00), (50.53, 82.00), (50.53, 81.00)],
     },
     {
+        "name": "bat-raw-cap-bus-to-u1-b",
+        "net": "BAT_RAW",
+        "layer": "In1.Cu",
+        "width": 0.40,
+        "points": [(50.53, 81.00), (58.00, 81.00), (58.00, 75.20), (68.00, 75.20), (68.00, 74.00)],
+    },
+    {
+        "name": "bat-raw-u1-entry-b",
+        "net": "BAT_RAW",
+        "layer": "F.Cu",
+        "width": 0.25,
+        "points": [(68.00, 74.00), (66.90, 74.00)],
+    },
+    {
         "name": "boost-fb-r400-r401-local-link",
         "net": "BOOST_FB",
         "layer": "F.Cu",
@@ -1249,6 +1263,7 @@ VIAS = [
     {"name": "bat-raw-u2-branch-via-b", "net": "BAT_RAW", "at": (82.00, 47.60)},
     {"name": "bat-raw-branch-layer-via-b", "net": "BAT_RAW", "at": (86.00, 82.00)},
     {"name": "bat-raw-cap-bus-via-b", "net": "BAT_RAW", "at": (50.53, 81.00)},
+    {"name": "bat-raw-u1-entry-via-b", "net": "BAT_RAW", "at": (68.00, 74.00)},
     {"name": "solar-fused-fuse-via", "net": "SOLAR_FUSED", "at": (89.60, 54.00)},
     {"name": "solar-fused-q1-via", "net": "SOLAR_FUSED", "at": (80.63, 52.20)},
     {"name": "solar-fused-u4-via-b", "net": "SOLAR_FUSED", "at": (71.80, 49.03)},
