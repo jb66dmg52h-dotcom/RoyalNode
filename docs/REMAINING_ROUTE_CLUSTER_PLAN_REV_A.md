@@ -62,7 +62,7 @@ Current status:
 Next strategy:
 
 - Keep the accepted L1 location unless the whole charger quadrant is replanned; moving only L1 upward has already failed.
-- Treat C217, C218, R203/R204, `BQ_TS`, `BQ_REGN`, `BQ_PMID`, `BQ_SW2` and `BQ_BTST2` as a shared U1 right-side fanout problem.
+- Treat C217, C218, R203/R204, `BQ_TS`, `BQ_PMID`, `BQ_SW2` and `BQ_BTST2` as a shared U1 right-side fanout problem. `BQ_REGN` is now routed but should be preserved during any grouped refactor.
 - Move BQ25798 VBUS/PMID capacitor banks nearer U1/Q2/Q3 only as part of a grouped capacitor/passive placement pass.
 
 Do not:
@@ -86,7 +86,7 @@ Current status:
 
 Next strategy:
 
-- Rework C215/R200/R201/R202 as a local U1 support-passive group.
+- Rework R201/R202 and the BATP/TS sense corridor as a local U1 support-passive group while preserving the accepted C215/R200 REGN routing.
 - Keep BATP as a sense route; do not merge it into the high-current battery copper.
 
 Do not:
