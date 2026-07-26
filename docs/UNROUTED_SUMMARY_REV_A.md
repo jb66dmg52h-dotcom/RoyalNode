@@ -4,7 +4,7 @@ Generated from `hardware/fabrication/RoyalNode_drc.rpt`.
 
 This file is a layout planning aid, not a manufacturing release note. Counts are KiCad ratsnest-pair counts, so a net with several components can appear multiple times.
 
-Total unrouted pairs: 35
+Total unrouted pairs: 34
 
 | Net | Ratsnest pairs | Layout note |
 |---|---:|---|
@@ -21,7 +21,6 @@ Total unrouted pairs: 35
 | `BOOST_COMP` | 1 |  |
 | `BOOST_FB` | 1 |  |
 | `BOOST_VCC` | 1 |  |
-| `BQ_ACDRV1` | 1 |  |
 | `BQ_ACDRV2` | 1 |  |
 | `BQ_BTST2` | 1 |  |
 | `BQ_PMID` | 1 | Route as local charger power copper after capacitor placement review. |
