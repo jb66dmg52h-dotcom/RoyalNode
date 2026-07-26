@@ -79,6 +79,12 @@ crossed the `BQ_PMID` via, crossed the accepted `BQ_SYS` spine and left a
 dangling inner segment. Rework the U1 lower-left pins and the VBUS/PMID cap
 bank together rather than drawing another direct bridge.
 
+A 2026-07-26 `BQ_VBUS` cap-bank-to-U1 route after the accepted REGN pin-5
+route was also rejected. The U1 fanout shorted into the new `BQ_REGN` escape
+and BAT_RAW inner trace, while the cap-bank side crossed `BQ_PMID` and the
+accepted `BQ_STAT` back-layer corridor. Keep VBUS in the same U1 lower-edge
+and capacitor-bank placement pass as PMID/STAT/REGN.
+
 The 2026-07-25 `BQ_SYS` capacitor-bank-to-U1 entry is now routed with an internal-layer spine from the SYS capacitor island and a short top-layer entry into U1 pad 25. The accepted via was nudged left to clear the nearby `BQ_SDRV` route.
 
 The 2026-07-25 `BQ_SYS` L2-to-SYS-spine route is now routed with a short top-layer L2 fanout and a wider internal-layer branch into the accepted SYS spine. This leaves the U3 VIN/input-cap connection as the main remaining boost-input power-loop item.
