@@ -69,6 +69,11 @@ Nearby routed or placed blockers:
 - Do not route BTST2 directly through the R203/PROG corridor.
 - Do not place a BTST2 via beside U1 pads 18-20; hole clearance and existing
   B.Cu/In1 corridors fail.
+- Do not move C218 upward into the TPS61088/BQ_SYS input-cap area. A trial at
+  69.2, 68.0 mm shorted `BQ_SDRV` into C401/`BQ_SYS`, overlapped C401's
+  courtyard and starved C218's ground thermal.
+- Do not move C218 to 69.2, 71.2 mm without rerouting R204 first. That trial
+  put the C218 ground pad under R204's 3.3 V feed.
 
 ## Refactor Goal
 
