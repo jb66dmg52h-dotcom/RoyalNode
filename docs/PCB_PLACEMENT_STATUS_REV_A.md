@@ -21,23 +21,24 @@ hardware/kicad/RoyalNode/RoyalNode.kicad_pcb
 The Rev A planning outline is:
 
 ```text
-85 mm x 75 mm
+97 mm x 87 mm
 ```
 
 Current edge rectangle:
 
 ```text
-start: 20 mm, 20 mm
-end:   105 mm, 95 mm
+start: 15 mm, 15 mm
+end:   112 mm, 102 mm
 ```
 
-The board remains a placement scaffold, not a routed PCB and not a fabrication release.
+The outline was expanded from the original 85 x 75 mm scaffold so four real M3 mounting holes can sit in the corners without crowding JST-GH service connectors, the TS/NTC divider, or accepted routing. The board remains a placement scaffold, not a routed PCB and not a fabrication release.
 
 ## Generated Placement Anchors
 
 The generated board currently contains:
 
 - 18 major module, connector, power IC, FET, fuse, and inductor anchors.
+- 4 M3 non-plated corner mounting-hole anchors.
 - 53 staged support-passive anchors from `PASSIVE_CAPTURE_SEED_REV_A.csv`.
 
 The passive anchors are staging placements for footprint/net review, not final routed power-loop placement.
@@ -62,6 +63,10 @@ The passive anchors are staging placements for footprint/net review, not final r
 | `Q1` | `Q_POWER_INFINEON_PG_DSO_8_27_RC` | 78.0, 56.0 mm | 0 deg | Solar protection FET release candidate |
 | `Q2` | `Q_POWER_INFINEON_PG_DSO_8_27_RC` | 78.0, 64.0 mm | 0 deg | BQ solar input selector FET release candidate |
 | `Q3` | `Q_POWER_INFINEON_PG_DSO_8_27_RC` | 78.0, 72.0 mm | 0 deg | BQ USB input selector FET release candidate |
+| `MH1` | `MH_M3_NPTH_3P2MM_6P8MM_CLEARANCE` | 20.0, 20.0 mm | 0 deg | Top-left M3 NPTH mechanical anchor |
+| `MH2` | `MH_M3_NPTH_3P2MM_6P8MM_CLEARANCE` | 107.0, 20.0 mm | 0 deg | Top-right M3 NPTH mechanical anchor |
+| `MH3` | `MH_M3_NPTH_3P2MM_6P8MM_CLEARANCE` | 20.0, 97.0 mm | 0 deg | Bottom-left M3 NPTH mechanical anchor |
+| `MH4` | `MH_M3_NPTH_3P2MM_6P8MM_CLEARANCE` | 107.0, 97.0 mm | 0 deg | Bottom-right M3 NPTH mechanical anchor |
 
 ## Placement Intent
 
@@ -73,7 +78,9 @@ E22 pin 21 ANT -> short 50 ohm GCPW -> edge-launch SMA
 
 The XIAO composite socket footprint is placed in the upper-right area with USB-C edge access still to be verified against the final module orientation. It has been shifted above the RF corridor so the lower XIAO socket pads no longer cross the provisional E22 ANT-to-SMA centerline. The composite footprint uses two LXWCONN `254PM-1x7P-V` socket strips from JLC/LCSC part `C53202181`.
 
-The XT30 solar and battery connectors are placed on the right/lower-right side of the board to keep high-current wiring away from the RF launch as much as possible within the 85 x 75 mm outline. Both use imported JLC/LCSC `C431092` EasyEDA geometry for AMASS `XT30PW-M30.G.Y`.
+The XT30 solar and battery connectors are placed on the right/lower-right side of the board to keep high-current wiring away from the RF launch as much as possible within the 97 x 87 mm outline. Both use imported JLC/LCSC `C431092` EasyEDA geometry for AMASS `XT30PW-M30.G.Y`.
+
+Four M3 non-plated mounting holes are generated as board-only mechanical anchors. Each hole uses a 3.2 mm drill and a 6.8 mm courtyard/clearance diameter, with centers 5 mm in from the expanded board outline corners.
 
 J3 and J4 are now placed as 2-pin JST-GH release-candidate connectors. J3 is the internal XIAO underside BAT/GND lead after the LM66100 isolation path and has been moved to the bottom service edge so it no longer crowds J6, C503 or the SMA corridor. J4 is the battery-mounted NTC safety lead for the BQ25798 TS network. Neither is a general accessory or deployed telemetry port.
 
@@ -149,7 +156,7 @@ Only stable local/control nets are routed in this first pass:
 
 The optional J6 environmental connector is intentionally left unrouted after the connector-access rework; its old generated fanout was retired because it created service-clearance and routing conflicts. The active I2C pair is split across bottom and inner signal layers near the XIAO to avoid the existing RXEN/control corridor. The BQ25798 I2C pins use short local fanouts before joining the same XIAO-side bus, and the pullups sit next to that bus. The E22 control routes use short top-layer fanouts, vias, then `In2.Cu` tracks. The E22 SPI routes use left-side fanouts and a bottom-layer stepped bus to avoid the current boost-stage region. This keeps them away from the unresolved RF launch and avoids treating the staged power passives as final placement.
 
-The same generated pass now adds `TOP_GND_FILL` on `F.Cu` and `L2_GND_REFERENCE` on `In1.Cu`, both tied to `GND` and inset 0.5 mm from the current 85 x 75 mm board outline. The top fill clears the broad passive/module ground ratsnest without creating shorts, while Layer 2 remains the intended continuous reference plane. A generated bottom pour trial was rejected because it created an isolated thermal island at the XIAO socket ground pad; bottom-side copper should be revisited only with a more deliberate via/stitching plan.
+The same generated pass now adds `TOP_GND_FILL` on `F.Cu` and `L2_GND_REFERENCE` on `In1.Cu`, both tied to `GND` and inset 0.5 mm from the current 97 x 87 mm board outline. The top fill clears the broad passive/module ground ratsnest without creating shorts, while Layer 2 remains the intended continuous reference plane. A generated bottom pour trial was rejected because it created an isolated thermal island at the XIAO socket ground pad; bottom-side copper should be revisited only with a more deliberate via/stitching plan.
 
 The RF path, high-current power rails, bottom-side ground copper, BQ25798/TPS61088 switch nodes and final power-loop routes remain unrouted until their placement and footprint review gates are settled.
 

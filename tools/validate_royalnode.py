@@ -404,7 +404,7 @@ def check_generated_pcb_placement() -> None:
     status = read("docs/PCB_PLACEMENT_STATUS_REV_A.md")
     for needle in [
         "P1a",
-        "85 mm x 75 mm",
+        "97 mm x 87 mm",
         "MOD2_E22_900M33S_JLC_C22399506_RC",
         "J_POWER_XT30PW_M_C431092_RC",
         "MOD1_XIAO_NRF52840_SOCKET_C53202181_RC",

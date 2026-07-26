@@ -1446,6 +1446,7 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("segment", "j6-3v3-backbone", "1"),
     stable_uuid("segment", "j6-3v3-backbone", "2"),
     stable_uuid("via", "d1-3v3-service-via"),
+    stable_uuid("segment", "d1-3v3-internal-route", "2"),
     stable_uuid("segment", "j6-gnd-fanout", "0"),
     stable_uuid("segment", "j6-gnd-backbone", "0"),
     stable_uuid("segment", "j6-gnd-backbone", "1"),
@@ -2012,7 +2013,7 @@ def ground_zone_block(layer: str, name: str, zone_uuid: str) -> str:
         f'    )\n'
         f'    (polygon\n'
         f'      (pts\n'
-        f'        (xy 20.50 20.50) (xy 104.50 20.50) (xy 104.50 94.50) (xy 20.50 94.50)\n'
+        f'        (xy 15.50 15.50) (xy 111.50 15.50) (xy 111.50 101.50) (xy 15.50 101.50)\n'
         f'      )\n'
         f'    )\n'
         f'  )'

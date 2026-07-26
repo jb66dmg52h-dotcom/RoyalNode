@@ -151,6 +151,7 @@ The board-mounted SMA is connected to EBYTE ANT pin 21 through a short 50-ohm co
 - Antenna: PCB-mounted edge-launch SMA
 - Programming: XIAO USB-C
 - Recovery/debug: Tag-Connect or SWD pads
+- Mounting: four M3 non-plated corner holes
 
 ## Design philosophy
 

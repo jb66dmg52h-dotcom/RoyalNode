@@ -122,7 +122,7 @@ The following shall not be included as deployed telemetry sensors unless future 
 - Solar wiring sized for approximately 3.3 A continuous current with low voltage drop.
 - Battery wiring sized for at least 5 A continuous capability.
 - PCB-mounted edge-launch SMA connected to EBYTE ANT pin 21 through a short 50-ohm controlled-impedance path.
-- At least four mounting holes.
+- Four M3 non-plated corner mounting holes, 3.2 mm drill, with mechanical clearance for screw heads/standoffs.
 - Board layout must separate switching power circuitry from the radio module and MCU antenna.
 
 ## 9. PCB requirements

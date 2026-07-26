@@ -68,7 +68,7 @@ PLACEMENTS = [
         "file": "J_LOW_JST_GH_SM02B_GHS_TB_RC.kicad_mod",
         "library_name": "J_LOW_JST_GH_SM02B_GHS_TB_RC",
         "at": (95.0, 91.0, 0),
-        "note": "Internal two-wire XIAO underside BAT/GND harness; moved to the bottom service edge away from J6, RF and XIAO SPI fanout.",
+        "note": "Internal two-wire XIAO underside BAT/GND harness; bottom service edge placement preserved by the larger mechanical outline.",
     },
     {
         "ref": "J4",
@@ -84,7 +84,7 @@ PLACEMENTS = [
         "file": "J_LOW_JST_GH_SM04B_GHS_TB_RC.kicad_mod",
         "library_name": "J_LOW_JST_GH_SM04B_GHS_TB_RC",
         "at": (95.0, 24.8, 0),
-        "note": "Optional MeshCore-supported environmental I2C port; moved toward the top edge to clear J3 service access.",
+        "note": "Optional MeshCore-supported environmental I2C port; top service edge placement preserved by the larger mechanical outline.",
     },
     {
         "ref": "U1",
@@ -165,6 +165,38 @@ PLACEMENTS = [
         "library_name": "Q_POWER_INFINEON_PG_DSO_8_27_RC",
         "at": (78.0, 72.0, 0),
         "note": "BQ25798 USB input selector FET placement candidate.",
+    },
+    {
+        "ref": "MH1",
+        "value": "M3 NPTH corner mounting hole",
+        "file": "MH_M3_NPTH_3P2MM_6P8MM_CLEARANCE.kicad_mod",
+        "library_name": "MH_M3_NPTH_3P2MM_6P8MM_CLEARANCE",
+        "at": (20.0, 20.0, 0),
+        "note": "Top-left M3 non-plated mounting hole, 5 mm inset from the 97 x 87 mm board outline.",
+    },
+    {
+        "ref": "MH2",
+        "value": "M3 NPTH corner mounting hole",
+        "file": "MH_M3_NPTH_3P2MM_6P8MM_CLEARANCE.kicad_mod",
+        "library_name": "MH_M3_NPTH_3P2MM_6P8MM_CLEARANCE",
+        "at": (107.0, 20.0, 0),
+        "note": "Top-right M3 non-plated mounting hole, 5 mm inset from the 97 x 87 mm board outline.",
+    },
+    {
+        "ref": "MH3",
+        "value": "M3 NPTH corner mounting hole",
+        "file": "MH_M3_NPTH_3P2MM_6P8MM_CLEARANCE.kicad_mod",
+        "library_name": "MH_M3_NPTH_3P2MM_6P8MM_CLEARANCE",
+        "at": (20.0, 97.0, 0),
+        "note": "Bottom-left M3 non-plated mounting hole, 5 mm inset from the 97 x 87 mm board outline.",
+    },
+    {
+        "ref": "MH4",
+        "value": "M3 NPTH corner mounting hole",
+        "file": "MH_M3_NPTH_3P2MM_6P8MM_CLEARANCE.kicad_mod",
+        "library_name": "MH_M3_NPTH_3P2MM_6P8MM_CLEARANCE",
+        "at": (107.0, 97.0, 0),
+        "note": "Bottom-right M3 non-plated mounting hole, 5 mm inset from the 97 x 87 mm board outline.",
     },
 ]
 GENERATED_LIBRARY_NAMES = {str(item["library_name"]) for item in PLACEMENTS}
