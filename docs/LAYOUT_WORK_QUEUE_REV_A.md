@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 19 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 18 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 3 known footprint/library warnings, `MOD2`, `U3` and `L2`
-- Unrouted: 19 ratsnest pairs
+- Unrouted: 18 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
@@ -74,6 +74,8 @@ The 2026-07-25 `BQ_SYS` L2-to-SYS-spine route is now routed with a short top-lay
 The 2026-07-25 `BQ_SYS` U3 VIN-to-L2 spine branch is now routed with a compact top-layer U3 fanout and an In1 branch into the L2/SYS spine. Intermediate trials hit BOOST_EN, I2C/E22 internal routes, BOOT clearance and C407 ground thermal starvation; the accepted via lands lower/left enough to keep C407's ground thermal intact.
 
 A 2026-07-25 `BQ_SYS` boost-input-cap-to-U3 spine corridor trial was rejected. In1 crossed `BOOST_FB` and crowded `BOOST_EN`; In2 avoided those but crossed E22 reset/RXEN and the XIAO/I2C service corridor; B.Cu crossed `SPI_SCK`, I2C and the XIAO through-hole row with solder-mask issues. Keep the remaining boost-input connection as a placement/copper-pour pass rather than a long straight corridor.
+
+The 2026-07-25 TPS61088 input-cap placement pass moved C400, C401 and C404 from the remote placeholder boost row into the local U3/L2 input area. C400/C401 now form a local `BQ_SYS` bulk-cap bus below L2, and C404 is placed as the local high-frequency bypass. The accepted top-layer copper removes `BQ_SYS` from the unrouted list while keeping DRC clean.
 
 ## Pass 4: Switch Nodes
 
