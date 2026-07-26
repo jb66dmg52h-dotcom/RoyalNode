@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 30 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 29 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 3 known footprint/library warnings, `MOD2`, `U3` and `L2`
-- Unrouted: 30 ratsnest pairs
+- Unrouted: 29 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
@@ -70,7 +70,7 @@ The current layout ties the adjacent TPS61088 switch pins into L2 with compact l
 
 C216 is now relocated below U1 with `BQ_BTST1` and the local capacitor side of `BQ_SW1` routed. The remaining `BQ_SW1` ratsnest item is the inductor/power-loop path, not the bootstrap-cap connection.
 
-A 2026-07-25 C217 `BQ_BTST2`/local `BQ_SW2` trial was rejected. The proposed lower-right placement collided with C218 ground, the accepted 3.3 V pullup path, and the existing `BQ_INT`/`BQ_PROG` fanout. Treat C217 as part of a coordinated right-side U1 fanout pass.
+C217 is now staged beside the charger power stage and its local `BQ_SW2` side is tied to L1. The companion `BQ_BTST2` escape remains blocked after a top-layer trial crossed/crowded `BQ_TS`; treat the remaining bootstrap work as a U1 right-side escape pass.
 
 A 2026-07-25 `BQ_PMID` U1-to-cap-bus bridge trial was rejected. The direct top-layer route crossed the accepted C216 `BQ_BTST1` escape and crowded U1 `BQ_STAT`; the bottom-layer via variant still violated clearance at the dense U1 lower pad row. Treat `BQ_PMID` as a U1 power-copper/fanout pass.
 
