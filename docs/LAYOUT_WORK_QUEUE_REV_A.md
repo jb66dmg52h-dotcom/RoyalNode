@@ -65,6 +65,8 @@ The 2026-07-25 `SOLAR_PROTECTED` U4 protected-output sense branch is now routed 
 
 A 2026-07-25 `SOLAR_PROTECTED` U1-entry trial from the Q1 protected-output spine was rejected. The U1-side via crowded/shorted the `BQ_ACDRV2` lower-row pad, and the internal-layer approach crossed the accepted `BQ_VBUS` and I2C corridors. Keep the remaining `SOLAR_PROTECTED` U1 connection blocked until the U1 lower-edge fanout is reworked as a group.
 
+A 2026-07-25 `BQ_VBUS` Q3-to-U1 bridge trial was rejected. The U1-side via/fanout crowded `BQ_STAT` and `BQ_BTST1`, while the back-layer route crossed accepted `BQ_STAT` and I2C paths. Keep the remaining `BQ_VBUS` U1 connection blocked until the U1 lower-left fanout is reworked as a group.
+
 ## Pass 4: Switch Nodes
 
 Route only after BQ25798 and TPS61088 placement is compact:
