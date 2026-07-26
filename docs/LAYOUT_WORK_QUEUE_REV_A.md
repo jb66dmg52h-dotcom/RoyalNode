@@ -121,6 +121,14 @@ A later 2026-07-25 `BQ_SW2` trial that shifted the accepted `BQ_SYS` U1-entry vi
 
 A 2026-07-25 direct `BQ_SW1` U1-to-L1 top-layer route was rejected. It dropped the ratsnest count but ran down the U1 left pad row, shorting/crowding `BQ_STAT`, `BQ_VBUS`, `BQ_BTST1`, `BQ_REGN`, `USB_VBUS_RAW` and `SOLAR_PROTECTED` pads. Move/refactor the L1/U1 switch-node placement before retrying `BQ_SW1`/`BQ_SW2`.
 
+A 2026-07-26 grouped `BQ_BTST2`/C217/R203 refactor was rejected. It briefly
+reduced the ratsnest count, but placing C217 near the U1 right edge and moving
+R203 into that same corridor produced `BQ_BTST2`/`BQ_PROG`, `BQ_PROG`/`BQ_TS`
+and `BQ_SW2`/`BQ_PROG` crossings or shorts depending on the PROG escape layer.
+The temporary C217/R203 placement and orphaned PROG stub are retired. Keep the
+next BTST2 attempt as a broader right-side U1 refactor that includes TS, PROG,
+INT, SW2 and the nearby selector/service routes.
+
 A 2026-07-25 trial moving L1 above U1 was rejected. The topology would shorten the switch nodes, but in the current floorplan it collides with the accepted TPS61088 `BQ_SYS` input-cap cluster, C216/C218 support passives and the accepted U1 `BQ_SYS`/`BQ_SDRV` escape routes. Do not move only L1 upward; the charger power stage needs a broader floorplan change with the boost input-cap cluster and U1 support passives considered together.
 
 A 2026-07-25 long `UV_NODE` bottom-layer route was rejected. It collided with the fused-solar U4 via, crossed the accepted I2C/SPI corridors, and clipped the XIAO through-hole row. Treat the protection-divider sense nets as a U4/divider placement pass rather than long board-spanning traces.
