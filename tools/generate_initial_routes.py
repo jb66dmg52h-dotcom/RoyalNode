@@ -886,6 +886,20 @@ SEGMENTS = [
         "points": [(75.38, 56.64), (75.38, 61.70), (80.63, 61.70)],
     },
     {
+        "name": "solar-protected-u4-to-q1-sense-b",
+        "net": "SOLAR_PROTECTED",
+        "layer": "In2.Cu",
+        "width": 0.25,
+        "points": [(76.10, 49.68), (71.50, 49.68), (71.50, 56.64), (75.38, 56.64)],
+    },
+    {
+        "name": "solar-protected-u4-sense-fanout-b",
+        "net": "SOLAR_PROTECTED",
+        "layer": "F.Cu",
+        "width": 0.15,
+        "points": [(75.14, 49.68), (76.10, 49.68)],
+    },
+    {
         "name": "q3-usb-vbus-raw-drain-local",
         "net": "USB_VBUS_RAW",
         "layer": "F.Cu",
@@ -1275,6 +1289,7 @@ VIAS = [
     {"name": "q3-usb-selector-common-right-via-b", "net": "BQ_USB_SELECTOR_COMMON", "at": (82.00, 72.64)},
     {"name": "q3-acdrv2-u1-via-b", "net": "BQ_ACDRV2", "at": (61.60, 77.60)},
     {"name": "q3-acdrv2-gate-via-b", "net": "BQ_ACDRV2", "at": (74.20, 72.10)},
+    {"name": "solar-protected-u4-sense-via-b", "net": "SOLAR_PROTECTED", "at": (76.10, 49.68)},
     {"name": "solar-protected-q1-left-drain-via-b", "net": "SOLAR_PROTECTED", "at": (75.38, 56.64)},
     {"name": "solar-protected-q1-right-drain-via-b", "net": "SOLAR_PROTECTED", "at": (80.63, 61.70)},
     {"name": "bq-pmid-c213-bus-via", "net": "BQ_PMID", "at": (32.60, 75.00)},
