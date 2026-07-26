@@ -21,7 +21,7 @@ Current architecture:
 - Generated root schematic with major active parts, connectors, inductors, fuse, off-board thermistor representation and 54 support passives.
 - Project-local symbol library for the current Rev A major parts.
 - Project-local release-candidate footprints for E22, XIAO socket, BQ25798, TPS61088, LM66100, LTC4365, Infineon power MOSFETs, XT30, JST-GH, inductors, solar fuse and E22 bulk capacitor.
-- Net-aware PCB placement scaffold with 71 generated footprint anchors.
+- Net-aware PCB placement scaffold with 75 generated footprint anchors.
 - KiCad net classes for high-current power, switching nodes, RF and sensitive sense nets.
 - No dedicated test points, current shunts, probe loops or bench-only measurement links.
 
@@ -30,10 +30,10 @@ Current architecture:
 Preferred local verification command:
 
 ```text
-make full-check
+make layout-status
 ```
 
-This runs the repository validator, KiCad ERC, KiCad DRC and the report gate that confirms only the expected Rev A warning/unrouted state is present.
+This runs the repository validator, KiCad ERC, KiCad DRC, the report gate that confirms only the expected Rev A warning/unrouted state is present, and the unrouted-summary generator.
 
 Expected command state:
 
@@ -46,7 +46,7 @@ kicad-cli sch erc --exit-code-violations --severity-all
 
 kicad-cli pcb drc --severity-all
   3 known footprint/library warnings: MOD2, U3 and L2
-  16 expected unconnected/ratsnest items because the board is not routed
+  11 expected unrouted ratsnest pairs because the board is not fully routed
 ```
 
 The known footprint warnings are tracked because MOD2 is a local JLC/LCSC release candidate for a factory-installed E22 module and U3/L2 are local release-candidate power footprints whose board instances are rotated for the accepted boost topology. These must be cleared by KiCad footprint update/save behavior or explicitly accepted through JLCPCB DFM/PCBA review before fabrication release.
@@ -58,6 +58,14 @@ J3 has been moved to the bottom service edge to clear the J6/SMA/C503 area. J6 h
 `BAT_RAW` is now routed from the battery XT30 pad to the LM66100/XIAO battery-isolation input, the local battery capacitor island and the U1 BAT pins. `BATP_KELVIN` is now routed as a separate low-current sense branch from U1 BATP to R202, and `BQ_PMID` now bridges from U1 into the PMID capacitor bank.
 
 `BOOST_ILIM`, `BOOST_SS`, `BOOST_COMP`, `BQ_REGN`, `BQ_SDRV`, the C216 `BQ_BTST1`/local `BQ_SW1` bootstrap side, the accepted `BQ_SW1` left-wrap to L1, `BQ_PMID`, the C217 local `BQ_SW2` bootstrap side and the TPS61088 `BQ_SYS` input-cap cluster are now locally routed after moving their support passives beside the relevant ICs. `BOOST_VCC`, `BQ_SW2` and `BQ_BTST2` remain unrouted until their nearby support-passive and power-loop geometry can be separated cleanly.
+
+The draft quote-export workflow now runs with:
+
+```text
+make export-draft-quote
+```
+
+It produces Gerber, drill, CPL, BOM, netlist and report artifacts under `hardware/fabrication/quote_draft_rev_a`. The generated package remains explicitly marked not-for-fabrication until the remaining unrouted items, SMA launch and high-current power paths are resolved.
 
 ## Active Blockers
 
