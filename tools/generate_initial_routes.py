@@ -1453,6 +1453,8 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("segment", "boost-input-c400-c401-local-bus", "1"),
     stable_uuid("segment", "boost-input-c400-c401-local-bus", "2"),
     stable_uuid("segment", "boost-input-c404-top-edge-bridge", "2"),
+    stable_uuid("segment", "e22-vcc-c503-local-c", "0"),
+    stable_uuid("segment", "e22-vcc-c503-local-c", "1"),
     stable_uuid("segment", "bq-pmid-cap-to-u1-left-fanout-d", "0"),
     stable_uuid("segment", "bq-pmid-cap-to-u1-internal-d", "0"),
     stable_uuid("segment", "bq-pmid-u1-entry-d", "0"),
