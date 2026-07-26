@@ -89,6 +89,7 @@ Use these first:
 - `docs/PCB_PLACEMENT_STATUS_REV_A.md`
 - `docs/UNROUTED_SUMMARY_REV_A.md`
 - `docs/LAYOUT_WORK_QUEUE_REV_A.md`
+- `docs/REMAINING_ROUTE_CLUSTER_PLAN_REV_A.md`
 - `docs/PCB_NET_CLASSES_REV_A.md`
 
 Older conflict reviews and trace-path audits are retained as historical reasoning. Where they conflict with the files above, the current authoritative documents win.
