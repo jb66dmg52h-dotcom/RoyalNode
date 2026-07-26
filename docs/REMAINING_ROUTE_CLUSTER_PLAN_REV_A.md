@@ -51,17 +51,18 @@ Remaining nets:
 
 Current status:
 
-- The existing L1 position leaves `BQ_SW1`/`BQ_SW2` too far below the U1 switch pins.
 - `BQ_SW1` is now routed with an accepted left-side wrap from U1/C216 to L1.
 - A trial moving only L1 above U1 was rejected because it collided with the accepted TPS61088 input-cap cluster and U1 support passives.
 - A direct `BQ_SW1` top route lowered the ratsnest count but failed badly by running down the U1 left pad row.
 - `BQ_PMID` bridge retries lower the count but short/crowd `BQ_STAT`, `BQ_BTST1` and the accepted `BQ_SYS` spine.
 - `BQ_SW2` and `BQ_BTST2` remain coupled to C217 placement and the U1 right-side escape.
+- Recent `BQ_SW2` trials show that the accepted `BQ_SYS` entry, C218/`BQ_SDRV`, R203/R204, `BQ_TS` and Q3 selector pads must be replanned together; shifting only the SYS via or drawing a right-side overpass causes shorts or solder-mask bridges.
+- Recent `BQ_BTST2` trials show that the direct top path crosses `BQ_PROG`, while a two-via escape crowds BATP/PROG and crosses existing `I2C_SDA`, `BAT_RAW` and `BQ_TS` corridors.
 
 Next strategy:
 
-- Reposition L1 closer to the U1 switch pins before retrying `BQ_SW1`/`BQ_SW2`.
-- Treat C216/C217 bootstrap capacitors, `BQ_TS`, `BQ_REGN`, `BQ_PMID` and switch-node escapes as a shared U1 fanout problem.
+- Keep the accepted L1 location unless the whole charger quadrant is replanned; moving only L1 upward has already failed.
+- Treat C217, C218, R203/R204, `BQ_TS`, `BQ_REGN`, `BQ_PMID`, `BQ_SW2` and `BQ_BTST2` as a shared U1 right-side fanout problem.
 - Move BQ25798 VBUS/PMID capacitor banks nearer U1/Q2/Q3 only as part of a grouped capacitor/passive placement pass.
 
 Do not:
@@ -117,10 +118,10 @@ The highest-value next pass is:
 
 ```text
 Refactor the BQ25798 power-stage placement:
-  1. Move L1 closer to U1 switch pins.
-  2. Re-stage C216/C217 around the new L1/U1 geometry.
-  3. Re-test BQ_SW1, BQ_SW2 and BQ_BTST2.
-  4. Only then retry BQ_PMID and BQ_REGN.
+  1. Preserve the accepted BQ_SW1 left-wrap unless a full charger-quadrant refactor replaces it.
+  2. Re-stage C217/C218/R203/R204 around the U1 right-side escape.
+  3. Re-test BQ_SW2 and BQ_BTST2.
+  4. Only then retry BQ_PMID, BQ_REGN, BATP_KELVIN and the U1-side service-power entries.
 ```
 
 This should reduce several remaining unrouted items while improving the actual
