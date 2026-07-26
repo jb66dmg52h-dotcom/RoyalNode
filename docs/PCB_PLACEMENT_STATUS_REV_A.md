@@ -143,7 +143,8 @@ Only stable local/control nets are routed in this first pass:
 - `BQ_VBUS`: C200 and C201 are also tied with a same-side local capacitor bus; C212 and U1/FET cross-pads remain unrouted.
 - `BQ_PMID`: C202-C204 are now tied with a same-side local bus; C213 and U1-side PMID remain unrouted.
 - `BQ_SYS`: C206-C209 and C214 are now tied with a same-side local capacitor bus; U1, U3, L2 and upper boost input capacitors remain unrouted.
-- `BAT_RAW`: C210/C211, J2, U2 and the U1 BAT pins are now tied through wider inner/back-layer branches; `BATP_KELVIN` remains a separate unrouted sense branch.
+- `BAT_RAW`: C210/C211, J2, U2 and the U1 BAT pins are now tied through wider inner/back-layer branches.
+- `BATP_KELVIN`: U1 BATP is now connected to R202 through a routed sense branch using short top-layer fanouts, small signal vias, a B.Cu escape and an In2.Cu hop around the existing BAT_RAW/NTC/I2C corridors.
 - `BQ_SW2`: C217 has been moved beside the charger power stage and tied locally to L1; the U1-to-L1 switch-node span and `BQ_BTST2` escape remain unrouted.
 - `BQ_ACDRV1`: short local Q2 gate pin tie only; source/drain power pads remain unrouted.
 - `BQ_ACDRV2`: short local Q3 gate pin tie only; source/drain power pads remain unrouted.
@@ -242,7 +243,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-16 expected unrouted ratsnest items
+13 expected unrouted ratsnest items
 0 footprint errors
 3 known footprint/library warnings: MOD2, U3 and L2
 ```

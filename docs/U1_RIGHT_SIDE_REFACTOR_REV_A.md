@@ -1,7 +1,7 @@
 # U1 Right-Side Refactor Rev A
 
 This note captures the next charger-layout work package after the clean
-17-unrouted checkpoint.
+13-unrouted checkpoint.
 
 ## Current Gate
 
@@ -9,7 +9,7 @@ This note captures the next charger-layout work package after the clean
 make layout-status
   ERC: 0
   DRC: 3 known footprint warnings only
-  Unrouted: 14 ratsnest pairs
+  Unrouted: 13 ratsnest pairs
 ```
 
 Known allowed DRC warnings remain `MOD2`, `U3` and `L2` footprint/library
@@ -103,7 +103,7 @@ Create a legal right-side escape corridor where:
 1. `BQ_SYS` keeps a short, quiet U1 entry.
 2. `BQ_SW2` leaves U1 without crossing SDRV, SYS, 3.3 V, Q3 or I2C.
 3. `BQ_BTST2` stays close to C217 and avoids PROG/TS.
-4. `BATP_KELVIN` remains a sense connection, not part of high-current BAT copper.
+4. `BATP_KELVIN` remains a routed sense connection, not part of high-current BAT copper.
 5. Q3 selector pads remain serviceable and do not mask-bridge to switch-node copper.
 
 ## Candidate Placement Strategy

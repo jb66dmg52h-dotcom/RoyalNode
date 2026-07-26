@@ -648,6 +648,34 @@ SEGMENTS = [
         "points": [(68.00, 76.60), (66.85, 76.60)],
     },
     {
+        "name": "batp-kelvin-u1-fanout-e",
+        "net": "BATP_KELVIN",
+        "layer": "F.Cu",
+        "width": 0.15,
+        "points": [(66.875, 75.80), (67.75, 75.80), (67.75, 75.90)],
+    },
+    {
+        "name": "batp-kelvin-bottom-escape-e",
+        "net": "BATP_KELVIN",
+        "layer": "B.Cu",
+        "width": 0.15,
+        "points": [(67.75, 75.90), (67.75, 76.05), (69.00, 76.05), (69.00, 81.30), (52.00, 81.30), (52.00, 80.20), (49.00, 80.20)],
+    },
+    {
+        "name": "batp-kelvin-inner-route-e",
+        "net": "BATP_KELVIN",
+        "layer": "In2.Cu",
+        "width": 0.15,
+        "points": [(49.00, 80.20), (33.00, 80.20), (33.00, 90.50), (42.45, 90.50)],
+    },
+    {
+        "name": "batp-kelvin-r202-fanout-e",
+        "net": "BATP_KELVIN",
+        "layer": "F.Cu",
+        "width": 0.15,
+        "points": [(42.45, 90.50), (42.45, 89.00), (41.625, 89.00)],
+    },
+    {
         "name": "bq-sdrv-c218-local",
         "net": "BQ_SDRV",
         "layer": "F.Cu",
@@ -1406,6 +1434,9 @@ VIAS = [
     {"name": "bq-stat-u1-via", "net": "BQ_STAT", "at": (62.40, 73.40)},
     {"name": "bq-regn-u1-pad5-via-a", "net": "BQ_REGN", "at": (60.80, 76.00)},
     {"name": "bq-regn-c215-via-a", "net": "BQ_REGN", "at": (39.85, 85.00)},
+    {"name": "batp-kelvin-u1-via-e", "net": "BATP_KELVIN", "at": (67.75, 75.90), "size": 0.50, "drill": 0.25},
+    {"name": "batp-kelvin-layer-hop-via-e", "net": "BATP_KELVIN", "at": (49.00, 80.20), "size": 0.50, "drill": 0.25},
+    {"name": "batp-kelvin-r202-via-e", "net": "BATP_KELVIN", "at": (42.45, 90.50), "size": 0.50, "drill": 0.25},
     {"name": "boost-comp-rc-r404-via", "net": "BOOST_COMP_RC", "at": (28.80, 47.00)},
     {"name": "boost-comp-rc-c408-via", "net": "BOOST_COMP_RC", "at": (34.10, 29.00)},
     {"name": "boost-fb-u3-via-b", "net": "BOOST_FB", "at": (56.80, 55.75)},
@@ -1501,6 +1532,9 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("via", "5v-radio-e22-entry-via-c"),
     stable_uuid("segment", "boost-vcc-c405-local-e", "0"),
     stable_uuid("segment", "boost-vcc-c405-local-e", "1"),
+    stable_uuid("segment", "boost-vcc-u3-c405-local-b", "0"),
+    stable_uuid("segment", "boost-vcc-u3-c405-local-b", "1"),
+    stable_uuid("segment", "boost-ilim-u3-fanout", "1"),
     stable_uuid("segment", "bq-sys-boost-input-to-u3-c", "0"),
     stable_uuid("segment", "bq-sys-boost-input-to-u3-c", "1"),
     stable_uuid("segment", "bq-sys-boost-input-to-u3-c", "2"),
@@ -1875,6 +1909,20 @@ RETIRED_GENERATED_UUIDS = {
     stable_uuid("segment", "batp-kelvin-left-route-b", "1"),
     stable_uuid("segment", "batp-kelvin-left-route-b", "2"),
     stable_uuid("via", "batp-kelvin-u1-left-via-b"),
+    stable_uuid("segment", "batp-kelvin-u1-fanout-d", "0"),
+    stable_uuid("segment", "batp-kelvin-u1-fanout-d", "1"),
+    stable_uuid("segment", "batp-kelvin-bottom-route-d", "0"),
+    stable_uuid("segment", "batp-kelvin-bottom-route-d", "1"),
+    stable_uuid("segment", "batp-kelvin-bottom-route-d", "2"),
+    stable_uuid("segment", "batp-kelvin-bottom-route-d", "3"),
+    stable_uuid("segment", "batp-kelvin-bottom-route-d", "4"),
+    stable_uuid("segment", "batp-kelvin-bottom-route-d", "5"),
+    stable_uuid("segment", "batp-kelvin-r202-fanout-d", "0"),
+    stable_uuid("via", "batp-kelvin-u1-via-d"),
+    stable_uuid("via", "batp-kelvin-r202-via-d"),
+    stable_uuid("segment", "batp-kelvin-u1-r202-local-e", "0"),
+    stable_uuid("segment", "batp-kelvin-r202-batraw-local-e", "0"),
+    stable_uuid("segment", "batp-kelvin-r202-batraw-local-e", "1"),
     stable_uuid("segment", "bq-pmid-u1-lower-fanout-c", "0"),
     stable_uuid("segment", "bq-pmid-u1-lower-fanout-c", "1"),
     stable_uuid("segment", "bq-pmid-lower-back-route-c", "0"),
@@ -1993,12 +2041,12 @@ def segment_block(name: str, index: int, net: str, layer: str, width: float, sta
     )
 
 
-def via_block(name: str, net: str, at: tuple[float, float]) -> str:
+def via_block(name: str, net: str, at: tuple[float, float], size: float = 0.60, drill: float = 0.30) -> str:
     return (
         f'  (via\n'
         f'    (at {at[0]:.2f} {at[1]:.2f})\n'
-        f'    (size 0.60)\n'
-        f'    (drill 0.30)\n'
+        f'    (size {size:.2f})\n'
+        f'    (drill {drill:.2f})\n'
         f'    (layers "F.Cu" "B.Cu")\n'
         f'    (net "{net}")\n'
         f'    (uuid "{stable_uuid("via", name)}")\n'
@@ -2050,7 +2098,15 @@ def generated_blocks() -> str:
                 )
             )
     for via in VIAS:
-        blocks.append(via_block(str(via["name"]), str(via["net"]), via["at"]))  # type: ignore[arg-type]
+        blocks.append(
+            via_block(
+                str(via["name"]),
+                str(via["net"]),
+                via["at"],  # type: ignore[arg-type]
+                float(via.get("size", 0.60)),
+                float(via.get("drill", 0.30)),
+            )
+        )
     for layer, name, zone_uuid in GROUND_ZONES:
         blocks.append(ground_zone_block(layer, name, zone_uuid))
     return "\n".join(blocks)

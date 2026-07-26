@@ -55,7 +55,7 @@ J3 has been moved to the bottom service edge to clear the J6/SMA/C503 area. J6 h
 
 `BOOST_EN` is now routed from the XIAO control pin to the TPS61088 enable pin and R405 pulldown. The accepted route uses the existing control corridor and keeps the local pulldown tied into the same enable net without adding measurement links.
 
-`BAT_RAW` is now routed from the battery XT30 pad to the LM66100/XIAO battery-isolation input, the local battery capacitor island and the U1 BAT pins. `BATP_KELVIN` remains open as the separate battery sense branch.
+`BAT_RAW` is now routed from the battery XT30 pad to the LM66100/XIAO battery-isolation input, the local battery capacitor island and the U1 BAT pins. `BATP_KELVIN` is now routed as a separate low-current sense branch from U1 BATP to R202.
 
 `BQ_REGN` and the protection-divider `GND` local link remain intentionally unrouted until their local placement/fanout is improved. Generated trial routes were rejected and retired because they crossed I2C/OV routes or crowded adjacent pads. `BOOST_ILIM`, `BOOST_SS`, `BQ_SDRV`, the C216 `BQ_BTST1`/local `BQ_SW1` bootstrap side, the accepted `BQ_SW1` left-wrap to L1, the C217 local `BQ_SW2` bootstrap side and the TPS61088 `BQ_SYS` input-cap cluster are now locally routed after moving their support passives beside the relevant ICs. `BQ_SW2` and `BQ_BTST2` remain unrouted until the U1 right-side escape can be separated cleanly from `BQ_TS`, `BQ_PROG`, C218/`BQ_SDRV`, R204 and Q3.
 
