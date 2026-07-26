@@ -921,6 +921,13 @@ SEGMENTS = [
         "points": [(83.50, 65.91), (83.50, 73.91)],
     },
     {
+        "name": "bq-vbus-q2-left-to-right-b",
+        "net": "BQ_VBUS",
+        "layer": "In2.Cu",
+        "width": 0.50,
+        "points": [(75.38, 64.64), (75.38, 68.30), (83.50, 68.30), (83.50, 65.91)],
+    },
+    {
         "name": "bq-vbus-q3-right-entry",
         "net": "BQ_VBUS",
         "layer": "F.Cu",
@@ -1266,6 +1273,7 @@ VIAS = [
     {"name": "bq-vbus-c212-bus-via", "net": "BQ_VBUS", "at": (21.40, 75.00)},
     {"name": "bq-vbus-c212-pad-via", "net": "BQ_VBUS", "at": (22.40, 85.80)},
     {"name": "bq-vbus-q2-via", "net": "BQ_VBUS", "at": (83.50, 65.91)},
+    {"name": "bq-vbus-q2-left-drain-via-b", "net": "BQ_VBUS", "at": (75.38, 64.64)},
     {"name": "bq-vbus-q3-via", "net": "BQ_VBUS", "at": (83.50, 73.91)},
     {"name": "bq-vbus-q3-left-drain-via-b", "net": "BQ_VBUS", "at": (75.38, 72.64)},
     {"name": "bat-raw-u2-branch-via-b", "net": "BAT_RAW", "at": (82.00, 47.60)},
