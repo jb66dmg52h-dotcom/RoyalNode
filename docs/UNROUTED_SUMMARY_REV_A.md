@@ -4,12 +4,12 @@ Generated from `hardware/fabrication/RoyalNode_drc.rpt`.
 
 This file is a layout planning aid, not a manufacturing release note. Counts are KiCad ratsnest-pair counts, so a net with several components can appear multiple times.
 
-Total unrouted pairs: 22
+Total unrouted pairs: 21
 
 | Net | Ratsnest pairs | Layout note |
 |---|---:|---|
 | `5V_RADIO` | 4 | Route as high-current power pour after boost/radio placement review. |
-| `BQ_SYS` | 4 | Route as system power pour after charger/boost placement review. |
+| `BQ_SYS` | 3 | Route as system power pour after charger/boost placement review. |
 | `BQ_REGN` | 2 | Hold for BQ25798 local fanout and inductor-area placement pass. |
 | `BQ_VBUS` | 2 | Route as input-selector power copper after Q2/Q3/U1 placement review. |
 | `USB_VBUS_RAW` | 2 |  |
