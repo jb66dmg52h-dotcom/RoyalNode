@@ -1448,6 +1448,7 @@ def generated_uuids() -> set[str]:
     for via in VIAS:
         ids.add(stable_uuid("via", str(via["name"])))
     ids.update(uuid for _, _, uuid in GROUND_ZONES)
+    ids.add(stable_uuid("zone", "q1-solar-protected-join"))
     ids.update(RETIRED_GENERATED_UUIDS)
     return ids
 
