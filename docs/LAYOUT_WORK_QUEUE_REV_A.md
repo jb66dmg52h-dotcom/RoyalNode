@@ -63,6 +63,8 @@ The 2026-07-25 `SOLAR_PROTECTED` Q1 duplicate-drain island is now joined with an
 
 The 2026-07-25 `SOLAR_PROTECTED` U4 protected-output sense branch is now routed with a short top-layer fanout from U4 and an internal-layer bridge into the Q1 protected-output island. The first U4 via-in-pad location was rejected for no-net pad and hole-clearance issues; the accepted route moves the via off-pad and left of the `SOLAR_PROT_COMMON` via.
 
+A 2026-07-25 `SOLAR_PROTECTED` U1-entry trial from the Q1 protected-output spine was rejected. The U1-side via crowded/shorted the `BQ_ACDRV2` lower-row pad, and the internal-layer approach crossed the accepted `BQ_VBUS` and I2C corridors. Keep the remaining `SOLAR_PROTECTED` U1 connection blocked until the U1 lower-edge fanout is reworked as a group.
+
 ## Pass 4: Switch Nodes
 
 Route only after BQ25798 and TPS61088 placement is compact:
