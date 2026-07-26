@@ -76,6 +76,9 @@ Nearby routed or placed blockers:
   `BQ_TS`/I2C_SDA, and the right pocket shorted into the accepted
   `BQ_PROG` local route. Move or reroute R203/`BQ_PROG` before retrying
   `BQ_BTST2`.
+- A vertical R203 relocation at 72.8, 76.8 mm was rejected. The rotated pad
+  order put the GND pad in the PROG feed path, added a solder-mask bridge and
+  introduced an extra R203 footprint/library warning.
 - Do not place a BTST2 via beside U1 pads 18-20; hole clearance and existing
   B.Cu/In1 corridors fail.
 - Do not move C218 upward into the TPS61088/BQ_SYS input-cap area. A trial at
