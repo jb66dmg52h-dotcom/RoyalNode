@@ -459,6 +459,20 @@ SEGMENTS = [
         "points": [(70.50, 55.00), (70.50, 71.80), (65.80, 71.80)],
     },
     {
+        "name": "bq-sys-u3-vin-fanout-b",
+        "net": "BQ_SYS",
+        "layer": "F.Cu",
+        "width": 0.30,
+        "points": [(60.65, 53.25), (61.20, 53.25), (61.20, 52.90)],
+    },
+    {
+        "name": "bq-sys-u3-to-l2-spine-b",
+        "net": "BQ_SYS",
+        "layer": "In1.Cu",
+        "width": 0.50,
+        "points": [(61.20, 52.90), (70.50, 52.90), (70.50, 55.00)],
+    },
+    {
         "name": "bat-raw-cap-bank-bus",
         "net": "BAT_RAW",
         "layer": "F.Cu",
@@ -1307,6 +1321,7 @@ VIAS = [
     {"name": "bq-sys-c205-pad-via", "net": "BQ_SYS", "at": (50.00, 77.80)},
     {"name": "bq-sys-u1-entry-via-b", "net": "BQ_SYS", "at": (65.80, 71.80)},
     {"name": "bq-sys-l2-spine-via-b", "net": "BQ_SYS", "at": (70.50, 55.00)},
+    {"name": "bq-sys-u3-vin-via-b", "net": "BQ_SYS", "at": (61.20, 52.90)},
     {"name": "solar-prot-gate-u4-via-b", "net": "SOLAR_PROT_GATE", "at": (76.60, 49.03)},
     {"name": "solar-prot-gate-q1-via-b", "net": "SOLAR_PROT_GATE", "at": (74.00, 55.37)},
     {"name": "q1-solar-prot-common-left-via", "net": "SOLAR_PROT_COMMON", "at": (72.50, 54.10)},

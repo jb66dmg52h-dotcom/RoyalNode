@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 20 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 19 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 3 known footprint/library warnings, `MOD2`, `U3` and `L2`
-- Unrouted: 20 ratsnest pairs
+- Unrouted: 19 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
@@ -70,6 +70,8 @@ A 2026-07-25 `BQ_VBUS` Q3-to-U1 bridge trial was rejected. The U1-side via/fanou
 The 2026-07-25 `BQ_SYS` capacitor-bank-to-U1 entry is now routed with an internal-layer spine from the SYS capacitor island and a short top-layer entry into U1 pad 25. The accepted via was nudged left to clear the nearby `BQ_SDRV` route.
 
 The 2026-07-25 `BQ_SYS` L2-to-SYS-spine route is now routed with a short top-layer L2 fanout and a wider internal-layer branch into the accepted SYS spine. This leaves the U3 VIN/input-cap connection as the main remaining boost-input power-loop item.
+
+The 2026-07-25 `BQ_SYS` U3 VIN-to-L2 spine branch is now routed with a compact top-layer U3 fanout and an In1 branch into the L2/SYS spine. Intermediate trials hit BOOST_EN, I2C/E22 internal routes, BOOT clearance and C407 ground thermal starvation; the accepted via lands lower/left enough to keep C407's ground thermal intact.
 
 ## Pass 4: Switch Nodes
 
