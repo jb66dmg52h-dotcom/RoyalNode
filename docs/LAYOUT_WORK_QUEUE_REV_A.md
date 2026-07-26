@@ -97,6 +97,8 @@ A later 2026-07-25 `C217` move to the lower-right of U1 was rejected. It worsene
 
 A 2026-07-25 direct `BQ_SW1` U1-to-L1 top-layer route was rejected. It dropped the ratsnest count but ran down the U1 left pad row, shorting/crowding `BQ_STAT`, `BQ_VBUS`, `BQ_BTST1`, `BQ_REGN`, `USB_VBUS_RAW` and `SOLAR_PROTECTED` pads. Move/refactor the L1/U1 switch-node placement before retrying `BQ_SW1`/`BQ_SW2`.
 
+A 2026-07-25 trial moving L1 above U1 was rejected. The topology would shorten the switch nodes, but in the current floorplan it collides with the accepted TPS61088 `BQ_SYS` input-cap cluster, C216/C218 support passives and the accepted U1 `BQ_SYS`/`BQ_SDRV` escape routes. Do not move only L1 upward; the charger power stage needs a broader floorplan change with the boost input-cap cluster and U1 support passives considered together.
+
 A 2026-07-25 `BQ_PMID` U1-to-cap-bus bridge trial was rejected. The direct top-layer route crossed the accepted C216 `BQ_BTST1` escape and crowded U1 `BQ_STAT`; the bottom-layer via variant still violated clearance at the dense U1 lower pad row. Treat `BQ_PMID` as a U1 power-copper/fanout pass.
 
 A later 2026-07-25 `BQ_PMID` inner-layer retry after the BAT_RAW/BQ_STAT reroutes still failed. Centering the U1-side via crowded the accepted `BQ_SW1` escape, moving it left shorted into `BQ_STAT`, and shifting `BQ_SW1` right starved the U1 ground thermal while crowding `BQ_SW2`. Keep `BQ_PMID` blocked until the U1 lower-edge fanout is reworked as a group.

@@ -53,6 +53,7 @@ Remaining nets:
 Current status:
 
 - The existing L1 position leaves `BQ_SW1`/`BQ_SW2` too far below the U1 switch pins.
+- A trial moving only L1 above U1 was rejected because it collided with the accepted TPS61088 input-cap cluster and U1 support passives.
 - A direct `BQ_SW1` top route lowered the ratsnest count but failed badly by running down the U1 left pad row.
 - `BQ_PMID` bridge retries lower the count but short/crowd `BQ_STAT`, `BQ_BTST1` and the accepted `BQ_SYS` spine.
 - `BQ_SW2` and `BQ_BTST2` remain coupled to C217 placement and the U1 right-side escape.
