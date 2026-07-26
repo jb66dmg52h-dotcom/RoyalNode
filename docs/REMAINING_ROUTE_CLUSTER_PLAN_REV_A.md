@@ -1,7 +1,7 @@
 # RoyalNode Rev A Remaining Route Cluster Plan
 
 This file groups the remaining generated KiCad ratsnest items after the clean
-13-unrouted checkpoint. It is a layout planning aid, not a fabrication release.
+12-unrouted checkpoint. It is a layout planning aid, not a fabrication release.
 
 Current gate:
 
@@ -9,7 +9,7 @@ Current gate:
 make layout-status
   ERC: 0
   DRC: 3 known footprint warnings only
-  Unrouted: 13 ratsnest pairs
+  Unrouted: 12 ratsnest pairs
 ```
 
 ## Cluster A: TPS61088 5 V Radio Boost Output
@@ -42,7 +42,6 @@ Do not:
 
 Remaining nets:
 
-- `BQ_PMID`
 - `BQ_VBUS`
 - `BQ_SW2`
 - `BQ_BTST2`
@@ -54,7 +53,7 @@ Current status:
 - `BQ_SW1` is now routed with an accepted left-side wrap from U1/C216 to L1.
 - A trial moving only L1 above U1 was rejected because it collided with the accepted TPS61088 input-cap cluster and U1 support passives.
 - A direct `BQ_SW1` top route lowered the ratsnest count but failed badly by running down the U1 left pad row.
-- `BQ_PMID` bridge retries lower the count but short/crowd `BQ_STAT`, `BQ_BTST1` and the accepted `BQ_SYS` spine.
+- `BQ_PMID` is now routed with a lower U1 fanout, B.Cu bridge and capacitor-bank entry; preserve it unless the full lower-edge charger fanout is replanned.
 - `BQ_SW2` and `BQ_BTST2` remain coupled to C217 placement and the U1 right-side escape.
 - Recent `BQ_SW2` trials show that the accepted `BQ_SYS` entry, C218/`BQ_SDRV`, R203/R204, `BQ_TS` and Q3 selector pads must be replanned together; shifting only the SYS via or drawing a right-side overpass causes shorts or solder-mask bridges.
 - Recent `BQ_BTST2` trials show that the direct top path crosses `BQ_PROG`, while a two-via escape crowds BATP/PROG and crosses existing `I2C_SDA`, `BAT_RAW` and `BQ_TS` corridors.
@@ -62,7 +61,7 @@ Current status:
 Next strategy:
 
 - Keep the accepted L1 location unless the whole charger quadrant is replanned; moving only L1 upward has already failed.
-- Treat C217, C218, R203/R204, `BQ_TS`, `BQ_PMID`, `BQ_SW2` and `BQ_BTST2` as a shared U1 right-side fanout problem. `BQ_REGN` is now routed but should be preserved during any grouped refactor.
+- Treat C217, C218, R203/R204, `BQ_TS`, `BQ_SW2` and `BQ_BTST2` as a shared U1 right-side fanout problem. `BQ_REGN` and `BQ_PMID` are now routed and should be preserved during any grouped refactor.
 - Move BQ25798 VBUS/PMID capacitor banks nearer U1/Q2/Q3 only as part of a grouped capacitor/passive placement pass.
 
 Do not:
@@ -74,19 +73,19 @@ Do not:
 
 Remaining nets:
 
-- `BATP_KELVIN`
+None in the current ratsnest list.
 
 Current status:
 
 - `BQ_REGN` C215/R200 island-to-U1-pin-5 routing and ILIM_HIZ/U1-pin-17 top bridge are now accepted; `BQ_REGN` is no longer in the remaining ratsnest list.
 - Earlier `BQ_REGN` pin-to-pin bridge trials lowered the count but shorted/crowded `BAT_RAW`, `BQ_TS`, `BQ_BTST1` and I2C corridors.
 - A top-layer REGN wrap also failed because the U1 perimeter is already occupied by ACDRV, I2C, TS and ground-thermal relief.
-- `BATP_KELVIN` route trials failed because the U1-side via conflicts with the same dense right-side U1 escape area.
+- `BATP_KELVIN` is now accepted as a routed low-current sense branch from U1 BATP to R202.
 - R202 tight-local relocation at U1 was also rejected because the 0603 footprint overlaps/crowds the U1 right-side support-passive escape.
 
 Next strategy:
 
-- Rework R201/R202 and the BATP/TS sense corridor as a local U1 support-passive group while preserving the accepted C215/R200 REGN routing.
+- Preserve the accepted R202/BATP sense branch while reworking any adjacent TS/support-passive placement.
 - Keep BATP as a sense route; do not merge it into the high-current battery copper.
 
 Do not:
@@ -121,7 +120,7 @@ Refactor the BQ25798 power-stage placement:
   1. Preserve the accepted BQ_SW1 left-wrap unless a full charger-quadrant refactor replaces it.
   2. Re-stage C217/C218/R203/R204 around the U1 right-side escape.
   3. Re-test BQ_SW2 and BQ_BTST2.
-  4. Only then retry BQ_PMID, BQ_REGN, BATP_KELVIN and the U1-side service-power entries.
+  4. Only then retry the U1-side service-power entries while preserving BQ_PMID, BQ_REGN and BATP_KELVIN.
 ```
 
 This should reduce several remaining unrouted items while improving the actual

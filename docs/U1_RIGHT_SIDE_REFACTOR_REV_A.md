@@ -1,7 +1,7 @@
 # U1 Right-Side Refactor Rev A
 
 This note captures the next charger-layout work package after the clean
-13-unrouted checkpoint.
+12-unrouted checkpoint.
 
 ## Current Gate
 
@@ -9,7 +9,7 @@ This note captures the next charger-layout work package after the clean
 make layout-status
   ERC: 0
   DRC: 3 known footprint warnings only
-  Unrouted: 13 ratsnest pairs
+  Unrouted: 12 ratsnest pairs
 ```
 
 Known allowed DRC warnings remain `MOD2`, `U3` and `L2` footprint/library
@@ -33,14 +33,16 @@ warnings.
 - `BQ_REGN` ILIM_HIZ/U1 pin 17 is now tied to the pin-5 REGN escape with a
   short top-layer bridge. Preserve this bridge unless the REGN/TS/BATP support
   cluster is fully replanned.
+- `BATP_KELVIN` is routed from U1 BATP to R202 with a low-current two-layer
+  sense branch.
+- `BQ_PMID` is routed from U1 to the PMID capacitor bus with a lower U1 fanout,
+  B.Cu bridge and top-layer cap-bank entry.
 
 ## Blocked Nets In This Cluster
 
 - `BQ_SW2`
 - `BQ_BTST2`
-- `BATP_KELVIN`
-- `BQ_REGN`
-- nearby `BQ_PMID`, `BQ_VBUS`, `USB_VBUS_RAW` and `SOLAR_PROTECTED` entries
+- nearby `BQ_VBUS`, `USB_VBUS_RAW` and `SOLAR_PROTECTED` entries
 
 ## Exact Conflict Map
 

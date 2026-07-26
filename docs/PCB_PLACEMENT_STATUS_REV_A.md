@@ -141,7 +141,7 @@ Only stable local/control nets are routed in this first pass:
 - `BQ_USB_SELECTOR_COMMON`: Q3 common pads are now tied with the same left-shifted back-layer loop pattern.
 - `BQ_VBUS`: Q2 and Q3 output-side pads are now joined with a right-side back-layer backbone; U1 and local FET cross-pads remain unrouted.
 - `BQ_VBUS`: C200 and C201 are also tied with a same-side local capacitor bus; C212 and U1/FET cross-pads remain unrouted.
-- `BQ_PMID`: C202-C204 are now tied with a same-side local bus; C213 and U1-side PMID remain unrouted.
+- `BQ_PMID`: C202-C204, C213 and the U1-side PMID entry are now tied with a local bus plus a B.Cu bridge from U1 into the capacitor bank.
 - `BQ_SYS`: C206-C209 and C214 are now tied with a same-side local capacitor bus; U1, U3, L2 and upper boost input capacitors remain unrouted.
 - `BAT_RAW`: C210/C211, J2, U2 and the U1 BAT pins are now tied through wider inner/back-layer branches.
 - `BATP_KELVIN`: U1 BATP is now connected to R202 through a routed sense branch using short top-layer fanouts, small signal vias, a B.Cu escape and an In2.Cu hop around the existing BAT_RAW/NTC/I2C corridors.
@@ -169,11 +169,11 @@ A wider TPS61088 small-passive relocation trial was also rejected on 2026-07-25.
 
 The accepted 2026-07-25 boost topology rotation keeps U3 and L2 at the same centers but rotates both 180 degrees. This moves the TPS61088 VOUT pads to the E22 side and the BOOST_SW pads toward L2. KiCad DRC reports no new clearance, short, courtyard or solder-mask violations from this rotation.
 
-`BQ_REGN` to `ILIM_HIZ` also remains unrouted after trial routes crossed the existing BQ25798 I2C fanouts or crowded the BQ25798 inductor/switch-node area. Treat this as a BQ25798 local-fanout placement task, not a long generated trace task.
+`BQ_REGN` to `ILIM_HIZ` is now routed with the accepted local REGN bridge. Preserve this route during nearby BQ25798 support-passive and switch-node rework.
 
 An additional 2026-07-25 trial that moved C215/R200/R201 around the BQ25798 right side was rejected. It reduced the ratsnest temporarily, but caused `BQ_TS`/`BQ_REGN` shorts and U1/C215/R200/R201 courtyard violations. The failed `bq-ts-u1-to-r200-local` generated segment has been retired in `tools/generate_initial_routes.py`.
 
-The local `GND` link between the protection-divider ground pads also remains unrouted. Trial routes either clipped the neighboring `OV_NODE`/`BOOST_EN` pads or conflicted with the existing `OV_NODE` divider route. Revisit this after the protection divider and R405 placement are adjusted.
+The previous local `GND` ratsnest between the protection-divider ground pads is no longer present in the current KiCad unrouted summary; keep this handled by the ground pours/reference plane rather than adding skinny local ground traces.
 
 ## Net-Class Policy
 
@@ -243,7 +243,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-13 expected unrouted ratsnest items
+12 expected unrouted ratsnest items
 0 footprint errors
 3 known footprint/library warnings: MOD2, U3 and L2
 ```

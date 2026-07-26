@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 13 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 12 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,14 +22,14 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 3 known footprint/library warnings, `MOD2`, `U3` and `L2`
-- Unrouted: 13 ratsnest pairs
+- Unrouted: 12 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
 Resolve these before routing more long traces:
 
 1. Finalize or replace the edge-launch SMA footprint and RF launch geometry.
-2. Rework BQ25798 `BQ_REGN`/`ILIM_HIZ` local fanout around the inductor and I2C exits.
+2. Preserve the accepted BQ25798 `BQ_REGN`/`ILIM_HIZ` local fanout during nearby charger rework.
 3. Rework the protection-divider ground escape around `OV_NODE` and the accepted control-routing corridor.
 4. Confirm XT30 connector polarity, board-edge access, and mating-plug clearance.
 5. Re-route J6 only after confirming the new top-edge service clearance remains acceptable.
@@ -47,13 +47,12 @@ Planned work:
 
 ## Pass 3: Charger Power Path
 
-Route as copper pours after placement review:
+Route remaining charger/service power as deliberate copper after placement review:
 
-- `BQ_SYS`
-- `BQ_PMID`
 - `BQ_VBUS`
-- `SOLAR_FUSED`
 - `SOLAR_PROTECTED`
+
+Preserve the accepted `BQ_SYS`, `BQ_PMID` and `SOLAR_FUSED` routes unless a grouped power-stage refactor replaces them.
 
 These nets should not be completed as narrow generated traces.
 
@@ -123,13 +122,6 @@ A later 2026-07-25 `BQ_SW2` trial that shifted the accepted `BQ_SYS` U1-entry vi
 A 2026-07-25 direct `BQ_SW1` U1-to-L1 top-layer route was rejected. It dropped the ratsnest count but ran down the U1 left pad row, shorting/crowding `BQ_STAT`, `BQ_VBUS`, `BQ_BTST1`, `BQ_REGN`, `USB_VBUS_RAW` and `SOLAR_PROTECTED` pads. Move/refactor the L1/U1 switch-node placement before retrying `BQ_SW1`/`BQ_SW2`.
 
 A 2026-07-25 trial moving L1 above U1 was rejected. The topology would shorten the switch nodes, but in the current floorplan it collides with the accepted TPS61088 `BQ_SYS` input-cap cluster, C216/C218 support passives and the accepted U1 `BQ_SYS`/`BQ_SDRV` escape routes. Do not move only L1 upward; the charger power stage needs a broader floorplan change with the boost input-cap cluster and U1 support passives considered together.
-
-A 2026-07-25 `BQ_PMID` U1-to-cap-bus bridge trial was rejected. The direct top-layer route crossed the accepted C216 `BQ_BTST1` escape and crowded U1 `BQ_STAT`; the bottom-layer via variant still violated clearance at the dense U1 lower pad row. Treat `BQ_PMID` as a U1 power-copper/fanout pass.
-
-A later 2026-07-25 `BQ_PMID` inner-layer retry after the BAT_RAW/BQ_STAT reroutes still failed. Centering the U1-side via crowded the accepted `BQ_SW1` escape, moving it left shorted into `BQ_STAT`, and shifting `BQ_SW1` right starved the U1 ground thermal while crowding `BQ_SW2`. Keep `BQ_PMID` blocked until the U1 lower-edge fanout is reworked as a group.
-
-A 2026-07-25 `BQ_PMID` bridge retry after the accepted `BQ_SYS` input-cap move still failed. It dropped the ratsnest count to 17, but the U1-side via/entry shorted or crowded `BQ_BTST1`, `BQ_STAT` and the accepted `BQ_SYS` spine. Keep `BQ_PMID` in the U1 lower-edge fanout refactor; do not use a one-off via beside the existing pad row.
-A 2026-07-26 lower `BQ_PMID` B.Cu route trial reduced the ratsnest to 13 but was rejected. The U1 fanout still crowded `BQ_STAT`, the via shorted/crowded the accepted `BQ_SYS` branch, and the cap-bank entry crossed the `BQ_STAT` back-layer lane. Keep PMID in the grouped U1 lower-edge and cap-bank placement pass.
 
 A 2026-07-25 long `UV_NODE` bottom-layer route was rejected. It collided with the fused-solar U4 via, crossed the accepted I2C/SPI corridors, and clipped the XIAO through-hole row. Treat the protection-divider sense nets as a U4/divider placement pass rather than long board-spanning traces.
 
@@ -225,6 +217,7 @@ These should avoid switch-node copper and RF launch copper.
 - A 2026-07-25 `BATP_KELVIN` bottom-layer sense-route trial was rejected. The R202-side via collided with the accepted `BAT_RAW` branch and `BQ_TS` route, the bottom span crossed `BQ_STAT`, and the U1-side via crowded `BQ_PROG`. Rework the BQ25798 support-passive fanout before retrying BATP.
 - A 2026-07-25 R202 relocation trial for `BATP_KELVIN` was rejected. Moving R202 near U1 collided with the accepted I2C_SDA via corridor and crossed/shorted `BQ_TS`, `BQ_INT` and `BQ_PROG`; keep BATP as part of a coordinated right-side U1 fanout/sense-routing pass.
 - A 2026-07-26 two-layer `BATP_KELVIN` sense route is accepted. It uses a short U1 escape, small signal vias, a B.Cu dogleg around the U1/I2C exits, and an In2.Cu hop around the BAT_RAW and NTC corridors before entering R202. This reduced the ratsnest from 14 to 13 without adding DRC errors.
+- A 2026-07-26 `BQ_PMID` bridge is accepted. It uses a short lower U1 fanout, a B.Cu route under the charger area, and a top-layer entry into the PMID capacitor bus. A 64.00, 72.45 mm U1-side via clears the accepted `BQ_SW1` escape and reduces the ratsnest from 13 to 12 without adding DRC errors.
 - A later 2026-07-25 R202 tight-local relocation at U1 was rejected. The rotated 0603 orientation put the BATP/BAT_RAW pads opposite the intended side, and the placement still overlapped U1 while crowding the accepted `BQ_TS`, `BQ_INT` and `BAT_RAW` vias. Keep R202 out of the U1 pad row until the right-side support-passive cluster is reworked.
 - A 2026-07-25 `SOLAR_FUSED` divider-to-U4-backbone bridge trial was rejected because the straight bottom-layer span crossed the accepted SPI_SCK and I2C_SDA backbones. The remaining `SOLAR_FUSED` island needs a placement-aware reroute, not a long bottom trace through the digital corridor.
 - A 2026-07-25 local `BQ_REGN` U1 pin-to-pin wrap trial was rejected because the QFN escape crossed neighboring routes and starved nearby thermal relief. The final accepted REGN solution uses the C215/R200 island route plus a short ILIM_HIZ top bridge instead of this wrap.
