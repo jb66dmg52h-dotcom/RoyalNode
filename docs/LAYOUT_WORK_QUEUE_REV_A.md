@@ -179,6 +179,7 @@ These should avoid switch-node copper and RF launch copper.
 - 2026-07-26 `BQ_REGN` ILIM_HIZ/U1-pin-17 top-layer bridge is accepted. The route ties U1 pin 17 to the accepted REGN pin-5 escape without adding vias, avoiding the TS via-hole conflict from the rejected right-side ILIM trial and reducing the ratsnest from 15 to 14.
 - A 2026-07-25 `BQ_SYS` U3-VIN-to-L2 input hop trial was rejected. It crossed the accepted BOOT branch and crowded the L2 BOOST_SW pad. Route this as a deliberate boost-input copper shape after the BOOT/VIN/passive strategy is reviewed.
 - A 2026-07-25 `USB_VBUS_RAW` XIAO-to-Q3 right-side route trial was rejected. The outside path hit the XT30/J1 no-net mechanical pad; the inward path crossed I2C, XIAO_BAT_ISO or fused-solar back-layer tracks. Revisit USB_VBUS_RAW with a deliberate layer-transition plan.
+- A 2026-07-26 `BOOST_COMP` perimeter-route trial after adding the larger mechanical outline was rejected. The R404-side via collided with R405/GND, the bottom route crossed the existing SPI_SCK bus, and the U3-side via crowded BOOST_FB/E22_BUSY. Keep `BOOST_COMP` blocked until the TPS61088 support-passive cluster is replanned locally.
 - A 2026-07-26 top-edge `USB_VBUS_RAW` retry from MOD1 to Q3 reduced the
   ratsnest count but was rejected. The first horizontal exit crossed the 3.3 V
   pullup area; offset variants collided with the R204 3.3 V service spine,
