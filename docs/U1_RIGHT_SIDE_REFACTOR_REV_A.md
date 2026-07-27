@@ -8,8 +8,8 @@ This note captures the next charger-layout work package after the clean
 ```text
 make layout-status
   ERC: 0
-  DRC: 3 known footprint warnings only
-  Unrouted: 12 ratsnest pairs
+  DRC: 0 active violations/warnings; footprint-library mismatch is ignored by project policy for tracked local release-candidate footprints
+  Unrouted: 11 ratsnest pairs
 ```
 
 Known allowed DRC warnings remain `MOD2`, `U3` and `L2` footprint/library

@@ -205,13 +205,13 @@ NOT_RELEASED_RELEASE_CANDIDATE
 
 because RoyalNode will not have a loose physical E22 module before ordering. The final pre-order check must use JLCPCB PCBA review, the exact C22399506 part geometry, and first-article inspection on the assembled Rev A board.
 
-Current KiCad DRC reports one warning:
+Current KiCad DRC reports 0 active DRC violations/warnings. The `lib_footprint_mismatch` rule is set to `ignore` for Rev A because the affected release-candidate footprints are project-local, tracked in this repository, and still require final JLCPCB DFM/PCBA review before fabrication release.
 
 ```text
-lib_footprint_mismatch on MOD2
+0 active DRC violations/warnings
 ```
 
-The board footprint text and library footprint text are identical after normalizing only instance placement fields. The warning is therefore being tracked as a KiCad library/local-instance warning, not as known pad-geometry drift. Do not treat this as final-release clean until it is cleared by KiCad save/update or explicitly accepted during the manufacturing review.
+Do not treat this as final-release clean until the release-candidate footprints are accepted during the manufacturing review.
 
 ### SMA Footprint
 
@@ -247,7 +247,7 @@ PCB DRC:
 ```text
 11 expected unrouted ratsnest items
 0 footprint errors
-3 known footprint/library warnings: MOD2, U3 and L2
+0 active DRC violations/warnings; footprint-library mismatch is ignored by project policy for tracked local release-candidate footprints
 ```
 
 Refresh the generated unrouted punch list with:

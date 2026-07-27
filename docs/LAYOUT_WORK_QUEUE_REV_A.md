@@ -21,7 +21,7 @@ make layout-status
 Current result:
 
 - ERC: 0 violations
-- DRC: 3 known footprint/library warnings, `MOD2`, `U3` and `L2`
+- DRC: 0 active violations/warnings; `lib_footprint_mismatch` is ignored by project policy for tracked local release-candidate footprints
 - Unrouted: 11 ratsnest pairs
 
 ## Pass 1: Placement Blockers

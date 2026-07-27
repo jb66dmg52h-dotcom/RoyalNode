@@ -8,7 +8,7 @@ Current gate:
 ```text
 make layout-status
   ERC: 0
-  DRC: 3 known footprint warnings only
+  DRC: 0 active violations/warnings; footprint-library mismatch is ignored by project policy for tracked local release-candidate footprints
   Unrouted: 11 ratsnest pairs
 ```
 

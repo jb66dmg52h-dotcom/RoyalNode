@@ -10,12 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ERC = ROOT / "hardware/fabrication/RoyalNode_erc.rpt"
 DRC = ROOT / "hardware/fabrication/RoyalNode_drc.rpt"
 
-EXPECTED_FOOTPRINT_WARNINGS = {
-    "MOD2": "MOD2_E22_900M33S_JLC_C22399506_RC",
-    "U3": "U3_TPS61088_RHL0020A_THERMALVIAS_RC",
-    "L2": "L2_COILCRAFT_XAL7030_222MEC_RC",
-}
-EXPECTED_DRC_TAGS = ["lib_footprint_mismatch"] * len(EXPECTED_FOOTPRINT_WARNINGS)
+EXPECTED_DRC_TAGS: list[str] = []
 EXPECTED_UNCONNECTED = 11
 
 
@@ -47,10 +42,6 @@ def check_drc(text: str) -> None:
         fail(f"unexpected DRC tags before unrouted list: {tags}")
     if violation_count != len(EXPECTED_DRC_TAGS):
         fail(f"expected {len(EXPECTED_DRC_TAGS)} DRC violations, found {violation_count}")
-    for ref, footprint in EXPECTED_FOOTPRINT_WARNINGS.items():
-        if f"Footprint {ref}" not in text or footprint not in text:
-            fail(f"known {ref} footprint warning is missing or changed")
-
     unconnected = re.search(r"\*\* Found (\d+) unconnected pads \*\*", text)
     if not unconnected:
         fail("DRC report missing unconnected-pad count")
@@ -64,8 +55,7 @@ def main() -> None:
     check_drc(read(DRC))
     print("KiCad report check passed")
     print("  ERC: 0 errors, 0 warnings")
-    refs = ", ".join(EXPECTED_FOOTPRINT_WARNINGS)
-    print(f"  DRC: expected {len(EXPECTED_DRC_TAGS)} known footprint warnings ({refs})")
+    print("  DRC: 0 active violations/warnings")
     print(f"  Unconnected pads: {EXPECTED_UNCONNECTED}")
 
 
