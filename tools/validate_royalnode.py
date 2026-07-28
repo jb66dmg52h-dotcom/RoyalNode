@@ -492,7 +492,6 @@ def check_initial_routes() -> None:
         "e22-busy-backbone",
         "e22-nss-backbone",
         "e22-rxen-direct",
-        "e22-rxen-backbone",
         "e22-sck-backbone",
         "e22-miso-backbone",
         "e22-mosi-backbone",

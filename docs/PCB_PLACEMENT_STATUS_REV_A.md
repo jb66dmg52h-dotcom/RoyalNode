@@ -88,7 +88,7 @@ J6 is now placed as a 4-pin JST-GH release-candidate connector for the optional 
 
 F1 is now placed as a Littelfuse 483-series 1206 release-candidate footprint immediately after the solar XT30 positive path and before the protected solar-input path.
 
-C503 is now placed as a Panasonic 10SVPC330M 8 x 6.9 mm polymer-can release-candidate footprint at 93.0, 46.0 mm. This is a scaffold location that clears DRC; final routing should still pull the 5 V radio bulk capacitance as close as practical to the E22 VCC entry without violating the RF corridor or module courtyard.
+C503 is now placed as a Panasonic 10SVPC330M 8 x 6.9 mm polymer-can release-candidate footprint at 93.0, 46.0 mm. It is connected into the generated 5 V radio rail through the upper protection-divider corridor; final layout should still pull the 5 V radio bulk capacitance as close as practical to the E22 VCC entry without violating the RF corridor or module courtyard.
 
 R205 and R206, the I2C pullups, are now moved out of the generic lower passive staging grid and placed next to the XIAO/J6 bus corridor. This keeps the optional BME680 connector, XIAO I2C pins and BQ25798 I2C pins on one short logic bus instead of forcing long pullup stubs across the lower power area.
 
@@ -246,7 +246,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-11 expected unrouted ratsnest items
+6 expected unrouted ratsnest items
 0 footprint errors
 0 active DRC violations/warnings; footprint-library mismatch is ignored by project policy for tracked local release-candidate footprints
 ```

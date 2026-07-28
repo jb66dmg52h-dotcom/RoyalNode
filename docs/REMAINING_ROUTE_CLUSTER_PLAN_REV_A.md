@@ -1,7 +1,7 @@
 # RoyalNode Rev A Remaining Route Cluster Plan
 
 This file groups the remaining generated KiCad ratsnest items after the clean
-11-unrouted checkpoint. It is a layout planning aid, not a fabrication release.
+6-unrouted checkpoint. It is a layout planning aid, not a fabrication release.
 
 Current gate:
 
@@ -9,14 +9,13 @@ Current gate:
 make layout-status
   ERC: 0
   DRC: 0 active violations/warnings; footprint-library mismatch is ignored by project policy for tracked local release-candidate footprints
-  Unrouted: 11 ratsnest pairs
+  Unrouted: 6 ratsnest pairs
 ```
 
 ## Cluster A: TPS61088 5 V Radio Boost Output
 
 Remaining nets:
 
-- `5V_RADIO`
 - `BOOST_VCC`
 
 Current status:
@@ -25,6 +24,7 @@ Current status:
 - U3/L2 topology is improved, and the compensation RC pair is now staged locally below-right of U3.
 - Several C405/`BOOST_VCC` single-part moves were rejected around U3 because they collided with `BOOST_EN`, `BOOST_FSW`, `BOOST_ILIM`, U3 ground thermal relief or L2/R402 courtyards.
 - Two `5V_RADIO` shortcut routes toward E22 were rejected because they crossed `BOOST_FB`, SPI/control fanouts and E22 ground pins.
+- The accepted 2026-07-28 `5V_RADIO` pass now connects U3 VOUT to E22 VCC, the feedback/output-cap island, C503 and the lower bulk capacitor bank with top-layer generated copper.
 - `BOOST_COMP` is now routed locally after moving R404/C408 and nudging the `BOOST_FB` U3-side via.
 
 Next strategy:

@@ -9,7 +9,7 @@ This note captures the next charger-layout work package after the clean
 make layout-status
   ERC: 0
   DRC: 0 active violations/warnings; footprint-library mismatch is ignored by project policy for tracked local release-candidate footprints
-  Unrouted: 11 ratsnest pairs
+  Unrouted: 6 ratsnest pairs
 ```
 
 The DRC gate has 0 active violations/warnings. Footprint-library mismatch is

@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 11 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 6 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 0 active violations/warnings; `lib_footprint_mismatch` is ignored by project policy for tracked local release-candidate footprints
-- Unrouted: 11 ratsnest pairs
+- Unrouted: 6 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
@@ -269,9 +269,16 @@ These should avoid switch-node copper and RF launch copper.
 - A 2026-07-28 RF floorplan correction is accepted. MOD2/E22 was rotated to
   0 degrees so pin 21 ANT faces the left board edge, and J5's draft SMA
   envelope moved to the left edge near the ANT pad. The old E22 digital bus
-  fanouts were reworked for the new orientation. `E22_RXEN` is intentionally
-  left as an unrouted short E22-side stub because the direct route crosses the
-  TPS61088 support-passive pocket.
+  fanouts were reworked for the new orientation.
+- A 2026-07-28 `E22_RXEN` route is accepted. It uses a short top-layer fanout
+  from MOD2 pin 6 to a local via, then a bottom-layer escape to the XIAO D6
+  pad, clearing the TPS61088 support-passive pocket without new DRC violations.
+- A 2026-07-28 `5V_RADIO` route pass is accepted. U3 VOUT now feeds the E22
+  VCC pins through a short top-layer power spine, ties into the output
+  feedback/capacitor island, reaches the lower E22 bulk capacitor bank down
+  the right side of the module, and connects C503 through the upper
+  protection-divider corridor. This removes `5V_RADIO` from the remaining
+  ratsnest while keeping DRC clean.
 - A 2026-07-28 `BQ_SW2` top-layer escape trial and an internal-layer via
   escape trial both reduced the ratsnest count temporarily but were rejected.
   The top route crowded U1 `BQ_SYS`, `BQ_SDRV`, `BQ_TS` and I2C pads; the

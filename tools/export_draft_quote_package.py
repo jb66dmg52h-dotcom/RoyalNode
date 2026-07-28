@@ -74,7 +74,7 @@ def write_blocker_note() -> None:
                 "- J5 is still a draft SMA envelope, not the released Molex edge-launch footprint.",
                 "- Final 50 ohm GCPW width/gap still needs JLCPCB stack-up calculation.",
                 "- High-current power rails and switching loops are not complete.",
-                "- Current KiCad DRC state includes 11 expected unrouted ratsnest pairs.",
+                "- Current KiCad DRC state includes 6 expected unrouted ratsnest pairs.",
                 "- Footprint/library mismatch warnings are ignored by project policy for tracked local release-candidate footprints; current DRC active violations are 0.",
                 "- See reports/ for the ERC report, DRC report and unrouted summary.",
                 "",
