@@ -54,7 +54,7 @@ def main() -> None:
         "RF_915": "Hold for final SMA footprint and 50-ohm GCPW review.",
         "BOOST_EN": "Hold for TPS61088/R405 local fanout placement pass.",
         "BQ_REGN": "Hold for BQ25798 local fanout and inductor-area placement pass.",
-        "GND": "Known TOP_GND_FILL zone-split item after signal routing; resolve during final ground-pour/stitching review.",
+        "GND": "Resolve through deliberate ground-pour shaping or functional stitching vias.",
         "5V_RADIO": "Route as high-current power pour after boost/radio placement review.",
         "BQ_SYS": "Route as system power pour after charger/boost placement review.",
         "BAT_RAW": "Route as high-current battery path after XT30 and power-path review.",

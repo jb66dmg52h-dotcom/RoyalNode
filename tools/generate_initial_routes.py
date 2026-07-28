@@ -1611,7 +1611,7 @@ VIAS = [
     {"name": "e22-miso-xiao-via", "net": "SPI_MISO", "at": (87.00, 28.46)},
     {"name": "e22-mosi-e22-via", "net": "SPI_MOSI", "at": (29.60, 51.46)},
     {"name": "e22-mosi-xiao-via", "net": "SPI_MOSI", "at": (86.00, 31.00)},
-    {"name": "top-ground-fill-u1-right-stitch", "net": "GND", "at": (70.70, 80.55), "size": 0.50, "drill": 0.25},
+    {"name": "r203-gnd-l2-stitch", "net": "GND", "at": (71.32, 76.75), "size": 0.50, "drill": 0.25},
 ]
 
 def stable_uuid(*parts: str) -> str:
@@ -1622,10 +1622,13 @@ GROUND_ZONES = [
     ("F.Cu", "TOP_GND_FILL", stable_uuid("zone", "top-ground-fill")),
     ("In1.Cu", "L2_GND_REFERENCE", stable_uuid("zone", "l2-ground-reference")),
 ]
+
 RETIRED_GENERATED_UUIDS = {
     "0b7b61b1-618b-5f4e-b2f7-e2ab289b7a29",
     "20391620-8499-5247-99ac-f97ff61a93ca",
     stable_uuid("zone", "bottom-ground-fill"),
+    stable_uuid("zone", "u1-right-top-fill-island-keepout"),
+    stable_uuid("via", "top-ground-fill-u1-right-stitch"),
     stable_uuid("segment", "e22-rxen-direct", "1"),
     stable_uuid("segment", "e22-rxen-direct", "2"),
     stable_uuid("segment", "e22-rxen-direct", "3"),

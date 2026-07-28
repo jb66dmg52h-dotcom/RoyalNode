@@ -11,7 +11,7 @@ ERC = ROOT / "hardware/fabrication/RoyalNode_erc.rpt"
 DRC = ROOT / "hardware/fabrication/RoyalNode_drc.rpt"
 
 EXPECTED_DRC_TAGS: list[str] = []
-EXPECTED_UNCONNECTED = 1
+EXPECTED_UNCONNECTED = 0
 
 
 def fail(message: str) -> None:
@@ -56,7 +56,7 @@ def main() -> None:
     print("KiCad report check passed")
     print("  ERC: 0 errors, 0 warnings")
     print("  DRC: 0 active violations/warnings")
-    print(f"  Expected TOP_GND_FILL/GND zone item: {EXPECTED_UNCONNECTED}")
+    print(f"  Unconnected items: {EXPECTED_UNCONNECTED}")
 
 
 if __name__ == "__main__":

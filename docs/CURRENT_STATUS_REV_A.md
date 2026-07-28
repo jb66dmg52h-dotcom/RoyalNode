@@ -46,7 +46,7 @@ kicad-cli sch erc --exit-code-violations --severity-all
 
 kicad-cli pcb drc --severity-all
   0 active DRC violations/warnings
-  1 expected unconnected item from the generated TOP_GND_FILL/GND zone split
+  0 unconnected items
 ```
 
 The `lib_footprint_mismatch` rule is set to `ignore` for Rev A because the remaining markers apply to project-local release-candidate footprints that are tracked in the footprint audit and still require final JLCPCB DFM/PCBA review before fabrication release.
@@ -57,7 +57,7 @@ J3 has been moved to the bottom service edge to clear the J6/SMA/C503 area. J6 h
 
 `BAT_RAW` is now routed from the battery XT30 pad to the LM66100/XIAO battery-isolation input, the local battery capacitor island and the U1 BAT pins. `BATP_KELVIN` is now routed as a separate low-current sense branch from U1 BATP to R202, and `BQ_PMID` now bridges from U1 into the PMID capacitor bank.
 
-`BOOST_ILIM`, `BOOST_SS`, `BOOST_COMP`, `BOOST_VCC`, `BQ_REGN`, `BQ_SDRV`, the C216 `BQ_BTST1`/local `BQ_SW1` bootstrap side, the accepted `BQ_SW1` left-wrap to L1, `BQ_PMID`, the C217 local `BQ_SW2` bootstrap side, `BQ_BTST2` and the TPS61088 `BQ_SYS` input-cap cluster are now locally routed after moving their support passives beside the relevant ICs. `E22_RXEN` is now routed through a short top-layer fanout and bottom-layer escape. `5V_RADIO` is now connected from U3 VOUT to the E22 VCC pins, the feedback/output-cap island, C503 and the lower radio capacitor bank. The `BQ_VBUS` capacitor bank is now connected into U1 after rerouting `BQ_STAT` onto an internal detour and nudging the local `BQ_BTST1` jog, and the Q3-side `BQ_VBUS` selector bridge is now connected through a split-layer high bridge. `USB_VBUS_RAW` is now routed from U1 to Q3 through a split In2/In1 high-corridor route, `SOLAR_PROTECTED` is now routed from U1 to the protected solar spine through a split In2/In1 left-edge overpass, and `BQ_SW2` is now routed through the accepted lower U1/right-side switch-node escape. The remaining KiCad unconnected item is a generated `TOP_GND_FILL`/`GND` zone split, not an active signal-net route.
+`BOOST_ILIM`, `BOOST_SS`, `BOOST_COMP`, `BOOST_VCC`, `BQ_REGN`, `BQ_SDRV`, the C216 `BQ_BTST1`/local `BQ_SW1` bootstrap side, the accepted `BQ_SW1` left-wrap to L1, `BQ_PMID`, the C217 local `BQ_SW2` bootstrap side, `BQ_BTST2` and the TPS61088 `BQ_SYS` input-cap cluster are now locally routed after moving their support passives beside the relevant ICs. `E22_RXEN` is now routed through a short top-layer fanout and bottom-layer escape. `5V_RADIO` is now connected from U3 VOUT to the E22 VCC pins, the feedback/output-cap island, C503 and the lower radio capacitor bank. The `BQ_VBUS` capacitor bank is now connected into U1 after rerouting `BQ_STAT` onto an internal detour and nudging the local `BQ_BTST1` jog, and the Q3-side `BQ_VBUS` selector bridge is now connected through a split-layer high bridge. `USB_VBUS_RAW` is now routed from U1 to Q3 through a split In2/In1 high-corridor route, `SOLAR_PROTECTED` is now routed from U1 to the protected solar spine through a split In2/In1 left-edge overpass, and `BQ_SW2` is now routed through the accepted lower U1/right-side switch-node escape. A dedicated R203-area GND stitch now ties the former top-fill island into the Layer-2 reference plane.
 
 The draft quote-export workflow now runs with:
 
@@ -65,7 +65,7 @@ The draft quote-export workflow now runs with:
 make export-draft-quote
 ```
 
-It produces Gerber, drill, CPL, BOM, netlist and report artifacts under `hardware/fabrication/quote_draft_rev_a`. The generated package remains explicitly marked not-for-fabrication until the known GND zone item, SMA launch and high-current power-path release reviews are resolved.
+It produces Gerber, drill, CPL, BOM, netlist and report artifacts under `hardware/fabrication/quote_draft_rev_a`. The generated package remains explicitly marked not-for-fabrication until the SMA launch and high-current power-path release reviews are resolved.
 
 ## Active Blockers
 

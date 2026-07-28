@@ -1,7 +1,7 @@
 # RoyalNode Rev A Remaining Route Cluster Plan
 
-This file records the remaining generated KiCad connectivity item after the
-final signal-route checkpoint. It is a layout planning aid, not a fabrication release.
+This file records the release-review work after the final signal-route
+checkpoint. It is a layout planning aid, not a fabrication release.
 
 Current gate:
 
@@ -9,7 +9,7 @@ Current gate:
 make layout-status
   ERC: 0
   DRC: 0 active violations/warnings; footprint-library mismatch is ignored by project policy for tracked local release-candidate footprints
-  Unconnected: 1 expected TOP_GND_FILL/GND zone split
+  Unconnected: 0 items
 ```
 
 ## Cluster A: TPS61088 5 V Radio Boost Output

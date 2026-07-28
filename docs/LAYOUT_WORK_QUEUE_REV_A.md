@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean final signal-route checkpoint with 1 expected generated `TOP_GND_FILL`/`GND` zone-split item. This work queue translates the generated summary into the next layout and release-review passes.
+RoyalNode Rev A now has a clean final signal-route checkpoint with 0 DRC violations and 0 unconnected items. This work queue translates the generated summary into the next layout and release-review passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 0 active violations/warnings; `lib_footprint_mismatch` is ignored by project policy for tracked local release-candidate footprints
-- Unconnected: 1 expected generated `TOP_GND_FILL`/`GND` zone-split item
+- Unconnected: 0 items
 
 ## Pass 1: Placement Blockers
 
@@ -36,7 +36,7 @@ Resolve these before routing more long traces:
 
 ## Pass 2: Ground System
 
-`GND` is now handled by generated top copper and Layer-2 reference pours. One known top-fill zone-split item remains after the signal routes are connected; treat it as a ground-pour/stitching cleanup item, not a missing signal route.
+`GND` is now handled by generated top copper and Layer-2 reference pours. The former top-fill island is tied into the Layer-2 reference plane with a dedicated R203-area GND stitch.
 
 Planned work:
 

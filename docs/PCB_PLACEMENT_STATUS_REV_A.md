@@ -245,7 +245,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-1 expected generated `TOP_GND_FILL`/`GND` zone-split item
+0 unconnected items
 0 footprint errors
 0 active DRC violations/warnings; footprint-library mismatch is ignored by project policy for tracked local release-candidate footprints
 ```
