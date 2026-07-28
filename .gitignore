@@ -20,3 +20,4 @@ hardware/releases/*
 __pycache__/
 *.pyc
 tmp/
+work/
