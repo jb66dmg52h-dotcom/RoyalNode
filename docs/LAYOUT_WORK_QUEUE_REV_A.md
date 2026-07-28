@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 6 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 5 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 0 active violations/warnings; `lib_footprint_mismatch` is ignored by project policy for tracked local release-candidate footprints
-- Unrouted: 6 ratsnest pairs
+- Unrouted: 5 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
@@ -88,6 +88,13 @@ A 2026-07-26 `BQ_VBUS` U1-to-Q3 In2.Cu bridge trial after the larger outline
 was rejected. The U1-side via and internal run shorted or crossed ACDRV2,
 BTST1, SYS, STAT and I2C corridors. Do not retry this as a direct U1-to-Q3
 internal bridge; it needs a grouped U1 lower-edge refactor.
+
+A 2026-07-28 `BQ_VBUS` capacitor-bank-to-U1 route is accepted. The route uses
+an allowed 0.50/0.25 mm via near U1, a B.Cu corridor back to the VBUS capacitor
+bank, an In2.Cu detour for the low-current `BQ_STAT` return, and a slight
+leftward jog of the local `BQ_BTST1` route. This removes the VBUS cap-bank
+ratsnest item while keeping DRC clean. The remaining `BQ_VBUS` item is the
+Q3 selector-side connection to U1.
 
 The 2026-07-25 `BQ_SYS` capacitor-bank-to-U1 entry is now routed with an internal-layer spine from the SYS capacitor island and a short top-layer entry into U1 pad 25. The accepted via was nudged left to clear the nearby `BQ_SDRV` route.
 

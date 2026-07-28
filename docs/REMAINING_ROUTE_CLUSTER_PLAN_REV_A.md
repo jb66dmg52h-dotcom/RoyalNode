@@ -9,7 +9,7 @@ Current gate:
 make layout-status
   ERC: 0
   DRC: 0 active violations/warnings; footprint-library mismatch is ignored by project policy for tracked local release-candidate footprints
-  Unrouted: 6 ratsnest pairs
+  Unrouted: 5 ratsnest pairs
 ```
 
 ## Cluster A: TPS61088 5 V Radio Boost Output

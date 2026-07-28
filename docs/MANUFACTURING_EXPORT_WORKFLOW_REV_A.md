@@ -42,7 +42,7 @@ Known blockers:
 - J5 is still a draft SMA envelope, not a released Molex edge-launch footprint.
 - Final 50 ohm GCPW width/gap still needs the JLCPCB stack-up calculation.
 - High-current power rails and switching loops are not complete.
-- Current KiCad DRC state includes 6 expected unrouted ratsnest pairs.
+- Current KiCad DRC state includes 5 expected unrouted ratsnest pairs.
 - Footprint/library mismatch warnings are ignored by project policy for tracked local release-candidate footprints; current DRC active violations are 0.
 
 ## Intended Use

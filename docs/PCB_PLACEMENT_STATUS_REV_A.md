@@ -129,7 +129,7 @@ Only stable local/control nets are routed in this first pass:
 - `I2C_SDA`: BQ25798 SDA and R205 pullup into the same XIAO I2C bus.
 - `I2C_SCL`: BQ25798 SCL and R206 pullup into the same XIAO I2C bus.
 - `CHG_LED_K`: short local charge-LED cathode link between D1 and R207.
-- `BQ_STAT`: charge LED resistor to BQ25798 STAT through a bottom-layer return route.
+- `BQ_STAT`: charge LED resistor to BQ25798 STAT through an internal-layer detour that leaves the back-layer VBUS capacitor-bank lane clear.
 - `BQ_TS`: short local battery-temperature divider link between R200 and R201.
 - `UV_NODE`: short local charger input-undervoltage divider link between R100 and R101.
 - `OV_NODE`: local charger input-overvoltage divider chain link between R101 and R102.
@@ -140,7 +140,7 @@ Only stable local/control nets are routed in this first pass:
 - `BQ_SOLAR_SELECTOR_COMMON`: Q2 common pads are now tied with the same left-shifted back-layer loop pattern.
 - `BQ_USB_SELECTOR_COMMON`: Q3 common pads are now tied with the same left-shifted back-layer loop pattern.
 - `BQ_VBUS`: Q2 and Q3 output-side pads are now joined with a right-side back-layer backbone; U1 and local FET cross-pads remain unrouted.
-- `BQ_VBUS`: C200 and C201 are also tied with a same-side local capacitor bus; C212 and U1/FET cross-pads remain unrouted.
+- `BQ_VBUS`: C200/C201/C212 are tied into U1 through an accepted back-layer capacitor-bank route; the remaining VBUS item is the Q3 selector-side connection to U1.
 - `BQ_PMID`: C202-C204, C213 and the U1-side PMID entry are now tied with a local bus plus a B.Cu bridge from U1 into the capacitor bank.
 - `BQ_SYS`: C206-C209 and C214 are now tied with a same-side local capacitor bus; U1, U3, L2 and upper boost input capacitors remain unrouted.
 - `BAT_RAW`: C210/C211, J2, U2 and the U1 BAT pins are now tied through wider inner/back-layer branches.
@@ -246,7 +246,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-6 expected unrouted ratsnest items
+5 expected unrouted ratsnest items
 0 footprint errors
 0 active DRC violations/warnings; footprint-library mismatch is ignored by project policy for tracked local release-candidate footprints
 ```
