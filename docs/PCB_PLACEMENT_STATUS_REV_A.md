@@ -149,7 +149,7 @@ Only stable local/control nets are routed in this first pass:
 - `BQ_ACDRV1`: short local Q2 gate pin tie only; source/drain power pads remain unrouted.
 - `BQ_ACDRV2`: short local Q3 gate pin tie only; source/drain power pads remain unrouted.
 - `SOLAR_FUSED`: F1 output is now routed to Q1 through a short wide top/back/top path; U4/divider sensing branches remain unrouted.
-- `SOLAR_PROTECTED`: Q1 protected output is now routed down into Q2 through a short wide top-layer path; U4 sensing and U1-side path remain unrouted.
+- `SOLAR_PROTECTED`: Q1 protected output, U4 sensing and the U1-side path are now routed through the accepted local and split-layer left-edge overpass routes.
 - `USB_VBUS_RAW`: MOD1-to-Q3 and Q3-to-U1 are now routed through the accepted top-edge and split-layer high-corridor routes.
 - `BQ_VBUS`: routed in the current generated checkpoint.
 - `BAT_RAW`: U1 duplicate BAT pins are tied into the accepted battery rail.
@@ -245,7 +245,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-2 expected unrouted ratsnest items
+1 expected unrouted ratsnest item
 0 footprint errors
 0 active DRC violations/warnings; footprint-library mismatch is ignored by project policy for tracked local release-candidate footprints
 ```

@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 2 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 1 expected unrouted ratsnest item. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 0 active violations/warnings; `lib_footprint_mismatch` is ignored by project policy for tracked local release-candidate footprints
-- Unrouted: 2 ratsnest pairs
+- Unrouted: 1 ratsnest pair
 
 ## Pass 1: Placement Blockers
 
@@ -49,7 +49,6 @@ Planned work:
 
 Route remaining charger/service power as deliberate copper after placement review:
 
-- `SOLAR_PROTECTED`
 
 Preserve the accepted `BQ_SYS`, `BQ_PMID` and `SOLAR_FUSED` routes unless a grouped power-stage refactor replaces them.
 
@@ -377,6 +376,12 @@ These should avoid switch-node copper and RF launch copper.
   `BQ_STAT`, `BAT_RAW` and `BQ_SYS`, while the selector-spine via landed too
   close to the Q2 `BQ_SOLAR_SELECTOR_COMMON` pad. Retry only after moving the
   lower-edge U1 escape and Q1/Q2 selector join as a group.
+- A later 2026-07-28 `SOLAR_PROTECTED` split-layer left-edge overpass is
+  accepted. It fans out from U1 pad 9, crosses the lower U1 pocket on In2.Cu,
+  hops to In1.Cu at x47 before the BATP lane, then returns across the upper
+  service corridor and drops into the existing Q1/Q2 protected-output via.
+  This removes `SOLAR_PROTECTED` from the current unrouted list while keeping
+  DRC clean.
 - A 2026-07-25 `BATP_KELVIN` bottom-layer sense-route trial was rejected. The R202-side via collided with the accepted `BAT_RAW` branch and `BQ_TS` route, the bottom span crossed `BQ_STAT`, and the U1-side via crowded `BQ_PROG`. Rework the BQ25798 support-passive fanout before retrying BATP.
 - A 2026-07-25 R202 relocation trial for `BATP_KELVIN` was rejected. Moving R202 near U1 collided with the accepted I2C_SDA via corridor and crossed/shorted `BQ_TS`, `BQ_INT` and `BQ_PROG`; keep BATP as part of a coordinated right-side U1 fanout/sense-routing pass.
 - A 2026-07-26 two-layer `BATP_KELVIN` sense route is accepted. It uses a short U1 escape, small signal vias, a B.Cu dogleg around the U1/I2C exits, and an In2.Cu hop around the BAT_RAW and NTC corridors before entering R202. This reduced the ratsnest from 14 to 13 without adding DRC errors.
