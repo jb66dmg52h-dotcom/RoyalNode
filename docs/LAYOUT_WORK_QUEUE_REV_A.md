@@ -204,6 +204,10 @@ These should avoid switch-node copper and RF launch copper.
   `BOOST_VCC` ratsnest but was rejected. The route crossed `BOOST_EN`,
   crowded `BOOST_FSW`, overlapped U3/L2 courtyards and solder-mask-bridged
   into the switch-node area.
+- A later 2026-07-28 lower C405 retry below U3 briefly removed the
+  `BOOST_VCC` ratsnest but was rejected. C405 still crowded `BOOST_EN`, R403
+  and U3 silk/thermal geometry; moving `BOOST_EN` and R403 to compensate broke
+  the accepted boost support routing and introduced new shorts.
 - A 2026-07-28 `5V_RADIO` trial from U3 VOUT to the upper output-cap/sense
   island reduced the radio ratsnest count by one, but every tested internal
   layer crossed accepted routes: `In2.Cu` crossed E22 reset/DIO1 control,
@@ -294,7 +298,9 @@ These should avoid switch-node copper and RF launch copper.
 - A 2026-07-28 `BQ_SW2` top-layer escape trial and an internal-layer via
   escape trial both reduced the ratsnest count temporarily but were rejected.
   The top route crowded U1 `BQ_SYS`, `BQ_SDRV`, `BQ_TS` and I2C pads; the
-  internal route crossed `BQ_TS`, `BQ_VBUS`, 3.3 V and `BQ_ACDRV2`.
+  internal route crossed `BQ_TS`, `BQ_VBUS`, 3.3 V and `BQ_ACDRV2`. A later
+  via-in-pad/inner-layer escape also closed the net electrically, but a
+  rule-compliant via at U1 pad 26 crowded the adjacent `BQ_SYS` and GND pads.
 - A 2026-07-28 `BQ_VBUS` U1-to-Q3 bottom-layer bridge trial reduced the
   ratsnest count temporarily but was rejected because it crossed/crowded
   `BQ_STAT`, `BAT_RAW`, I2C_SDA and `BQ_USB_SELECTOR_COMMON`.
