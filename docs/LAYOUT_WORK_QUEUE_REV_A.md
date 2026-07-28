@@ -338,6 +338,12 @@ These should avoid switch-node copper and RF launch copper.
   `BQ_USB_SELECTOR_COMMON` plus the accepted B.Cu I2C_SDA service route. The
   next SW2 attempt needs either an I2C/service-route layer swap or a local
   selector-common reroute, not just a different SW2 spine.
+- A follow-up 2026-07-28 I2C_SDA layer-swap plus `BQ_SW2` B.Cu retry was
+  rejected. Moving I2C_SDA from B.Cu to In1.Cu collided with the accepted
+  `BQ_SYS` boost branch and broke SDA continuity through its existing layer
+  transitions, while the SW2 via still crowded U1 pad 25/27 and the 3.3 V
+  via. Leave I2C_SDA on B.Cu unless its full endpoint/via strategy is
+  replanned.
 - A 2026-07-28 `BQ_VBUS` U1-to-Q3 bottom-layer bridge trial reduced the
   ratsnest count temporarily but was rejected because it crossed/crowded
   `BQ_STAT`, `BAT_RAW`, I2C_SDA and `BQ_USB_SELECTOR_COMMON`.
