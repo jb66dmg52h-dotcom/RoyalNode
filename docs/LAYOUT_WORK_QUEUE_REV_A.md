@@ -286,6 +286,15 @@ These should avoid switch-node copper and RF launch copper.
 - A 2026-07-28 `BQ_VBUS` U1-to-Q3 bottom-layer bridge trial reduced the
   ratsnest count temporarily but was rejected because it crossed/crowded
   `BQ_STAT`, `BAT_RAW`, I2C_SDA and `BQ_USB_SELECTOR_COMMON`.
+- A later 2026-07-28 `BQ_VBUS` U1-to-Q3 internal-layer escape trial was
+  rejected. The U1-side via crowded the accepted `BQ_STAT` escape, and the
+  internal path crossed I2C, 3.3 V, `BQ_TS` and `BQ_ACDRV2` service routes.
+- A follow-up 2026-07-28 grouped `BQ_STAT` slide plus `BQ_VBUS` lower escape
+  was also rejected. It opened the U1 VBUS lane only partially and then
+  crossed/crowded `BAT_RAW`, `BATP_KELVIN`, `BQ_ACDRV1`, `BQ_ACDRV2`,
+  `BQ_BTST1` and the shifted `BQ_STAT` entry. The remaining `BQ_VBUS` route
+  needs a broader U1/Q3/L1 support-passive placement refactor, not another
+  one-off bridge.
 - A 2026-07-25 `SOLAR_PROTECTED` Q1 drain-join trial was rejected. The outside bottom bridge required a top-layer escape that crossed the accepted Q1 gate U-shape; moving the gate U-shape to the right shorted against Q1's no-net thermal/mechanical pad. Treat the Q1 protected-drain join as a FET-footprint/copper-shape pass.
 - 2026-07-28 `SOLAR_PROTECTED` U1-entry retry briefly reduced the ratsnest
   count by one but was rejected. The internal route crossed accepted `BAT_RAW`
