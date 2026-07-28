@@ -271,6 +271,11 @@ These should avoid switch-node copper and RF launch copper.
   `SOLAR_PROTECTED`, while the tested `In1.Cu`, `In2.Cu` and `B.Cu`
   backbones crossed `BQ_ACDRV2`, `BQ_TS`, 3.3 V, `BAT_RAW`, `BATP_KELVIN`,
   `BQ_VBUS` or NTC routes.
+- A later 2026-07-28 `USB_VBUS_RAW` high-corridor retry also reduced the
+  ratsnest count to 2 but was rejected. The B.Cu version crossed `BAT_RAW`
+  and `BATP_KELVIN`; the In1/In2 variants crowded U1 pad 7/pad 9 and crossed
+  `BQ_ACDRV1`, `BQ_ACDRV2`, `BQ_TS`, 3.3 V or NTC corridors. Keep USB raw in
+  the grouped lower-edge U1/input-selector refactor.
 - A BQ25798 right-side TS-divider relocation trial was rejected because it shorted `BQ_TS` to `BQ_REGN` and violated U1/capacitor courtyards. Treat `BQ_REGN`/`BQ_TS` as a compact HOTROD-package placement pass, not as a generic passive-grid cleanup.
 - A 2026-07-25 `BQ_PROG`/`BQ_INT` direct top-layer routing trial was rejected because it crossed the lower charger/passive staging area and caused shorts, solder-mask issues and thermal relief starvation. Route these only after the lower charger support passives are placed deliberately.
 - A 2026-07-25 `BQ_BTST2` direct top route and a follow-up two-via escape trial were rejected. The top route shorted/crowded `BQ_PROG`; the via route crowded BATP/PROG pad clearance and crossed existing `I2C_SDA`, `BAT_RAW` and `BQ_TS` corridors. Keep `BQ_BTST2`, C217 and the U1 right-side support passives in the same placement pass.
@@ -317,6 +322,11 @@ These should avoid switch-node copper and RF launch copper.
   rejected. Moving the `BQ_SYS` entry right opened the SW2 ratsnest but
   crowded `BQ_SDRV` and I2C; moving the SW2 via lower-left restored SYS but
   shorted or crowded the accepted SYS spines and I2C lane.
+- A later 2026-07-28 `BQ_SW2` right-spine retry and internal via retry were
+  rejected. The top route shorted or crossed 3.3 V, `BQ_SDRV`, `BQ_INT` and
+  `BQ_BTST2`; the internal route did not reduce the ratsnest count and still
+  crossed `BQ_SYS`, 3.3 V and `BQ_TS`. This confirms that `BQ_SW2` needs a
+  coordinated `BQ_SYS` entry plus R203/R204/C218 support-lane refactor.
 - A 2026-07-28 `BQ_VBUS` U1-to-Q3 bottom-layer bridge trial reduced the
   ratsnest count temporarily but was rejected because it crossed/crowded
   `BQ_STAT`, `BAT_RAW`, I2C_SDA and `BQ_USB_SELECTOR_COMMON`.
@@ -339,6 +349,11 @@ These should avoid switch-node copper and RF launch copper.
   `BQ_PMID`, `I2C_SDA`, U3 ground/thermal geometry and
   `SOLAR_PROT_COMMON`. The remaining solar-protected U1 entry belongs in the
   same grouped U1/input-selector refactor as `BQ_VBUS` and `USB_VBUS_RAW`.
+- A later 2026-07-28 `SOLAR_PROTECTED` U1-to-spine internal trial reduced the
+  ratsnest count to 2 but was rejected. The U1-side vertical lane crossed
+  `BQ_STAT`, `BAT_RAW` and `BQ_SYS`, while the selector-spine via landed too
+  close to the Q2 `BQ_SOLAR_SELECTOR_COMMON` pad. Retry only after moving the
+  lower-edge U1 escape and Q1/Q2 selector join as a group.
 - A 2026-07-25 `BATP_KELVIN` bottom-layer sense-route trial was rejected. The R202-side via collided with the accepted `BAT_RAW` branch and `BQ_TS` route, the bottom span crossed `BQ_STAT`, and the U1-side via crowded `BQ_PROG`. Rework the BQ25798 support-passive fanout before retrying BATP.
 - A 2026-07-25 R202 relocation trial for `BATP_KELVIN` was rejected. Moving R202 near U1 collided with the accepted I2C_SDA via corridor and crossed/shorted `BQ_TS`, `BQ_INT` and `BQ_PROG`; keep BATP as part of a coordinated right-side U1 fanout/sense-routing pass.
 - A 2026-07-26 two-layer `BATP_KELVIN` sense route is accepted. It uses a short U1 escape, small signal vias, a B.Cu dogleg around the U1/I2C exits, and an In2.Cu hop around the BAT_RAW and NTC corridors before entering R202. This reduced the ratsnest from 14 to 13 without adding DRC errors.
