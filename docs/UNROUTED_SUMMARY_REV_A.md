@@ -8,4 +8,4 @@ Total unrouted pairs: 1
 
 | Net | Ratsnest pairs | Layout note |
 |---|---:|---|
-| `BQ_SW2` | 1 | Switch node; keep compact and route only after BQ25798 power-loop placement. |
+| `GND` | 1 | Known TOP_GND_FILL zone-split item after signal routing; resolve during final ground-pour/stitching review. |

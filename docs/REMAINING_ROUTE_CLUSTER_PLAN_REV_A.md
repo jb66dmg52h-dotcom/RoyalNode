@@ -1,7 +1,7 @@
 # RoyalNode Rev A Remaining Route Cluster Plan
 
-This file groups the remaining generated KiCad ratsnest items after the clean
-1-unrouted checkpoint. It is a layout planning aid, not a fabrication release.
+This file records the remaining generated KiCad connectivity item after the
+final signal-route checkpoint. It is a layout planning aid, not a fabrication release.
 
 Current gate:
 
@@ -9,7 +9,7 @@ Current gate:
 make layout-status
   ERC: 0
   DRC: 0 active violations/warnings; footprint-library mismatch is ignored by project policy for tracked local release-candidate footprints
-  Unrouted: 1 ratsnest pair
+  Unconnected: 1 expected TOP_GND_FILL/GND zone split
 ```
 
 ## Cluster A: TPS61088 5 V Radio Boost Output
@@ -39,9 +39,7 @@ Do not:
 
 ## Cluster B: BQ25798 Charger Power Stage
 
-Remaining nets:
-
-- `BQ_SW2`
+Remaining nets: none in the current generated signal ratsnest.
 
 Current status:
 
@@ -50,14 +48,13 @@ Current status:
 - A direct `BQ_SW1` top route lowered the ratsnest count but failed badly by running down the U1 left pad row.
 - `BQ_PMID` is now routed with a lower U1 fanout, B.Cu bridge and capacitor-bank entry; preserve it unless the full lower-edge charger fanout is replanned.
 - `BQ_VBUS` is now routed with the accepted capacitor-bank entry plus a split-layer Q3-to-U1 bridge; preserve it unless the full lower-edge charger fanout is replanned.
-- `BQ_SW2` remains coupled to C217 placement and the U1 right-side escape.
-- Recent `BQ_SW2` trials show that the accepted `BQ_SYS` entry, C218/`BQ_SDRV`, R203/R204, `BQ_TS` and Q3 selector pads must be replanned together; shifting only the SYS via or drawing a right-side overpass causes shorts or solder-mask bridges.
+- `BQ_SW2` is now routed with the accepted lower U1/right-side escape after moving the `BQ_SYS` U1 entry away from the tight SW2 pocket.
 - `BQ_BTST2` is now routed with an accepted top-layer dogleg after straightening the local `BQ_PROG` route.
 
 Next strategy:
 
 - Keep the accepted L1 location unless the whole charger quadrant is replanned; moving only L1 upward has already failed.
-- Treat C217, C218, R203/R204, `BQ_TS` and `BQ_SW2` as a shared U1 right-side fanout problem. `BQ_REGN`, `BQ_PMID` and `BQ_BTST2` are now routed and should be preserved during any grouped refactor.
+- Preserve the accepted C217, C218, R203/R204, `BQ_TS`, `BQ_SYS` and `BQ_SW2` geometry until a deliberate power-loop release review replaces the whole charger quadrant.
 - Move BQ25798 VBUS/PMID capacitor banks nearer U1/Q2/Q3 only as part of a grouped capacitor/passive placement pass.
 
 Do not:
@@ -109,15 +106,14 @@ Next strategy:
 The highest-value next pass is:
 
 ```text
-Refactor the BQ25798 power-stage placement:
-  1. Preserve the accepted BQ_SW1 left-wrap unless a full charger-quadrant refactor replaces it.
-  2. Re-stage C217/C218/R203/R204 around the U1 right-side escape.
-  3. Re-test BQ_SW2 while preserving the accepted BQ_BTST2 dogleg.
-  4. Only then retry the U1-side service-power entries while preserving BQ_PMID, BQ_REGN and BATP_KELVIN.
+Review the BQ25798 power-stage placement for release:
+  1. Preserve the accepted BQ_SW1 and BQ_SW2 escapes unless a full charger-quadrant refactor replaces them.
+  2. Re-stage C217/C218/R203/R204 only as part of a deliberate high-di/dt loop review.
+  3. Preserve the accepted BQ_BTST2 dogleg, BQ_PMID, BQ_REGN and BATP_KELVIN routes during that review.
 ```
 
-This should reduce several remaining unrouted items while improving the actual
-charger power-loop geometry.
+This should improve charger power-loop geometry without reopening already
+connected signal ratsnest items.
 
 Detailed coordinates and trial constraints for this pass are tracked in
 `docs/U1_RIGHT_SIDE_REFACTOR_REV_A.md`.

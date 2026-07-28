@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 1 expected unrouted ratsnest item. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean final signal-route checkpoint with 1 expected generated `TOP_GND_FILL`/`GND` zone-split item. This work queue translates the generated summary into the next layout and release-review passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 0 active violations/warnings; `lib_footprint_mismatch` is ignored by project policy for tracked local release-candidate footprints
-- Unrouted: 1 ratsnest pair
+- Unconnected: 1 expected generated `TOP_GND_FILL`/`GND` zone-split item
 
 ## Pass 1: Placement Blockers
 
@@ -36,7 +36,7 @@ Resolve these before routing more long traces:
 
 ## Pass 2: Ground System
 
-`GND` is now handled by generated top copper and Layer-2 reference pours. Do not replace the remaining ground/fanout work with skinny traces.
+`GND` is now handled by generated top copper and Layer-2 reference pours. One known top-fill zone-split item remains after the signal routes are connected; treat it as a ground-pour/stitching cleanup item, not a missing signal route.
 
 Planned work:
 
@@ -103,10 +103,9 @@ removes `BQ_VBUS` from the current unrouted list.
 The 2026-07-25 `BQ_SYS` capacitor-bank-to-U1 entry is now routed with an internal-layer spine from the SYS capacitor island and a short top-layer entry into U1 pad 25. The accepted via was nudged left to clear the nearby `BQ_SDRV` route.
 
 A 2026-07-28 `BQ_SYS` U1-entry support refactor is accepted. The entry via is
-now lower at 65.75, 71.35 mm, and the SYS top-layer entry lands into the lower
-edge of U1 pad 25 while preserving DRC cleanliness. This does not reduce the
-ratsnest count by itself, but it gives the remaining `BQ_SW2` pad-26 escape
-more clearance than the earlier 65.80, 71.80 mm entry.
+now staged at 66.35, 70.50 mm, and the SYS top-layer entry lands into the lower
+edge of U1 pad 25 while preserving DRC cleanliness. This creates the clearance
+used by the accepted lower U1/right-side `BQ_SW2` pad-26 escape.
 
 The 2026-07-25 `BQ_SYS` L2-to-SYS-spine route is now routed with a short top-layer L2 fanout and a wider internal-layer branch into the accepted SYS spine. This leaves the U3 VIN/input-cap connection as the main remaining boost-input power-loop item.
 
@@ -128,9 +127,9 @@ The current layout ties the adjacent TPS61088 switch pins into L2 with compact l
 
 C216 is now relocated below U1 with `BQ_BTST1` and the local capacitor side of `BQ_SW1` routed. The remaining `BQ_SW1` ratsnest item is the inductor/power-loop path, not the bootstrap-cap connection.
 
-C217 is now staged beside the charger power stage and its local `BQ_SW2` side is tied to L1. The companion `BQ_BTST2` escape is now routed with a top-layer dogleg after straightening the local `BQ_PROG` route. Keep future C217 work focused on the remaining `BQ_SW2` U1-to-L1 span.
+C217 is now staged beside the charger power stage and its local `BQ_SW2` side is tied to L1. The companion `BQ_BTST2` escape is now routed with a top-layer dogleg after straightening the local `BQ_PROG` route. The 2026-07-28 lower U1/right-side `BQ_SW2` route closes the U1-to-L1 span while preserving the accepted `BQ_SYS` entry.
 
-A direct 2026-07-25 `BQ_SW2` U1-to-L1 top-layer span was rejected because it crossed the U1 `I2C_SCL`/ground pad row and the accepted SCL fanout. The remaining `BQ_SW2` power-loop connection needs a coordinated U1 escape, not a vertical trace through the lower pad row.
+A direct 2026-07-25 `BQ_SW2` U1-to-L1 top-layer span was rejected because it crossed the U1 `I2C_SCL`/ground pad row and the accepted SCL fanout. Preserve that rejection note as history; the accepted route uses a different lower/right-side escape.
 
 A later 2026-07-25 `C217` move to the lower-right of U1 was rejected. It worsened the ratsnest count, overlapped the L1 courtyard, swapped the intended `BTST2`/`SW2` pad approach after rotation, and crossed/shorted the accepted `BQ_TS` via corridor. Keep `C217`, `BQ_TS`, `BQ_REGN` and the U1 right-side escape as one placement pass.
 

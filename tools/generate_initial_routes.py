@@ -505,14 +505,14 @@ SEGMENTS = [
         "net": "BQ_SYS",
         "layer": "In1.Cu",
         "width": 0.40,
-        "points": [(50.00, 77.80), (54.80, 77.80), (54.80, 71.35), (65.75, 71.35)],
+        "points": [(50.00, 77.80), (54.80, 77.80), (54.80, 70.50), (66.35, 70.50)],
     },
     {
         "name": "bq-sys-u1-entry-b",
         "net": "BQ_SYS",
         "layer": "F.Cu",
         "width": 0.25,
-        "points": [(65.75, 71.35), (65.90, 72.80)],
+        "points": [(66.35, 70.50), (66.35, 72.20), (65.90, 72.80)],
     },
     {
         "name": "bq-sys-l2-fanout-to-spine-b",
@@ -526,7 +526,7 @@ SEGMENTS = [
         "net": "BQ_SYS",
         "layer": "In2.Cu",
         "width": 0.60,
-        "points": [(70.50, 55.00), (70.50, 71.35), (65.75, 71.35)],
+        "points": [(70.50, 55.00), (70.50, 70.50), (66.35, 70.50)],
     },
     {
         "name": "bq-sys-u3-vin-fanout-b",
@@ -681,6 +681,13 @@ SEGMENTS = [
         "layer": "F.Cu",
         "width": 0.40,
         "points": [(73.58, 82.00), (75.20, 82.00), (75.20, 84.00), (67.41, 84.00)],
+    },
+    {
+        "name": "bq-sw2-u1-to-l1-lower-u",
+        "net": "BQ_SW2",
+        "layer": "F.Cu",
+        "width": 0.25,
+        "points": [(65.45, 73.30), (65.45, 69.30), (71.60, 69.30), (71.60, 70.80), (72.80, 70.80), (72.80, 83.20), (67.41, 83.20), (67.41, 84.00)],
     },
     {
         "name": "bq-ts-divider-local",
@@ -1535,7 +1542,7 @@ VIAS = [
     {"name": "j4-ntc-sense-pad-via", "net": "NTC_SENSE", "at": (83.88, 86.65)},
     {"name": "bq-sys-c205-bus-via", "net": "BQ_SYS", "at": (40.50, 83.40)},
     {"name": "bq-sys-c205-pad-via", "net": "BQ_SYS", "at": (50.00, 77.80)},
-    {"name": "bq-sys-u1-entry-via-b", "net": "BQ_SYS", "at": (65.75, 71.35)},
+    {"name": "bq-sys-u1-entry-via-b", "net": "BQ_SYS", "at": (66.35, 70.50)},
     {"name": "bq-sys-l2-spine-via-b", "net": "BQ_SYS", "at": (70.50, 55.00)},
     {"name": "bq-sys-u3-vin-via-b", "net": "BQ_SYS", "at": (61.20, 52.90)},
     {"name": "solar-prot-gate-u4-via-b", "net": "SOLAR_PROT_GATE", "at": (76.60, 49.03)},
@@ -1604,6 +1611,7 @@ VIAS = [
     {"name": "e22-miso-xiao-via", "net": "SPI_MISO", "at": (87.00, 28.46)},
     {"name": "e22-mosi-e22-via", "net": "SPI_MOSI", "at": (29.60, 51.46)},
     {"name": "e22-mosi-xiao-via", "net": "SPI_MOSI", "at": (86.00, 31.00)},
+    {"name": "top-ground-fill-u1-right-stitch", "net": "GND", "at": (70.70, 80.55), "size": 0.50, "drill": 0.25},
 ]
 
 def stable_uuid(*parts: str) -> str:
@@ -2383,6 +2391,7 @@ def ground_zone_block(layer: str, name: str, zone_uuid: str) -> str:
         f'    (fill\n'
         f'      (thermal_gap 0.50)\n'
         f'      (thermal_bridge_width 0.50)\n'
+        f'      (island_removal_mode 2)\n'
         f'    )\n'
         f'    (polygon\n'
         f'      (pts\n'

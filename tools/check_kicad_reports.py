@@ -39,7 +39,7 @@ def check_drc(text: str) -> None:
     main_section = text.split("** Found", 2)[1]
     tags = re.findall(r"^\[([^\]]+)\]:", main_section, flags=re.M)
     if tags != EXPECTED_DRC_TAGS:
-        fail(f"unexpected DRC tags before unrouted list: {tags}")
+        fail(f"unexpected DRC tags before unconnected-item list: {tags}")
     if violation_count != len(EXPECTED_DRC_TAGS):
         fail(f"expected {len(EXPECTED_DRC_TAGS)} DRC violations, found {violation_count}")
     unconnected = re.search(r"\*\* Found (\d+) unconnected pads \*\*", text)
@@ -56,7 +56,7 @@ def main() -> None:
     print("KiCad report check passed")
     print("  ERC: 0 errors, 0 warnings")
     print("  DRC: 0 active violations/warnings")
-    print(f"  Unconnected pads: {EXPECTED_UNCONNECTED}")
+    print(f"  Expected TOP_GND_FILL/GND zone item: {EXPECTED_UNCONNECTED}")
 
 
 if __name__ == "__main__":
