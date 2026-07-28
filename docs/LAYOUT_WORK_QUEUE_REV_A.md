@@ -301,6 +301,10 @@ These should avoid switch-node copper and RF launch copper.
   internal route crossed `BQ_TS`, `BQ_VBUS`, 3.3 V and `BQ_ACDRV2`. A later
   via-in-pad/inner-layer escape also closed the net electrically, but a
   rule-compliant via at U1 pad 26 crowded the adjacent `BQ_SYS` and GND pads.
+- A follow-up 2026-07-28 grouped `BQ_SYS`/`BQ_SW2` pocket refactor was also
+  rejected. Moving the `BQ_SYS` entry right opened the SW2 ratsnest but
+  crowded `BQ_SDRV` and I2C; moving the SW2 via lower-left restored SYS but
+  shorted or crowded the accepted SYS spines and I2C lane.
 - A 2026-07-28 `BQ_VBUS` U1-to-Q3 bottom-layer bridge trial reduced the
   ratsnest count temporarily but was rejected because it crossed/crowded
   `BQ_STAT`, `BAT_RAW`, I2C_SDA and `BQ_USB_SELECTOR_COMMON`.
