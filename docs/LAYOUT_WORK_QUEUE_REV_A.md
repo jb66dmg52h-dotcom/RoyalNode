@@ -305,6 +305,11 @@ These should avoid switch-node copper and RF launch copper.
   count by one but was rejected. The internal route crossed accepted `BAT_RAW`
   and `BQ_SYS`, and the Q2-side via solder-mask-bridged into the selector
   common pad.
+- A later 2026-07-28 `SOLAR_PROTECTED` U1-to-Q1 left-side service-route trial
+  was rejected. It crossed or crowded `BQ_REGN`, `BQ_ACDRV2`, `BQ_STAT`,
+  `BQ_PMID`, `I2C_SDA`, U3 ground/thermal geometry and
+  `SOLAR_PROT_COMMON`. The remaining solar-protected U1 entry belongs in the
+  same grouped U1/input-selector refactor as `BQ_VBUS` and `USB_VBUS_RAW`.
 - A 2026-07-25 `BATP_KELVIN` bottom-layer sense-route trial was rejected. The R202-side via collided with the accepted `BAT_RAW` branch and `BQ_TS` route, the bottom span crossed `BQ_STAT`, and the U1-side via crowded `BQ_PROG`. Rework the BQ25798 support-passive fanout before retrying BATP.
 - A 2026-07-25 R202 relocation trial for `BATP_KELVIN` was rejected. Moving R202 near U1 collided with the accepted I2C_SDA via corridor and crossed/shorted `BQ_TS`, `BQ_INT` and `BQ_PROG`; keep BATP as part of a coordinated right-side U1 fanout/sense-routing pass.
 - A 2026-07-26 two-layer `BATP_KELVIN` sense route is accepted. It uses a short U1 escape, small signal vias, a B.Cu dogleg around the U1/I2C exits, and an In2.Cu hop around the BAT_RAW and NTC corridors before entering R202. This reduced the ratsnest from 14 to 13 without adding DRC errors.
