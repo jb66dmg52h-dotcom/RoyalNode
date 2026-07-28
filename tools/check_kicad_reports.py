@@ -11,7 +11,7 @@ ERC = ROOT / "hardware/fabrication/RoyalNode_erc.rpt"
 DRC = ROOT / "hardware/fabrication/RoyalNode_drc.rpt"
 
 EXPECTED_DRC_TAGS: list[str] = []
-EXPECTED_UNCONNECTED = 5
+EXPECTED_UNCONNECTED = 4
 
 
 def fail(message: str) -> None:

@@ -246,7 +246,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-5 expected unrouted ratsnest items
+4 expected unrouted ratsnest items
 0 footprint errors
 0 active DRC violations/warnings; footprint-library mismatch is ignored by project policy for tracked local release-candidate footprints
 ```

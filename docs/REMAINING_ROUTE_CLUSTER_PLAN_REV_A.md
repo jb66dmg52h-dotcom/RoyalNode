@@ -1,7 +1,7 @@
 # RoyalNode Rev A Remaining Route Cluster Plan
 
 This file groups the remaining generated KiCad ratsnest items after the clean
-6-unrouted checkpoint. It is a layout planning aid, not a fabrication release.
+4-unrouted checkpoint. It is a layout planning aid, not a fabrication release.
 
 Current gate:
 
@@ -9,14 +9,12 @@ Current gate:
 make layout-status
   ERC: 0
   DRC: 0 active violations/warnings; footprint-library mismatch is ignored by project policy for tracked local release-candidate footprints
-  Unrouted: 5 ratsnest pairs
+  Unrouted: 4 ratsnest pairs
 ```
 
 ## Cluster A: TPS61088 5 V Radio Boost Output
 
-Remaining nets:
-
-- `BOOST_VCC`
+Remaining nets: none in the current generated ratsnest.
 
 Current status:
 
@@ -26,17 +24,18 @@ Current status:
 - Two `5V_RADIO` shortcut routes toward E22 were rejected because they crossed `BOOST_FB`, SPI/control fanouts and E22 ground pins.
 - The accepted 2026-07-28 `5V_RADIO` pass now connects U3 VOUT to E22 VCC, the feedback/output-cap island, C503 and the lower bulk capacitor bank with top-layer generated copper.
 - `BOOST_COMP` is now routed locally after moving R404/C408 and nudging the `BOOST_FB` U3-side via.
+- `BOOST_VCC` is now routed after moving C405 below U3, moving R403 lower-left and moving R404 lower to clear the bypass-cap pocket.
 
 Next strategy:
 
-- Move the TPS61088 output capacitors and feedback divider as a group instead of one part at a time.
+- Preserve the accepted C405/R403/R404 support-pocket placement unless a full TPS61088 power-loop review replaces it.
 - Keep `5V_RADIO` as a deliberate high-current copper shape from U3 VOUT to E22 VCC and the local capacitor bank.
 - Preserve the E22 control/SPI fanout corridors unless the whole radio/boost placement is reviewed.
 
 Do not:
 
 - Route `5V_RADIO` as a long skinny internal trace.
-- Keep searching the immediate U3 underside for C405 without moving EN/FSW/ILIM support routing.
+- Reopen `BOOST_VCC` as a one-off route; it is closed in the current checkpoint.
 
 ## Cluster B: BQ25798 Charger Power Stage
 

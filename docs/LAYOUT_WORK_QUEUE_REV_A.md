@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 5 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 4 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 0 active violations/warnings; `lib_footprint_mismatch` is ignored by project policy for tracked local release-candidate footprints
-- Unrouted: 5 ratsnest pairs
+- Unrouted: 4 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
@@ -208,6 +208,13 @@ These should avoid switch-node copper and RF launch copper.
   `BOOST_VCC` ratsnest but was rejected. C405 still crowded `BOOST_EN`, R403
   and U3 silk/thermal geometry; moving `BOOST_EN` and R403 to compensate broke
   the accepted boost support routing and introduced new shorts.
+- A later 2026-07-28 TPS61088 support-pocket refactor is accepted. C405 now
+  sits below U3 with a short top-layer `BOOST_VCC` bypass route, R403 moves
+  lower-left with an ILIM layer hop around `BOOST_COMP`, and R404 moves lower
+  to preserve compensation clearances. The U3 reference field is hidden in the
+  local release-candidate footprint to avoid silkscreen over the new bypass
+  capacitor. This removes `BOOST_VCC` from the remaining ratsnest while
+  keeping DRC clean.
 - A 2026-07-28 `5V_RADIO` trial from U3 VOUT to the upper output-cap/sense
   island reduced the radio ratsnest count by one, but every tested internal
   layer crossed accepted routes: `In2.Cu` crossed E22 reset/DIO1 control,
