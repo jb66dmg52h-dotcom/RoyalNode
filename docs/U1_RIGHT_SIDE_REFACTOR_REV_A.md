@@ -1,7 +1,7 @@
 # U1 Right-Side Refactor Rev A
 
 This note captures the next charger-layout work package after the clean
-12-unrouted checkpoint.
+11-unrouted checkpoint.
 
 ## Current Gate
 
@@ -12,8 +12,8 @@ make layout-status
   Unrouted: 11 ratsnest pairs
 ```
 
-Known allowed DRC warnings remain `MOD2`, `U3` and `L2` footprint/library
-warnings.
+The DRC gate has 0 active violations/warnings. Footprint-library mismatch is
+ignored by project policy for tracked local release-candidate footprints.
 
 ## Accepted State To Preserve
 
@@ -97,6 +97,23 @@ Nearby routed or placed blockers:
   later SW2/BTST2 pass proves it necessary.
 - Do not route R204's 3.3 V feed on `In1.Cu` across x73.5 mm; that lane
   crosses the accepted `BQ_ACDRV1` route.
+- 2026-07-28 BTST2 dogleg trials showed the tight top-layer lane between
+  `BQ_TS` and `BQ_PROG` is too narrow at the current 0.15 mm minimum trace
+  width. A dogleg at x68.50 mm cleared `BQ_PROG` but missed `BQ_TS` clearance
+  by 0.025 mm; shifting right cleared `BQ_TS` but crowded `BQ_PROG`.
+- Do not solve that miss by dropping the BTST2 track to 0.10 mm. KiCad rejects
+  that under the Rev A 0.15 mm board minimum.
+- Moving the `BQ_TS` via left to open the BTST2 lane was rejected because it
+  collided with the accepted `I2C_SDA` and `BQ_REGN` escape region.
+- Bending the `BQ_PROG` route below BTST2 was rejected because it crowded the
+  accepted `BQ_INT` top-layer route. `BQ_PROG` and `BQ_INT` must be moved as a
+  pair if this lane is opened.
+- Moving C217 into the immediate U1 pin field was rejected. The capacitor
+  overlapped/crowded `BAT_RAW`, `BATP_KELVIN`, `BQ_SDRV`, `BQ_PROG`, `BQ_INT`,
+  R203/R204 and the Q3 selector corridor.
+- A via-based BTST2 escape from U1 to C217 was rejected because the U1-side via
+  crowded `BQ_PROG`, `BAT_RAW` and `BATP_KELVIN`, and the back-layer route
+  crossed the accepted `BATP_KELVIN` sense branch.
 
 ## Refactor Goal
 
@@ -133,5 +150,5 @@ The pass is accepted only if:
 - unconnected count decreases below 17, or a documented placement improvement is
   achieved without increasing it;
 - ERC remains 0;
-- DRC contains only the known `MOD2`, `U3` and `L2` footprint warnings;
+- DRC remains at 0 active violations/warnings;
 - no test points, shunts or measurement links are added.
