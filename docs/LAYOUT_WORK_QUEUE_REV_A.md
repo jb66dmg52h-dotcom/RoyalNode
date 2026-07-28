@@ -103,6 +103,12 @@ removes `BQ_VBUS` from the current unrouted list.
 
 The 2026-07-25 `BQ_SYS` capacitor-bank-to-U1 entry is now routed with an internal-layer spine from the SYS capacitor island and a short top-layer entry into U1 pad 25. The accepted via was nudged left to clear the nearby `BQ_SDRV` route.
 
+A 2026-07-28 `BQ_SYS` U1-entry support refactor is accepted. The entry via is
+now lower at 65.75, 71.35 mm, and the SYS top-layer entry lands into the lower
+edge of U1 pad 25 while preserving DRC cleanliness. This does not reduce the
+ratsnest count by itself, but it gives the remaining `BQ_SW2` pad-26 escape
+more clearance than the earlier 65.80, 71.80 mm entry.
+
 The 2026-07-25 `BQ_SYS` L2-to-SYS-spine route is now routed with a short top-layer L2 fanout and a wider internal-layer branch into the accepted SYS spine. This leaves the U3 VIN/input-cap connection as the main remaining boost-input power-loop item.
 
 The 2026-07-25 `BQ_SYS` U3 VIN-to-L2 spine branch is now routed with a compact top-layer U3 fanout and an In1 branch into the L2/SYS spine. Intermediate trials hit BOOST_EN, I2C/E22 internal routes, BOOT clearance and C407 ground thermal starvation; the accepted via lands lower/left enough to keep C407's ground thermal intact.
@@ -327,6 +333,11 @@ These should avoid switch-node copper and RF launch copper.
   `BQ_BTST2`; the internal route did not reduce the ratsnest count and still
   crossed `BQ_SYS`, 3.3 V and `BQ_TS`. This confirms that `BQ_SW2` needs a
   coordinated `BQ_SYS` entry plus R203/R204/C218 support-lane refactor.
+- After the accepted lower `BQ_SYS` entry, a 2026-07-28 `BQ_SW2` B.Cu retry
+  was also rejected. It still crowded the new `BQ_SYS` entry via and crossed
+  `BQ_USB_SELECTOR_COMMON` plus the accepted B.Cu I2C_SDA service route. The
+  next SW2 attempt needs either an I2C/service-route layer swap or a local
+  selector-common reroute, not just a different SW2 spine.
 - A 2026-07-28 `BQ_VBUS` U1-to-Q3 bottom-layer bridge trial reduced the
   ratsnest count temporarily but was rejected because it crossed/crowded
   `BQ_STAT`, `BAT_RAW`, I2C_SDA and `BQ_USB_SELECTOR_COMMON`.
