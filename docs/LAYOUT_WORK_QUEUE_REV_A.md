@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 3 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 2 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 0 active violations/warnings; `lib_footprint_mismatch` is ignored by project policy for tracked local release-candidate footprints
-- Unrouted: 3 ratsnest pairs
+- Unrouted: 2 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
@@ -282,6 +282,12 @@ These should avoid switch-node copper and RF launch copper.
   and `BATP_KELVIN`; the In1/In2 variants crowded U1 pad 7/pad 9 and crossed
   `BQ_ACDRV1`, `BQ_ACDRV2`, `BQ_TS`, 3.3 V or NTC corridors. Keep USB raw in
   the grouped lower-edge U1/input-selector refactor.
+- A later 2026-07-28 `USB_VBUS_RAW` split-layer high-corridor route is
+  accepted. It uses a horizontal U1 pad-8 fanout, an In2.Cu vertical escape,
+  a left-side layer hop before crossing `BQ_TS`, and an In1.Cu high overpass
+  around L1, NTC, ACDRV and `BQ_VBUS` corridors before entering Q3. This
+  removes `USB_VBUS_RAW` from the current unrouted list while keeping DRC
+  clean.
 - A BQ25798 right-side TS-divider relocation trial was rejected because it shorted `BQ_TS` to `BQ_REGN` and violated U1/capacitor courtyards. Treat `BQ_REGN`/`BQ_TS` as a compact HOTROD-package placement pass, not as a generic passive-grid cleanup.
 - A 2026-07-25 `BQ_PROG`/`BQ_INT` direct top-layer routing trial was rejected because it crossed the lower charger/passive staging area and caused shorts, solder-mask issues and thermal relief starvation. Route these only after the lower charger support passives are placed deliberately.
 - A 2026-07-25 `BQ_BTST2` direct top route and a follow-up two-via escape trial were rejected. The top route shorted/crowded `BQ_PROG`; the via route crowded BATP/PROG pad clearance and crossed existing `I2C_SDA`, `BAT_RAW` and `BQ_TS` corridors. Keep `BQ_BTST2`, C217 and the U1 right-side support passives in the same placement pass.

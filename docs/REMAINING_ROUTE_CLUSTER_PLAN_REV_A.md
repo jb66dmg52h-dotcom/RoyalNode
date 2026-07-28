@@ -1,7 +1,7 @@
 # RoyalNode Rev A Remaining Route Cluster Plan
 
 This file groups the remaining generated KiCad ratsnest items after the clean
-3-unrouted checkpoint. It is a layout planning aid, not a fabrication release.
+2-unrouted checkpoint. It is a layout planning aid, not a fabrication release.
 
 Current gate:
 
@@ -9,7 +9,7 @@ Current gate:
 make layout-status
   ERC: 0
   DRC: 0 active violations/warnings; footprint-library mismatch is ignored by project policy for tracked local release-candidate footprints
-  Unrouted: 3 ratsnest pairs
+  Unrouted: 2 ratsnest pairs
 ```
 
 ## Cluster A: TPS61088 5 V Radio Boost Output
@@ -43,7 +43,6 @@ Remaining nets:
 
 - `BQ_SW2`
 - `SOLAR_PROTECTED`
-- `USB_VBUS_RAW`
 
 Current status:
 
@@ -95,7 +94,6 @@ Do not:
 
 Remaining nets:
 
-- `USB_VBUS_RAW`
 - portions of `SOLAR_PROTECTED`
 
 Current status:
