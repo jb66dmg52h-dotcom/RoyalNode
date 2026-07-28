@@ -225,6 +225,11 @@ These should avoid switch-node copper and RF launch copper.
   It crossed accepted `BQ_VBUS`, `XIAO_BAT_ISO` and I2C_SDA service routes.
   Keep USB raw routing blocked until the right-edge service corridor is
   replanned.
+- A 2026-07-28 `USB_VBUS_RAW` U1-to-Q3 bottom-edge service-route trial was
+  rejected. It reduced the ratsnest count temporarily, but crossed or crowded
+  `BQ_ACDRV2`, `BQ_VBUS`, `XIAO_BAT_ISO`, `NTC_SENSE`, `BATP_KELVIN` and
+  `BQ_REGN`. The remaining U1 USB input connection needs the same grouped
+  U1/Q3/service-connector refactor as `BQ_VBUS`.
 - After moving the right-edge 3.3 V service leg to `In2.Cu`, a 2026-07-26
   top-edge `USB_VBUS_RAW` route from MOD1 5V to Q3 pads 7/8 is accepted. This
   removes the MOD1-to-Q3 USB ratsnest item; the remaining `USB_VBUS_RAW` item
