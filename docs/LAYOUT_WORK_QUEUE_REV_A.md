@@ -1,6 +1,6 @@
 # Layout Work Queue Rev A
 
-RoyalNode Rev A now has a clean generated-routing checkpoint with 4 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
+RoyalNode Rev A now has a clean generated-routing checkpoint with 3 expected unrouted ratsnest items. This work queue translates the generated summary into the next layout passes.
 
 Use this sequence rather than routing random ratsnest lines.
 
@@ -22,7 +22,7 @@ Current result:
 
 - ERC: 0 violations
 - DRC: 0 active violations/warnings; `lib_footprint_mismatch` is ignored by project policy for tracked local release-candidate footprints
-- Unrouted: 4 ratsnest pairs
+- Unrouted: 3 ratsnest pairs
 
 ## Pass 1: Placement Blockers
 
@@ -49,7 +49,6 @@ Planned work:
 
 Route remaining charger/service power as deliberate copper after placement review:
 
-- `BQ_VBUS`
 - `SOLAR_PROTECTED`
 
 Preserve the accepted `BQ_SYS`, `BQ_PMID` and `SOLAR_FUSED` routes unless a grouped power-stage refactor replaces them.
@@ -95,6 +94,12 @@ bank, an In2.Cu detour for the low-current `BQ_STAT` return, and a slight
 leftward jog of the local `BQ_BTST1` route. This removes the VBUS cap-bank
 ratsnest item while keeping DRC clean. The remaining `BQ_VBUS` item is the
 Q3 selector-side connection to U1.
+
+A later 2026-07-28 `BQ_VBUS` Q3-to-U1 bridge is accepted. It uses an In1.Cu
+high bridge from the Q3 VBUS backbone to a via at 64.00, 85.60 mm, then an
+In2.Cu drop into the accepted U1/cap-bank VBUS via. This clears the nearby
+`BAT_RAW`, `BQ_ACDRV1`, `BQ_ACDRV2`, `NTC_SENSE` and L1/`BQ_SW1` corridors and
+removes `BQ_VBUS` from the current unrouted list.
 
 The 2026-07-25 `BQ_SYS` capacitor-bank-to-U1 entry is now routed with an internal-layer spine from the SYS capacitor island and a short top-layer entry into U1 pad 25. The accepted via was nudged left to clear the nearby `BQ_SDRV` route.
 

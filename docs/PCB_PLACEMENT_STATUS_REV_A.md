@@ -139,8 +139,7 @@ Only stable local/control nets are routed in this first pass:
 - `SOLAR_PROT_COMMON`: Q1 common pads are now tied with a left-shifted back-layer loop that clears the gate backbone.
 - `BQ_SOLAR_SELECTOR_COMMON`: Q2 common pads are now tied with the same left-shifted back-layer loop pattern.
 - `BQ_USB_SELECTOR_COMMON`: Q3 common pads are now tied with the same left-shifted back-layer loop pattern.
-- `BQ_VBUS`: Q2 and Q3 output-side pads are now joined with a right-side back-layer backbone; U1 and local FET cross-pads remain unrouted.
-- `BQ_VBUS`: C200/C201/C212 are tied into U1 through an accepted back-layer capacitor-bank route; the remaining VBUS item is the Q3 selector-side connection to U1.
+- `BQ_VBUS`: Q2 and Q3 output-side pads are now joined with a right-side back-layer backbone; C200/C201/C212 are tied into U1 through an accepted back-layer capacitor-bank route; and the Q3-side selector bridge now reaches U1 through a split-layer high bridge.
 - `BQ_PMID`: C202-C204, C213 and the U1-side PMID entry are now tied with a local bus plus a B.Cu bridge from U1 into the capacitor bank.
 - `BQ_SYS`: C206-C209 and C214 are now tied with a same-side local capacitor bus; U1, U3, L2 and upper boost input capacitors remain unrouted.
 - `BAT_RAW`: C210/C211, J2, U2 and the U1 BAT pins are now tied through wider inner/back-layer branches.
@@ -152,7 +151,7 @@ Only stable local/control nets are routed in this first pass:
 - `SOLAR_FUSED`: F1 output is now routed to Q1 through a short wide top/back/top path; U4/divider sensing branches remain unrouted.
 - `SOLAR_PROTECTED`: Q1 protected output is now routed down into Q2 through a short wide top-layer path; U4 sensing and U1-side path remain unrouted.
 - `USB_VBUS_RAW`: short wide local Q3 adjacent-drain pad tie only; external/source path remains unrouted.
-- `BQ_VBUS`: short local U1 duplicate VBUS pin tie only; rail fanout remains unrouted.
+- `BQ_VBUS`: routed in the current generated checkpoint.
 - `BAT_RAW`: U1 duplicate BAT pins are tied into the accepted battery rail.
 - `BOOST_SW`: TPS61088 switch pins are now tied into L2 with compact local top-layer copper. C406 and R402 have been moved beside the boost stage and their BOOT/FSW switch-node branches are routed.
 
@@ -246,7 +245,7 @@ Schematic ERC:
 PCB DRC:
 
 ```text
-4 expected unrouted ratsnest items
+3 expected unrouted ratsnest items
 0 footprint errors
 0 active DRC violations/warnings; footprint-library mismatch is ignored by project policy for tracked local release-candidate footprints
 ```

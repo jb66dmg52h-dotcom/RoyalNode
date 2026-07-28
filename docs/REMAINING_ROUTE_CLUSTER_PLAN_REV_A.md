@@ -1,7 +1,7 @@
 # RoyalNode Rev A Remaining Route Cluster Plan
 
 This file groups the remaining generated KiCad ratsnest items after the clean
-4-unrouted checkpoint. It is a layout planning aid, not a fabrication release.
+3-unrouted checkpoint. It is a layout planning aid, not a fabrication release.
 
 Current gate:
 
@@ -9,7 +9,7 @@ Current gate:
 make layout-status
   ERC: 0
   DRC: 0 active violations/warnings; footprint-library mismatch is ignored by project policy for tracked local release-candidate footprints
-  Unrouted: 4 ratsnest pairs
+  Unrouted: 3 ratsnest pairs
 ```
 
 ## Cluster A: TPS61088 5 V Radio Boost Output
@@ -41,7 +41,6 @@ Do not:
 
 Remaining nets:
 
-- `BQ_VBUS`
 - `BQ_SW2`
 - `SOLAR_PROTECTED`
 - `USB_VBUS_RAW`
@@ -52,6 +51,7 @@ Current status:
 - A trial moving only L1 above U1 was rejected because it collided with the accepted TPS61088 input-cap cluster and U1 support passives.
 - A direct `BQ_SW1` top route lowered the ratsnest count but failed badly by running down the U1 left pad row.
 - `BQ_PMID` is now routed with a lower U1 fanout, B.Cu bridge and capacitor-bank entry; preserve it unless the full lower-edge charger fanout is replanned.
+- `BQ_VBUS` is now routed with the accepted capacitor-bank entry plus a split-layer Q3-to-U1 bridge; preserve it unless the full lower-edge charger fanout is replanned.
 - `BQ_SW2` remains coupled to C217 placement and the U1 right-side escape.
 - Recent `BQ_SW2` trials show that the accepted `BQ_SYS` entry, C218/`BQ_SDRV`, R203/R204, `BQ_TS` and Q3 selector pads must be replanned together; shifting only the SYS via or drawing a right-side overpass causes shorts or solder-mask bridges.
 - `BQ_BTST2` is now routed with an accepted top-layer dogleg after straightening the local `BQ_PROG` route.
@@ -96,7 +96,6 @@ Do not:
 Remaining nets:
 
 - `USB_VBUS_RAW`
-- portions of `BQ_VBUS`
 - portions of `SOLAR_PROTECTED`
 
 Current status:
