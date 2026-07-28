@@ -46,9 +46,14 @@ Target route:
 
 ```text
 E22 pin 21 ANT
-  -> short 50 ohm grounded coplanar waveguide on F.Cu
+  -> short left-edge 50 ohm grounded coplanar waveguide on F.Cu
   -> Molex 0732511150 edge-launch SMA center contact
 ```
+
+The current Rev A floorplan rotates the E22 module to 0 degrees at 42.0, 54.0
+mm and places the J5 draft SMA envelope at the left board edge near E22 pin 21.
+Do not return to the older far-right SMA corridor unless the final SMA footprint
+or enclosure forces another RF-floorplan review.
 
 Reference plane:
 

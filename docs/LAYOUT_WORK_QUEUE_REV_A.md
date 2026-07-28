@@ -111,7 +111,7 @@ The current layout ties the adjacent TPS61088 switch pins into L2 with compact l
 
 C216 is now relocated below U1 with `BQ_BTST1` and the local capacitor side of `BQ_SW1` routed. The remaining `BQ_SW1` ratsnest item is the inductor/power-loop path, not the bootstrap-cap connection.
 
-C217 is now staged beside the charger power stage and its local `BQ_SW2` side is tied to L1. The companion `BQ_BTST2` escape remains blocked: a top-layer trial crossed/crowded `BQ_TS`, and a back-layer/via trial crowded the accepted `BQ_ACDRV1`, `BQ_TS` and `BQ_PROG` corridors. Treat the remaining bootstrap work as a U1 right-side escape pass.
+C217 is now staged beside the charger power stage and its local `BQ_SW2` side is tied to L1. The companion `BQ_BTST2` escape is now routed with a top-layer dogleg after straightening the local `BQ_PROG` route. Keep future C217 work focused on the remaining `BQ_SW2` U1-to-L1 span.
 
 A direct 2026-07-25 `BQ_SW2` U1-to-L1 top-layer span was rejected because it crossed the U1 `I2C_SCL`/ground pad row and the accepted SCL fanout. The remaining `BQ_SW2` power-loop connection needs a coordinated U1 escape, not a vertical trace through the lower pad row.
 
@@ -252,6 +252,9 @@ These should avoid switch-node copper and RF launch copper.
   `BQ_REGN` escape region, bending `BQ_PROG` below the lane crowded `BQ_INT`,
   and moving C217 near U1 collided with the surrounding `BAT_RAW`,
   `BATP_KELVIN`, `BQ_SDRV`, `BQ_PROG`, `BQ_INT`, R203/R204 and Q3 routes.
+- A later 2026-07-28 `BQ_BTST2` pass is accepted. The `BQ_PROG` local trace
+  was straightened into R203, and `BQ_BTST2` now uses a legal top-layer dogleg
+  from U1 to C217 without new DRC violations.
 - A 2026-07-25 lower-edge `BATP_KELVIN` route trial was rejected because the U1-side via crowded neighboring BQ25798 pads and the bottom route crossed existing lower sense/I2C routing. Treat `BATP_KELVIN` as requiring a deliberate U1 escape and sense-routing pass, not a casual bottom-edge route.
 - A 2026-07-25 U4-side `UV_NODE`/`OV_NODE`/`LTC_SHDN` divider relocation trial was rejected because it crowded the LTC4365 pins, overlapped the L2 inductor courtyard and shorted the divider nodes into adjacent U4/L2 nets. Rework U4, L2 and the divider corridor together before pulling these protection passives closer.
 - A 2026-07-26 `R204` 3.3 V pullup-feed reroute is accepted. It uses a short
@@ -263,6 +266,19 @@ These should avoid switch-node copper and RF launch copper.
   removes the x102.4 top-layer 3.3 V spine that blocked USB edge-route trials.
 - A 2026-07-25 `BQ_VBUS` Q2/Q3 left-drain loop trial was rejected because top-layer loops around the MOSFET bodies shorted or crossed the adjacent `BQ_ACDRV1`/`BQ_ACDRV2` gate pads. Route the remaining FET drain joins with deliberate copper shapes or a revised FET placement, not a simple around-body trace.
 - A 2026-07-25 rectangular `BQ_VBUS` copper-zone trial around Q3 passed DRC but did not connect Q3 pad 3 to pad 5, so it was removed. The selector drain joins need shaped copper or MOSFET placement changes, not a broad rectangular fill.
+- A 2026-07-28 RF floorplan correction is accepted. MOD2/E22 was rotated to
+  0 degrees so pin 21 ANT faces the left board edge, and J5's draft SMA
+  envelope moved to the left edge near the ANT pad. The old E22 digital bus
+  fanouts were reworked for the new orientation. `E22_RXEN` is intentionally
+  left as an unrouted short E22-side stub because the direct route crosses the
+  TPS61088 support-passive pocket.
+- A 2026-07-28 `BQ_SW2` top-layer escape trial and an internal-layer via
+  escape trial both reduced the ratsnest count temporarily but were rejected.
+  The top route crowded U1 `BQ_SYS`, `BQ_SDRV`, `BQ_TS` and I2C pads; the
+  internal route crossed `BQ_TS`, `BQ_VBUS`, 3.3 V and `BQ_ACDRV2`.
+- A 2026-07-28 `BQ_VBUS` U1-to-Q3 bottom-layer bridge trial reduced the
+  ratsnest count temporarily but was rejected because it crossed/crowded
+  `BQ_STAT`, `BAT_RAW`, I2C_SDA and `BQ_USB_SELECTOR_COMMON`.
 - A 2026-07-25 `SOLAR_PROTECTED` Q1 drain-join trial was rejected. The outside bottom bridge required a top-layer escape that crossed the accepted Q1 gate U-shape; moving the gate U-shape to the right shorted against Q1's no-net thermal/mechanical pad. Treat the Q1 protected-drain join as a FET-footprint/copper-shape pass.
 - 2026-07-28 `SOLAR_PROTECTED` U1-entry retry briefly reduced the ratsnest
   count by one but was rejected. The internal route crossed accepted `BAT_RAW`

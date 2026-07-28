@@ -45,9 +45,9 @@ The passive anchors are staging placements for footprint/net review, not final r
 
 | Reference | Footprint | Position | Rotation | Status |
 |---|---|---:|---:|---|
-| `MOD2` | `MOD2_E22_900M33S_JLC_C22399506_RC` | 42.0, 54.0 mm | 180 deg | Release-candidate factory PCBA footprint |
+| `MOD2` | `MOD2_E22_900M33S_JLC_C22399506_RC` | 42.0, 54.0 mm | 0 deg | Release-candidate factory PCBA footprint |
 | `MOD1` | `MOD1_XIAO_NRF52840_SOCKET_C53202181_RC` | 71.5, 31.0 mm | 0 deg | Composite XIAO socket release candidate |
-| `J5` | `J5_SMA_0732511150_DRAFT_ENVELOPE` | 100.0, 41.3 mm | 0 deg | Draft envelope only |
+| `J5` | `J5_SMA_0732511150_DRAFT_ENVELOPE` | 15.5, 65.3 mm | 0 deg | Draft left-edge envelope only |
 | `J1` | `J_POWER_XT30PW_M_C431092_RC` | 93.0, 62.0 mm | 0 deg | Imported XT30 release candidate |
 | `J2` | `J_POWER_XT30PW_M_C431092_RC` | 93.0, 78.0 mm | 0 deg | Imported XT30 release candidate |
 | `J3` | `J_LOW_JST_GH_SM02B_GHS_TB_RC` | 95.0, 91.0 mm | 0 deg | XIAO BAT/GND internal harness release candidate |
@@ -70,10 +70,10 @@ The passive anchors are staging placements for footprint/net review, not final r
 
 ## Placement Intent
 
-The E22 module is placed on the left side of the board and rotated so pin 21 faces the SMA/RF corridor. This supports the direct-PCB SMA strategy:
+The E22 module is placed on the left side of the board with pin 21 facing the left board edge. The SMA draft envelope has been moved to that left edge so the final direct-PCB RF path can remain short rather than crossing the board.
 
 ```text
-E22 pin 21 ANT -> short 50 ohm GCPW -> edge-launch SMA
+E22 pin 21 ANT -> short left-edge 50 ohm GCPW -> edge-launch SMA
 ```
 
 The XIAO composite socket footprint is placed in the upper-right area with USB-C edge access still to be verified against the final module orientation. It has been shifted above the RF corridor so the lower XIAO socket pads no longer cross the provisional E22 ANT-to-SMA centerline. The composite footprint uses two LXWCONN `254PM-1x7P-V` socket strips from JLC/LCSC part `C53202181`.
@@ -121,7 +121,7 @@ Only stable local/control nets are routed in this first pass:
 - `E22_DIO1`: E22 interrupt to XIAO D1 through a short fanout, via and Layer-3 route.
 - `E22_BUSY`: E22 busy signal to XIAO D2 through a short fanout, via and Layer-3 route.
 - `E22_NSS`: E22 chip select to XIAO D3 through a short fanout, via and Layer-3 route.
-- `E22_RXEN`: E22 receive-enable to XIAO D6 through a short fanout, via and Layer-3 route.
+- `E22_RXEN`: currently left as a short E22-side stub after the E22/SMA RF-floorplan correction; re-route to XIAO D6 after the boost support-passive pocket is reviewed.
 - `SPI_SCK`: E22 SCK to XIAO D8 through a short fanout, via, bottom-layer bus route and top-layer XIAO entry.
 - `SPI_MISO`: E22 MISO to XIAO D9 through a short fanout, via, bottom-layer bus route and top-layer XIAO entry.
 - `SPI_MOSI`: E22 MOSI to XIAO D10 through a short fanout, via, bottom-layer bus route and top-layer XIAO entry.
@@ -145,7 +145,8 @@ Only stable local/control nets are routed in this first pass:
 - `BQ_SYS`: C206-C209 and C214 are now tied with a same-side local capacitor bus; U1, U3, L2 and upper boost input capacitors remain unrouted.
 - `BAT_RAW`: C210/C211, J2, U2 and the U1 BAT pins are now tied through wider inner/back-layer branches.
 - `BATP_KELVIN`: U1 BATP is now connected to R202 through a routed sense branch using short top-layer fanouts, small signal vias, a B.Cu escape and an In2.Cu hop around the existing BAT_RAW/NTC/I2C corridors.
-- `BQ_SW2`: C217 has been moved beside the charger power stage and tied locally to L1; the U1-to-L1 switch-node span and `BQ_BTST2` escape remain unrouted.
+- `BQ_SW2`: C217 has been moved beside the charger power stage and tied locally to L1; the U1-to-L1 switch-node span remains unrouted.
+- `BQ_BTST2`: routed with a top-layer dogleg after straightening the `BQ_PROG` local route.
 - `BQ_ACDRV1`: short local Q2 gate pin tie only; source/drain power pads remain unrouted.
 - `BQ_ACDRV2`: short local Q3 gate pin tie only; source/drain power pads remain unrouted.
 - `SOLAR_FUSED`: F1 output is now routed to Q1 through a short wide top/back/top path; U4/divider sensing branches remain unrouted.

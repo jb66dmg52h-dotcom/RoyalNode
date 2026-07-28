@@ -57,7 +57,7 @@ J3 has been moved to the bottom service edge to clear the J6/SMA/C503 area. J6 h
 
 `BAT_RAW` is now routed from the battery XT30 pad to the LM66100/XIAO battery-isolation input, the local battery capacitor island and the U1 BAT pins. `BATP_KELVIN` is now routed as a separate low-current sense branch from U1 BATP to R202, and `BQ_PMID` now bridges from U1 into the PMID capacitor bank.
 
-`BOOST_ILIM`, `BOOST_SS`, `BOOST_COMP`, `BQ_REGN`, `BQ_SDRV`, the C216 `BQ_BTST1`/local `BQ_SW1` bootstrap side, the accepted `BQ_SW1` left-wrap to L1, `BQ_PMID`, the C217 local `BQ_SW2` bootstrap side and the TPS61088 `BQ_SYS` input-cap cluster are now locally routed after moving their support passives beside the relevant ICs. `BOOST_VCC`, `BQ_SW2` and `BQ_BTST2` remain unrouted until their nearby support-passive and power-loop geometry can be separated cleanly.
+`BOOST_ILIM`, `BOOST_SS`, `BOOST_COMP`, `BQ_REGN`, `BQ_SDRV`, the C216 `BQ_BTST1`/local `BQ_SW1` bootstrap side, the accepted `BQ_SW1` left-wrap to L1, `BQ_PMID`, the C217 local `BQ_SW2` bootstrap side, `BQ_BTST2` and the TPS61088 `BQ_SYS` input-cap cluster are now locally routed after moving their support passives beside the relevant ICs. `BOOST_VCC`, `BQ_SW2` and the re-floorplanned `E22_RXEN` route remain unrouted until their nearby support-passive and power-loop geometry can be separated cleanly.
 
 The draft quote-export workflow now runs with:
 

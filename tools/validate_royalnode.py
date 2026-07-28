@@ -527,7 +527,7 @@ def check_initial_routes() -> None:
     ]:
         if not has_pcb_net_annotation(pcb, net_name):
             fail(f"PCB missing generated initial route for net {net_name!r}")
-    for needle in ['(layer "B.Cu")', '(layer "In2.Cu")', '(via', '(start 30.35 59.08)', '(end 30.35 61.62)', '(layer "F.Cu")', '(name "TOP_GND_FILL")', '(layer "In1.Cu")', '(name "L2_GND_REFERENCE")']:
+    for needle in ['(layer "B.Cu")', '(layer "In2.Cu")', '(via', '(start 53.65 48.92)', '(end 53.65 46.38)', '(layer "F.Cu")', '(name "TOP_GND_FILL")', '(layer "In1.Cu")', '(name "L2_GND_REFERENCE")']:
         if needle not in pcb:
             fail(f"PCB missing expected initial route geometry {needle!r}")
 

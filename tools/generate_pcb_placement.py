@@ -27,8 +27,8 @@ PLACEMENTS = [
         "value": "E22-900M33S C22399506 RC",
         "file": "MOD2_E22_900M33S_JLC_C22399506_RC.kicad_mod",
         "library_name": "MOD2_E22_900M33S_JLC_C22399506_RC",
-        "at": (42.0, 54.0, 180),
-        "note": "Pin 21 faces the SMA/RF corridor; factory-installed PCBA item.",
+        "at": (42.0, 54.0, 0),
+        "note": "Pin 21 faces the left-edge SMA/RF corridor; factory-installed PCBA item.",
     },
     {
         "ref": "MOD1",
@@ -43,8 +43,8 @@ PLACEMENTS = [
         "value": "SMA edge envelope",
         "file": "J5_SMA_0732511150_DRAFT_ENVELOPE.kicad_mod",
         "library_name": "J5_SMA_0732511150_DRAFT_ENVELOPE",
-        "at": (100.0, 41.3, 0),
-        "note": "DRAFT envelope only; Molex launch footprint remains blocked.",
+        "at": (15.5, 65.3, 0),
+        "note": "DRAFT envelope only; moved to left edge near E22 pin 21. Molex launch footprint remains blocked.",
     },
     {
         "ref": "J1",

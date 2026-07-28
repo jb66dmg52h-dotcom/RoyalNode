@@ -44,7 +44,6 @@ Remaining nets:
 
 - `BQ_VBUS`
 - `BQ_SW2`
-- `BQ_BTST2`
 - `SOLAR_PROTECTED`
 - `USB_VBUS_RAW`
 
@@ -54,14 +53,14 @@ Current status:
 - A trial moving only L1 above U1 was rejected because it collided with the accepted TPS61088 input-cap cluster and U1 support passives.
 - A direct `BQ_SW1` top route lowered the ratsnest count but failed badly by running down the U1 left pad row.
 - `BQ_PMID` is now routed with a lower U1 fanout, B.Cu bridge and capacitor-bank entry; preserve it unless the full lower-edge charger fanout is replanned.
-- `BQ_SW2` and `BQ_BTST2` remain coupled to C217 placement and the U1 right-side escape.
+- `BQ_SW2` remains coupled to C217 placement and the U1 right-side escape.
 - Recent `BQ_SW2` trials show that the accepted `BQ_SYS` entry, C218/`BQ_SDRV`, R203/R204, `BQ_TS` and Q3 selector pads must be replanned together; shifting only the SYS via or drawing a right-side overpass causes shorts or solder-mask bridges.
-- Recent `BQ_BTST2` trials show that the direct top path crosses `BQ_PROG`, while a two-via escape crowds BATP/PROG and crosses existing `I2C_SDA`, `BAT_RAW` and `BQ_TS` corridors.
+- `BQ_BTST2` is now routed with an accepted top-layer dogleg after straightening the local `BQ_PROG` route.
 
 Next strategy:
 
 - Keep the accepted L1 location unless the whole charger quadrant is replanned; moving only L1 upward has already failed.
-- Treat C217, C218, R203/R204, `BQ_TS`, `BQ_SW2` and `BQ_BTST2` as a shared U1 right-side fanout problem. `BQ_REGN` and `BQ_PMID` are now routed and should be preserved during any grouped refactor.
+- Treat C217, C218, R203/R204, `BQ_TS` and `BQ_SW2` as a shared U1 right-side fanout problem. `BQ_REGN`, `BQ_PMID` and `BQ_BTST2` are now routed and should be preserved during any grouped refactor.
 - Move BQ25798 VBUS/PMID capacitor banks nearer U1/Q2/Q3 only as part of a grouped capacitor/passive placement pass.
 
 Do not:
@@ -119,7 +118,7 @@ The highest-value next pass is:
 Refactor the BQ25798 power-stage placement:
   1. Preserve the accepted BQ_SW1 left-wrap unless a full charger-quadrant refactor replaces it.
   2. Re-stage C217/C218/R203/R204 around the U1 right-side escape.
-  3. Re-test BQ_SW2 and BQ_BTST2.
+  3. Re-test BQ_SW2 while preserving the accepted BQ_BTST2 dogleg.
   4. Only then retry the U1-side service-power entries while preserving BQ_PMID, BQ_REGN and BATP_KELVIN.
 ```
 
