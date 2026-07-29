@@ -177,7 +177,88 @@ The second substitution pass now also forces:
 - `R401` to 57.6 kOhm `C4106968`
 - `U4` to `C688323`
 
-The processable quote files have been regenerated with this second pass, but the updated pair has not yet produced a final JLCPCB component-cost total. The live JLCPCB page still needs to accept the regenerated files or be restarted from a fresh quote.
+The processable quote files were regenerated with this second pass and then reprocessed in the signed-in JLCPCB SMT quote flow.
+
+JLCPCB showed:
+
+- 54 parts detected
+- 45 parts confirmed
+- 9 parts with inventory shortage
+
+The remaining shortage rows were:
+
+- `Q1`, `Q2`, `Q3` - Infineon dual N-channel PG-DSO-8 MOSFET candidates
+- `R102`
+- `R200`
+- `R201`
+- `R400`
+- `R401`
+- `U4`
+
+The MOSFET rows were then excluded from the quote because no safe JLC in-stock dual N-channel PG-DSO-8 replacement was found. JLC-listed related Infineon parts included N+P devices, which are not acceptable substitutes for RoyalNode's back-to-back N-channel input selector/protection circuits.
+
+The resistor and LTC4365 rows were retried with JLC-source alternatives, but still showed inventory shortage inside the SMT quote flow.
+
+The successful quote path used JLCPCB's `Do not place` option for the remaining shortage rows.
+
+## Final Successful Draft PCBA Quote
+
+Date/time shown by JLCPCB autosave: 2026-07-28 22:14
+
+No order was placed, and the quote was not saved to cart.
+
+Final quote-page settings and prices shown:
+
+- Quantity: 5 PCBAs
+- PCB: 4-layer FR-4, green solder mask, white silkscreen
+- Board size after JLC assembly rails: 97 mm x 97 mm
+- Surface finish: ENIG
+- Outer copper: 2 oz
+- Inner copper: 0.5 oz
+- Via covering: plugged
+- PCBA type: Standard
+- Assembly side: top side
+- Solder paste: high temp
+- PCB build time: 3 days
+- Assembly build time selected: 5-6 days
+- Weight shown: 1.12 kg
+
+Charge details shown:
+
+| Item | Price |
+|---|---:|
+| PCB price | USD 60.50 |
+| Standard PCBA price | USD 260.29 |
+| Setup fee | USD 25.56 |
+| Stencil | USD 8.21 |
+| Components, 32 items | USD 172.02 |
+| Feeders loading fee | USD 47.43 |
+| SMT assembly | USD 2.33 |
+| Hand-soldering labor fee | USD 3.58 |
+| Manual assembly | USD 0.66 |
+| Packaging fee | USD 0.50 |
+| Total price shown | USD 320.79 |
+
+Shipping was not shown on the final PCBA quote page captured in this pass. An earlier rugged PCB+PCBA setup screen showed a shipping estimate around USD 26-28, but that should not be treated as the final shipped total.
+
+## Excluded / Do-Not-Place Items In Final Quote
+
+These items were not included in the successful JLC quote total:
+
+- `MOD1` - Seeed XIAO nRF52840; user-supplied
+- `J5` - Molex edge-launch SMA; recognized earlier but absent from the final placement list
+- `Q1`, `Q2`, `Q3` - dual N-channel MOSFETs
+- `R102`, `R200`, `R201`, `R400`, `R401` - shortage-blocked precision/feedback resistors
+- `U4` - shortage-blocked LTC4365 input-protection controller
+
+The final placement list did include major assembly items such as:
+
+- `MOD2` EBYTE E22-900M33S, JLCPCB/LCSC `C22399506`
+- `U1` BQ25798, `C2876593`
+- `U2` LM66100DCKR, `C2869734`
+- `U3` TPS61088RHLR, `C87357`
+- `J1,J2` XT30 connectors, `C431092`
+- `L1,L2` Coilcraft power inductors, `C3911470` and `C19191686`
 
 See `docs/quotes/JLCPCB_SUBSTITUTIONS_REV_A_2026-07-28.md`.
 

@@ -16,8 +16,25 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_ASSEMBLY_DIR = ROOT / "hardware/fabrication/quote_draft_rev_a/assembly"
 
-USER_SUPPLIED = {
-    "MOD1",  # Seeed XIAO nRF52840 is sourced and installed by the user.
+EXCLUDED_FROM_PCBA_QUOTE = {
+    "MOD1": "Seeed XIAO nRF52840 is sourced and installed by the user.",
+    # JLCPCB had no safe in-stock drop-in dual N-channel PG-DSO-8 substitute for
+    # the input-selector MOSFETs during quote processing. Keep them out of the
+    # auto-assembly quote instead of substituting an N+P part into an N+N circuit.
+    "Q1": "JLCPCB had no safe in-stock drop-in dual N-channel PG-DSO-8 substitute.",
+    "Q2": "JLCPCB had no safe in-stock drop-in dual N-channel PG-DSO-8 substitute.",
+    "Q3": "JLCPCB had no safe in-stock drop-in dual N-channel PG-DSO-8 substitute.",
+    "J5": "Molex edge-launch SMA was recognized but not placed in the successful JLC quote flow.",
+    # These are recognized by JLCPCB but remained inventory-short in the SMT quote
+    # flow after multiple JLC-source substitutions. Excluding them allows a quote
+    # for the board and confirmed assembly rows without pretending the design is
+    # release-ready.
+    "R102": "Quote-blocked precision divider resistor; JLC-source candidates were short.",
+    "R200": "Quote-blocked TS-network resistor; JLC-source candidates were short.",
+    "R201": "Quote-blocked TS-network resistor; JLC-source candidates were short.",
+    "R400": "Quote-blocked TPS61088 feedback resistor; JLC-source candidates were short.",
+    "R401": "Quote-blocked TPS61088 feedback resistor; JLC-source candidates were short.",
+    "U4": "Quote-blocked LTC4365 input-protection controller; JLC-source candidates were short.",
 }
 
 FORCED_PARTS = {
@@ -63,24 +80,6 @@ FORCED_PARTS = {
         "lcsc": "C913282",
         "note": "Bourns 5 A 1206 fuse; quote substitute for Littelfuse 0483005.DR.",
     },
-    "Q1": {
-        "comment": "ISA250250N04LMDSXTMA1",
-        "footprint": "PG-DSO-8",
-        "lcsc": "C43317100",
-        "note": "Infineon same-family dual N-channel PG-DSO-8 candidate; release-review required.",
-    },
-    "Q2": {
-        "comment": "ISA250250N04LMDSXTMA1",
-        "footprint": "PG-DSO-8",
-        "lcsc": "C43317100",
-        "note": "Same quote candidate as Q1.",
-    },
-    "Q3": {
-        "comment": "ISA250250N04LMDSXTMA1",
-        "footprint": "PG-DSO-8",
-        "lcsc": "C43317100",
-        "note": "Same quote candidate as Q1.",
-    },
     "J5": {
         "comment": "0732511150",
         "footprint": "1.60 mm PCB edge mount",
@@ -102,38 +101,38 @@ FORCED_PARTS = {
     "R102": {
         "comment": "40.2 kOhm 0.1%",
         "footprint": "Resistor_SMD:R_0603_1608Metric",
-        "lcsc": "C4210499",
-        "note": "Vishay TNPW060340K2BYEN; precision UV/OV divider substitute.",
+        "lcsc": "C1724666",
+        "note": "Vishay TNPW060340K2BEEN; same value/package precision UV/OV divider substitute.",
     },
     "R200": {
         "comment": "5.23 kOhm 0.1%",
         "footprint": "Resistor_SMD:R_0603_1608Metric",
-        "lcsc": "C4076829",
-        "note": "Vishay TNPU06035K23BZEN00; precision TS-network substitute.",
+        "lcsc": "C1716516",
+        "note": "Yageo RT0603WRD075K23L; same value/package precision TS-network substitute.",
     },
     "R201": {
         "comment": "30.1 kOhm 0.1%",
         "footprint": "Resistor_SMD:R_0603_1608Metric",
-        "lcsc": "C1709086",
-        "note": "Susumu RG1608N-3012-B-T5; precision TS-network substitute.",
+        "lcsc": "C4041890",
+        "note": "Yageo RT0603WRC0730K1L; same value/package precision TS-network substitute.",
     },
     "R400": {
-        "comment": "180 kOhm 0.1%",
+        "comment": "176 kOhm 0.1%",
         "footprint": "Resistor_SMD:R_0603_1608Metric",
-        "lcsc": "C4074070",
-        "note": "KOA RN731JTTD1803B50; paired with 57.6 kOhm R401 for quote-time TPS61088 feedback.",
+        "lcsc": "C2497648",
+        "note": "KOA RN73R1JTTD1763D50; same value/package TPS61088 feedback quote substitute.",
     },
     "R401": {
-        "comment": "57.6 kOhm 0.1%",
+        "comment": "56.0 kOhm 0.1%",
         "footprint": "Resistor_SMD:R_0603_1608Metric",
-        "lcsc": "C4106968",
-        "note": "SEI RNCF0603BTE57K6; paired with 180 kOhm R400 for about 4.97 V nominal output.",
+        "lcsc": "C4159977",
+        "note": "Vishay TNPW060356K0BETA; same value/package TPS61088 feedback substitute.",
     },
     "U4": {
-        "comment": "LTC4365HTS8-1#TRMPBF",
+        "comment": "LTC4365HTS8-1#PBF",
         "footprint": "TSOT-23-8",
-        "lcsc": "C688323",
-        "note": "ADI high-temperature -1 variant; same TSOT-23-8 family, release-review required.",
+        "lcsc": "C117259",
+        "note": "ADI LTC4365HTS8-1#PBF; same -1 TSOT-23-8 protection-controller family, higher temperature grade.",
     },
 }
 
@@ -162,7 +161,7 @@ def write_bom(assembly_dir: Path, included_refs: set[str]) -> set[str]:
 
         for row in rows:
             refs = split_designators(row["Designator"])
-            if not refs or all(ref in USER_SUPPLIED for ref in refs):
+            if not refs or all(ref in EXCLUDED_FROM_PCBA_QUOTE for ref in refs):
                 continue
             if row["Assembly Scope"] != "pcba":
                 continue
@@ -233,7 +232,7 @@ def main() -> None:
     args = parser.parse_args()
 
     cpl_rows = read_csv(args.assembly_dir / "RoyalNode_RevA_CPL.csv")
-    included_refs = {row["Ref"] for row in cpl_rows if row["Ref"] not in USER_SUPPLIED}
+    included_refs = {row["Ref"] for row in cpl_rows if row["Ref"] not in EXCLUDED_FROM_PCBA_QUOTE}
     emitted_refs = write_bom(args.assembly_dir, included_refs)
     write_cpl(args.assembly_dir, emitted_refs)
 
@@ -243,9 +242,9 @@ def main() -> None:
     print("Forced substitutes:")
     for designator, part in FORCED_PARTS.items():
         print(f"- {designator}: {part['lcsc']} ({part['note']})")
-    print("User-supplied / excluded:")
-    for designator in sorted(USER_SUPPLIED):
-        print(f"- {designator}")
+    print("Excluded from PCBA quote:")
+    for designator in sorted(EXCLUDED_FROM_PCBA_QUOTE):
+        print(f"- {designator}: {EXCLUDED_FROM_PCBA_QUOTE[designator]}")
 
 
 if __name__ == "__main__":
