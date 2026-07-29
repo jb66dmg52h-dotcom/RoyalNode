@@ -102,6 +102,52 @@ JLCPCB did not provide component or SMT assembly pricing on the first quote scre
 
 The current draft BOM still has missing LCSC part numbers, so the assembly quote will also need part matching and likely manual substitutions before it can become a real manufacturing quote.
 
+## Logged-In PCBA Attempt
+
+After signing in to JLCPCB, the BOM/CPL flow was retried.
+
+The original CPL export failed JLCPCB processing. A corrected sample-format CPL was generated with:
+
+- `Designator`
+- `Mid X`
+- `Mid Y`
+- `Layer`
+- `Rotation`
+- Coordinate values using `mm` suffixes
+- Positive Y coordinates instead of KiCad's negative placement Y values
+
+A corrected sample-format BOM was also generated using JLCPCB's sample headers:
+
+- `Comment`
+- `Designator`
+- `Footprint`
+- `JLCPCB Part #（optional）`
+
+With those files, JLCPCB successfully processed the placement data and reported:
+
+- 55 parts detected
+- 36 parts confirmed
+- 15 parts with inventory shortage
+- 4 parts not selected
+
+The four not-selected rows were:
+
+- `C212,C213,C214` - 100 nF 50 V X7R, 0603
+- `C404` - 100 nF 50 V X7R, 0603
+- `F1` - Littelfuse `0483005.DR` SMD fuse
+- `MOD1` - Seeed XIAO nRF52840 module
+
+JLCPCB would not advance to a complete Quote & Order price while those unselected rows remained unresolved. Therefore the final assembled PCBA price was not available yet.
+
+Generated retry files:
+
+- `RoyalNode_RevA_JLCPCB_BOM_SAMPLE_FORMAT.csv`
+- `RoyalNode_RevA_JLCPCB_CPL_SAMPLE_FORMAT.csv`
+- `RoyalNode_RevA_JLCPCB_BOM_PROCESSABLE_QUOTE.csv`
+- `RoyalNode_RevA_JLCPCB_CPL_PROCESSABLE_QUOTE.csv`
+
+The processable quote pair excludes `MOD1` and `F1` and forces JLCPCB part `C14663` for the unmatched 100 nF capacitors, but it was not fully processed into a final quote during this session.
+
 ## Do Not Order Yet
 
 This quote used draft fabrication files. The project currently has clean ERC/DRC/unconnected checks, but the package is still marked draft because these items need release review before fabrication:
