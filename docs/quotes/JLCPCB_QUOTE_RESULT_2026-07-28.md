@@ -146,7 +146,40 @@ Generated retry files:
 - `RoyalNode_RevA_JLCPCB_BOM_PROCESSABLE_QUOTE.csv`
 - `RoyalNode_RevA_JLCPCB_CPL_PROCESSABLE_QUOTE.csv`
 
-The processable quote pair excludes `MOD1` and `F1` and forces JLCPCB part `C14663` for the unmatched 100 nF capacitors, but it was not fully processed into a final quote during this session.
+The first processable quote pair excluded `MOD1` and `F1` and forced JLCPCB part `C14663` for the unmatched 100 nF capacitors, but it was not fully processed into a final quote during that session.
+
+After the user confirmed that the XIAO module will be sourced separately, the processable quote generator was updated to:
+
+- exclude `MOD1` only as a user-supplied XIAO module
+- keep `F1` in the PCBA set as Bourns `SF-1206S500-2`, JLCPCB/LCSC `C913282`
+- force `C212,C213,C214` and `C404` to Yageo `CC0603KRX7R9BB104`, JLCPCB/LCSC `C14663`
+- force `C215` to Samsung `CL21B475KAFNNNE`, JLCPCB/LCSC `C98195`
+
+That post-XIAO BOM/CPL pair was processed by JLCPCB and reduced the issue set from unmatched parts to stock-shortage rows. JLCPCB showed:
+
+- 54 parts detected
+- 39 parts confirmed
+- 15 parts with inventory shortage
+
+The second substitution pass now also forces:
+
+- `C216,C217` to `C1622`
+- `C218` to `C163508`
+- `C405` to `C74690`
+- `J5` to exact Molex SMA `C841205`
+- `J6` to GH-compatible XYECONN `C51940118`
+- `Q1,Q2,Q3` to same-family Infineon candidate `C43317100`
+- `R100` to `C166890`
+- `R102` to `C4210499`
+- `R200` to `C4076829`
+- `R201` to `C1709086`
+- `R400` to 180 kOhm `C4074070`
+- `R401` to 57.6 kOhm `C4106968`
+- `U4` to `C688323`
+
+The processable quote files have been regenerated with this second pass, but the updated pair has not yet produced a final JLCPCB component-cost total. The live JLCPCB page still needs to accept the regenerated files or be restarted from a fresh quote.
+
+See `docs/quotes/JLCPCB_SUBSTITUTIONS_REV_A_2026-07-28.md`.
 
 ## Do Not Order Yet
 
